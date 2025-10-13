@@ -900,10 +900,10 @@ Based on 10 papers × 3 questions = 30 test cases:
 | **Accuracy** | 0.42 ± 0.22 | 0.48 ± 0.20 | 0.45 ± 0.20 | 0.45 |
 
 **Key Findings**:
-- ✅ Standard metrics perform well (0.7-1.0 range)
-- ⚠️ G-Eval metrics show moderate performance (0.4-0.5 range)
-- 📊 Population questions perform best overall
-- 🎯 Contextual Recall consistent across all questions
+- Standard metrics perform well (0.7-1.0 range)
+- G-Eval metrics show moderate performance (0.4-0.5 range)
+- Population questions perform best overall
+- Contextual Recall consistent across all questions
 
 ---
 

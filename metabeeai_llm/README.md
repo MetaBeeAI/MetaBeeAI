@@ -8,15 +8,15 @@ The pipeline processes PDF documents (already converted to JSON chunks) and answ
 
 ### Key Features
 
-✨ **Intelligent Answer Merging**: Add new questions to existing papers without losing previous results. The pipeline automatically merges new answers with existing `answers.json` files.
+**Intelligent Answer Merging**: Add new questions to existing papers without losing previous results. The pipeline automatically merges new answers with existing `answers.json` files.
 
-🔧 **Flexible Question Configuration**: Customize questions, instructions, examples, and relevance thresholds via `questions.yml` without touching code.
+**Flexible Question Configuration**: Customize questions, instructions, examples, and relevance thresholds via `questions.yml` without touching code.
 
-📁 **Alphanumeric Folder Support**: Process papers in any folder naming format (e.g., `283C6B42`, `4KV2ZB36`) - no numeric constraints.
+**Alphanumeric Folder Support**: Process papers in any folder naming format (e.g., `283C6B42`, `4KV2ZB36`) - no numeric constraints.
 
-⚡ **Parallel Processing**: Configurable batch processing and concurrency for efficient large-scale analysis.
+**Parallel Processing**: Configurable batch processing and concurrency for efficient large-scale analysis.
 
-📊 **Quality Assessment**: Each answer includes confidence metrics, source chunk IDs, and reasoning for transparency.
+**Quality Assessment**: Each answer includes confidence metrics, source chunk IDs, and reasoning for transparency.
 
 ---
 
@@ -290,9 +290,9 @@ python llm_pipeline.py
 ```
 
 **How Merging Works:**
-- ✅ **Existing questions not in current run** → Preserved unchanged
-- ✅ **New questions** → Added to the file
-- ⚠️ **Questions in both old file and current run** → Updated with new results
+- **Existing questions not in current run** → Preserved unchanged
+- **New questions** → Added to the file
+- **Questions in both old file and current run** → Updated with new results
 
 **Pro Tip**: To add new questions without updating existing ones, comment out the existing questions in `questions.yml` before running.
 
@@ -420,10 +420,10 @@ python llm_pipeline.py --folders 283C6B42 3ZHNVADM
 ```
 
 ### Important Notes:
-- ✅ **Safe to re-run**: Old answers are preserved if not in current `questions.yml`
-- ✅ **Selective updates**: Only run specific questions by temporarily removing others from `questions.yml`
-- ⚠️ **Updates overwrite**: If you re-run a question that already exists, it will be updated with new results
-- 💡 **Tip**: Comment out existing questions in `questions.yml` if you only want to add new ones
+- **Safe to re-run**: Old answers are preserved if not in current `questions.yml`
+- **Selective updates**: Only run specific questions by temporarily removing others from `questions.yml`
+- **Updates overwrite**: If you re-run a question that already exists, it will be updated with new results
+- **Tip**: Comment out existing questions in `questions.yml` if you only want to add new ones
 
 ---
 

@@ -4,7 +4,7 @@ A comprehensive pipeline for extracting, analyzing, and benchmarking structured 
 
 ---
 
-## 🔑 Required API Accounts
+## Required API Accounts
 
 Before starting, you need to set up the following API accounts:
 
@@ -30,7 +30,7 @@ The `.env` file is automatically excluded from git for security.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install Dependencies
 
@@ -67,7 +67,7 @@ See the **Complete Workflow** section below for the full step-by-step process.
 
 ---
 
-## 📋 Pipeline Overview
+## Pipeline Overview
 
 The pipeline consists of 5 main stages:
 
@@ -107,7 +107,7 @@ PDFs → Vision AI Processing → LLM Analysis → Human Review → Benchmarking
 
 ---
 
-## 🔄 Complete Workflow
+## Complete Workflow
 
 ### Step 1: Process PDFs to JSON
 
@@ -237,7 +237,7 @@ python investigate_pesticides.py
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 primate-welfare/
@@ -298,7 +298,7 @@ primate-welfare/
 
 ---
 
-## 🎯 Common Use Cases
+## Common Use Cases
 
 ### Use Case 1: Process New Papers
 
@@ -376,7 +376,7 @@ python network_analysis.py
 
 ---
 
-## 📊 Question Types
+## Question Types
 
 The pipeline currently handles three question types for primate welfare:
 
@@ -416,7 +416,7 @@ Questions are fully defined in `metabeeai_llm/questions.yml` with instructions, 
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 ### Global Configuration (`config.py`)
 
@@ -446,7 +446,7 @@ Define questions with:
 
 ---
 
-## 📈 Benchmarking Metrics
+## Benchmarking Metrics
 
 The pipeline evaluates LLM performance using 5 metrics:
 
@@ -480,7 +480,7 @@ The pipeline evaluates LLM performance using 5 metrics:
 
 ---
 
-## 💰 Cost Estimates
+## Cost Estimates
 
 Based on typical usage with GPT-4o:
 
@@ -498,7 +498,7 @@ Based on typical usage with GPT-4o:
 
 ---
 
-## 📚 Detailed Documentation
+## Detailed Documentation
 
 Each component has detailed documentation:
 
@@ -511,7 +511,7 @@ Each component has detailed documentation:
 
 ---
 
-## 🎓 Tutorial: Process Your First 3 Papers
+## Tutorial: Process Your First 3 Papers
 
 ### Complete Example
 
@@ -570,7 +570,7 @@ python edge_cases.py --num-cases 2
 
 ---
 
-## 🔍 Understanding the Output
+## Understanding the Output
 
 ### LLM Answers (`answers.json`)
 
@@ -616,7 +616,7 @@ python edge_cases.py --num-cases 2
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -654,7 +654,7 @@ python deepeval_benchmarking.py --use-retrieval-only
 
 ---
 
-## 🔬 Current Dataset
+## Current Dataset
 
 **Primate Welfare Literature Review**
 
@@ -673,7 +673,7 @@ python deepeval_benchmarking.py --use-retrieval-only
 
 ---
 
-## 📝 Key Scripts Reference
+## Key Scripts Reference
 
 ### PDF Processing
 - `process_pdfs/process_all.py` - Main processor
@@ -693,7 +693,7 @@ python deepeval_benchmarking.py --use-retrieval-only
 
 ---
 
-## 🎯 Best Practices
+## Best Practices
 
 ### 1. Start Small
 - Test with 3-5 papers first
@@ -717,7 +717,7 @@ python deepeval_benchmarking.py --use-retrieval-only
 
 ---
 
-## 📖 Additional Resources
+## Additional Resources
 
 ### Documentation
 - **LLM Benchmarking**: `llm_benchmarking/README.md` (comprehensive guide)
@@ -731,7 +731,7 @@ python deepeval_benchmarking.py --use-retrieval-only
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 When adding new question types:
 
@@ -758,7 +758,7 @@ When adding new question types:
 
 ---
 
-## 📞 Support
+## Support
 
 For issues:
 1. Check relevant README in component folder
