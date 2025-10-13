@@ -769,7 +769,8 @@ For issues:
 
 ---
 
-**Project**: Primate Welfare Literature Review  
+**Project**: MetaBeeAI - Bees & Pesticides  
 **Version**: 2.0  
 **Last Updated**: October 8, 2025  
+**Written by**: Rachel Parkinson, Shuxiang Cao, Mikael Mieskolainen
 **Contact**: See project documentation
