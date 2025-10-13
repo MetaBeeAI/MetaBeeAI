@@ -1,4 +1,4 @@
-# Primate Welfare Literature Review Pipeline
+# MetaBeeAI Literature Review Pipeline
 
 A comprehensive pipeline for extracting, analyzing, and benchmarking structured information from scientific literature using Large Language Models and Vision AI.
 
