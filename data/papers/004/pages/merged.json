@@ -1,0 +1,1573 @@
+{
+  "data": {
+    "chunks": [
+      {
+        "text": "## Environmental Entomology\n\nVolume: 51(3), 2022, Pages: 613\u2013626\n\nDOI: [https://doi.org/10.1093/ee/nvac026](https://doi.org/10.1093/ee/nvac026)\n\nAdvance Access Publication Date: 5 May 2022\n\nType: Research",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.060842911877394636,
+              "r": 0.34249999999999997,
+              "b": 0.11503113026819924
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "9c99d55d-257b-4ea1-b94a-10645b93a4b0",
+        "chunk_ids": [
+          "9c99d55d-257b-4ea1-b94a-10645b93a4b0"
+        ],
+        "original_chunk_id": "9c99d55d-257b-4ea1-b94a-10645b93a4b0"
+      },
+      {
+        "text": "## Pollinator Ecology and Management\n\n### A Comparison of Pollen and Syrup Exposure Routes in *Bombus impatiens* (Hymenoptera: Apidae) Microcolonies: Implications for Pesticide Risk Assessment",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.14355124521072798,
+              "r": 0.7787499999999999,
+              "b": 0.26428639846743296
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "56fe9605-9b28-428f-9354-c1e6df67c91f",
+        "chunk_ids": [
+          "56fe9605-9b28-428f-9354-c1e6df67c91f"
+        ],
+        "original_chunk_id": "56fe9605-9b28-428f-9354-c1e6df67c91f"
+      },
+      {
+        "text": "## Authors and Affiliations\n\n**Chelsea A. Weitekamp,\u00b9,\u00b2 Robert W. Koethe,\u00b2 and David M. Lehmann\u00b9,\u00b3**\n\n\u00b9Center for Public Health and Environmental Assessment, Office of Research and Development, U.S. Environmental Protection Agency, Research Triangle Park, NC, USA  \n\u00b2Region 1 Office, Land Chemicals and Redevelopment Division RCRA, Waste Management and Pesticides Section, U.S. Environmental Protection Agency, Boston, MA, USA  \n\u00b3Corresponding author, e-mail: lehmann.david@epa.gov\n\n## Disclaimer\n\nThis article has been reviewed by the U.S. Environmental Protection Agency and approved for publication. Approval does not signify that the contents necessarily reflect the views and policies of the Agency or of the US Federal Government, nor does the mention of trade names or commercial products constitute endorsement or recommendations for use of those products. The authors report no financial or other conflicts of interest. The authors alone are responsible for the content and writing of this article.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.27759578544061303,
+              "r": 0.7875,
+              "b": 0.42494971264367815
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "94d23b9c-d21d-431c-90f1-5c59b6f2f5a1",
+        "chunk_ids": [
+          "94d23b9c-d21d-431c-90f1-5c59b6f2f5a1"
+        ],
+        "original_chunk_id": "94d23b9c-d21d-431c-90f1-5c59b6f2f5a1"
+      },
+      {
+        "text": "## Document Information\n\n- **Subject Editor**: Theresa Pitts-Singer\n- **Received**: 12 November 2021\n- **Editorial decision**: 11 March 2022",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.43730842911877393,
+              "r": 0.3825,
+              "b": 0.46772988505747126
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "key_value",
+        "chunk_id": "fefe4eb8-f94d-4527-8dd6-8f7a667c099f",
+        "chunk_ids": [
+          "fefe4eb8-f94d-4527-8dd6-8f7a667c099f"
+        ],
+        "original_chunk_id": "fefe4eb8-f94d-4527-8dd6-8f7a667c099f"
+      },
+      {
+        "text": "## Abstract\n\nBumble bees are important pollinators for both native plants and managed agricultural systems. Accumulating evidence has shown that pesticides, including neonicotinoids, can have a range of adverse effects on bumble bee health. Most laboratory studies that assess the effects of chronic neonicotinoid exposure on bumble bees use syrup as the delivery vehicle, rather than pollen. However, in the field, it is likely that bumble bees are exposed to neonicotinoids in both nectar (syrup) and pollen. To examine the potential for different effects based on the vehicle, we compared two studies of chronic exposure to the neonicotinoid acetamiprid in *Bombus impatiens* microcolonies. We examined correlations between microcolony endpoints and identified associations between the timing of colony pollen and syrup consumption and drone production. Furthermore, in line with previous results, we found that average drone weight was affected at a range of doses only when microcolonies were exposed to acetamiprid via pollen. In general, our analyses point to the importance of the treatment vehicle and suggest that critical effects on developing brood could be missed when neonicotinoid exposure occurs only through syrup.\n\n**Key words**: Bumble bee, drones, microcolony, acetamiprid, sublethal",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.49054597701149427,
+              "r": 0.7875,
+              "b": 0.705397509578544
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "6896dcc8-b668-43b5-9e05-44478fe9f0bf",
+        "chunk_ids": [
+          "6896dcc8-b668-43b5-9e05-44478fe9f0bf"
+        ],
+        "original_chunk_id": "6896dcc8-b668-43b5-9e05-44478fe9f0bf"
+      },
+      {
+        "text": "## Text from Document\n\nThe decline of many bumble bee populations has been reported worldwide (Cameron and Sadd 2020). There are likely numerous interacting stressors underlying impairments to bumble bee health, including changes in climate and land use and increases in pathogens and pesticides (Cameron and Sadd 2020). Among pesticides, the neonicotinoids have received the most attention (Woodcock et al. 2017). In addition to lethality, a variety of sublethal effects have been documented in bumble bees at environmentally-relevant exposures, including reductions in foraging efficiency (Gill et al. 2012, Feltham et al. 2014, Gill et al. 2014), fecundity (Laycock et al. 2012, Elston et al. 2013, Laycock and Cresswell 2013, Leza et al. 2018), and brood care (Crall et al. 2018).\n\nImportantly, while bumble bee workers forage for both pollen and nectar (syrup), most studies of chronic exposure to neonicotinoids dose syrup rather than pollen. Nectar is consumed by all bees in a colony as a source of carbohydrates (Suarez 2005). Pollen is consumed by the reproductive(s) for egg laying and, in pollen-storing Bombus species, is progressively fed to individual larvae.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.7728951149425287,
+              "r": 0.485,
+              "b": 0.8974329501915709
+            },
+            "page": 0
+          },
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.7728951149425287,
+              "r": 0.9075,
+              "b": 0.8964822796934866
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "8fb5555c-5a0c-4dbb-87b0-40a1b22bced1",
+        "chunk_ids": [
+          "8fb5555c-5a0c-4dbb-87b0-40a1b22bced1"
+        ],
+        "original_chunk_id": "8fb5555c-5a0c-4dbb-87b0-40a1b22bced1"
+      },
+      {
+        "text": "## Page Footer\n\nPublished by Oxford University Press on behalf of Entomological Society of America 2022.  \nThis work is written by (a) US Government employee(s) and is in the public domain in the US.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.9145450191570881,
+              "r": 0.52375,
+              "b": 0.9364104406130268
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "page_footer",
+        "chunk_id": "034abd3f-5f3f-4daf-8c22-81f4ac43f84d",
+        "chunk_ids": [
+          "034abd3f-5f3f-4daf-8c22-81f4ac43f84d"
+        ],
+        "original_chunk_id": "034abd3f-5f3f-4daf-8c22-81f4ac43f84d"
+      },
+      {
+        "text": "## Document Information\n\n- **Source**: Downloaded from [https://academic.oup.com/oxfordacademic/article/75/3/853/5914288](https://academic.oup.com/oxfordacademic/article/75/3/853/5914288)\n- **Publisher**: Oxford Economic Papers\n- **Access Date**: 1 January 2023\n\nThis crop contains a page header from an academic document, indicating the source and publisher details.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.9575,
+              "t": 0.20819683908045974,
+              "r": 0.9724999999999999,
+              "b": 0.7871551724137931
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "898b577c-a0b7-4986-95d3-00acaaafef81",
+        "chunk_ids": [
+          "898b577c-a0b7-4986-95d3-00acaaafef81"
+        ],
+        "original_chunk_id": "898b577c-a0b7-4986-95d3-00acaaafef81"
+      },
+      {
+        "text": "## Page Number\n\n613",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.88375,
+              "t": 0.9145450191570881,
+              "r": 0.9075,
+              "b": 0.924051724137931
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "page_number",
+        "chunk_id": "8fa02aed-91d5-4c11-a2bc-d93cc8da730a",
+        "chunk_ids": [
+          "8fa02aed-91d5-4c11-a2bc-d93cc8da730a"
+        ],
+        "original_chunk_id": "8fa02aed-91d5-4c11-a2bc-d93cc8da730a"
+      },
+      {
+        "text": "### Page Header\n\nEnvironmental Entomology, 2022, Vol. 51, No. 3",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.6075,
+              "t": 0.03422413793103448,
+              "r": 0.9075,
+              "b": 0.04563218390804598
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "f26a6456-7f08-46de-bdd3-810e36dfe4c1",
+        "chunk_ids": [
+          "f26a6456-7f08-46de-bdd3-810e36dfe4c1"
+        ],
+        "original_chunk_id": "f26a6456-7f08-46de-bdd3-810e36dfe4c1"
+      },
+      {
+        "text": "## Page Number\n\n614",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.03422413793103448,
+              "r": 0.11374999999999999,
+              "b": 0.0437308429118774
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "page_number",
+        "chunk_id": "9e9b6ad5-a8c6-43fe-bdc7-e753c49ded0d",
+        "chunk_ids": [
+          "9e9b6ad5-a8c6-43fe-bdc7-e753c49ded0d",
+          "d01509df-6000-4224-8ad4-c4a24ca4f38e"
+        ],
+        "original_chunk_id": "9e9b6ad5-a8c6-43fe-bdc7-e753c49ded0d"
+      },
+      {
+        "text": "## Text\n\n...along with nectar and glandular secretions (Pereboom 2000). Both fecundity and brood development are dependent on the protein and lipids from pollen. Given that reproductives and brood are exposed to higher amounts of pollen while workers primarily digest nectar, any effects observed from neonicotinoid exposure may depend, in part, on the route of exposure. Here, to allow a comparison of exposure routes, we conduct an analysis of two previously published datasets. One study exposed *Bombus impatiens* microcolonies to the neonicotinoid acetamiprid via pollen (Camp et al. 2020b), while the other utilized syrup as a vehicle (Camp et al. 2020a).\n\n...the number of emerged drones (Camp et al. 2020a). Here, using the published datasets, we sought to further examine the relationships between these and other variables to gain additional insight into potential differences in outcomes based on the treatment vehicle. To this end, we focused on three main objectives when comparing between acetamiprid delivered via pollen and syrup: 1) to explore correlations between microcolony endpoints measured in both studies, 2) to examine relationships between pollen consumption, syrup consumption, and drone production, and 3) to further test the observation of exposure route differences on drone production.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06844827586206896,
+              "r": 0.485,
+              "b": 0.20629549808429118
+            },
+            "page": 1
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.06844827586206896,
+              "r": 0.9075,
+              "b": 0.20629549808429118
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "24d84b9c-8e45-4cc9-97c9-200b0f6132cb",
+        "chunk_ids": [
+          "24d84b9c-8e45-4cc9-97c9-200b0f6132cb"
+        ],
+        "original_chunk_id": "24d84b9c-8e45-4cc9-97c9-200b0f6132cb"
+      },
+      {
+        "text": "## Text\n\nIn bumble bees, the microcolony model is used to evaluate both individual and colony-level effects from a variety of stressors (Klinger et al. 2019). Microcolonies are groups of workers that are maintained without a queen. In the absence of a queen, one or several dominant workers are stimulated to begin egg-laying (Sibbald and Plowright 2012, Amsalem et al. 2015). Like other hymenoptera, bumble bees have a haplodiploid reproductive system: fertilized eggs result in females and unfertilized eggs in males. Because eggs laid by workers are unfertilized, they produce only male offspring, or drones. In the wild, drones are produced during late summer and early autumn when the colony switches from producing workers to producing reproductives (Belsky et al. 2020). Males are produced before gynes and, after a brief period of sexual maturation during which they participate in brood care, drones leave the natal nest to mate and do not return. Drone production has been used as a key measure of microcolony productivity given that it integrates potential effects on fecundity, growth, and development, and can be directly quantified (Belsky et al. 2020). In addition to drone production, the microcolony model has been used to evaluate a variety of endpoints following neonicotinoid exposure, including, e.g., adult survival, fecundity, brood production, food consumption, and behavior (Camp and Lehmann 2021).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.20914750957854406,
+              "r": 0.485,
+              "b": 0.5152634099616857
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "806877ad-fdf0-46b2-98ed-2bedc555b1cd",
+        "chunk_ids": [
+          "806877ad-fdf0-46b2-98ed-2bedc555b1cd",
+          "9cd26d7d-b4de-4168-88c4-da62ab0a21ac"
+        ],
+        "original_chunk_id": "806877ad-fdf0-46b2-98ed-2bedc555b1cd"
+      },
+      {
+        "text": "## Methods\n\nDetailed methods for both the pollen and syrup studies have been published previously (Camp et al. 2020a, b). Briefly, in both experiments, newly emerged *B. impatiens* workers were acclimated for 24 h before microcolony initiation. Since the microcolonies were confined and could not forage, workers were provisioned with 50/50 inverted sugar syrup (50% glucose and 50% fructose) prepared in distilled water and containing 2.95 mM citric acid and 8.32 mM sorbic acid. Microcolonies were also provided 3 g pollen paste (2.5 g pollen/1 ml 50/50 inverted syrup) prepared from multifloral honey bee corbicular pollen (collected in 2015 from ornamental nurseries, Connecticut, USA; to eliminate potential differences in pesticide residues (type and quantity) and the nutritional quality of the pollen used in the studies, the same blended batch of pollen was used for both experiments). Microcolonies were initiated as groups of five bees. Five days after initiation, an additional 2 g clean pollen paste was added. In the study with pollen as the vehicle, 2 g of acetamiprid-containing pollen (no solvent added; 0.452, 4.52, 45.2, 452, or 4520 ppb; 8 microcolonies per treatment group) was provided in a separate feeding dish beginning seven days after colony initiation. In the syrup study, acetamiprid-containing syrup (no solvent added; 1.13, 11.3, 113, 1130, or 11,300 ppb; 10 microcolonies per treatment group) was added at initiation. Since over half of the microcolonies failed to produce drones at the highest dose groups (4,520 and 11,300 ppb), these groups were excluded from our analyses. The exposure duration was six weeks for both experiments (colonies were maintained for seven weeks; dosing began after week 1). Pollen and syrup were measured three days per week from which we calculated weekly averages for this analysis. In the pollen experiment, newly emerged drones were removed weekly from the microcolony, counted, and weighed when observations were collected (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed. Based on the dry weight of a drone (Bertsch 1984), we assume the removal of a single drone is unlikely to result in a measurable impact on the microcolony. Additional measured endpoints included total brood area, number of drones, number of drone pupae, number of dead larvae, and average past microcolony weight, which was recorded at the end of each week for all except root pots.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.23386494252873563,
+              "r": 0.9075,
+              "b": 0.8147246168582375
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "2cc7ffa1-3c42-4742-83bd-920a8d4c51ea",
+        "chunk_ids": [
+          "2cc7ffa1-3c42-4742-83bd-920a8d4c51ea"
+        ],
+        "original_chunk_id": "2cc7ffa1-3c42-4742-83bd-920a8d4c51ea"
+      },
+      {
+        "text": "## Text from Document\n\nDifferential toxicity in bees has been shown between the N-nitroguanidine neonicotinoids imidacloprid, clothianidin, and thiamethoxam and the N-cyanoamidine neonicotinoids thiacloprid and acetamiprid (Manjon et al. 2018). In adult honey bees and bumble bees, the CYP9Q subfamily of cytochrome P450 enzymes can metabolize the N-cyanoamidine neonicotinoids and thus reduce their apparent toxicity (Manjon et al. 2018, Troczka et al. 2019). As such, the sublethal effects of thiacloprid and acetamiprid on bumble bees have received relatively little study. While other neonicotinoids are applied as a seed coating, whereby the compounds translocate through plant tissues, thiacloprid and acetamiprid are applied via foliar spray, often coinciding with the flowering stage of plants. In the United States, acetamiprid is approved for use on a variety of bumble bee-pollinated crops, thus bumble bees may be exposed via contaminated pollen and nectar. The amount of residue encountered likely varies based on the target crop and the timing of application (Havstad et al. 2019). In pollen, acetamiprid residues have been reported at a range of levels (e.g., 14\u2013134 ppb in honey bee pollen) (Marion-Poll et al. 2010).\n\nTo compare the extent to which exposure to acetamiprid via pollen or syrup affects *B. impatiens* microcolonies, we conducted an analysis of two previously published datasets that exposed microcolonies through pollen (Camp et al. 2020b) or through syrup (Camp et al. 2020a). Because over half of the microcolonies receiving the highest dose in both studies failed to produce any drones, we excluded these groups from our analyses. Outside of these high exposure groups, few treatment related effects were reported in the published studies. However, in the pollen but not syrup study, there was a treatment related decrease in average drone weight (Camp et al. 2020b). Conversely, in the syrup study, there was a decrease...",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.5181154214559387,
+              "r": 0.485,
+              "b": 0.7824018199233717
+            },
+            "page": 1
+          },
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.7852538314176245,
+              "r": 0.485,
+              "b": 0.9364104406130268
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "b1392bc1-2ecc-497a-876b-fd10040ab848",
+        "chunk_ids": [
+          "b1392bc1-2ecc-497a-876b-fd10040ab848"
+        ],
+        "original_chunk_id": "b1392bc1-2ecc-497a-876b-fd10040ab848"
+      },
+      {
+        "text": "## Statistical Analysis\n\nAll analyses were done in R version 4.0.5. R scripts and source data files are available upon request. To examine correlations between microcolony endpoints, we used packages 'Hmisc' and 'corrplot'. The correlation and clustering methods were 'pearson' and 'Hclust', respectively. In addition to the measured microcolony endpoints, we also included 'dose consumed' as a metric to examine the...",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.8394420498084291,
+              "r": 0.9075,
+              "b": 0.9354597701149425
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "c6e1e536-f4e5-4a28-8aab-fa11630a0368",
+        "chunk_ids": [
+          "c6e1e536-f4e5-4a28-8aab-fa11630a0368"
+        ],
+        "original_chunk_id": "c6e1e536-f4e5-4a28-8aab-fa11630a0368"
+      },
+      {
+        "text": "## Page Header\n\nDownloaded from https://academic.oup.com/aler/article/5/1/1/3085742 by Oxford Economic Papers user",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.9587499999999999,
+              "t": 0.20914750957854406,
+              "r": 0.9724999999999999,
+              "b": 0.7862045019157088
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "58d263ce-7da7-4b0b-ba81-cb9fd50982ac",
+        "chunk_ids": [
+          "58d263ce-7da7-4b0b-ba81-cb9fd50982ac"
+        ],
+        "original_chunk_id": "58d263ce-7da7-4b0b-ba81-cb9fd50982ac"
+      },
+      {
+        "text": "### Page Header\n\n**Environmental Entomology, 2022, Vol. 51, No. 3**",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.6075,
+              "t": 0.03422413793103448,
+              "r": 0.9075,
+              "b": 0.04563218390804598
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "8e1cd4c8-7b0a-45c2-9f4f-598021b12648",
+        "chunk_ids": [
+          "8e1cd4c8-7b0a-45c2-9f4f-598021b12648",
+          "3d7825ad-d6c6-41c3-aac9-2d002c152638",
+          "89c8f1bb-9771-4041-819c-77925530cede",
+          "4ab4a45a-0fe8-4103-a42b-e29d96b1b760"
+        ],
+        "original_chunk_id": "8e1cd4c8-7b0a-45c2-9f4f-598021b12648"
+      },
+      {
+        "text": "## Text\n\n...along with nectar and glandular secretions (Pereboom 2000). Both fecundity and brood development are dependent on the protein and lipids from pollen. Given that reproductives and brood are exposed to higher amounts of pollen while workers primarily digest nectar, any effects observed from neonicotinoid exposure may depend, in part, on the route of exposure. Here, to allow a comparison of exposure routes, we conduct an analysis of two previously published datasets. One study exposed *Bombus impatiens* microcolonies to the neonicotinoid acetamiprid via pollen (Camp et al. 2020b), while the other utilized syrup as a vehicle (Camp et al. 2020a).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06844827586206896,
+              "r": 0.485,
+              "b": 0.20629549808429118
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "62a5cc33-7fa4-4b00-8707-929da8c63551",
+        "chunk_ids": [
+          "62a5cc33-7fa4-4b00-8707-929da8c63551"
+        ],
+        "original_chunk_id": "62a5cc33-7fa4-4b00-8707-929da8c63551"
+      },
+      {
+        "text": "## Text\n\nDifferential toxicity in bees has been shown between the N-nitroguanidine neonicotinoids imidacloprid, clothianidin, and thiamethoxam and the N-cyanoamidine neonicotinoids thiacloprid and acetamiprid (Manjon et al. 2018). In adult honey bees and bumble bees, the CYP9Q subfamily of cytochrome P450 enzymes can metabolize the N-cyanoamidine neonicotinoids and thus reduce their apparent toxicity (Manjon et al. 2018, Troczka et al. 2019). As such, the sublethal effects of thiacloprid and acetamiprid on bumble bees have received relatively little study. While other neonicotinoids are applied as a seed coating, whereby the compounds translocate through plant tissues, thiacloprid and acetamiprid are applied via foliar spray, often coinciding with the flowering stage of plants. In the United States, acetamiprid is approved for use on a variety of bumble bee-pollinated crops, thus bumble bees may be exposed via contaminated pollen and nectar. The amount of residue encountered likely varies based on the target crop and the timing of application (Havstad et al. 2019). In pollen, acetamiprid residues have been reported at a range of levels (e.g., 14\u2013134 ppb in honey bee pollen) (Marion-Poll et al. 2010).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.5181154214559387,
+              "r": 0.485,
+              "b": 0.7824018199233717
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "8a8bdd32-adea-4fbe-874c-59f21dbd0517",
+        "chunk_ids": [
+          "8a8bdd32-adea-4fbe-874c-59f21dbd0517"
+        ],
+        "original_chunk_id": "8a8bdd32-adea-4fbe-874c-59f21dbd0517"
+      },
+      {
+        "text": "To compare the extent to which exposure to acetamiprid via pollen or syrup affects *B. impatiens* microcolonies, we conducted an analysis of two previously published datasets that exposed microcolonies through pollen (Camp et al. 2020b) or through syrup (Camp et al. 2020a). Because over half of the microcolonies receiving the highest dose in both studies failed to produce any drones, we excluded these groups from our analyses. Outside of these high exposure groups, few treatment related effects were reported in the published studies. However, in the pollen but not syrup study, there was a treatment related decrease in average drone weight (Camp et al. 2020b). Conversely, in the syrup study, there was a decrease in the number of emerged drones (Camp et al. 2020a). Here, using the published datasets, we sought to further examine the relationships between these and other variables to gain additional insight into potential differences in outcomes based on the treatment vehicle. To this end, we focused on three main objectives when comparing between acetamiprid delivered via pollen and syrup: 1) to explore correlations between microcolony endpoints measured in both studies, 2) to examine relationships between pollen consumption, syrup consumption, and drone production, and 3) to further test the observation of exposure route differences on drone production.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.7852538314176245,
+              "r": 0.485,
+              "b": 0.9364104406130268
+            },
+            "page": 1
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.06844827586206896,
+              "r": 0.9075,
+              "b": 0.20629549808429118
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "b1e778ea-aa53-4bea-b318-dac423a6d308",
+        "chunk_ids": [
+          "b1e778ea-aa53-4bea-b318-dac423a6d308"
+        ],
+        "original_chunk_id": "b1e778ea-aa53-4bea-b318-dac423a6d308"
+      },
+      {
+        "text": "## Methods\n\n",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.23386494252873563,
+              "r": 0.585,
+              "b": 0.24527298850574714
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "e9869af0-b58d-44bd-a3fc-265acf496385",
+        "chunk_ids": [
+          "e9869af0-b58d-44bd-a3fc-265acf496385"
+        ],
+        "original_chunk_id": "e9869af0-b58d-44bd-a3fc-265acf496385"
+      },
+      {
+        "text": "## Detailed Methods for Both the Pollen and Syrup Studies\n\nDetailed methods for both the pollen and syrup studies have been published previously (Camp et al. 2020a, b). Briefly, in both experiments, newly emerged *B. impatiens* workers were acclimated for 24 h before microcolony initiation. Since the microcolonies were confined and could not forage, workers were provisioned with 50/50 inverted sugar syrup (50% glucose and 50% fructose) prepared in distilled water and containing 2.95 mM citric acid and 8.32 mM sorbic acid. Microcolonies were also provided 3 g pollen paste (2.5 g pollen/1 ml 50/50 inverted syrup) prepared from multifloral honey bee corbicular pollen (collected in 2015 from ornamental nurseries, Connecticut, USA; to eliminate potential differences in pesticide residues (type and quantity) and the nutritional quality of the pollen used in the studies, the same blended batch of pollen was used for both experiments). Microcolonies were initiated as groups of five bees. Five days after initiation, an additional 2 g clean pollen paste was added. In the study with pollen as the vehicle; 2 g of acetamiprid-containing pollen (no solvent added; 0.452, 4.52, 45.2, 452, or 4520 ppb; 8 microcolonies per treatment group) was provided in a separate feeding dish beginning seven days after colony initiation. In the syrup study, acetamiprid-containing syrup (no solvent added; 1.13, 11.3, 113, 1,130, or 11,300 ppb; 10 microcolonies per treatment group) was added at initiation. Since over half of the microcolonies failed to produce drones at the highest dose groups (4,520 and 11,300 ppb), these groups were excluded from our analyses. The exposure duration was six weeks for both experiments (pollen experiment maintained for seven weeks; dosing began after week 1). Pollen and syrup consumption were measured three days per week from which we calculated weekly averages for this analysis. In the pollen experiment, newly emerged drones were removed from the microcolony, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when observations were conducted (i.e., on Mondays, Wednesdays, and Fridays starting on day 28, through day 49). In the syrup experiment, newly emerged drones were permanently removed from the microcolony, counted, and weighed when they were first observed. As in the pollen experiment, drones were removed, counted, and weighed when",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.25573036398467436,
+              "r": 0.9075,
+              "b": 0.8147246168582375
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "a4cb1c96-c5c2-499c-b5fc-8136b960711a",
+        "chunk_ids": [
+          "a4cb1c96-c5c2-499c-b5fc-8136b960711a"
+        ],
+        "original_chunk_id": "a4cb1c96-c5c2-499c-b5fc-8136b960711a"
+      },
+      {
+        "text": "## Statistical Analysis",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.8394420498084291,
+              "r": 0.6475,
+              "b": 0.8508500957854407
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "098091c5-1a17-4ebf-bcd4-0d608a1b2e54",
+        "chunk_ids": [
+          "098091c5-1a17-4ebf-bcd4-0d608a1b2e54"
+        ],
+        "original_chunk_id": "098091c5-1a17-4ebf-bcd4-0d608a1b2e54"
+      },
+      {
+        "text": "All analyses were done in R version 4.0.5. R scripts and source data files are available upon request. To examine correlations between microcolony endpoints, we used packages 'Hmisc' and 'corrplot'. The correlation and clustering methods were 'pearson' and 'Hclust', respectively. In addition to the measured microcolony endpoints, we also included 'dose consumed' as a metric to examine the...",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.8556034482758621,
+              "r": 0.9075,
+              "b": 0.9354597701149425
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "6583a6fa-be4a-4ed8-afd2-de0b19ad2ad1",
+        "chunk_ids": [
+          "6583a6fa-be4a-4ed8-afd2-de0b19ad2ad1"
+        ],
+        "original_chunk_id": "6583a6fa-be4a-4ed8-afd2-de0b19ad2ad1"
+      },
+      {
+        "text": "## Page Header\n\nDownloaded from https://academic.oup.com/aler/article/23/1/1/6035742 by Oxford Economic Papers user",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.9587499999999999,
+              "t": 0.20914750957854406,
+              "r": 0.9724999999999999,
+              "b": 0.7862045019157088
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "d21a5b35-ba60-4b2f-b0d4-60029dea282e",
+        "chunk_ids": [
+          "d21a5b35-ba60-4b2f-b0d4-60029dea282e"
+        ],
+        "original_chunk_id": "d21a5b35-ba60-4b2f-b0d4-60029dea282e"
+      },
+      {
+        "text": "## Environmental Entomology, 2022, Vol. 51, No. 6\n\nThis is a page header from a document indicating the journal name, year, volume, and issue number.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.03422413793103448,
+              "r": 0.39125,
+              "b": 0.04563218390804598
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "f3bb40a5-dea3-487e-8669-226ba2046f22",
+        "chunk_ids": [
+          "f3bb40a5-dea3-487e-8669-226ba2046f22",
+          "62d99e94-3e70-4324-abdc-c2e92639c43f"
+        ],
+        "original_chunk_id": "f3bb40a5-dea3-487e-8669-226ba2046f22"
+      },
+      {
+        "text": "## Text Analysis\n\nThe document discusses the relationship between treatment and other variables in a study. Here's a detailed breakdown:\n\n- **Calculation Method**: The relationship was calculated by multiplying the treatment dose by the total amount of either treated pollen or treated syrup consumed by a microcolony.\n\n- **Correlation Analysis**: Significant correlations were found at $P < 0.01$ for all endpoints. The correlation between the timing of pollen and syrup consumption and drone emergence was significant at $P < 0.05$.\n\n- **Statistical Tests**: Dunnett\u2019s test was used to examine treatment effects compared to the control group at the microcolony level using the package `DescTools`.\n\n- **Linear Regression Models**: Used to examine relationships between correlated endpoints with the function `lm`. The study also aimed to understand which weeks of syrup and pollen consumption at the microcolony level best predicted average drone mass across experiments and treatment groups.\n\n- **Model Selection**: Automated model selection was performed using the package `glmulti` (Calcagno and de Mazancourt 2010), which fits all unique models and ranks them based on corrected Akaike information criteria (AICc).\n\n- **Predictor Variables**: Included all weeks of pollen and syrup consumption, limiting the number of predictor variables to one (maxK = 3). Models within 2 AICc units of the best model were evaluated using linear regression and scatterplots.\n\n- **Dose Groups**: The automated model selection approach was used to determine which weeks of food consumption predicted average drone mass in dose groups where a significant treatment effect was found.\n\n- **Effect Size Calculation**: Cohen\u2019s D was calculated using the package `lsr` (Navarro 2015). Effect sizes are classified as small (0.2), medium (0.5), and very large (1.2) (Sawilowsky 2009). Treatment effects were visualized using `ggplot2`.\n\n- **Effects from Treatment**: Analyzed using linear mixed effects models with the package `lme4` (Bates et al. 2015) and `lmerTest` (Kuznetsova et al. 2007), with treatment (i.e., dose) as the fixed effect and microcolony as the random effect. The response variable was the average drone mass, which was log transformed and back transformed to the original scale for plotting. Normality and homoscedasticity of residuals were checked using diagnostic plots.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06844827586206896,
+              "r": 0.485,
+              "b": 0.5856130268199233
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "da8435dd-f100-4037-a3db-dedc3af932ff",
+        "chunk_ids": [
+          "da8435dd-f100-4037-a3db-dedc3af932ff"
+        ],
+        "original_chunk_id": "da8435dd-f100-4037-a3db-dedc3af932ff"
+      },
+      {
+        "text": "Because the count data showed over-dispersion due to zeros, we fit a negative binomial distribution and included a zero-inflation term. Treatment was specified as the fixed factor, with day of emergence nested within microcolony as the random factors. All models were run separately for the pollen and syrup experiments.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.06844827586206896,
+              "r": 0.9075,
+              "b": 0.150205938697318
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "f986d1dc-5511-4e2f-8fc9-6cad82453044",
+        "chunk_ids": [
+          "f986d1dc-5511-4e2f-8fc9-6cad82453044"
+        ],
+        "original_chunk_id": "f986d1dc-5511-4e2f-8fc9-6cad82453044"
+      },
+      {
+        "text": "## Results\n\n### Correlations Between Microcolony Endpoints (Exploratory Analysis)\n\nWe examined correlations (significant at $P < 0.01$) between measured microcolony endpoints for both the pollen and syrup delivery experiments (Fig. 1). First, for both pollen and syrup delivery, we found that the endpoints 'dead larvae at necropsy' and 'ejected larvae' did not correlate with any other endpoints. In the pollen study, 'dose consumed' was negatively correlated with 'average drone weight' and positively correlated with 'unhatched eggs at necropsy' and the average number of 'full nectar pots'. In the syrup study, 'dose consumed' was negatively correlated with 'total drones emerged' and 'pupae at necropsy' and positively correlated with the average number of 'full nectar pots'. In addition, in the syrup study only, 'days to first drone emergence' was negatively correlated with 'total drones emerged', 'total syrup consumed', and 'total pollen consumed'. In both studies, there were correlations between 'total pollen consumption', 'total syrup consumption', and 'total drones emerged'. Notably, 'dose consumed' was not correlated with 'total pollen consumption' or 'total syrup consumption' in either study.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.18443007662835248,
+              "r": 0.9075,
+              "b": 0.473433908045977
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "7bd45a5b-6afb-4541-828d-f6b3bbd91c51",
+        "chunk_ids": [
+          "7bd45a5b-6afb-4541-828d-f6b3bbd91c51"
+        ],
+        "original_chunk_id": "7bd45a5b-6afb-4541-828d-f6b3bbd91c51"
+      },
+      {
+        "text": "## Text Analysis\n\nBecause our exploratory analysis identified 'unhatched eggs at necropsy', 'full nectar pots', and 'pupae at necropsy' as potentially affected by treatment (published analyses of the data did not examine treatment effects on these endpoints), we evaluated dose effects on each variable for both pollen and syrup delivery ([Supp Tables 1-3](#) [online only]). Using Dunnett's test to compare each treatment group against the control, there were no significant treatment effects ($P < 0.05$) on 'unhatched eggs at necropsy' ([Supp Table 1](#)).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.4762859195402299,
+              "r": 0.9075,
+              "b": 0.5846623563218392
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "4f58e5e9-8f8d-4953-bc76-70a00295a7f4",
+        "chunk_ids": [
+          "4f58e5e9-8f8d-4953-bc76-70a00295a7f4"
+        ],
+        "original_chunk_id": "4f58e5e9-8f8d-4953-bc76-70a00295a7f4"
+      },
+      {
+        "text": "## Environmental Entomology, 2022, Vol. 51, No. 6\n\nThis is a page header from a document indicating the title of the journal \"Environmental Entomology,\" the year 2022, and the volume and issue number, which are Vol. 51 and No. 6, respectively.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.03422413793103448,
+              "r": 0.39125,
+              "b": 0.04563218390804598
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "0e27c4c8-cfab-48ff-aad0-d4bb54af4cdb",
+        "chunk_ids": [
+          "0e27c4c8-cfab-48ff-aad0-d4bb54af4cdb"
+        ],
+        "original_chunk_id": "0e27c4c8-cfab-48ff-aad0-d4bb54af4cdb"
+      },
+      {
+        "text": "## Text Analysis\n\nThe document discusses the relationship between treatment and other variables in a study. The analysis was conducted by multiplying the treatment dose by the total amount of either treated pollen or treated syrup consumed by a microcolony. Significant correlations were found for all endpoints, with $P < 0.01$. To demonstrate the correlations between the timing of pollen and syrup consumption and drone emergence, a Dunnett's test was used to compare treatment effects to the control group at the microcolony level using the package `DescTools`.\n\nTo further examine relationships between correlated endpoints, linear regression models were used with the function `lm`. The study also aimed to understand which weeks of syrup and pollen consumption at the microcolony level best predicted average drone mass across experiments and treatment groups. Automated model selection was performed using the package `glmulti` (Calcagno and de Mazancourt 2010), which fits all unique models and ranks them based on corrected Akaike information criteria (AICc). Predictor variables included all weeks of pollen and syrup consumption, with a limit of three predictor variables per model (maxK = 3). Models within 2 AICc units of the best model were evaluated using linear regression and scatterplots. This automated model selection approach was also used to determine which weeks of food consumption predicted average drone mass in dose groups where a significant treatment effect was observed.\n\nTo examine the effect size of each dose per microcolony, Cohen's D was calculated using the package `lsr` (Navarro 2015). Cohen's D effect sizes are classified as small (0.2), medium (0.5), and very large (1.2) (Sawilowsky 2009). Treatment effects were visualized per microcolony using `ggplot2`.\n\nEffects from treatment on microcolony-level syrup consumption were examined using linear mixed effects models with the package `lme4` (Pinheiro et al. 2007), with treatment (i.e., dose) as the fixed effect and microcolony as the random effect. The response variable was the total syrup consumption, normalized by the number of bees in the microcolony. The model included the number of predictor variables to ensure robustness.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06844827586206896,
+              "r": 0.485,
+              "b": 0.5856130268199233
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "94a1601d-4dcc-4ddd-8b69-f5c8c90fc73d",
+        "chunk_ids": [
+          "94a1601d-4dcc-4ddd-8b69-f5c8c90fc73d"
+        ],
+        "original_chunk_id": "94a1601d-4dcc-4ddd-8b69-f5c8c90fc73d"
+      },
+      {
+        "text": "## Text\n\n\"glmmADMB\" (Bolker et al. 2012). Because the count data showed over-dispersion due to zeros, we fit a negative binomial distribution and included a zero-inflation term. Treatment was specified as the fixed factor, with day of emergence nested within microcolony as the random factors. All models were run separately for the pollen and syrup experiments.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.06844827586206896,
+              "r": 0.9075,
+              "b": 0.150205938697318
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "66765223-b35d-4644-be32-a060a580b053",
+        "chunk_ids": [
+          "66765223-b35d-4644-be32-a060a580b053"
+        ],
+        "original_chunk_id": "66765223-b35d-4644-be32-a060a580b053"
+      },
+      {
+        "text": "## Results\n\n### Correlations Between Microcolony Endpoints (Exploratory Analysis)\n\nWe examined correlations (significant at $P < 0.01$) between measured microcolony endpoints for both the pollen and syrup delivery experiments (Fig. 1). First, for both pollen and syrup delivery, we found that the endpoints 'dead larvae at necropsy' and 'ejected larvae' did not correlate with any other endpoints. In the pollen study, 'dose consumed' was negatively correlated with 'average drone weight' and positively correlated with 'unhatched eggs at necropsy' and the average number of 'full nectar pots'. In the syrup study, 'dose consumed' was negatively correlated with 'total drones emerged' and 'pupae at necropsy' and positively correlated with the average number of 'full nectar pots'. In addition, in the syrup study only, 'days to first drone emergence' was negatively correlated with 'total drones emerged', 'total syrup consumed', and 'total pollen consumed'. In both studies, there were correlations between total pollen consumption, 'total syrup consumption', and 'total drones emerged'. Notably, 'dose consumed' was not correlated with 'total pollen consumption' or 'total syrup consumption' in either study.\n\nBecause our exploratory analysis identified 'unhatched eggs at necropsy', 'full nectar pots', and 'pupae at necropsy' as potentially affected by treatment (published analyses of the data did not examine treatment effects on these endpoints), we evaluated dose effects on each variable for both pollen and syrup delivery (Supp Tables 1-3 [online only]). Using Dunnett's test to compare each treatment group against the control, there were no significant treatment effects ($P < 0.05$) on 'unhatched eggs at necropsy' (Supp Table 1).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.18443007662835248,
+              "r": 0.9075,
+              "b": 0.5846623563218392
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "ba8b6275-02ce-4dfc-9ad3-103dde59903d",
+        "chunk_ids": [
+          "ba8b6275-02ce-4dfc-9ad3-103dde59903d"
+        ],
+        "original_chunk_id": "ba8b6275-02ce-4dfc-9ad3-103dde59903d"
+      },
+      {
+        "text": "## Environmental Entomology, 2022, Vol. 51, No. 3\n\nThis is a page header from a document indicating the journal name \"Environmental Entomology,\" the year \"2022,\" and the volume and issue number \"Vol. 51, No. 3.\"",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.6075,
+              "t": 0.03422413793103448,
+              "r": 0.9075,
+              "b": 0.04563218390804598
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "ebed04df-0c35-47cc-81f1-99b5c16fb9df",
+        "chunk_ids": [
+          "ebed04df-0c35-47cc-81f1-99b5c16fb9df"
+        ],
+        "original_chunk_id": "ebed04df-0c35-47cc-81f1-99b5c16fb9df"
+      },
+      {
+        "text": "## Text\n\n(online only) for either pollen or syrup delivery and no significant treatment effects for average 'full nectar pots' (Supp Table 2 [online only]) or 'pupae at necropsy' (Supp Table 3 [online only]) when delivered via pollen. For syrup delivery at 1,130 ppb, there was a significantly higher average number of 'full nectar pots' compared to the control group (Supp Table 2 [online only]; difference in means = 1.63 (0.31, 2.9), *P* = 0.011) and a significantly lower number of 'pupae at necropsy' (Supp Table 3 [online only]; difference in means = -6.7 (-11.8, -1.6), *P* = 0.0063).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06844827586206896,
+              "r": 0.485,
+              "b": 0.1920354406130268
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "7c61a44f-5dc3-45e3-b9e1-639d522d84ef",
+        "chunk_ids": [
+          "7c61a44f-5dc3-45e3-b9e1-639d522d84ef"
+        ],
+        "original_chunk_id": "7c61a44f-5dc3-45e3-b9e1-639d522d84ef"
+      },
+      {
+        "text": "## Relations Between Pollen Consumption, Syrup Consumption, and Drone Production\n\nTo further examine the relationships between drone emergence and pollen and syrup consumption at the microcolony level, we show correlations based on weekly average consumption and weekly drone emergence (Fig. 2). From this, a pattern becomes apparent whereby pollen consumption predicts drone emergence two weeks later. With pollen delivery: pollen consumed in week 3 predicted drones emerged during week 5 ($R^2 = 0.47, F = 35.4, P = 7.6 \\times 10^{-7}$); pollen consumed in week 4 predicted drones emerged during week 6 ($R^2 = 0.50, F = 40.3, P = 1.9 \\times 10^{-7}$); pollen consumed in week 5 predicted drones emerged during week 7 ($R^2 = 0.47, F = 35.2, P = 7.1 \\times 10^{-7}$). With syrup delivery: pollen consumed in week 3 predicted drones emerged during week 5 ($R^2 = 0.75, F = 146.5, P = 3.4 \\times 10^{-15}$); pollen consumed in week 4 predicted drones emerged during week 6 ($R^2 = 0.68, F = 105.5, P = 1.0 \\times 10^{-10}$). Scatterplots by treatment are shown in Supp Figs. 1 & 2 (online only), as well as additional visualizations of drone emergence and pollen and syrup consumption over time (Supp Figs. 3 & 4 [online only]).\n\nTo determine if average drone weight was predicted by syrup or pollen consumption at specific time points, we examined all possible combinations of syrup and pollen consumption weeks 1\u20137 where applicable. In the pollen experiment, the best model was a negative correlation with week 5 syrup consumed (AICc = 287.5, model weight = 0.38; $R^2 = 0.11, P = 0.020$), followed by a negative correlation with week 5 syrup consumed (AICc = 288.5, model weight = 0.22; $R^2 = 0.09, P = 0.037$). There were no other models within 2 AICc units. In the syrup experiment, the best model was week 5 syrup consumed (AICc = 409.7, model weight = 0.19; $R^2 = 0.03, P = 0.11$) which was followed closely by the null model (AICc = 410.1, model weight = 0.15), indicating poor fit. We next focused only on dose groups where a significant treatment effect on drone weight was observed (4.52 and 452 ppb, see below). For these microcolonies, there was a negative correlation between drone weight and pollen consumed at week 5 (AICc = 112.9, model weight = 0.34, $R^2 = 0.21, P = 0.041$), followed by the null model (AICc = 114.7, model weight = 0.14).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.22055555555555556,
+              "r": 0.485,
+              "b": 0.6150838122605364
+            },
+            "page": 3
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.06844827586206896,
+              "r": 0.9075,
+              "b": 0.17872605363984675
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "dca020f9-bcc1-41c9-a341-b8309e2834ba",
+        "chunk_ids": [
+          "dca020f9-bcc1-41c9-a341-b8309e2834ba"
+        ],
+        "original_chunk_id": "dca020f9-bcc1-41c9-a341-b8309e2834ba"
+      },
+      {
+        "text": "## Effects of Delivery Vehicle on Drone Production\n\nIn the exploratory correlation plots, 'dose consumed' was correlated with 'average drone weight' (pollen study) and with 'total emerged drones' (syrup study). This is consistent with the previously published observations that 'average drone weight' decreased at the two highest doses (452, 4,520 ppb) in the pollen study (Camp et al. 2020b) while no effect was observed in the syrup study (Camp et al. 2020a). In contrast, 'total emerged drones' was reported to decrease at the two highest doses (1,130, 11,300 ppb) in the syrup study and at the highest dose (4,520 ppb) in the pollen study. As in the correlation plots, the previous analyses were conducted on microcolony averaged level data (e.g., for each microcolony, the weight of all drones was averaged then the ranks across treatment groups were compared). Here, we repeat this analysis (excluding the highest dose groups) using linear mixed-effects modeling which does not require group averages as input, but rather includes individual data points for each microcolony, accounting for microcolony as a random effect. With this approach, we found that acetamiprid given via pollen resulted in a decrease in drone weight ($P < 0.05$) and very large effect size at 11,300 ppb and 452 ppb (Fig. 3A; Table 1). There was no effect on drone weight when acetamiprid was delivered via syrup (Fig. 3B; Table 1). For the number of emerged drones, acetamiprid via pollen did not significantly reduce the number of emerged drones at any analyzed dose (Fig. 3C; Table 2). Delivered via syrup, there was a significant reduction in the number of emerged drones at 1,130 ppb with large effect size (Fig. 3D).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.19964080459770114,
+              "r": 0.9075,
+              "b": 0.5637476053639847
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "105b0a16-7dcd-42e7-8d01-bfc9f16e0ea2",
+        "chunk_ids": [
+          "105b0a16-7dcd-42e7-8d01-bfc9f16e0ea2"
+        ],
+        "original_chunk_id": "105b0a16-7dcd-42e7-8d01-bfc9f16e0ea2"
+      },
+      {
+        "text": "## Discussion\n\nAs standardized laboratory studies for *Apis* and non-*Apis* bees are developed, consideration should be given to the potential importance of the delivery vehicle. To help inform our understanding of the ways in which the treatment vehicle may affect different outcomes and life stages, we sought to determine whether the route of acetamiprid exposure affects the associations between measured microcolony endpoints and to more closely examine the observation of exposure route differences on drone production. We report evidence to suggest that developing brood may receive higher pesticide exposure if delivery is through pollen. For developmental toxicants, these effects could potentially be missed with syrup delivery alone. Likewise, pollen delivery alone may underestimate effects from pesticides that adversely affect adult workers. Experiments that directly compare exposure route differences can help to elucidate whether this applies broadly to various pesticide classes, as well as the extent to which it may apply to different castes and pollinator species.\n\nBy comparing correlation plots for measured microcolony endpoints between the pollen and syrup experiments, we gained some insight into the predictive power of common microcolony measurements. For example, we found that 'dead larvae at necropsy' and 'ejected larvae' did not correlate with other variables. Similarly, while we found that 'unhatched eggs at necropsy' was positively correlated with 'dose consumed' in the pollen experiment, there was...",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.5951197318007663,
+              "r": 0.9075,
+              "b": 0.9364104406130268
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "2b4ae097-a8b4-49f4-8144-4250dda3b736",
+        "chunk_ids": [
+          "2b4ae097-a8b4-49f4-8144-4250dda3b736"
+        ],
+        "original_chunk_id": "2b4ae097-a8b4-49f4-8144-4250dda3b736"
+      },
+      {
+        "text": "## Text Capture\n\n(online only) for either pollen or syrup delivery and no significant treatment effects for average 'full nectar pots' ([Supp Table 2](online only)) or 'pupae at necropsy' ([Supp Table 3](online only)) when delivered via pollen. For syrup delivery at 1,130 ppb, there was a significantly higher average number of 'full nectar pots' compared to the control group ([Supp Table 2](online only); difference in means = 1.63 (0.31, 2.9), *P* = 0.011) and a significantly lower number of 'pupae at necropsy' ([Supp Table 3](online only); difference in means = -6.7 (-11.8, -1.6), *P* = 0.0063).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06844827586206896,
+              "r": 0.485,
+              "b": 0.1920354406130268
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "58e04605-9203-475e-85f4-fdcdb107dc72",
+        "chunk_ids": [
+          "58e04605-9203-475e-85f4-fdcdb107dc72"
+        ],
+        "original_chunk_id": "58e04605-9203-475e-85f4-fdcdb107dc72"
+      },
+      {
+        "text": "## Relations Between Pollen Consumption, Syrup Consumption, and Drone Production\n\nTo further examine the relationships between drone emergence and pollen and syrup consumption at the microcolony level, we show correlations based on weekly average consumption and weekly drone emergence (Fig. 2). From this, a pattern becomes apparent where pollen consumption predicts drone emergence two weeks later. With pollen delivery: pollen consumed in week 3 predicted drones emerged during week 5 ($R^2 = 0.47, F = 35.4, P = 7.6 \\times 10^{-7}$); pollen consumed in week 4 predicted drones emerged during week 6 ($R^2 = 0.50, F = 40.3, P = 1.9 \\times 10^{-7}$); pollen consumed in week 5 predicted drones emerged during week 7 ($R^2 = 0.47, F = 35.2, P = 7.1 \\times 10^{-7}$). With syrup delivery: pollen consumed in week 3 predicted drones emerged during week 5 ($R^2 = 0.75, F = 146.5, P = 3.4 \\times 10^{-15}$); pollen consumed in week 4 predicted drones emerged during week 6 ($R^2 = 0.68, F = 105.5, P = 1.0 \\times 10^{-10}$). Scatterplots by treatment are shown in Supp Figs. 1 & 2 (online only), as well as additional visualizations of drone emergence and pollen and syrup consumption over time in Supp Figs. 3 & 4 (online only).\n\nTo determine if average drone weight was predicted by syrup or pollen consumption at specific time points, we examined all possible combinations of syrup and pollen consumption weeks 1\u20137 where applicable. In the pollen experiment, the best model was a negative correlation with week 5 syrup consumed (AICc = 287.5, model weight = 0.38; $R^2 = 0.11, P = 0.020$), followed by a negative correlation with week 5 syrup consumed (AICc = 288.5, model weight = 0.22; $R^2 = 0.09, P = 0.037$). There were no other models within 2 AICc units. In the syrup experiment, the best model was week 5 syrup consumed (AICc = 409.7, model weight = 0.19; $R^2 = 0.03, P = 0.11$) which was followed closely by the null model (AICc = 410.1, model weight = 0.15), indicating poor fit. We next focused only on dose groups where a significant treatment effect on drone weight was observed (4.52 and 452 ppb, see below). For these microcolonies, there was a negative correlation between drone weight and pollen consumed at week 5 (AICc = 112.9, model weight = 0.34, $R^2 = 0.21, P = 0.041$), followed by the null model (AICc = 114.7, model weight = 0.14).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.22055555555555556,
+              "r": 0.485,
+              "b": 0.6150838122605364
+            },
+            "page": 3
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.06844827586206896,
+              "r": 0.9075,
+              "b": 0.17872605363984675
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "099d8f09-4193-4215-9209-83c3144c98ef",
+        "chunk_ids": [
+          "099d8f09-4193-4215-9209-83c3144c98ef"
+        ],
+        "original_chunk_id": "099d8f09-4193-4215-9209-83c3144c98ef"
+      },
+      {
+        "text": "## Effects of Delivery Vehicle on Drone Production\n\nIn the exploratory correlation plots, 'dose consumed' was correlated with 'average drone weight' (pollen study) and with 'total emerged drones' (syrup study). This is consistent with the previously published observations that 'average drone weight' decreased at the two highest doses (452, 4,520 ppb) in the pollen study (Camp et al. 2020b) while no effect was observed in the syrup study (Camp et al. 2020a). In contrast, 'total emerged drones' was reported to decrease at the two highest doses (1,130, 11,300 ppb) in the syrup study and at the highest dose (4,520 ppb) in the pollen study. As in the correlation plots, the previous analyses were conducted on microcolony averaged level data (e.g., for each microcolony, the weight of all drones was averaged then the ranks across treatment groups were compared). Here, we repeat this analysis (excluding the highest dose groups) using linear mixed-effects modeling which does not require group averages as input, but rather includes individual data points for each microcolony, accounting for microcolony as a random effect. With this approach, we found that acetamiprid given via pollen resulted in a decrease in drone weight ($P < 0.05$) and very large effect size at both 52 ppb and 452 ppb (Fig. 3A, Table 1). There was no effect on drone weight when acetamiprid was delivered via syrup (Fig. 3B; Table 1). For the number of emerged drones, acetamiprid via pollen did not significantly reduce the number of emerged drones at any analyzed dose (Fig. 3C; Table 2). Delivered via syrup, there was a significant reduction in the number of emerged drones at 1,130 ppb with large effect size (Fig. 3D).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.19964080459770114,
+              "r": 0.9075,
+              "b": 0.5637476053639847
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "b25d1128-0aa9-49f6-a8d2-1d1aeae9af7a",
+        "chunk_ids": [
+          "b25d1128-0aa9-49f6-a8d2-1d1aeae9af7a"
+        ],
+        "original_chunk_id": "b25d1128-0aa9-49f6-a8d2-1d1aeae9af7a"
+      },
+      {
+        "text": "## Discussion\n\nAs standardized laboratory studies for *Apis* and non-*Apis* bees are developed, consideration should be given to the potential importance of the delivery vehicle. To help inform our understanding of the ways in which the treatment vehicle may affect different outcomes and life stages, we sought to determine whether the route of acetamiprid exposure affects the associations between measured microcolony endpoints and to more closely examine the observation of exposure route differences on drone production. We report evidence to suggest that developing brood may receive higher pesticide exposure when delivery is through pollen. For developmental toxicants, these effects could potentially be missed with syrup delivery alone. Likewise, pollen delivery alone may underestimate effects from pesticides that adversely affect adult workers. Experiments that directly compare exposure route differences can help to elucidate whether this applies broadly to various pesticide classes, as well as the extent to which it may apply to different castes and pollinator species.\n\nBy comparing correlation plots for measured microcolony endpoints between the pollen and syrup experiments, we gained some insight into the predictive power of common microcolony measurements. For example, we found that 'dead larvae at necropsy' and 'ejected larvae' did not correlate with other variables. Similarly, while we found that 'unhatched eggs at necropsy' was positively correlated with 'dose consumed' in the pollen experiment, there was...",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.5951197318007663,
+              "r": 0.9075,
+              "b": 0.9364104406130268
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "e173254f-6d7f-4901-bf06-8594ea161731",
+        "chunk_ids": [
+          "e173254f-6d7f-4901-bf06-8594ea161731"
+        ],
+        "original_chunk_id": "e173254f-6d7f-4901-bf06-8594ea161731"
+      },
+      {
+        "text": "## Page Number\n\n617",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.8849999999999999,
+              "t": 0.03422413793103448,
+              "r": 0.9075,
+              "b": 0.0437308429118774
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "page_number",
+        "chunk_id": "b0854a1d-02cc-49f6-9765-1972a7d29be6",
+        "chunk_ids": [
+          "b0854a1d-02cc-49f6-9765-1972a7d29be6",
+          "65c6ca56-a230-442c-9fc1-045cd0fe267b"
+        ],
+        "original_chunk_id": "b0854a1d-02cc-49f6-9765-1972a7d29be6"
+      },
+      {
+        "text": "## Page Header\n\nDownloaded from https://academic.oup.com/aler/article/5/1/1/180587 by Oxford Economic Papers user",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.9587499999999999,
+              "t": 0.20914750957854406,
+              "r": 0.9724999999999999,
+              "b": 0.7862045019157088
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "454bff08-50c9-4d69-84d0-5de94bb60876",
+        "chunk_ids": [
+          "454bff08-50c9-4d69-84d0-5de94bb60876",
+          "e018f228-a6db-42b4-8ecd-9e7b8787521c"
+        ],
+        "original_chunk_id": "454bff08-50c9-4d69-84d0-5de94bb60876"
+      },
+      {
+        "text": "## Text from Document\n\nQuantifying egg production is difficult both because nests are structured in layers and because bumble bees engage in oophagy and larval ejection \u2013 the rates of which may also differ by treatment (Zanette et al. 2012, Roger et al. 2017). There may also be both direct and indirect effects on larval survival. For example, exposure to imidacloprid has been shown to reduce rates of brood care in *B. impatiens* (Crail et al. 2018). Through examining correlations between variables, we also found an increase in full nectar pots at the higher doses. This may reflect a lower demand for syrup (unused nectar pots) due to sublethal effects associated with increasing exposure to acetamiprid in the workers. In support of this hypothesis, the treatment effect was significant when delivered via syrup but not pollen. It is assumed that adult workers are exposed to higher levels of pesticide through consumption of syrup. However, provided that the treatment amount in syrup was higher compared to pollen (1,130 vs 452 ppb), additional controlled experiments would be needed to assess potential exposure route differences in nectar pot utilization.\n\nInterestingly, while there was no treatment effect on pollen or syrup consumption, we identified strong positive correlations between the timing of drone development and food consumption. Specifically, in both experiments, there was a consistent 2-week delay.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.6293438697318008,
+              "r": 0.485,
+              "b": 0.878419540229885
+            },
+            "page": 4
+          },
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.8822222222222222,
+              "r": 0.485,
+              "b": 0.9354597701149425
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "01a862b5-6681-4db5-bc70-e7313399c488",
+        "chunk_ids": [
+          "01a862b5-6681-4db5-bc70-e7313399c488",
+          "f1b6642b-7ad5-478d-85c5-7b7f30e8312e"
+        ],
+        "original_chunk_id": "01a862b5-6681-4db5-bc70-e7313399c488"
+      },
+      {
+        "text": "In the timing of the positive correlation between pollen consumed and subsequent drone emergence. In a study of *B. impatiens*, the feeding period for larval drones was reported to last approximately 8 d and the time from the end of the feeding period to adult emergence was 11 d (Cnaani et al. 2002). Based on this, the mid-point of larval feeding would be 15 d before emergence, coinciding with our observation of increased pollen consumption at 2 weeks prior to emergence. To test these observations, future experiments could limit pollen or syrup availability in the critical weeks before emergence and assess associations with drone production after ~2 weeks. Similarly, the timing of pesticide treatment could be varied to determine how windows of exposure might affect the number or weight (bee body size is determined during the larval stage [Chole et al. 2019]) of reproductives produced by a colony. An improved understanding of the dynamics of exposure timing and outcomes will be useful to adequately understanding and assessing pesticide risks. For example, it is interesting to note that many studies of neonicotinoid exposure in bumble bees report reduced pollen foraging efficiency or motivation. Rather than impaired foraging per se (leading to nutrient limitation), it is possible that reduced pollen foraging reflects a lower colony need for protein and lipids because fewer broods are developing.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.6293438697318008,
+              "r": 0.9075,
+              "b": 0.9345090996168581
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "f7de0135-f872-4f3d-8f21-9693b2fdb13a",
+        "chunk_ids": [
+          "f7de0135-f872-4f3d-8f21-9693b2fdb13a",
+          "21d6de05-ea71-4cd1-a97c-c21acee9f555"
+        ],
+        "original_chunk_id": "f7de0135-f872-4f3d-8f21-9693b2fdb13a"
+      },
+      {
+        "text": "## Environmental Entomology, 2022, Vol. 51, No. 6",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.03422413793103448,
+              "r": 0.39125,
+              "b": 0.04468151340996169
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "4dfc3bbc-5967-4800-b361-56b02493097d",
+        "chunk_ids": [
+          "4dfc3bbc-5967-4800-b361-56b02493097d"
+        ],
+        "original_chunk_id": "4dfc3bbc-5967-4800-b361-56b02493097d"
+      },
+      {
+        "text": "## Results of Linear Mixed Effects Models\n\n### Table: Treatment Effects on Drone Weight Within Microcolonies\n\nThis table presents the results of linear mixed effects models used to examine treatment effects on drone weight within microcolonies. The data is organized by treatment vehicle, dose, number of microcolonies, mean drone weight per microcolony, estimate with standard error, degrees of freedom (df), t-value with P-value, and Cohen's D (average per microcolony).\n\n<table>\n  <tr>\n    <th>Treatment vehicle</th>\n    <th>Dose</th>\n    <th>Number of microcolonies</th>\n    <th>Mean drone weight per microcolony (mg)</th>\n    <th>Estimate \u00b1 standard error</th>\n    <th>df</th>\n    <th>t (P-value)</th>\n    <th>Cohen's D (average per microcolony)</th>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>0 ppb</td>\n    <td>8</td>\n    <td>135.7</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>0.452 ppb</td>\n    <td>8</td>\n    <td>129.8</td>\n    <td>-0.0055 \u00b1 0.0034</td>\n    <td>37</td>\n    <td>-1.6 (0.12)</td>\n    <td>0.87</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>4.52 ppb</td>\n    <td>8</td>\n    <td>126.7</td>\n    <td>-0.0093 \u00b1 0.0035</td>\n    <td>37</td>\n    <td>-2.49 (0.017)</td>\n    <td>1.4</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>45.2 ppb</td>\n    <td>8</td>\n    <td>134.5</td>\n    <td>-0.0021 \u00b1 0.0036</td>\n    <td>37</td>\n    <td>-0.60 (0.55)</td>\n    <td>0.15</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>113 ppb</td>\n    <td>8</td>\n    <td>121.9</td>\n    <td>-0.013 \u00b1 0.0035</td>\n    <td>37</td>\n    <td>-3.7 (0.0007)</td>\n    <td>1.5</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>0 ppb</td>\n    <td>10</td>\n    <td>146.1</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>0.113 ppb</td>\n    <td>10</td>\n    <td>144.7</td>\n    <td>0.00028 \u00b1 0.0063</td>\n    <td>49</td>\n    <td>0.044 (0.96)</td>\n    <td>0.11</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>1.13 ppb</td>\n    <td>10</td>\n    <td>140.6</td>\n    <td>-0.0064 \u00b1 0.0050</td>\n    <td>49</td>\n    <td>-1.28 (0.21)</td>\n    <td>0.36</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>11.3 ppb</td>\n    <td>10</td>\n    <td>137.7</td>\n    <td>-0.0046 \u00b1 0.0064</td>\n    <td>49</td>\n    <td>-0.72 (0.47)</td>\n    <td>0.22</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>113 ppb</td>\n    <td>10</td>\n    <td>146.3</td>\n    <td>0.00092 \u00b1 0.0067</td>\n    <td>49</td>\n    <td>0.14 (0.89)</td>\n    <td>0.009</td>\n  </tr>\n</table>\n\n**Note**: Significant P-values (P < 0.05) are indicated in bold.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06939894636015326,
+              "r": 0.9075,
+              "b": 0.28044779693486593
+            },
+            "page": 5
+          }
+        ],
+        "chunk_type": "table",
+        "chunk_id": "5555e13a-c295-4fa5-9119-fd1282b1eadb",
+        "chunk_ids": [
+          "5555e13a-c295-4fa5-9119-fd1282b1eadb"
+        ],
+        "original_chunk_id": "5555e13a-c295-4fa5-9119-fd1282b1eadb"
+      },
+      {
+        "text": "## Results of General Linear Mixed Effects Models\n\n### Table Description\n\nThis table presents the results of general linear mixed effects models used to examine treatment effects on the number of emerged drones within microcolonies. The table is organized into several columns, each detailing specific aspects of the study.\n\n### Table Data\n\n<table>\n  <tr>\n    <th>Treatment vehicle</th>\n    <th>Dose</th>\n    <th>Number of microcolonies</th>\n    <th>Total number of emerged drones per microcolony</th>\n    <th>Estimate \u00b1 standard error</th>\n    <th>z (P-value)</th>\n    <th>Cohen's D (total per microcolony)</th>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>0 ppb</td>\n    <td>8</td>\n    <td>24</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>0.452 ppb</td>\n    <td>8</td>\n    <td>24.9</td>\n    <td>-0.0026 \u00b1 0.17</td>\n    <td>0.02 (0.99)</td>\n    <td>0.15</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>4.52 ppb</td>\n    <td>8</td>\n    <td>19.5</td>\n    <td>-0.19 \u00b1 0.18</td>\n    <td>-1.0 (0.30)</td>\n    <td>0.8</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>45.2 ppb</td>\n    <td>8</td>\n    <td>19.25</td>\n    <td>-0.20 \u00b1 0.18</td>\n    <td>-1.1 (0.28)</td>\n    <td>0.6</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>452 ppb</td>\n    <td>8</td>\n    <td>19.5</td>\n    <td>-0.23 \u00b1 0.18</td>\n    <td>-1.3 (0.20)</td>\n    <td>0.8</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>0 ppb</td>\n    <td>10</td>\n    <td>19.1</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>0.13 ppb</td>\n    <td>10</td>\n    <td>20.3</td>\n    <td>0.098 \u00b1 0.24</td>\n    <td>0.41 (0.68)</td>\n    <td>0.2</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>1.13 ppb</td>\n    <td>10</td>\n    <td>25.8</td>\n    <td>0.35 \u00b1 0.24</td>\n    <td>1.47 (0.14)</td>\n    <td>0.7</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>11.3 ppb</td>\n    <td>10</td>\n    <td>18.4</td>\n    <td>-0.0059 \u00b1 0.24</td>\n    <td>0.02 (0.98)</td>\n    <td>0.08</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>1,130 ppb</td>\n    <td>10</td>\n    <td>10.5</td>\n    <td>-0.62 \u00b1 0.25</td>\n    <td>-2.5 (<b>0.014</b>)</td>\n    <td>1.0</td>\n  </tr>\n</table>\n\n### Notes\n\n- Significant P-values ($P < 0.05$) are indicated in bold.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.3146719348659004,
+              "r": 0.9087500000000001,
+              "b": 0.5266714559386974
+            },
+            "page": 5
+          }
+        ],
+        "chunk_type": "table",
+        "chunk_id": "463a4faf-5093-4488-84cd-ecc81a3c6c31",
+        "chunk_ids": [
+          "463a4faf-5093-4488-84cd-ecc81a3c6c31"
+        ],
+        "original_chunk_id": "463a4faf-5093-4488-84cd-ecc81a3c6c31"
+      },
+      {
+        "text": "## Text from Document\n\nWe examined two reported measures of drone production within microcolonies \u2013 drone weight and the number of emerged drones. For the number of emerged drones per microcolony, we found little evidence to suggest that the outcome was dependent on the route of delivery of acetamiprid. There was a significant reduction only via syrup exposure (1,130 ppb), however, it is important to note that this dose is more than double the comparable dose in the pollen delivery study (452 ppb). Given that reductions in the number of emerged drones were observed in both studies at the highest dose groups (Camp et al. 2020a, b), we assume the lack of significant effects reported here for the pollen study reflects differences in dose rather than effects from the exposure vehicle.\n\nIn contrast, and in line with published results, we found that drone weight was reduced when acetamiprid was delivered via pollen, while there was no dose-dependent effect when given via syrup. When dosed through pollen, there was a significant reduction in drone weight at two doses (4.52 and 452 ppb). While more research is needed on bumble bee collected pollen, these are likely within the range of environmentally relevant doses as acetamiprid residues have been detected at 14\u2013134 ppb in honey bee pollen (Marion-Poll et al. 2010). Furthermore, this is consistent with an observed increase in smaller workers following field-application of acetamiprid (Chandler et al. 2020). Critically, most studies of neonicotinoids use syrup as the vehicle. Our results suggest that exposure via syrup alone could result in missing potential brood effects which may occur at low doses. It is likely that both brood and the reproductives) receive relatively higher exposure to the test compound when in pollen (as compared to syrup), as they depend on the protein and lipids for growth. This is an important outcome as drone body size has potential effects on fitness (Belsky et al. 2020). Importantly, measures of body size and weight show a strong linear correlation (Bertsch 1984, Hagen and Dupont 2013, Kelemen et al. 2020). Larger worker bumble bees have a larger flight range (Greenleaf et al. 2007) and larger workers and drones can fly under lower light levels (Kapustjanski et al. 2007). In addition, larger B. terrestris drones have been reported to have longer sperm length (\u03bcm) (Baer et al. 2003) and an increased number of sperm (Wilfert et al. 2007). Thus, it could be inferred that smaller drones may have reduced mating performance. In addition, the observed effects on drone body size suggest that worker and queen size could also be impaired by acetamiprid exposure, as the mechanisms regulating development, while complex, are generally shared across castes (Chole et al. 2019). This may be of particular relevance to workers, as they are more variably sized compared to drones or queens (Kelemen et al. 2022). Female bumble bees show morphological polyethism related to task allocation \u2013 generally, larger worker bumble bees are more likely to forage, while smaller workers are more likely to remain in the nest and care for the brood. Alterations to the distribution of worker body size may hinder colony performance. The extent to which acetamiprid exposure affects worker and queen body size is an important unanswered question, also considering potential evidence that declining bee species are smaller in body size compared to historical specimens (Nooten and Rehan 2019).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.5485368773946361,
+              "r": 0.485,
+              "b": 0.7006441570881226
+            },
+            "page": 5
+          },
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.7034961685823755,
+              "r": 0.485,
+              "b": 0.9250023946360153
+            },
+            "page": 5
+          },
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.5485368773946361,
+              "r": 0.9087500000000001,
+              "b": 0.8679621647509579
+            },
+            "page": 5
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "d944e95f-0c15-469b-9b12-5824214b7cb2",
+        "chunk_ids": [
+          "d944e95f-0c15-469b-9b12-5824214b7cb2"
+        ],
+        "original_chunk_id": "d944e95f-0c15-469b-9b12-5824214b7cb2"
+      },
+      {
+        "text": "Previous studies have found that colonies with limited food resources produce smaller offspring (Sutcliffe and Plowright 2012, Rotheray et al. 2017). There are at least three potential (not mutually exclusive) mechanisms underlying effects on drone weight \u2013 treatment",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.8708141762452107,
+              "r": 0.9075,
+              "b": 0.9250023946360153
+            },
+            "page": 5
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "0c26d78b-8636-4705-ad77-20ada0d13338",
+        "chunk_ids": [
+          "0c26d78b-8636-4705-ad77-20ada0d13338"
+        ],
+        "original_chunk_id": "0c26d78b-8636-4705-ad77-20ada0d13338"
+      },
+      {
+        "text": "## Results of Linear Mixed Effects Models to Examine Treatment Effects on Drone Weight Within Microcolonies\n\n### Table\n\n<table>\n  <tr>\n    <th>Treatment vehicle</th>\n    <th>Dose</th>\n    <th>Number of microcolonies</th>\n    <th>Mean drone weight per microcolony (mg)</th>\n    <th>Estimate \u00b1 standard error</th>\n    <th>df</th>\n    <th>t (P-value)</th>\n    <th>Cohen's D (average per microcolony)</th>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>0 ppb</td>\n    <td>8</td>\n    <td>135.7</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>0.452 ppb</td>\n    <td>8</td>\n    <td>129.8</td>\n    <td>-0.0055 \u00b1 0.0034</td>\n    <td>37</td>\n    <td>-1.6 (0.12)</td>\n    <td>0.37</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>4.52 ppb</td>\n    <td>8</td>\n    <td>126.7</td>\n    <td>-0.0093 \u00b1 0.0035</td>\n    <td>37</td>\n    <td>-2.49 (0.017)</td>\n    <td>1.4</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>45.2 ppb</td>\n    <td>8</td>\n    <td>134.5</td>\n    <td>-0.0021 \u00b1 0.0036</td>\n    <td>37</td>\n    <td>-0.60 (0.55)</td>\n    <td>0.15</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>113 ppb</td>\n    <td>8</td>\n    <td>121.9</td>\n    <td>-0.013 \u00b1 0.0035</td>\n    <td>37</td>\n    <td>-3.7 (0.0007)</td>\n    <td>1.7</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>0 ppb</td>\n    <td>10</td>\n    <td>146.1</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>0.452 ppb</td>\n    <td>10</td>\n    <td>144.7</td>\n    <td>0.00028 \u00b1 0.0063</td>\n    <td>49</td>\n    <td>0.044 (0.96)</td>\n    <td>0.11</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>1.13 ppb</td>\n    <td>10</td>\n    <td>140.9</td>\n    <td>-0.0056 \u00b1 0.0044</td>\n    <td>49</td>\n    <td>-1.28 (0.21)</td>\n    <td>0.34</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>11.3 ppb</td>\n    <td>10</td>\n    <td>137.7</td>\n    <td>-0.0046 \u00b1 0.0064</td>\n    <td>49</td>\n    <td>-0.72 (0.47)</td>\n    <td>0.52</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>113 ppb</td>\n    <td>10</td>\n    <td>146.3</td>\n    <td>0.00092 \u00b1 0.0067</td>\n    <td>49</td>\n    <td>0.14 (0.89)</td>\n    <td>0.009</td>\n  </tr>\n</table>\n\n**Significant P-values (P < 0.05) are indicated in bold.**",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06939894636015326,
+              "r": 0.9075,
+              "b": 0.28044779693486593
+            },
+            "page": 5
+          }
+        ],
+        "chunk_type": "table",
+        "chunk_id": "232adc2f-7c14-4cb5-845e-60be753c5a53",
+        "chunk_ids": [
+          "232adc2f-7c14-4cb5-845e-60be753c5a53"
+        ],
+        "original_chunk_id": "232adc2f-7c14-4cb5-845e-60be753c5a53"
+      },
+      {
+        "text": "### Table 2: Results of General Linear Mixed Effects Models\n\nThis table examines the treatment effects on the number of emerged drones within microcolonies.\n\n<table>\n  <tr>\n    <th>Treatment vehicle</th>\n    <th>Dose</th>\n    <th>Number of microcolonies</th>\n    <th>Total number of emerged drones per microcolony</th>\n    <th>Estimate \u00b1 standard error</th>\n    <th>z (P-value)</th>\n    <th>Cohen's D (total per microcolony)</th>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>0 ppb</td>\n    <td>8</td>\n    <td>24</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>0.452 ppb</td>\n    <td>8</td>\n    <td>24.9</td>\n    <td>-0.0026 \u00b1 0.17</td>\n    <td>0.02 (0.99)</td>\n    <td>0.15</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>4.52 ppb</td>\n    <td>8</td>\n    <td>19.5</td>\n    <td>-0.19 \u00b1 0.18</td>\n    <td>-1.0 (0.30)</td>\n    <td>0.86</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>45.2 ppb</td>\n    <td>8</td>\n    <td>19.25</td>\n    <td>-0.20 \u00b1 0.18</td>\n    <td>-1.1 (0.28)</td>\n    <td>0.6</td>\n  </tr>\n  <tr>\n    <td>Pollen</td>\n    <td>452 ppb</td>\n    <td>8</td>\n    <td>19.5</td>\n    <td>-0.23 \u00b1 0.18</td>\n    <td>-1.3 (0.20)</td>\n    <td>0.8</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>0 ppb</td>\n    <td>10</td>\n    <td>19.1</td>\n    <td>NA</td>\n    <td>NA</td>\n    <td>NA</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>1.13 ppb</td>\n    <td>10</td>\n    <td>20.3</td>\n    <td>0.098 \u00b1 0.24</td>\n    <td>0.41 (0.68)</td>\n    <td>0.14</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>11.3 ppb</td>\n    <td>10</td>\n    <td>25.8</td>\n    <td>0.35 \u00b1 0.24</td>\n    <td>1.47 (0.14)</td>\n    <td>0.48</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>113 ppb</td>\n    <td>10</td>\n    <td>18.4</td>\n    <td>-0.0059 \u00b1 0.24</td>\n    <td>0.02 (0.98)</td>\n    <td>0.08</td>\n  </tr>\n  <tr>\n    <td>Syrup</td>\n    <td>1,130 ppb</td>\n    <td>10</td>\n    <td>10.5</td>\n    <td>-0.62 \u00b1 0.25</td>\n    <td>-2.5 (<b>0.014</b>)</td>\n    <td>1.0</td>\n  </tr>\n</table>\n\n**Note**: Significant P-values (\\(P < 0.05\\)) are indicated in bold.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.3146719348659004,
+              "r": 0.9087500000000001,
+              "b": 0.5266714559386974
+            },
+            "page": 5
+          }
+        ],
+        "chunk_type": "table",
+        "chunk_id": "a3b5573a-1674-4b3e-800e-d27ea64c8daf",
+        "chunk_ids": [
+          "a3b5573a-1674-4b3e-800e-d27ea64c8daf"
+        ],
+        "original_chunk_id": "a3b5573a-1674-4b3e-800e-d27ea64c8daf"
+      },
+      {
+        "text": "## Text from Document\n\nWe examined two reported measures of drone production within microcolonies \u2013 drone weight and the number of emerged drones. For the number of emerged drones per microcolony, we found little evidence to suggest that the outcome was dependent on the route of delivery of acetamiprid. There was a significant reduction only via syrup exposure (1,130 ppb), however, it is important to note that this dose is more than double the comparable dose in the pollen delivery study (452 ppb). Given that reductions in the number of emerged drones were observed in both studies at the highest dose groups (Camp et al. 2020a, b), we assume the lack of significant effects reported here for the pollen study reflects differences in dose rather than effects from the exposure vehicle.\n\nIn contrast, and in line with published results, we found that drone weight was reduced when acetamiprid was delivered via pollen, while there was no dose-dependent effect when given via syrup. When dosed through pollen, there was a significant reduction in drone weight at two doses (4.52 and 452 ppb). While more research is needed on bumble bee collected pollen, these are likely within the range of environmentally relevant doses as acetamiprid residues have been detected at 14\u2013134 ppb in honey bee pollen (Marion-Poll et al. 2010). Furthermore, this is consistent with an observed increase in smaller workers following field-application of acetamiprid (Chandler et al. 2020). Critically, most studies of neonicotinoids use syrup as the vehicle. Our results suggest that exposure via syrup alone could result in missing potential brood effects which may occur at low doses. It is likely that both brood and the reproductives receive relatively higher exposure to the test compound when in pollen (as compared to syrup), as they depend on the protein and lipids for growth. This is an important outcome as drone body size has potential effects on fitness (Belsky et al. 2020). Importantly, measures of body size and weight show a strong linear correlation (Bertsch 1984, Hagen and Dupont 2013, Kelemen et al. 2020). Larger worker bumble bees have a larger flight range (Greenleaf et al. 2007) and larger workers and drones can fly under lower light levels (Kapustjanski et al. 2007). In addition, larger B. terrestris drones have been reported to have longer sperm length (\u03bcm) (Baer et al. 2003) and an increased number of sperm (Wilfert et al. 2007). Thus, it could be inferred that smaller drones may have reduced mating performance. In addition, the observed effects on drone body size suggest that worker and queen size could also be impaired by acetamiprid exposure, as the mechanisms regulating development, while complex, are generally shared across castes (Chole et al. 2019). This may be of particular relevance to workers, as they are more variably sized compared to drones or queens (Kelemen et al. 2022). Female bumble bees show morphological polyethism related to task allocation \u2013 generally, larger worker bumble bees are more likely to forage, while smaller workers are more likely to remain in the nest and care for the brood. Alterations to the distribution of worker body size may hinder colony performance. The extent to which acetamiprid exposure affects worker and queen body size is an important unanswered question, also considering potential evidence that declining bee species are smaller in body size compared to historical specimens (Nooten and Rehan 2019).\n\nPrevious studies have found that colonies with limited food resources produce smaller offspring (Sutcliffe and Plowright 2012, Rotheray et al. 2017). There are at least three potential (not mutually-exclusive) mechanisms underlying effects on drone weight \u2013 treatment...",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.5485368773946361,
+              "r": 0.485,
+              "b": 0.7006441570881226
+            },
+            "page": 5
+          },
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.7034961685823755,
+              "r": 0.485,
+              "b": 0.9250023946360153
+            },
+            "page": 5
+          },
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.5485368773946361,
+              "r": 0.9087500000000001,
+              "b": 0.8679621647509579
+            },
+            "page": 5
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.8708141762452107,
+              "r": 0.9075,
+              "b": 0.9250023946360153
+            },
+            "page": 5
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "8fe2e12c-e270-434b-9513-43bb19de5e89",
+        "chunk_ids": [
+          "8fe2e12c-e270-434b-9513-43bb19de5e89"
+        ],
+        "original_chunk_id": "8fe2e12c-e270-434b-9513-43bb19de5e89"
+      },
+      {
+        "text": "## Environmental Entomology, 2022, Vol. 51, No. 6\n\nThis is a page header from a document indicating the journal name \"Environmental Entomology,\" the year \"2022,\" the volume \"51,\" and the issue number \"6.\"",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.03422413793103448,
+              "r": 0.39125,
+              "b": 0.04563218390804598
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "984ec571-00c9-4f33-8ef1-a9e968d7f8d0",
+        "chunk_ids": [
+          "984ec571-00c9-4f33-8ef1-a9e968d7f8d0"
+        ],
+        "original_chunk_id": "984ec571-00c9-4f33-8ef1-a9e968d7f8d0"
+      },
+      {
+        "text": "could reduce provisioning to the brood resulting in growth restriction via nutrient limitation, treatment could reduce the size of the developing oocytes, or there could be direct toxicity to the developing brood that impaired growth. Given that treatment effects on drone weight were only observed when acetamiprid was provided in pollen, my results provides evidence that observed effects do not arise from reduced provisioning. Across treatment groups, we did not identify any robust associations between drone weight and food consumption. However, focusing on only the dose groups with a significant treatment effect (in the pollen delivery group), we found that microcolonies that consumed more pollen at week 5 (and thus received a higher dose) produced smaller drones, suggesting support for the direct larval toxicity hypothesis. Low dose exposures to N-nitroguanidine neonicotinoids (e.g., imidacloprid, clothianidin, and thiamethoxam) during larval development have been found to reduce body size in several species, including in the stingless bee, Scaptotrigona depilis (Hymenoptera: Apidae) [Rosa et al. 2016] and in the common blue butterfly Polyommatus icarus (Lepidoptera: Lycaenidae) (Basley and Goulson 2018). Similarly, a study of honey bees found altered lipid metabolism in larvae exposed to imidacloprid (via syrup) [Zhang et al. 2013], suggesting a potential mechanism for reduced body size. In addition, imidacloprid exposure in B. terrestris has been shown to reduce the size of terminal oocytes (Laycock et al. 2012). Fewer studies have been conducted with thiacloprid or acetamiprid. In one study, larval exposure to thiacloprid in two solitary bees, Osmia spp., resulted in decreased pollen consumption and cocoon weight (Clausen et al. 2021). While the N-cyanoamidine neonicotinoids have been shown to be less toxic, the low toxicity to adults has been linked to the action of cytochrome P450s of the CYP9Q subfamily (Manjon et al. 2018), similar to many in larvae during reproduction. For example, P450s are highly involved in the detoxification of foreign compounds and insecticide detoxification. Additional studies that utilize enzyme inhibitors to assess the role of these enzymes in detoxification through acetamiprid exposure reduces drone body mass.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06844827586206896,
+              "r": 0.485,
+              "b": 0.5437835249042146
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "9a04dafb-8012-41bd-ae2a-a175270089b6",
+        "chunk_ids": [
+          "9a04dafb-8012-41bd-ae2a-a175270089b6"
+        ],
+        "original_chunk_id": "9a04dafb-8012-41bd-ae2a-a175270089b6"
+      },
+      {
+        "text": "An important limitation to our comparison of treatment effects from pollen versus syrup delivery of acetamiprid is that we do not know how much of each source was consumed by either adults or larvae. The reproductive(s) engaged in egg laying consume more pollen than other adults as a requirement for oocyte development. Also, compared to workers, we assume that brood directly receives a higher ratio of pollen to nectar given their high need of proteins and lipids for development and low carbohydrate requirements (as they are mostly immobile), but this ratio is likely dependent on developmental stage (Vaudo et al. 2015, Gradish et al. 2019). Still, workers masticate pollen to build the nest and to feed the brood, but the amount consumed during these activities is unknown. Finally, we do not know to what extent food predigestion by workers may affect chemical exposure to the brood and if this potentially varies between pollen and syrup. While detailed information on food allocation would be useful in determining effective doses and in furthering our understanding of bumble bee biology in general, our results nonetheless suggest that brood show higher sensitivity (via effects on body size) to treatment delivered via pollen.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.5466355363984674,
+              "r": 0.485,
+              "b": 0.8099712643678161
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "35225064-fa57-4071-8063-8c7937ea50b6",
+        "chunk_ids": [
+          "35225064-fa57-4071-8063-8c7937ea50b6"
+        ],
+        "original_chunk_id": "35225064-fa57-4071-8063-8c7937ea50b6"
+      },
+      {
+        "text": "## Text\n\nBumble bees are important pollinators and there is an urgent need to adequately understand causes of their decline. Indeed, while less well studied, bumble bees may be more sensitive and at higher risk of exposure to neonicotinoids compared to honey bees (Cresswell et al. 2012, Gradish et al. 2019). Here, we show that adverse effects on drone weight occur following exposure to acetamiprid via pollen but not syrup and at environmentally relevant exposure levels. For that reason, we recommend that investigators select the test article delivery vehicle (i.e., pollen or syrup) that is most appropriate for their experimental objectives. Alternatively, to mimic environmental exposures and to ensure all relevant treatment effects are captured, investigators could provide the test article in both pollen and syrup at the same time. In this way, the microcolony model is effective at capturing brood effects affecting colony-level fitness, whether those effects arise from adult toxicity resulting in reduced provisioning to the brood, or reproductive or developmental toxicity resulting in impaired fecundity or larval growth (or a combination thereof). Our results also provide support for drone weight or size, the number of emerged drones, and time to drone emergence as apical endpoints in microcolony analyses as these integrate potential treatment effects on food consumption, fecundity, development, and survival and are easily quantified. Finally, our results showing the relationship between the timing of pollen consumption and drone emergence suggest that disentangling treatment effects on foraging and colony food needs from brood production may provide insight into the mechanisms of toxicity. As such, we suggest investigators track food consumption over time, which also enables the estimation of exposure at the level of the microcolony. Focusing future studies on these endpoints can increase standardization and allow for more direct comparisons of treatment effects across laboratories.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.8128232758620689,
+              "r": 0.485,
+              "b": 0.9364104406130268
+            },
+            "page": 6
+          },
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.06844827586206896,
+              "r": 0.9075,
+              "b": 0.37456417624521077
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "b9797245-7d5f-4375-8679-3653075cbd7a",
+        "chunk_ids": [
+          "b9797245-7d5f-4375-8679-3653075cbd7a"
+        ],
+        "original_chunk_id": "b9797245-7d5f-4375-8679-3653075cbd7a"
+      },
+      {
+        "text": "## Acknowledgments\n\nWe thank Allison Camp, Wanda Williams, and Michael Batres for initial data collection and Tom Purucker, Yong Ho Kim, and two anonymous reviewers for thoughtful and critical review of this manuscript.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.4059363026819923,
+              "r": 0.9075,
+              "b": 0.4658285440613027
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "abd0e230-fd40-431b-b724-03a291d06b1d",
+        "chunk_ids": [
+          "abd0e230-fd40-431b-b724-03a291d06b1d"
+        ],
+        "original_chunk_id": "abd0e230-fd40-431b-b724-03a291d06b1d"
+      },
+      {
+        "text": "## Supplementary Data\n\nSupplementary data are available at *Environmental Entomology* online.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.49720067049808425,
+              "r": 0.9075,
+              "b": 0.5409315134099616
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "eaa6a554-261f-49d6-a77a-1fdbe5776cad",
+        "chunk_ids": [
+          "eaa6a554-261f-49d6-a77a-1fdbe5776cad"
+        ],
+        "original_chunk_id": "eaa6a554-261f-49d6-a77a-1fdbe5776cad"
+      },
+      {
+        "text": "## References Cited",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.5732543103448275,
+              "r": 0.6475,
+              "b": 0.5846623563218392
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "bfc3499c-ab5c-4902-85e5-e960617a7624",
+        "chunk_ids": [
+          "bfc3499c-ab5c-4902-85e5-e960617a7624"
+        ],
+        "original_chunk_id": "bfc3499c-ab5c-4902-85e5-e960617a7624"
+      },
+      {
+        "text": "## Text\n\nAmsalem, E., C. M. Grozinger, M. Padilla, and A. Hefetz. 2015. The physiological and genomic bases of bumble bee social behaviour, pp. 37-93. In *Genomics, Physiology and Behaviour of Social Insects*. Academic Press, London, UK.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.594169061302682,
+              "r": 0.9075,
+              "b": 0.6417025862068966
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "9ac14b73-2d2f-48b7-9603-f3e4bfb7ea32",
+        "chunk_ids": [
+          "9ac14b73-2d2f-48b7-9603-f3e4bfb7ea32"
+        ],
+        "original_chunk_id": "9ac14b73-2d2f-48b7-9603-f3e4bfb7ea32"
+      },
+      {
+        "text": "Baer, B., P. Schmid-Hempel, J. T. Hoeg, and J. J. Boomsma. 2003. Sperm length, sperm storage and mating system characteristics in bumblebees. *Insectes Soc.* 50: 101\u2013108.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.6455052681992337,
+              "r": 0.9075,
+              "b": 0.6806800766283525
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "f420a78b-f401-4181-b276-cac7ef45a66b",
+        "chunk_ids": [
+          "f420a78b-f401-4181-b276-cac7ef45a66b"
+        ],
+        "original_chunk_id": "f420a78b-f401-4181-b276-cac7ef45a66b"
+      },
+      {
+        "text": "## Reference\n\nBasley, K., and D. Goulson. 2018. Effects of field-relevant concentrations of clothianidin on larval development of the butterfly Polyommatus icarus (Lepidoptera, Lycaenidae). *Environ. Sci. Technol.* 52, 3990-3996.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.6835320881226054,
+              "r": 0.9075,
+              "b": 0.7196575670498084
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "265231e1-bb0f-4f15-87c1-d954541a3a5c",
+        "chunk_ids": [
+          "265231e1-bb0f-4f15-87c1-d954541a3a5c"
+        ],
+        "original_chunk_id": "265231e1-bb0f-4f15-87c1-d954541a3a5c"
+      },
+      {
+        "text": "## Reference\n\nBelsky, J., E.A.A. Camp, and D.M. Lehmann. 2020. The importance of males to bumble bee (Bombus species) nest development and colony viability. *Insects*, 11: 506.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.721558908045977,
+              "r": 0.9075,
+              "b": 0.7567337164750958
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "c57c2dfa-4944-40b8-98df-2d6726696a00",
+        "chunk_ids": [
+          "c57c2dfa-4944-40b8-98df-2d6726696a00"
+        ],
+        "original_chunk_id": "c57c2dfa-4944-40b8-98df-2d6726696a00"
+      },
+      {
+        "text": "## Text\n\nBertsch, A. 1994. Foraging in male bumblebees (Bombus lucorum L.): maximizing energy or minimizing water load? Oecologia 62: 325-336.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.7605363984674329,
+              "r": 0.9075,
+              "b": 0.7824018199233717
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "25adac49-b054-44a3-9efd-171094b9984c",
+        "chunk_ids": [
+          "25adac49-b054-44a3-9efd-171094b9984c"
+        ],
+        "original_chunk_id": "25adac49-b054-44a3-9efd-171094b9984c"
+      },
+      {
+        "text": "## Reference\n\nBolker, B., H. Skaug, A. Magnusson, and A. Nielsen. 2012. Getting started with the glmmADMB package. Available at [http://glmmadmb-rforge.r-project.org/glmmADMB.pdf](http://glmmadmb-rforge.r-project.org/glmmADMB.pdf). Accessed November 1, 2021.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.7862045019157088,
+              "r": 0.9075,
+              "b": 0.8213793103448276
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "45bb8ba3-26f9-4e90-9f5b-c983870415ab",
+        "chunk_ids": [
+          "45bb8ba3-26f9-4e90-9f5b-c983870415ab"
+        ],
+        "original_chunk_id": "45bb8ba3-26f9-4e90-9f5b-c983870415ab"
+      },
+      {
+        "text": "Calcagno, V., and C. de Mazancourt. **2010**. glmulti: An R package for easy automated model selection with (generalized) linear models. *J. Stat. Softw.* **34**: 1-29.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.8242313218390804,
+              "r": 0.9075,
+              "b": 0.858455459770115
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "04f502ab-484e-4c5d-837b-51f1bac3996c",
+        "chunk_ids": [
+          "04f502ab-484e-4c5d-837b-51f1bac3996c"
+        ],
+        "original_chunk_id": "04f502ab-484e-4c5d-837b-51f1bac3996c"
+      },
+      {
+        "text": "## Reference\n\nCameron, S. A., and B. M. Sadd. 2020. Global trends in bumble bee health. *Annu. Rev. Entomol.* 65:209-232.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.8622581417624521,
+              "r": 0.9075,
+              "b": 0.8850742337164751
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "c560b25f-3043-4a66-b526-02987df6abf5",
+        "chunk_ids": [
+          "c560b25f-3043-4a66-b526-02987df6abf5"
+        ],
+        "original_chunk_id": "c560b25f-3043-4a66-b526-02987df6abf5"
+      },
+      {
+        "text": "## Reference\n\nCamp, A. A., and D. M. Lehmann. 2021. Impacts of neonicotinoids on the bumble bees *Bombus terrestris* and *Bombus impatiens* examined through the lens of an adverse outcome pathway framework. *Environ. Toxicol. Chem.*, 40, 309-322.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.8879262452107279,
+              "r": 0.9075,
+              "b": 0.9345090996168581
+            },
+            "page": 6
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "9439b1a8-6f63-48a5-a6cb-d52019b6fe39",
+        "chunk_ids": [
+          "9439b1a8-6f63-48a5-a6cb-d52019b6fe39"
+        ],
+        "original_chunk_id": "9439b1a8-6f63-48a5-a6cb-d52019b6fe39"
+      }
+    ]
+  }
+}

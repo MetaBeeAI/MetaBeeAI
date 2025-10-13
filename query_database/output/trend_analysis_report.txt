@@ -1,0 +1,60 @@
+META BEE AI DATABASE - TREND ANALYSIS REPORT
+FOCUS: NICOTINIC CHOLINERGIC PESTICIDES (nAChR AGONISTS)
+============================================================
+
+OVERVIEW
+--------------------
+Total studies with both bee species and nicotinic cholinergic pesticide data: 851
+Unique bee species studied: 228
+Unique nicotinic cholinergic pesticides tested: 14
+Total bee-nicotinic pesticide combinations: 438
+
+DIVERSITY MEASURES
+--------------------
+Average pesticides tested per bee species: 1.92
+Average bee species tested per pesticide: 31.29
+Shannon diversity index: 17.674
+
+TOP COMBINATIONS
+--------------------
+ 1. Apis mellifera + imidacloprid: 266 studies
+ 2. Apis mellifera + thiamethoxam: 155 studies
+ 3. Apis mellifera + clothianidin: 138 studies
+ 4. Apis mellifera + thiacloprid: 70 studies
+ 5. Apis mellifera + acetamiprid: 59 studies
+ 6. Bombus terrestris + imidacloprid: 55 studies
+ 7. Bombus terrestris + thiamethoxam: 38 studies
+ 8. Apis mellifera + flupyradifurone: 35 studies
+ 9. Apis mellifera + sulfoxaflor: 34 studies
+10. Bombus impatiens + imidacloprid: 32 studies
+
+MOST STUDIED BEE SPECIES
+------------------------------
+ 1. Apis mellifera: 813 studies
+ 2. Bombus terrestris: 176 studies
+ 3. Apis cerana: 75 studies
+ 4. Bombus impatiens: 71 studies
+ 5. Osmia bicornis: 67 studies
+ 6. Megachile rotundata: 31 studies
+ 7. Melipona quadrifasciata: 24 studies
+ 8. Osmia lignaria: 24 studies
+ 9. Apis florea: 18 studies
+10. Scaptotrigona postica: 13 studies
+
+MOST TESTED NICOTINIC CHOLINERGIC PESTICIDES
+---------------------------------------------
+ 1. imidacloprid: 632 studies
+ 2. thiamethoxam: 292 studies
+ 3. clothianidin: 237 studies
+ 4. thiacloprid: 135 studies
+ 5. acetamiprid: 126 studies
+ 6. flupyradifurone: 81 studies
+ 7. sulfoxaflor: 80 studies
+ 8. spinosad: 65 studies
+ 9. chlorantraniliprole: 53 studies
+10. dinotefuran: 27 studies
+
+EXTREME CASES
+---------------
+Most studied combination: Apis mellifera + imidacloprid (266 studies)
+Least studied combination: Agapostemon angelicus + imidacloprid (1 studies)

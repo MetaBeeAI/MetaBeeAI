@@ -1,0 +1,32 @@
+{
+  "QUESTIONS": {
+    "bee_and_pesticides.bee_species": {
+      "user_answer_positive": "Bombus terrestris dalmatinus",
+      "user_answer_negative": "",
+      "user_reason_positive": "The full species and subspecies name is given (Bombus terrestris dalmatinus)",
+      "user_reason_negative": "",
+      "user_rating": 0
+    },
+    "bee_species": {
+      "user_answer_positive": "1. Bombus terrestris dalmatinus",
+      "user_answer_negative": "",
+      "user_reason_positive": "The methodology section specifies the bee species used in the study.",
+      "user_reason_negative": "",
+      "user_rating": 10
+    },
+    "pesticides": {
+      "user_answer_positive": "1. Clothianidin: field exposure via treated oilseed rape (OSR) seeds at 10 g per kg of seed\n2. Beta-cyfluthrin: field exposure via treated oilseed rape (OSR) seeds at 2 g per kg of seed",
+      "user_answer_negative": "",
+      "user_reason_positive": "The study provides explicit information on the pesticides used, their application rates, and exposure methods.",
+      "user_reason_negative": "",
+      "user_rating": 10
+    },
+    "additional_stressors": {
+      "user_answer_positive": "No additional stressors were tested.",
+      "user_answer_negative": "",
+      "user_reason_positive": "The provided text does not mention any additional stressors such as temperature, parasites, pathogens, other chemicals, or diet and nutrition stress that were tested and controlled for in the study. The text only refers to environmental conditions that were recorded, not tested.",
+      "user_reason_negative": "",
+      "user_rating": 10
+    }
+  }
+}

@@ -1,0 +1,1238 @@
+{
+  "data": {
+    "chunks": [
+      {
+        "text": "## Environmental Entomology\n\nVolume: 51(2), 2022, Pages: 378\u2013384\n\n[DOI: 10.1093/ee/nvab139](https://doi.org/10.1093/ee/nvab139)\n\nAdvance Access Publication Date: 11 January 2022\n\nType: Research",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.060842911877394636,
+              "r": 0.365,
+              "b": 0.11503113026819924
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "1b0a530e-2cd7-4e93-9417-1611197d3305",
+        "chunk_ids": [
+          "1b0a530e-2cd7-4e93-9417-1611197d3305"
+        ],
+        "original_chunk_id": "1b0a530e-2cd7-4e93-9417-1611197d3305"
+      },
+      {
+        "text": "## Environmental Impacts of Proposed Management Options",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.14640325670498083,
+              "r": 0.63125,
+              "b": 0.16446599616858237
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "e9e9eeb2-d0f6-4f61-a133-540396aaa4c8",
+        "chunk_ids": [
+          "e9e9eeb2-d0f6-4f61-a133-540396aaa4c8"
+        ],
+        "original_chunk_id": "e9e9eeb2-d0f6-4f61-a133-540396aaa4c8"
+      },
+      {
+        "text": "## A Combined LD\\(_{50}\\) for Agrochemicals and Pathogens in Bumblebees (Bombus terrestris [Hymenoptera: Apidae])\n\n**Authors:**\n- Harry Siviter\\(^1{,}^2{,}^4{,}^*\\)\n- Alexander J. Matthews\\(^1{,}^3{,}^*\\)\n- Mark J. F. Brown\\(^1\\)\n\n**Affiliations:**\n1. Department of Biological Sciences, Centre for Ecology, Evolution, and Behaviour, School of Life Sciences and the Environment, Royal Holloway University of London, Egham, Surrey, TW20 0EX, United Kingdom\n2. Department of Integrative Biology, University of Texas at Austin, 2415 Speedway, Austin, TX 78712, USA\n3. Fargro Limited, Vinery Fields, Arundel, BN18 9PY, United Kingdom\n\n**Corresponding author:**\n- E-mail: Harry.Siviter.2016@live.rhul.ac.uk",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.0875,
+              "t": 0.19773946360153258,
+              "r": 0.78625,
+              "b": 0.34319204980842916
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "3de10d80-d2d9-4907-a671-be819b37c558",
+        "chunk_ids": [
+          "3de10d80-d2d9-4907-a671-be819b37c558"
+        ],
+        "original_chunk_id": "3de10d80-d2d9-4907-a671-be819b37c558"
+      },
+      {
+        "text": "## Document Information\n\n- **Subject Editor**: Michelle Samuel-Foo\n- **Note**: These authors contributed equally.\n- **Received**: 16 August 2021\n- **Editorial decision**: 8 November 2021",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.3536494252873563,
+              "r": 0.375,
+              "b": 0.40118295019157085
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "key_value",
+        "chunk_id": "cf24ec4b-94e7-4489-bd0a-a5f0ab13e222",
+        "chunk_ids": [
+          "cf24ec4b-94e7-4489-bd0a-a5f0ab13e222"
+        ],
+        "original_chunk_id": "cf24ec4b-94e7-4489-bd0a-a5f0ab13e222"
+      },
+      {
+        "text": "## Abstract\n\nNeonicotinoid insecticides are the most commonly used insecticide in the world and can have significant sub-lethal impacts on beneficial insects, including bumblebees, which are important pollinators of agricultural crops and wildflowers. This has led to bans on neonicotinoid use in the EU and has resulted in repeated calls for the agrochemical regulatory process to be modified. For example, there is increasing concern about 1) the underrepresentation of wild bees, such as bumblebees, in the regulatory process, and 2) the failure to determine how agrochemicals, such as neonicotinoids, interact with other commonly occurring environmental stressors, such as parasites. Here, we modify an OECD approved lethal dose (LD<sub>50</sub>) experimental design and expose bumblebees (Bombus terrestris) to the neonicotinoid thiamethoxam and the highly prevalent trypanosome parasite Crithidia bombi, in a fully crossed design. We found no difference in the LD<sub>50</sub> of thiamethoxam on bumblebees that had or had not been inoculated with the parasite (Crithidia bombi). Furthermore, thiamethoxam dosage did not appear to influence the peak intensity of surviving bumblebees, and there was no effect of either parasite or insecticide on sucrose consumption. The methodology used demonstrates how existing ring-tested experimental designs can be effectively modified to include other environmental stressors such as parasites. Moving forward, the regulatory process should implement methodologies that assess the interactions between agrochemicals and parasites on non-Apis bees and, in cases when this is not practical, should implement post-regulatory monitoring to better understand the real-world consequences of agrochemical use.\n\n**Key words**: neonicotinoid, thiamethoxam, Crithidia bombi, Bombus, toxicity test",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.08875,
+              "t": 0.4230483716475095,
+              "r": 0.78625,
+              "b": 0.6939894636015326
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "bff704de-da42-4d81-83ff-3a78543f5441",
+        "chunk_ids": [
+          "bff704de-da42-4d81-83ff-3a78543f5441"
+        ],
+        "original_chunk_id": "bff704de-da42-4d81-83ff-3a78543f5441"
+      },
+      {
+        "text": "## Neonicotinoids and Their Impact\n\nNeonicotinoids are systemic insecticides that are effective at controlling a broad range of pest species such as aphids, whiteflies, and pollen beetles (Simon-Delso et al. 2015). As neurotoxins, they target the insect nervous system, acting as agonists of nicotinic acetylcholine receptors (nAChRs) (Moffat et al. 2016). Neonicotinoids can be used as a seed treatment or foliar spray but are highly persistent in the environment, and may persist in soil for over a year (Goulson 2013, Bass et al. 2015, Bonmatin et al. 2015). Neonicotinoids can therefore contaminate the nectar and pollen of treated crops as well as neighbouring wildflowers, leading to exposure for bees and other flower visiting insects (Stewart et al. 2014, Botias et al. 2016).\n\nAn analysis of global honey samples revealed that 75% of honey contained at least one neonicotinoid insecticide, with 45% containing two, confirming that bees are routinely exposed to neonicotinoids on a global scale (Mitchell et al. 2017). Such exposure can have significant negative effects on bee colony health, behaviour, and physiology (reviewed by Godfray et al. 2014, Goulson et al. 2015, Pisa et al. 2017, Maini et al. 2018, Siviter et al. 2018b) which has led to bans and restrictions on their use globally, most notably in the European Union, where 3 commonly used neonicotinoids (imidacloprid, thiamethoxam, and clothianidin) are now banned. However, neonicotinoid use remains common globally, particularly in the United States and China (Simon-Delso et al. 2015).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.08875,
+              "t": 0.7310656130268199,
+              "r": 0.48374999999999996,
+              "b": 0.8964822796934866
+            },
+            "page": 0
+          },
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.7310656130268199,
+              "r": 0.9075,
+              "b": 0.8955316091954022
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "2d84a8e0-6d3f-4fec-afdd-919aca847297",
+        "chunk_ids": [
+          "2d84a8e0-6d3f-4fec-afdd-919aca847297"
+        ],
+        "original_chunk_id": "2d84a8e0-6d3f-4fec-afdd-919aca847297"
+      },
+      {
+        "text": "## Page Footer\n\nDownloaded from https://academic.oup.com/aler/article/5/1/1/2893699 by Oxford Economic Papers user on 17 January 2023.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.9587499999999999,
+              "t": 0.20819683908045974,
+              "r": 0.9724999999999999,
+              "b": 0.7871551724137931
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "page_footer",
+        "chunk_id": "bbbacb9f-d68c-4fd0-8b00-d265256897e1",
+        "chunk_ids": [
+          "bbbacb9f-d68c-4fd0-8b00-d265256897e1"
+        ],
+        "original_chunk_id": "bbbacb9f-d68c-4fd0-8b00-d265256897e1"
+      },
+      {
+        "text": "## Page Footer\n\n\u00a9 The Author(s) 2022. Published by Oxford University Press on behalf of Entomological Society of America.  \nThis is an Open Access article distributed under the terms of the Creative Commons Attribution License [https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/), which permits unrestricted reuse, distribution, and reproduction in any medium, provided the original work is properly cited.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.08875,
+              "t": 0.9145450191570881,
+              "r": 0.79875,
+              "b": 0.9487691570881226
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "page_footer",
+        "chunk_id": "d1b6dd9f-6115-4fa2-a64b-176f888a7f61",
+        "chunk_ids": [
+          "d1b6dd9f-6115-4fa2-a64b-176f888a7f61"
+        ],
+        "original_chunk_id": "d1b6dd9f-6115-4fa2-a64b-176f888a7f61"
+      },
+      {
+        "text": "## Page Number\n\n378",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.8825000000000001,
+              "t": 0.9307064176245211,
+              "r": 0.90625,
+              "b": 0.9402131226053639
+            },
+            "page": 0
+          }
+        ],
+        "chunk_type": "page_number",
+        "chunk_id": "b6341861-d790-4877-b4bf-5e65811c183d",
+        "chunk_ids": [
+          "b6341861-d790-4877-b4bf-5e65811c183d"
+        ],
+        "original_chunk_id": "b6341861-d790-4877-b4bf-5e65811c183d"
+      },
+      {
+        "text": "## Environmental Entomology, 2022, Vol. 51, No. 2\n\nThis is a page header from a document indicating the title of the journal, the year of publication, the volume number, and the issue number.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.03422413793103448,
+              "r": 0.39249999999999996,
+              "b": 0.04468151340996169
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "7732b2d7-0cf5-4554-a79b-f755c82b05fd",
+        "chunk_ids": [
+          "7732b2d7-0cf5-4554-a79b-f755c82b05fd",
+          "1feddff0-f7c3-4159-af7f-d36195cfde75"
+        ],
+        "original_chunk_id": "7732b2d7-0cf5-4554-a79b-f755c82b05fd"
+      },
+      {
+        "text": "Bumblebees are important pollinators of agricultural crops and wildflowers (Willmer et al. 1994, Garibaldi et al. 2013). Bumblebee nests routinely contain a plethora of different parasites and pesticides, suggesting that simultaneous exposure to both parasites and agrochemicals is the norm, not the exception (Goulson et al. 2018, Nicholls et al. 2018). When bees are exposed to multiple stressors, the stressors can interact and become more detrimental than when exposed to a stressor in isolation (Doublet et al. 2015, Tosi and Nieh 2019, Linguaodoca et al. 2021). For example, Di Prisco et al. (2013) found that honeybees (A. mellifera) exposed to the neonicotinoid clothianidin had a reduced immune defence, which promoted the replication of DWV. Furthermore, coexposure to neonicotinoids and parasites can also increase the likelihood of adult, or larval mortality (Fauser-Misslin et al. 2014, Doublet et al. 2015). Therefore, understanding how, and to what degree, insecticides and parasites interact when bees are simultaneously exposed to both is of utmost importance.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.06844827586206896,
+              "r": 0.485,
+              "b": 0.3042145593869732
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "2b323b30-27ad-4794-81b1-fd87ace2edfa",
+        "chunk_ids": [
+          "2b323b30-27ad-4794-81b1-fd87ace2edfa"
+        ],
+        "original_chunk_id": "2b323b30-27ad-4794-81b1-fd87ace2edfa"
+      },
+      {
+        "text": "Thiamethoxam is one of the most commonly used neonicotinoids in the world, and is routinely found in the nectar and pollen collected by bumblebees (Botias et al. 2017, Nicholls et al. 2018). *Crithidia bombi* is a trypanosome parasite that is highly prevalent in bumblebee populations, with infection levels ranging from 0 to 80%, depending upon the population and time of year (Shykoff and Schmid-Hempel 1991, Gillespie 2010, Kissinger et al. 2011, Jones and Brown 2014). *C. bombi* exposure when combined with stressors like nutrient limitation or hibernation can significantly reduce bumblebee survival (Brown et al. 2000), colony founding, growth and reproductive output (Brown et al. 2003, Yourth et al. 2008), and can also impair foraging behaviour and learning (Gegear et al. 2005, 2006; Otterstatter et al. 2005) but see (Martin et al. 2018). Previous studies investigating the interactions between thiamethoxam and *C. bombi* have shown various interaction effects (Fauser-Misslin et al. 2014, Fauser et al. 2017, Baron et al. 2017) and simultaneous exposure to both stressors can lower bumblebee survival (Fauser-Misslin et al. 2014). This suggests that toxicity assessment of thiamethoxam conducted in the regulatory process could underestimate the potential real-world consequences of thiamethoxam exposure on bumblebees infected with common bumblebee parasites.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.30801724137931036,
+              "r": 0.485,
+              "b": 0.6131824712643679
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "25812810-4d0e-4e6c-ba87-110e2b28c164",
+        "chunk_ids": [
+          "25812810-4d0e-4e6c-ba87-110e2b28c164"
+        ],
+        "original_chunk_id": "25812810-4d0e-4e6c-ba87-110e2b28c164"
+      },
+      {
+        "text": "## Agrochemical Regulatory Processes\n\nAgrochemical regulatory processes differ between nations and governing bodies. The European Union, which is considered to have the most rigorous regulatory process, has a tiered system that is heavily reliant on toxicity tests in the lower tiers to determine whether agrochemicals (pesticides, insecticides, fungicides, herbicides) are hazardous to animals (EFSA 2013, OECD 2017, Sanchez-Bayo and Tennekes 2017). When determining whether an agrochemical is \u2018bee safe\u2019 or not, toxicity tests, such as LD\u2085\u2080 and LC\u2085\u2080 tests, will be conducted on honeybees (Tier 1) to determine the amount of active ingredient that is required to kill 50% of the population when bees are orally (LD\u2085\u2080) or topically (LC\u2085\u2080) exposed. Based on this information, further higher tier assessments will, or will not, be conducted (EFSA 2013, Sanchez-Bayo and Tennekes 2017). In its current form bumblebee LD\u2085\u2080 experiments can be conducted in Tier 1 of the regulatory process, but this is not mandated, and the potential interactions between insecticides and other environmental stressors are not considered (EFSA 2013, Sanchez-Bayo and Tennekes 2017). Regulators and policy makers therefore require methodologies that can be used within the current regulatory framework that test the impact of agrochemicals on non-Apis-bees and 2) test how agrochemicals interact with other environmental factors (EFSA 2013, Vanbergen & Insect Pollinators Initiative 2013, Franklin and Raine 2019, Siviter et al. 2021a, c).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.6160344827586207,
+              "r": 0.48624999999999996,
+              "b": 0.9354597701149425
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "18902eee-2748-402b-9aa2-f1821142c17c",
+        "chunk_ids": [
+          "18902eee-2748-402b-9aa2-f1821142c17c"
+        ],
+        "original_chunk_id": "18902eee-2748-402b-9aa2-f1821142c17c"
+      },
+      {
+        "text": "## Text from Document\n\nHere we ask if simultaneous exposure to both thiamethoxam and *C. bombi* changes the LD\\(_{50}\\) values of thiamethoxam in bumblebees (*Bombus terrestris*). The acute, oral LD\\(_{50}\\) for bumblebees (*B. terrestris*) and thiamethoxam is known to be 5 ng of active ingredient per bee ([EFSA 2015](#)) and so if thiamethoxam and *C. bombi* significantly interact we would predict that this value would either increase or decrease. Our methodology was based on OECD guidelines ([OECD 2017](#)) but was modified to incorporate *C. bombi* inoculation. We hypothesised that when used in combination, thiamethoxam and *C. bombi* would lower the LD\\(_{50}\\) value of bumblebees (*B. terrestris*).\n\n### Methods\n\nSix bumblebee colonies (*Bombus terrestris audax*) were ordered from Agralan (United Kingdom) and transferred into plastic colony boxes (28 x 22 x 12 cm) and maintained in a laboratory (25\u00b0C & 42% humidity), with ad libitum access to sucrose solution (50\u00b0Brix) and pollen (Agralan). The faeces of 15 workers from each colony were examined using a phase contrast microscope for common bumblebee parasites (*Apicystis bombi, Crithidia spp.* & *Nosema spp.*, 400x magnification) ([Rutrecht and Brown 2009](#)). All colonies were unparasitized.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.515,
+              "t": 0.06844827586206896,
+              "r": 0.9087500000000001,
+              "b": 0.20629549808429118
+            },
+            "page": 1
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.2376676245210728,
+              "r": 0.9087500000000001,
+              "b": 0.3821695402298851
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "af7846dc-7a3b-4445-9191-087a4a117c49",
+        "chunk_ids": [
+          "af7846dc-7a3b-4445-9191-087a4a117c49"
+        ],
+        "original_chunk_id": "af7846dc-7a3b-4445-9191-087a4a117c49"
+      },
+      {
+        "text": "## Parasite Inoculation\n\nThe aim of this experiment was to determine if inoculation with the parasite *C. bombi* changed the LD\\(_{50}\\) of thiamethoxam on bumblebees. To achieve this, we had a total of 21 treatment groups (2 control groups, 1 *C. bombi* group, 9 thiamethoxam groups and 9 groups exposed to both thiamethoxam & *C. bombi*; see Supp Table S1 [online only]). We had 40 bumblebees in each treatment group and all bees were individually housed in Nicot cages (see below for details).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.4030842911877395,
+              "r": 0.9087500000000001,
+              "b": 0.5152634099616857
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "24011ad4-261c-44cc-a725-56c744020c30",
+        "chunk_ids": [
+          "24011ad4-261c-44cc-a725-56c744020c30",
+          "644ddff3-6f60-48d8-b2d7-2d172876d63e"
+        ],
+        "original_chunk_id": "24011ad4-261c-44cc-a725-56c744020c30"
+      },
+      {
+        "text": "To create a *C. bombi* inoculum the faeces of 30 workers were taken from a commercial colony infected with multiple strains of *C. bombi*. These strains were originally isolated from bumblebee queens caught at Windsor Great Park (United Kingdom) and then propagated through commercial colonies in the laboratory. Faeces of infected workers from these colonies were placed in an Eppendorf tube containing 0.9% Ringer solution and centrifuged at 0.8 g for 2 min. The supernatant was removed, and clean Ringer solution added, a process that was repeated 7 times (8 times in total) to purify and concentrate the preinoculum (following a modified triangulation protocol based on [Cole 1970]). Cell counts were carried out using a Neubauer improved haemocytometer to determine the concentration of *C. bombi* cells. The *C. bombi* preinoculum was then combined with sucrose (50\u00b0Brix) to create an inoculum of 1,000 cells/\u03bcL.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.515,
+              "t": 0.519066091954023,
+              "r": 0.9087500000000001,
+              "b": 0.7244109195402298
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "f8ce0b22-daf2-49f1-84dd-5ce3578d4b21",
+        "chunk_ids": [
+          "f8ce0b22-daf2-49f1-84dd-5ce3578d4b21"
+        ],
+        "original_chunk_id": "f8ce0b22-daf2-49f1-84dd-5ce3578d4b21"
+      },
+      {
+        "text": "## Text\n\nIndividual bumblebees from all treatment groups (see Supp Table S1 [online only] for list of treatment groups) were taken from queen-right colonies, and individually housed in Nicot cages (148 x 130 x 11 mm) with ad libitum access to 50\u00b0Brix sucrose through a 1 ml syringe.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.515,
+              "t": 0.7282136015325671,
+              "r": 0.9087500000000001,
+              "b": 0.7957112068965517
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "0987ff4a-69fc-4157-aa40-350d0249d0a1",
+        "chunk_ids": [
+          "0987ff4a-69fc-4157-aa40-350d0249d0a1"
+        ],
+        "original_chunk_id": "0987ff4a-69fc-4157-aa40-350d0249d0a1"
+      },
+      {
+        "text": "Prior to inoculation, workers from all the treatment groups underwent a starvation period of 3 h [Logan et al. 2005] after which all bees were removed from their Nicot cages and placed in an individual vial (9 \u00d7 2.5 cm). The inoculum was presented to each individual to drink with a 10 \u03bcl droplet of 50\u00b0Brix sucrose solution containing approximately 10,000 C. bombi. A dose of 10,000 cells has been determined to produce a reliable and high rate of infection [Ruiz-Gonzalez and Brown 2006]. A period of 15 min was allowed for the individual to consume the inoculum. Workers from control and thiamethoxam only treatment groups underwent the",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.7985632183908046,
+              "r": 0.9087500000000001,
+              "b": 0.9364104406130268
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "fe3a475b-c8c0-4110-a23e-92322e2b2aa3",
+        "chunk_ids": [
+          "fe3a475b-c8c0-4110-a23e-92322e2b2aa3"
+        ],
+        "original_chunk_id": "fe3a475b-c8c0-4110-a23e-92322e2b2aa3"
+      },
+      {
+        "text": "## Page Header\n\nDownloaded from https://academic.oup.com/jeea/article/18/5/2277/5863449 by Oxford Economic Papers user on 17 January 2022",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.9587499999999999,
+              "t": 0.21009818007662837,
+              "r": 0.9724999999999999,
+              "b": 0.7852538314176245
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "38a315fc-4d3b-439c-9a19-462745d1f418",
+        "chunk_ids": [
+          "38a315fc-4d3b-439c-9a19-462745d1f418"
+        ],
+        "original_chunk_id": "38a315fc-4d3b-439c-9a19-462745d1f418"
+      },
+      {
+        "text": "## Environmental Entomology, 2022, Vol. 51, No. 2\n\nThis text appears to be a page header from a document, specifically from a journal titled \"Environmental Entomology,\" published in 2022, Volume 51, Number 2.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.03422413793103448,
+              "r": 0.39249999999999996,
+              "b": 0.04468151340996169
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "92e674b7-6731-448c-aaa4-493b698db208",
+        "chunk_ids": [
+          "92e674b7-6731-448c-aaa4-493b698db208"
+        ],
+        "original_chunk_id": "92e674b7-6731-448c-aaa4-493b698db208"
+      },
+      {
+        "text": "### Page Number\n\nThe image shows the number **379**.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.8849999999999999,
+              "t": 0.03422413793103448,
+              "r": 0.9075,
+              "b": 0.0437308429118774
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "page_number",
+        "chunk_id": "3e05c162-f625-4088-9efa-d31d3d9c7a44",
+        "chunk_ids": [
+          "3e05c162-f625-4088-9efa-d31d3d9c7a44"
+        ],
+        "original_chunk_id": "3e05c162-f625-4088-9efa-d31d3d9c7a44"
+      },
+      {
+        "text": "## Bumblebees and Agrochemicals\n\nBumblebees are important pollinators of agricultural crops and wildflowers (Willmer et al. 1994, Garibaldi et al. 2013). Bumblebee nests routinely contain a plethora of different parasites and pesticides, suggesting that simultaneous exposure to both parasites and agrochemicals is the norm, not the exception (Goulson et al. 2018, Nicholls et al. 2018). When bees are exposed to multiple stressors, the stressors can interact and become more detrimental than when exposed to a stressor in isolation (Doublet et al. 2015, Tosi and Nieh 2019, Linguaodoca et al. 2021). For example, Di Prisco et al. (2013) found that honeybees (A. mellifera) exposed to the neonicotinoid clothianidin had a reduced immune defence, which promoted the replication of DWV. Furthermore, coexposure to neonicotinoids and parasites can also increase the likelihood of adult, or larval mortality (Fauser-Misslin et al. 2014, Doublet et al. 2015). Therefore, understanding how, and to what degree, insecticides and parasites interact when bees are simultaneously exposed to both is of utmost importance.\n\n## Thiamethoxam and C. bombi\n\nThiamethoxam is one of the most commonly used neonicotinoids in the world, and is routinely found in the nectar and pollen collected by bumblebees (Botias et al. 2017, Nicholls et al. 2018). Crithidia bombi is a trypanosome parasite that is highly prevalent in bumblebee populations, with infection levels ranging from 0 to 80%, depending upon the population and time of year (Shykoff and Schmid-Hempel 1991, Gillespie 2010, Kissinger et al. 2011, Jones and Brown 2014). C. bombi exposure when combined with stressors like nutrient limitation or hibernation can significantly reduce bumblebee survival (Brown et al. 2000), colony founding, growth and reproductive output (Brown et al. 2003, Yourth et al. 2008), and can also impair foraging behaviour and learning (Gegear et al. 2005, 2006; Otterstatter et al. 2005) but see (Martin et al. 2018). Previous studies investigating the interactions between thiamethoxam and C. bombi have shown various interaction effects and simultaneous exposure to both stressors can lower bumblebee survival (Fauser-Misslin et al. 2014, Fauser et al. 2017, Baron et al. 2017) and simultaneous exposure to both stressors can lower bumblebee queen survival (Fauser-Misslin et al. 2014). This suggests that toxicity assessment of thiamethoxam conducted in the regulatory process could underestimate the potential real-world consequences of thiamethoxam exposure on bumblebees infected with common bumblebee parasites.\n\n## Agrochemical Regulatory Processes\n\nAgrochemical regulatory processes differ between nations and governing bodies. The European Union, which is considered to have the most rigorous regulatory process, has a tiered system that is heavily reliant on toxicity tests in the lower tiers to determine whether agrochemicals (pesticides, insecticides, fungicides, herbicides) are hazardous to animals (EFSA 2013, OECD 2017, Sanchez-Bayo and Tennekes 2017). When determining whether an agrochemical is \u2018bee safe\u2019 or not, toxicity tests, such as LD50 and LC50 tests will be conducted on honeybees (Tier 1) to determine the amount of active ingredient that is required to kill 50% of the population when bees are orally (LD50) or topically (LC50) exposed. Based on this information, further higher tier assessments will, or will not, be conducted (EFSA 2013, Sanchez-Bayo and Tennekes 2017). In its current form bumblebee LD50 experiments can be conducted in Tier 1 of the regulatory process, but this is not mandated, and the potential interactions between insecticides and other environmental stressors are not considered (EFSA 2013, Sanchez-Bayo and Tennekes 2017). Regulators and policy makers therefore require methodologies that can be used within the current regulatory framework that assess the impact of agrochemicals on non-Apis-bees and 2) test how agrochemicals interact with other environmental factors (EFSA 2013, Vanbergen & Insect Pollinators Initiative 2013, Franklin and Raine 2019; Siviter et al. 2021a, c).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.06844827586206896,
+              "r": 0.485,
+              "b": 0.3042145593869732
+            },
+            "page": 1
+          },
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.30801724137931036,
+              "r": 0.485,
+              "b": 0.6131824712643679
+            },
+            "page": 1
+          },
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.6160344827586207,
+              "r": 0.48624999999999996,
+              "b": 0.9354597701149425
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "2f9ec352-fd32-4720-81ce-4da3d4fe31dc",
+        "chunk_ids": [
+          "2f9ec352-fd32-4720-81ce-4da3d4fe31dc"
+        ],
+        "original_chunk_id": "2f9ec352-fd32-4720-81ce-4da3d4fe31dc"
+      },
+      {
+        "text": "Here we ask if simultaneous exposure to both thiamethoxam and *C. bombi* changes the LD\\(_{50}\\) values of thiamethoxam in bumblebees (*Bombus terrestris*). The acute, oral LD\\(_{50}\\) for bumblebees (*B. terrestris*) and thiamethoxam is known to be 5 ng of active ingredient per bee ([EFSA 2015](#)) and so if thiamethoxam and *C. bombi* significantly interact we would predict that this value would either increase or decrease. Our methodology was based on OECD guidelines ([OECD 2017](#)) but was modified to incorporate *C. bombi* inoculation. We hypothesised that when used in combination, thiamethoxam and *C. bombi* would lower the LD\\(_{50}\\) value of bumblebees (*B. terrestris*).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.515,
+              "t": 0.06844827586206896,
+              "r": 0.9087500000000001,
+              "b": 0.20629549808429118
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "eb729093-b409-44f7-abc7-1a0b0a22d859",
+        "chunk_ids": [
+          "eb729093-b409-44f7-abc7-1a0b0a22d859"
+        ],
+        "original_chunk_id": "eb729093-b409-44f7-abc7-1a0b0a22d859"
+      },
+      {
+        "text": "## Methods\n\nSix bumblebee colonies (*Bombus terrestris audax*) were ordered from Agralan (United Kingdom) and transferred into plastic colony boxes (28 \u00d7 22 \u00d7 12 cm) and maintained in a laboratory (25\u00b0C & 42% humidity), with ad libitum access to sucrose solution (50\u00b0Brix) and pollen (Agralan). The faeces of 15 workers from each colony were examined using a phase contrast microscope for common bumblebee parasites (*Apicystis bombi, Crithidia spp. & Nosema spp.*, 400\u00d7 magnification) ([Rutrecht and Brown 2009](#)). All colonies were unparasitized.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.2376676245210728,
+              "r": 0.9087500000000001,
+              "b": 0.3821695402298851
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "a2fd9191-5c69-401b-960d-8e3d77d541a2",
+        "chunk_ids": [
+          "a2fd9191-5c69-401b-960d-8e3d77d541a2"
+        ],
+        "original_chunk_id": "a2fd9191-5c69-401b-960d-8e3d77d541a2"
+      },
+      {
+        "text": "To create a *C. bombi* inoculum the faeces of 30 workers were taken from a commercial colony infected with multiple strains of *C. bombi*. These strains were originally isolated from bumblebee queens caught at Windsor Great Park (United Kingdom) and then propagated through commercial colonies in the laboratory. Faeces of infected workers from these colonies were placed in an Eppendorf tube containing 0.9% Ringer solution and centrifuged at 0.8 g for 2 min. The supernatant was removed, and clean Ringer solution added, a process that was repeated 7 times (8 times in total) to purify and concentrate the preinoculum (following a modified triangulation protocol based on (Cole 1970)). Cell counts were carried out using a Neubauer improved haemocytometer to determine the concentration of *C. bombi* cells. The *C. bombi* preinoculum was then combined with sucrose (50\u00b0Brix) to create an inoculum of 1,000 cells/\u03bcl.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.515,
+              "t": 0.519066091954023,
+              "r": 0.9087500000000001,
+              "b": 0.7244109195402298
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "657bbd70-ba8b-4930-9fc6-178d8e80ff9f",
+        "chunk_ids": [
+          "657bbd70-ba8b-4930-9fc6-178d8e80ff9f"
+        ],
+        "original_chunk_id": "657bbd70-ba8b-4930-9fc6-178d8e80ff9f"
+      },
+      {
+        "text": "Individual bumblebees from all treatment groups (see Supp Table S1 [online only] for list of treatment groups) were taken from queen-right colonies, and individually housed in Nicot cages (148 \u00d7 130 \u00d7 11 mm) with ad libitum access to 50\u00b0Brix sucrose through a 1 ml syringe.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.515,
+              "t": 0.7282136015325671,
+              "r": 0.9087500000000001,
+              "b": 0.7957112068965517
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "3df267b8-0bc8-427a-b744-ff639b6472a3",
+        "chunk_ids": [
+          "3df267b8-0bc8-427a-b744-ff639b6472a3"
+        ],
+        "original_chunk_id": "3df267b8-0bc8-427a-b744-ff639b6472a3"
+      },
+      {
+        "text": "## Text\n\nPrior to inoculation, workers from all the treatment groups underwent a starvation period of 3 h [Logan et al. 2005] after which all bees were removed from their Nicot cages and placed in an individual vial (9 \u00d7 2.5 cm). The inoculum was presented to each individual to drink with a 10 \u03bcl droplet of 50\u00b0Brix sucrose solution containing approximately 10,000 C. bombi. A dose of 10,000 cells has been determined to produce a reliable and high rate of infection [Ruiz-Gonzalez and Brown 2006]. A period of 15 min was allowed for the individual to consume the inoculum. Workers from control and thiamethoxam only treatment groups underwent the",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.7985632183908046,
+              "r": 0.9087500000000001,
+              "b": 0.9364104406130268
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "1abb712d-2e8e-4a0a-b337-fce07383cccd",
+        "chunk_ids": [
+          "1abb712d-2e8e-4a0a-b337-fce07383cccd"
+        ],
+        "original_chunk_id": "1abb712d-2e8e-4a0a-b337-fce07383cccd"
+      },
+      {
+        "text": "## Page Header\n\nDownloaded from [https://academic.oup.com/reep/article/15/1/227/5864449](https://academic.oup.com/reep/article/15/1/227/5864449) by Oxford Economic Papers user on 17 January 2022.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.9587499999999999,
+              "t": 0.21009818007662837,
+              "r": 0.9724999999999999,
+              "b": 0.7852538314176245
+            },
+            "page": 1
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "b3aab449-c04d-4318-a002-2206f4ce9865",
+        "chunk_ids": [
+          "b3aab449-c04d-4318-a002-2206f4ce9865"
+        ],
+        "original_chunk_id": "b3aab449-c04d-4318-a002-2206f4ce9865"
+      },
+      {
+        "text": "## Page Number\n\n380",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.03422413793103448,
+              "r": 0.1125,
+              "b": 0.0437308429118774
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "page_number",
+        "chunk_id": "9867a7a7-ee7a-49c8-b654-04aa13c9d95f",
+        "chunk_ids": [
+          "9867a7a7-ee7a-49c8-b654-04aa13c9d95f"
+        ],
+        "original_chunk_id": "9867a7a7-ee7a-49c8-b654-04aa13c9d95f"
+      },
+      {
+        "text": "## Page Header\n\n**Environmental Entomology, 2022, Vol. 51, No. 2**",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.6062500000000001,
+              "t": 0.03422413793103448,
+              "r": 0.90625,
+              "b": 0.04563218390804598
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "bac2c24c-427d-4afc-9fbe-f9655054e173",
+        "chunk_ids": [
+          "bac2c24c-427d-4afc-9fbe-f9655054e173",
+          "1756a0f2-a6c1-48a8-9356-c369b44b00ba"
+        ],
+        "original_chunk_id": "bac2c24c-427d-4afc-9fbe-f9655054e173"
+      },
+      {
+        "text": "To enable the parasite to establish itself within the host the bees (both parasitized and unparasitized) were then left for 7 d [Schmid-Hempel and Schmid-Hempel 1993, Logan et al. 2005]. 76 bumblebees died during this time period, but there was no difference in mortality between inoculated and uninoculated bees (see Supp Table S1 [online only]).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06939894636015326,
+              "r": 0.48374999999999996,
+              "b": 0.17872605363984675
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "b8a3c71b-d188-44f8-8042-6398c3e5f253",
+        "chunk_ids": [
+          "b8a3c71b-d188-44f8-8042-6398c3e5f253"
+        ],
+        "original_chunk_id": "b8a3c71b-d188-44f8-8042-6398c3e5f253"
+      },
+      {
+        "text": "## Thiamethoxam Exposure\n\nThiamethoxam PESTANAL analytical standard (100 \u00b5g) was purchased from Sigma-Aldrich and combined with 100 ml of acetone solution to produce the stock solution, which was subsequently combined with sucrose (50\u00b0Brix) to create the required dosages. The acute oral LD50 for thiamethoxam in *B. terrestris* has previously been determined to be 5 ng/g of active substance/bee (EFSA 2015) and we based our dosages on this (see Supp Table S1 [online only]).\n\nPrior to being fed the relative thiamethoxam dose the sucrose syringes were removed from the Nicot cages and the bees starved for 3 h. Following this, the syringes were replaced with new ones with a 40 \u00b5l sucrose solution (50\u00b0Brix) containing the relevant thiamethoxam dosage. Bees were left for 4 h, after which the syringes were replaced with weighted syringes containing clean sucrose. Bees that had not consumed the entire dosages were removed from the experiment (n = 8, see Supp Table S1 [online only]).\n\nBees were left for 96 h and mortality was recorded at 4, 6, 8, 24, 48, 72, and 96 h, after being fed the thiamethoxam inoculation (OECD 2017). All bees that died during the experiment were frozen at \u221280\u00b0C.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.08875,
+              "t": 0.19678879310344827,
+              "r": 0.48374999999999996,
+              "b": 0.4753352490421456
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "667ae264-5038-47fc-9a1e-40585681aae3",
+        "chunk_ids": [
+          "667ae264-5038-47fc-9a1e-40585681aae3"
+        ],
+        "original_chunk_id": "667ae264-5038-47fc-9a1e-40585681aae3"
+      },
+      {
+        "text": "## Parasite Analysis\n\nAll bees were screened for *C. bombi* infection. Individual bees were dissected, and the hindgut was removed and placed into a 1.5 ml Eppendorf tube. 100 \u03bcl of 0.9% Ringer\u2019s solution was added and the hindgut was pulverised within the Ringer solution. The contents were then vortexed for 2 s. Uninoculated bees were checked for infection by placing 14 \u03bcl from each sample onto a microscope slide and analysing it for *C. bombi* cells under phase contrast at 400x magnification. No uninoculated bees were found to be infected.\n\nFor inoculated bees, we used a Neubauer improved haemocytometer to measure *C. bombi* intensity, and to count the number of *C. bombi* cells per \u03bcl. Inoculated bees that had no sign of an infection were removed from the analyses (n = 4).\n\nThorax width, as a proxy for body size, was measured using a Mitutoyo digital calliper, with all individuals measured three times to produce a mean measure of size.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.4952993295019157,
+              "r": 0.48374999999999996,
+              "b": 0.7196575670498084
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "931483a3-f01f-4802-9149-db1a4c1093f4",
+        "chunk_ids": [
+          "931483a3-f01f-4802-9149-db1a4c1093f4"
+        ],
+        "original_chunk_id": "931483a3-f01f-4802-9149-db1a4c1093f4"
+      },
+      {
+        "text": "## Statistical Analysis\n\nWe used an information theoretic model selection approach for each test (except for determining the LD\\(_{50}\\) values [see below]). The initial model set contained all measured factors and was compared to all subsets of the full model, and a null model containing just the intercept and random factors. Models were selected based on Akaike weights derived from AIC\\(_c\\) values, and were included when they could not be rejected with a 95% certainty (this included cases in which the null model was accepted within the confidence set). When more than one model was present within the confidence set, model averaging was used (Burnham and Anderson 2002).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.08875,
+              "t": 0.7386709770114943,
+              "r": 0.48374999999999996,
+              "b": 0.8917289272030652
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "2d36cda9-8164-4572-86bd-20c232589a42",
+        "chunk_ids": [
+          "2d36cda9-8164-4572-86bd-20c232589a42"
+        ],
+        "original_chunk_id": "2d36cda9-8164-4572-86bd-20c232589a42"
+      },
+      {
+        "text": "## Text from Document\n\nA mixed effect Cox model and a linear mixed effect model were used to determine if *C. bombi* influenced bumblebee mortality and sucrose consumption respectively. *C. bombi*, thiamethoxam dosage, and their interaction were included as fixed factors and bee size was included as a covariate. Colony of origin was included as a random factor. Parasite count was logged (log10) to improve model fit and analysed using a linear mixed effect model with thiamethoxam dosages, with bee size included as a covariant, and colony of origin included as a random factor.\n\nWe used the packages *lme4*, *MuMIn*, *lmerTest* & *coxme* (Bates et al. 2015, Ritz et al. 2015, Barton 2016, Therneau 2018).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.06844827586206896,
+              "r": 0.90625,
+              "b": 0.1920354406130268
+            },
+            "page": 2
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.1948874521072797,
+              "r": 0.9075,
+              "b": 0.21960488505747125
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "00b3735a-e560-4f3f-a6c2-8070d3c0feeb",
+        "chunk_ids": [
+          "00b3735a-e560-4f3f-a6c2-8070d3c0feeb"
+        ],
+        "original_chunk_id": "00b3735a-e560-4f3f-a6c2-8070d3c0feeb"
+      },
+      {
+        "text": "## Results\n\nWe found that the LD<sub>50</sub> value for thiamethoxam was 6.63 ng when used in isolation compared with 6.82 ng per bumblebee when used in combination with the parasite *C. bombi*, suggesting no observed differences in mortality between infected and uninfected bumblebees (Fig. 1A and B, Coxme, *C. bombi*, Parameter Estimate (ES) = 0.10, Confidence Interval (CI) = -0.11 to 0.33). Bumblebee size had an effect on mortality, but the effect was not linear, with mortality risk increasing for both smaller and larger bees (Fig. 2, Coxme, size, PE = -0.35, CI = -0.60 to -0.11).\n\nWe found no effect of thiamethoxam or *C. bombi* inoculation on sucrose consumption (Fig. 3, Supp Table S2 and S3 [online only]). Interestingly, as thiamethoxam dose increased, this resulted in bumblebees having a higher intensity of *C. bombi* infection (Fig. 4A, lmer, dosage, PE = 0.0047, CI = 0.003-0.006). However, when subjects that died during the experiment were excluded from the analysis there was no effect of thiamethoxam dose on parasite intensity (Fig. 4B, lmer, dosage, PE = 0.001, CI = -0.01 to 0.013), suggesting no effect of thiamethoxam on *C. bombi* intensity at sub-lethal levels.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.24622365900383142,
+              "r": 0.9075,
+              "b": 0.5152634099616857
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "253d5e1f-1b4a-40a9-91aa-93ea74dab617",
+        "chunk_ids": [
+          "253d5e1f-1b4a-40a9-91aa-93ea74dab617"
+        ],
+        "original_chunk_id": "253d5e1f-1b4a-40a9-91aa-93ea74dab617"
+      },
+      {
+        "text": "Following [Ritz et al. (2015)](https://example.com), we used a fitted dose-response model ($drm$) based on a log-logistic regression analysis to determine the LD$_{50}$ values for bumblebees that were and were not inoculated with...",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.894580938697318,
+              "r": 0.48374999999999996,
+              "b": 0.9345090996168581
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "943abbd6-ea82-421c-939e-a5259e63b90d",
+        "chunk_ids": [
+          "943abbd6-ea82-421c-939e-a5259e63b90d"
+        ],
+        "original_chunk_id": "943abbd6-ea82-421c-939e-a5259e63b90d"
+      },
+      {
+        "text": "## Page Footer\n\nDownloaded from https://academic.oup.com/aler/article/5/1/237/289369 by Oxford Economic Papers user on 01 January 2022.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.9587499999999999,
+              "t": 0.20819683908045974,
+              "r": 0.9724999999999999,
+              "b": 0.7852538314176245
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "page_footer",
+        "chunk_id": "715de5df-9190-45dd-b2f0-8bcceb898482",
+        "chunk_ids": [
+          "715de5df-9190-45dd-b2f0-8bcceb898482"
+        ],
+        "original_chunk_id": "715de5df-9190-45dd-b2f0-8bcceb898482"
+      },
+      {
+        "text": "### Page Header\n\n**Environmental Entomology, 2022, Vol. 51, No. 2**",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.6062500000000001,
+              "t": 0.03422413793103448,
+              "r": 0.90625,
+              "b": 0.04563218390804598
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "b70eb0c6-89e1-4472-b722-3f4a650d4f47",
+        "chunk_ids": [
+          "b70eb0c6-89e1-4472-b722-3f4a650d4f47"
+        ],
+        "original_chunk_id": "b70eb0c6-89e1-4472-b722-3f4a650d4f47"
+      },
+      {
+        "text": "## Text Capture\n\nsame procedure but were presented with a 10 \u03bcl droplet of sucrose solution (50\u00b0Brix). All workers were then placed back into their allotted Nicot cages and the sucrose syringe was returned. To enable the parasite to establish itself within the host the bees (both parasitized and unparasitized) were then left for 7 d (Schmid-Hempel and Schmid-Hempel 1993, Logan et al. 2005). 76 bumblebees died during this time period, but there was no difference in mortality between inoculated and uninoculated bees (see Supp Table S1 [online only]).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06939894636015326,
+              "r": 0.48374999999999996,
+              "b": 0.17872605363984675
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "849976a9-da54-4886-8af9-bd599f0d2f18",
+        "chunk_ids": [
+          "849976a9-da54-4886-8af9-bd599f0d2f18"
+        ],
+        "original_chunk_id": "849976a9-da54-4886-8af9-bd599f0d2f18"
+      },
+      {
+        "text": "### Thiamethoxam Exposure\n\nThiamethoxam PESTANAL analytical standard (100 \u00b5g) was purchased from Sigma-Aldrich and combined with 100 ml of acetone solution to produce the stock solution, which was subsequently combined with sucrose (50\u00b0Brix) to create the required dosages. The acute oral LD50 for thiamethoxam in *B. terrestris* has previously been determined to be 5 ng/g of active substance/bee (EFSA 2015) and we based our dosages on this (see Supp Table S1 [online only]).\n\nPrior to being fed the relative thiamethoxam dose the sucrose syringes were removed from the Nicot cages and the bees starved for 3 h. Following this, the syringes were replaced with new ones with a 40 \u00b5l sucrose solution (50\u00b0Brix) containing the relevant thiamethoxam dosage. Bees were left for 4 h, after which the syringes were replaced with weighted syringes containing clean sucrose. Bees that had not consumed the entire dosages were removed from the experiment (n = 8, see Supp Table S1 [online only]).\n\nBees were left for 96 h and mortality was recorded at 4, 6, 8, 24, 48, 72, and 96 h, after being fed the thiamethoxam inoculation (OECD 2017). All bees that died during the experiment were frozen at \u221280\u00b0C.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.08875,
+              "t": 0.19678879310344827,
+              "r": 0.48374999999999996,
+              "b": 0.4753352490421456
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "69485f7b-d649-40de-85cc-62ac63fec899",
+        "chunk_ids": [
+          "69485f7b-d649-40de-85cc-62ac63fec899"
+        ],
+        "original_chunk_id": "69485f7b-d649-40de-85cc-62ac63fec899"
+      },
+      {
+        "text": "## Parasite Analysis\n\nAll bees were screened for *C. bombi* infection. Individual bees were dissected, and the hindgut was removed and placed into a 1.5 ml Eppendorf tube. 100 \u03bcl of 0.9% Ringer\u2019s solution was added and the hindgut was pulverised within the Ringer solution. The contents were then vortexed for 2 s. Uninoculated bees were checked for infection by placing 14 \u03bcl from each sample onto a microscope slide and analysing it for *C. bombi* cells under phase contrast at 400\u00d7 magnification. No uninoculated bees were found to be infected.\n\nFor inoculated bees, we used a Neubauer improved haemocytometer to measure *C. bombi* intensity, and to count the number of *C. bombi* cells per \u03bcl. Inoculated bees that had no sign of an infection were removed from the analyses (n = 4).\n\nThorax width, as a proxy for body size, was measured using a Mitutoyo digital calliper, with all individuals measured three times to produce a mean measure of size.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.4952993295019157,
+              "r": 0.48374999999999996,
+              "b": 0.7196575670498084
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "5e9f5325-a242-4134-be97-ea134d891cd3",
+        "chunk_ids": [
+          "5e9f5325-a242-4134-be97-ea134d891cd3"
+        ],
+        "original_chunk_id": "5e9f5325-a242-4134-be97-ea134d891cd3"
+      },
+      {
+        "text": "### Statistical Analysis\n\nWe used an information theoretic model selection approach for each test (except for determining the LD\\textsubscript{50} values [see below]). The initial model set contained all measured factors and was compared to all subsets of the full model, and a null model containing just the intercept and random factors. Models were selected based on Akaike weights derived from AIC\\textsubscript{c} values, and were included when they could not be rejected with a 95% certainty (this included cases in which the null model was accepted within the confidence set). When more than one model was present within the confidence set, model averaging was used [Burnham and Anderson 2002].\n\nFollowing Ritz et al. (2015) we used a fitted dose-response model (`drc`) based on a log-logistic regression analysis to determine the LD\\textsubscript{50} values for bumblebees that were and were not inoculated with *C. bombi*. A mixed effect Cox model and a linear mixed effect model were used to determine if *C. bombi* influenced bumblebee mortality and sucrose consumption respectively. *C. bombi*, thiamethoxam dosage, and their interaction were included as fixed factors and bee size was included as a covariate. Colony of origin was included as a random factor. Parasite count was logged (log\\textsubscript{10}) to improve model fit and analysed using a linear mixed effect model with thiamethoxam dosages, with bee size included as a covariant, and colony of origin included as a random factor.\n\nWe used the packages `drc`, `MuMIn`, `lme4` & `coxme` [Bates et al. 2015, Ritz et al. 2015, Barton 2016, Therneau 2018].",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.08875,
+              "t": 0.7386709770114943,
+              "r": 0.48374999999999996,
+              "b": 0.9345090996168581
+            },
+            "page": 2
+          },
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.06844827586206896,
+              "r": 0.9075,
+              "b": 0.21960488505747125
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "05c36cd2-101a-47b8-a88c-ed7caa59511e",
+        "chunk_ids": [
+          "05c36cd2-101a-47b8-a88c-ed7caa59511e"
+        ],
+        "original_chunk_id": "05c36cd2-101a-47b8-a88c-ed7caa59511e"
+      },
+      {
+        "text": "## Results\n\nWe found that the LD\\(_{50}\\) value for thiamethoxam was 6.63 ng when used in isolation compared with 6.82 ng per bumblebee when used in combination with the parasite *C. bombi*, suggesting no observed differences in mortality between infected and uninfected bumblebees (Fig. 1A and B, Coxme, *C. bombi*, Parameter Estimate (ES) = 0.10, Confidence Interval (CI) = -0.11 to 0.33). Bumblebee size had an effect on mortality, but the effect was not linear, with mortality risk increasing for both smaller and larger bees (Fig. 2, Coxme, size, PE = -0.35, CI = -0.60 to -0.11).\n\nWe found no effect of thiamethoxam or *C. bombi* inoculation on sucrose consumption (Fig. 3, Supp Table S2 and S3 [online only]). Interestingly, as thiamethoxam dose increased, this resulted in bumblebees having a higher intensity of *C. bombi* infection (Fig. 4A, lmer, dosage, PE = 0.0047, CI = 0.003-0.006). However, when subjects that died during the experiment were excluded from the analysis there was no effect of thiamethoxam dose on parasite intensity (Fig. 4B, lmer, dosage, PE = 0.001, CI = -0.01 to 0.013), suggesting no effect of thiamethoxam on *C. bombi* intensity at sub-lethal levels.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.24622365900383142,
+              "r": 0.9075,
+              "b": 0.5152634099616857
+            },
+            "page": 2
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "11dc2634-ce91-4a57-8527-ea28b6e822e3",
+        "chunk_ids": [
+          "11dc2634-ce91-4a57-8527-ea28b6e822e3"
+        ],
+        "original_chunk_id": "11dc2634-ce91-4a57-8527-ea28b6e822e3"
+      },
+      {
+        "text": "## Page Number\n\n381",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.8849999999999999,
+              "t": 0.03422413793103448,
+              "r": 0.9075,
+              "b": 0.0437308429118774
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "page_number",
+        "chunk_id": "51749501-39ab-4d16-ac6f-e393eaa728a9",
+        "chunk_ids": [
+          "51749501-39ab-4d16-ac6f-e393eaa728a9",
+          "bf4f3866-3827-4a84-b34b-a2ef2773bc88"
+        ],
+        "original_chunk_id": "51749501-39ab-4d16-ac6f-e393eaa728a9"
+      },
+      {
+        "text": "## Discussion\n\nPrevious studies with bumblebees have shown that the LD\\(_{50}\\) of thiamethoxam is 5 ng of active ingredient per bumblebee [EFSA 2015] and our results were similar (6.63 ng when exposed to thiamethoxam in isolation and 6.82 ng for bumblebees exposed to both thiamethoxam and *C. bombi*). This suggests that contrary to our original hypothesis, the parasite *C. bombi* had no impact on the LD\\(_{50}\\) of thiamethoxam on bumblebees (*B. terrestris*). This is surprising, as the effects of this parasite on bumblebees are context-dependent, and emerge most obviously when bees are exposed to other stressors [Brown et al. 2000, 2003; Yourth et al. 2008]. Interestingly, and in contrast to previously observed results [Kessler et al. 2015, Arce et al. 2018] (but see [Muth et al. 2020]), we found no effect of thiamethoxam exposure on sucrose consumption. Finally, thiamethoxam exposure was seen to increase *C. bombi* intensity, but only at lethal dosages as there was no effect at sub-lethal levels. Our results demonstrate that methodologies currently used within the regulatory process can be modified to consider the interaction effects between multiple environmental stressors on wild bees.\n\nWe found no evidence of interaction effects between thiamethoxam and *C. bombi* on bumblebee mortality. This contrasts with previous studies that have shown that simultaneous exposure to both thiamethoxam and *C. bombi* can reduce bumblebee survival [Fauser-Misslin et al. 2014]. However, Fauser-Misslin et al. (2014) assessed the impact of chronic, sub-lethal thiamethoxam concentrations over 9 wk on queen bumblebee survival, while here we used acute dosages, in a toxicity test with workers. Toxicity tests such as LD\\(_{50}\\) experiments, are important in determining the lethal consequences of agrochemical use, but are not designed to detect more subtle, sub-lethal impacts of agrochemical exposure [Gill et al. 2012, Siviter et al. 2020b, Siviter et al. 2021b]. While our modified LD\\(_{50}\\) protocol can be used to assess how parasites and agrochemicals interact at higher dosages, a failure to conduct sub-lethal assessments of chronic exposure in bumblebees alongside toxicity tests will clearly result in a failure to detect sub-lethal, but significant, effects.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.8831728927203065,
+              "r": 0.485,
+              "b": 0.9288050766283525
+            },
+            "page": 3
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.48103927203065133,
+              "r": 0.9087500000000001,
+              "b": 0.7025454980842911
+            },
+            "page": 3
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.7063481800766284,
+              "r": 0.9087500000000001,
+              "b": 0.9269037356321839
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "55292e1c-4c35-4301-b768-bb4f0ce7f059",
+        "chunk_ids": [
+          "55292e1c-4c35-4301-b768-bb4f0ce7f059"
+        ],
+        "original_chunk_id": "55292e1c-4c35-4301-b768-bb4f0ce7f059"
+      },
+      {
+        "text": "## Page Footer\n\nDownloaded from https://academic.oup.com/reep/article/15/1/1/6064439 by Oxford Economic Papers user on 11 January 2022",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.9587499999999999,
+              "t": 0.21009818007662837,
+              "r": 0.9724999999999999,
+              "b": 0.7862045019157088
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "page_footer",
+        "chunk_id": "5c7488ec-2bdd-403e-ac45-67252c021a4c",
+        "chunk_ids": [
+          "5c7488ec-2bdd-403e-ac45-67252c021a4c"
+        ],
+        "original_chunk_id": "5c7488ec-2bdd-403e-ac45-67252c021a4c"
+      },
+      {
+        "text": "## Environmental Entomology, 2022, Vol. 51, No. 2\n\nThis is a page header from a document indicating the title of the journal \"Environmental Entomology,\" the year 2022, and the volume and issue number, which are Vol. 51, No. 2.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.03422413793103448,
+              "r": 0.39249999999999996,
+              "b": 0.04468151340996169
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "2f6e7021-52b5-46fb-9710-3acef8d98a2b",
+        "chunk_ids": [
+          "2f6e7021-52b5-46fb-9710-3acef8d98a2b"
+        ],
+        "original_chunk_id": "2f6e7021-52b5-46fb-9710-3acef8d98a2b"
+      },
+      {
+        "text": "## Page Header\n\nDownloaded from [https://academic.oup.com/reep/article/15/1/1/6064439](https://academic.oup.com/reep/article/15/1/1/6064439) by Oxford Economic Papers user on 11 January 2022.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.9587499999999999,
+              "t": 0.21009818007662837,
+              "r": 0.9724999999999999,
+              "b": 0.7862045019157088
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "page_header",
+        "chunk_id": "afab7eed-f615-4e70-8714-a5f8bb09815c",
+        "chunk_ids": [
+          "afab7eed-f615-4e70-8714-a5f8bb09815c"
+        ],
+        "original_chunk_id": "afab7eed-f615-4e70-8714-a5f8bb09815c"
+      },
+      {
+        "text": "## Discussion\n\nPrevious studies with bumblebees have shown that the LD\\(_{50}\\) of thiamethoxam is 5 ng of active ingredient per bumblebee [EFSA 2015] and our results were similar (6.63 ng when exposed to thiamethoxam in isolation and 6.82 ng for bumblebees exposed to both thiamethoxam and *C. bombi*). This suggests that contrary to our original hypothesis, the parasite *C. bombi* had no impact on the LD\\(_{50}\\) of thiamethoxam on bumblebees (*B. terrestris*). This is surprising, as the effects of this parasite on bumblebees are context-dependent, and emerge most obviously when bees are exposed to other stressors [Brown et al. 2000, 2003; Yourth et al. 2008]. Interestingly, and in contrast to previously observed results [Kessler et al. 2015, Arce et al. 2018] (but see [Muth et al. 2020]), we found no effect of thiamethoxam exposure on sucrose consumption. Finally, thiamethoxam exposure was seen to increase *C. bombi* intensity, but only at lethal dosages as there was no effect at sub-lethal levels. Our results demonstrate that methodologies currently used within the regulatory process can be modified to consider the interaction effects between multiple environmental stressors on wild bees.\n\nWe found no evidence of interaction effects between thiamethoxam and *C. bombi* on bumblebee mortality. This contrasts with previous studies that have shown that simultaneous exposure to both thiamethoxam and *C. bombi* can reduce bumblebee survival [Fauser-Misslin et al. 2014]. However, Fauser-Misslin et al. (2014) assessed the impact of chronic, sub-lethal thiamethoxam concentrations over 9 wk on queen bumblebee survival, while here we used acute dosages, in a toxicity test with workers. Toxicity tests, such as LD\\(_{50}\\) experiments, are important in determining the lethal consequences of agrochemical use, but are not designed to detect more subtle, sub-lethal impacts of agrochemical exposure [Gill et al. 2012, Siviter et al. 2020b, Siviter et al. 2021b]. While our modified LD\\(_{50}\\) protocol can be used to assess how parasites and agrochemicals interact at higher dosages, a failure to conduct sub-lethal assessments of chronic exposure in bumblebees alongside toxicity tests will clearly result in a failure to detect sub-lethal, but significant, effects.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09125,
+              "t": 0.8831728927203065,
+              "r": 0.485,
+              "b": 0.9288050766283525
+            },
+            "page": 3
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.48103927203065133,
+              "r": 0.9087500000000001,
+              "b": 0.7025454980842911
+            },
+            "page": 3
+          },
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.7063481800766284,
+              "r": 0.9087500000000001,
+              "b": 0.9269037356321839
+            },
+            "page": 3
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "8cdecb24-a6aa-45e3-8053-61ada52a8cd8",
+        "chunk_ids": [
+          "8cdecb24-a6aa-45e3-8053-61ada52a8cd8"
+        ],
+        "original_chunk_id": "8cdecb24-a6aa-45e3-8053-61ada52a8cd8"
+      },
+      {
+        "text": "## Text from Document\n\nWe found that *C. bombi* intensity was significantly higher in bumblebees that had been fed high dosages of thiamethoxam and that had subsequently died. *C. bombi* intensity typically increases for up to 7 days after inoculation and plateaus between 7- and 10-days post inoculation (Logan et al. 2005). We exposed bumblebees to thiamethoxam 7 days post inoculation and found that bees that died (on day 7) had a higher intensity of *C. bombi* than bees that survived (Fig. 4). One explanation for this is that acute exposure to thiamethoxam exerts long-term inhibition on the growth of *C. bombi*, and that this could only occur in bees that survived exposure. Alternatively, higher *C. bombi* counts in bumblebees exposed to lethal acute doses could be due to rapidly enhanced production or release of the parasite from the gut lining (Koch et al. 2019). Future experiments are needed to determine the mechanism behind this interaction. However, as we found no effect of sub-lethal thiamethoxam dosages on *C. bombi* intensity, this suggests that at field-realistic levels, thiamethoxam is unlikely to impact *C. bombi* intensity.\n\nNeonicotinoids are the most commonly used insecticides in the world and understanding the interaction between them and bumblebee pathogens is therefore vitally important. However, as the number of insect pests that are resistant to neonicotinoids increases and bans/restrictions on their use increase globally, novel insecticides such as sulfoxaflor or flupyradifurone could replace them over large geographical areas (Brown et al. 2016, Siviter and Muth 2020). Sulfoxaflor exposure can have significant sub-lethal impacts on bumblebee (*B. terrestris*) reproduction (Siviter et al. 2018a, Siviter et al. 2020 a,b; Linguaodoca et al. 2021) (but see [Siviter et al. 2019]) and flupyradifurone exposure can impair honeybee larval development (Tan et al. 2017, Al Naggar and Baer 2019), and adult behavior (Tosi and Nieh 2019, Tong et al. 2019, Hesselbach et al. 2020) (recently reviewed in [Siviter and Muth 2020]). Novel insecticides could also interact with bee pathogens, for example, bumblebee larvae fed sulfoxaflor in isolation showed no evidence of an increase in larval mortality, but when exposed to sulfoxaflor, and the common bumblebee parasite *Nosema bombi*, there was a significant increase in larval mortality (Siviter et al. 2020a). Similarly, honeybees (*A. mellifera*) fed flupyradifurone and inoculated with *N. ceranae* had lower survival than unexposed bees, and those exposed to each stressor in isolation (Al Naggar and Baer 2019). While we found no interaction between *C. bombi* and the neonicotinoid thiamethoxam on bee mortality, future research should focus on understanding how novel insecticides, such as sulfoxaflor and flupyradifurone, interact with common bee parasites (Siviter and Muth 2020).\n\nGlobal bee declines are thought to be driven by multiple anthropogenic stressors, including agrochemicals and parasites (Vanbergen & Insect Pollinators Initiative 2013, Goulson et al. 2015, Siviter et al. 2021a) which suggests that the agrochemical regulatory process should consider how insecticides interact with commonly occurring bee parasites (Siviter and Muth 2020). Here we show how toxicity tests, such as LD50 experiments, can be modified to consider the interactions between agrochemicals and parasites. This methodology could easily be modified to test other parasites depending on the life history of the parasites. However, the sheer number of bee parasites (known and unknown), and the range of different agrochemicals used in intensive agriculture means that testing every potential interaction between parasites and agrochemicals is impractical, and in some cases, when we do not have an understanding of the parasite life-history, impossible. In these cases, post-authorisation monitoring observations, which are currently nonexistent (Milner and Boyd 2017), should be...",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.09,
+              "t": 0.06844827586206896,
+              "r": 0.48374999999999996,
+              "b": 0.36125478927203064
+            },
+            "page": 4
+          },
+          {
+            "box": {
+              "l": 0.08875,
+              "t": 0.36410680076628354,
+              "r": 0.48374999999999996,
+              "b": 0.7263122605363984
+            },
+            "page": 4
+          },
+          {
+            "box": {
+              "l": 0.08875,
+              "t": 0.7291642720306513,
+              "r": 0.48374999999999996,
+              "b": 0.9506704980842912
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "bfa61b41-4666-4f33-a36a-4d18a38c6de0",
+        "chunk_ids": [
+          "bfa61b41-4666-4f33-a36a-4d18a38c6de0"
+        ],
+        "original_chunk_id": "bfa61b41-4666-4f33-a36a-4d18a38c6de0"
+      },
+      {
+        "text": "## Text\n\n...carried out that monitor interactions between pesticides and pathogens. More broadly a move towards a more holistic approach to environmental risk assessment, that considers the interactions between multiple stressors, and models their impact on wild bees, is required to better safe-guard bees, and other pollinators, from the potential harm of agrochemicals (Siviter and Muth 2020, Topping et al. 2021).",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.06844827586206896,
+              "r": 0.90625,
+              "b": 0.1511566091954023
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "12271872-e617-4ecd-8b9e-b260d80b4989",
+        "chunk_ids": [
+          "12271872-e617-4ecd-8b9e-b260d80b4989"
+        ],
+        "original_chunk_id": "12271872-e617-4ecd-8b9e-b260d80b4989"
+      },
+      {
+        "text": "## Supplementary Data\n\nSupplementary data are available at *Environmental Entomology* online.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.17587404214559388,
+              "r": 0.9075,
+              "b": 0.22150622605363984
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "89bc0717-d2a6-43d2-bea4-0edee5e82635",
+        "chunk_ids": [
+          "89bc0717-d2a6-43d2-bea4-0edee5e82635"
+        ],
+        "original_chunk_id": "89bc0717-d2a6-43d2-bea4-0edee5e82635"
+      },
+      {
+        "text": "## Acknowledgments\n\nWe thank Alberto Linguadoca for suggestions made for data presentation and statistical analysis, Callum Martin, and Christopher Pull for assisting with the statistical analysis, Arran Folly for assisting with the parasite work, Tom Oliver for helpful general discussion, and two anonymous reviewers for helpful comments. H.S. was supported by a Royal Holloway University of London Reid PhD Scholarship, by contributions from High Wycombe Beekeeper\u2019s Association, and by a Stengl-Wyer Scholarship. This project has received funding from the European Horizon 2020 research and innovation programme under grant agreement no. 773921 and from the Biotechnology and Biological Sciences Research Council, Grant/Award Number: BB/N000664/1.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.2386182950191571,
+              "r": 0.9075,
+              "b": 0.39642959770114944
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "0a8862da-d69e-4b40-9adb-9307bb440b0a",
+        "chunk_ids": [
+          "0a8862da-d69e-4b40-9adb-9307bb440b0a"
+        ],
+        "original_chunk_id": "0a8862da-d69e-4b40-9adb-9307bb440b0a"
+      },
+      {
+        "text": "## Data Availability\n\nRaw data available here [https://osf.io/vum2f/](https://osf.io/vum2f/)",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.51375,
+              "t": 0.4230483716475095,
+              "r": 0.7399999999999999,
+              "b": 0.4534698275862069
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "6851f53f-9643-489f-ac4c-bdf755a2fb8c",
+        "chunk_ids": [
+          "6851f53f-9643-489f-ac4c-bdf755a2fb8c"
+        ],
+        "original_chunk_id": "6851f53f-9643-489f-ac4c-bdf755a2fb8c"
+      },
+      {
+        "text": "## References Cited\n\nArce, A. N., A. Ramos Rodrigues, J. Yu, T. J. Colgan, Y. Wurm, and R. J. Gill. 2018. Foraging bumblebees acquire a preference for neonicotinoid-treated food with prolonged exposure. Proc. R. Soc B Biol. Sci. 285: 20180655.\n\nBaron, G. L., V. A. A. Jansen, M. J. F. Brown, and N. E. Raine. 2017. Pesticide reduces bumblebee colony initiation and increases probability of population extinction. Nat. Ecol. Evol. 1: 1308\u20131316.\n\nBarton, K. 2016. MuMIn: multi-model inference. R package version 1.15.6. https://cran.r-project.org/package=MuMIn\n\nBass, C., L. Denholm, M. S. Williamson, and R. Nauen. 2015. The global status of insect resistance to neonicotinoid insecticides. Pest. Biochem. Physiol. 121: 78\u201387.\n\nBates, D., M. M\u00e4chler, B. Bolker, and S. Walker. 2015. Fitting linear mixed-effects models using lme4. J. Stat. Software. 67: 1.\n\nBonmatin, J. M., C. Giorio, V. Girolami, D. Goulson, D. P. Kreutzweiser, C. Krupke, E. M. Long, M. Marzaro, E. A. Mitchell, et al. 2015. Environmental fate and exposure; neonicotinoids and fipronil. Environ. Sci. Pollut. Res. 22: 35\u201367.\n\nBot\u00edas, C., A. David, E. M. Hill, and D. Goulson. 2016. Contamination of wild plants near neonicotinoid seed-treated crops, and implications for non-target insects. Sci. Total Environ. 566: 269\u2013278.\n\nBot\u00edas, C., A. David, E. M. Hill, and D. Goulson. 2017. Quantifying exposure of wild bumblebees to mixtures of agrochemicals: tools for linking exposure to effects. Sci. Total Environ. 598: 529\u2013537.\n\nBrock, R. E., and J. M. C. Schmid-Hempel. 2003. Strong immune response in the honeybee Apis mellifera to a bacterial pathogen. Apidologie. 34: 569\u2013574.\n\nBrown, M. J. F., and R. J. Paxton. 2009. The conservation of bees: a global perspective. Apidologie. 40: 410\u2013416.\n\nBurnham, K. P., and D. R. Anderson. 2002. Model selection and multimodel inference: a practical information-theoretic approach, 2nd ed. New York: Springer-Verlag.",
+        "grounding": [
+          {
+            "box": {
+              "l": 0.5125000000000001,
+              "t": 0.4724832375478927,
+              "r": 0.9075,
+              "b": 0.9497198275862069
+            },
+            "page": 4
+          }
+        ],
+        "chunk_type": "text",
+        "chunk_id": "ba46b0a6-4358-4bea-b274-441afd8b8f40",
+        "chunk_ids": [
+          "ba46b0a6-4358-4bea-b274-441afd8b8f40"
+        ],
+        "original_chunk_id": "ba46b0a6-4358-4bea-b274-441afd8b8f40"
+      }
+    ]
+  }
+}

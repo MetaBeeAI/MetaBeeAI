@@ -1,0 +1,53 @@
+{
+  "QUESTIONS": {
+    "bee_and_pesticides.bee_species": {
+      "user_answer_positive": "Bumble bees, specifically *Bombus terrestris dalmatinus*",
+      "user_answer_negative": "*Bombus terrestris* and *Bombus terrestris dalmatinus*, two degrees of specificity mentioned without mentioning that* Bombus terrestris dalmatinus* is a subspecies at the answer level.",
+      "user_reason_positive": "The majority of the references consistently indicate that the species tested in the studies is bumble bees, specifically mentioning *Bombus terrestris* and its subspecies. This is supported by multiple fragments that highlight the focus on bumble bee colonies and their responses to neonicotinoids and other treatments. Therefore, the correct answer encompasses both the general term 'bumble bees' and the specific subspecies mentioned.",
+      "user_reason_negative": "",
+      "user_rating": 8
+    },
+    "bee_and_pesticides.pesticides": {
+      "user_answer_positive": "The pesticide used in the study was clothianidin, applied as a seed dressing at a dose of 10 g clothianidin per kg of seed. The exposure method was through planting the treated seeds, and the duration of exposure was from autumn 2013 until summer 2014.",
+      "user_answer_negative": "This answer doesn't mention the additional pyrethroid insecticide present in the seed dressing, 2g beta-cyfluthrin/kg of seed.",
+      "user_reason_positive": "The study utilized clothianidin as the pesticide, specifically in the form of a seed dressing for oilseed rape (OSR). The dose was 10 g of clothianidin per kg of seed, and the exposure method involved planting the treated seeds in the fields. The duration of exposure was from autumn 2013 until summer 2014, during which no further neonicotinoids were applied at the study fields. This information is corroborated across multiple text fragments, confirming the pesticide used, its application method, and the exposure timeline.",
+      "user_reason_negative": "",
+      "user_rating": 6
+    },
+    "bee_and_pesticides.additional_stressors": {
+      "user_answer_positive": "",
+      "user_answer_negative": "",
+      "user_reason_positive": "",
+      "user_reason_negative": "",
+      "user_rating": 10
+    },
+    "experimental_methodology": {
+      "user_answer_positive": "The experimental methodologies used in this paper involved field studies with bumble bee hives placed at different distances from oilseed rape (OSR) fields treated with clothianidin. The study included regular assessments of hive weight and worker numbers, the use of queen lockers to monitor queen production, and pollen sampling for residue analysis.",
+      "user_answer_negative": "Pollen identification was carried out through observation under the microscope to nearest taconomic practicability, and counted on a matrix. \nThe hive weight, health of the queen and number of workers was assessed following a week of exposure and after the colonies' lifetime, the hives were frozen and dissected.  \n(The AI missed several sections)",
+      "user_reason_positive": "",
+      "user_reason_negative": "",
+      "user_rating": 0
+    },
+    "discussion.limitations": {
+      "user_answer_positive": "The paper identifies limitations such as the lack of standardized testing methods for bumble bees, logistical challenges in conducting large-scale studies, inability to control for environmental factors, absence of validated methodologies for assessing responses to pesticides, complexity and high costs of landscape-level monitoring studies, and challenges in measuring biological endpoints like queen weight and reproductive success.",
+      "user_answer_negative": "",
+      "user_reason_positive": "The paper discusses several limitations and barriers to research on bumble bees, including the lack of standardized testing methods, logistical challenges in conducting large-scale studies, and the inability to control for various environmental factors that may influence results. It highlights the absence of validated methodologies for assessing bumble bee responses to pesticides, the complexity and high costs of landscape-level monitoring studies, and the challenges in accurately measuring biological endpoints such as queen weight and reproductive success. Additionally, it critiques previous studies for using unrealistic worst-case scenarios that do not reflect real-world conditions, which complicates the interpretation of findings.",
+      "user_reason_negative": "",
+      "user_rating": 10
+    },
+    "discussion.future_research": {
+      "user_answer_positive": "Future research should focus on: 1) conducting repeated field and monitoring studies across various years and locations to address unanswered questions about the effects of clothianidin on bumble bees; 2) developing validated methodologies for testing the effects of plant protection products (PPPs) on bumble bees, taking into account their unique biology; 3) standardizing bumble bee hives and ensuring uniformity in queen age and quality; 4) accurately measuring reproductive success by considering both the number of new queens and queen cells produced; and 5) investigating the temporal dynamics of bumble bee foraging behavior and the impact of various floral resources in the landscape.",
+      "user_answer_negative": "",
+      "user_reason_positive": "The paper discusses several key future research directions, including the need for repeated field and monitoring studies across various years and locations to better understand the effects of clothianidin on bumble bees. It emphasizes the importance of developing validated methodologies for testing plant protection products (PPPs) on bumble bees, considering their unique biology. Additionally, it highlights the necessity of standardizing bumble bee hives and accurately measuring reproductive success by focusing on both the number of new queens and queen cells produced. Lastly, it suggests investigating the dynamics of bumble bee foraging behavior over time and the influence of various floral resources in the landscape.",
+      "user_reason_negative": "",
+      "user_rating": 9
+    },
+    "discussion.significance": {
+      "user_answer_positive": "The paper emphasizes the importance of understanding the ecological and agricultural roles of bumble bees, the need for comprehensive studies to assess the impacts of pesticides, and the necessity for standardized methodologies in risk assessments. It highlights that multiple factors contribute to pollinator decline, not just neonicotinoids, making it crucial for future research and regulatory practices.",
+      "user_answer_negative": "",
+      "user_reason_positive": "The paper discusses the critical role of pollination in ecosystems and agriculture, highlighting the alarming decline in pollinator populations, particularly bumble bees. It emphasizes the need for more comprehensive studies on bumble bees due to the lack of established methodologies compared to honey bees, and the importance of landscape-level monitoring studies to accurately assess the risks of pesticides like neonicotinoids. The findings suggest that while immediate impacts of neonicotinoids may be less significant than previously thought, multiple factors contribute to pollinator decline, underscoring the necessity for ongoing research and improved testing methodologies to ensure the health and sustainability of bee populations.",
+      "user_reason_negative": "",
+      "user_rating": 9
+    }
+  }
+}

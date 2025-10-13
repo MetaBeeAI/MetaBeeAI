@@ -1,0 +1,18 @@
+{
+  "QUESTIONS": {
+    "bee_and_pesticides.bee_species": {
+      "user_answer_positive": "Bombus terrestris audax",
+      "user_answer_negative": "Bombus terrestris and Bombus terrestris audax refer to the same species, just that one is listed without the subspecies.",
+      "user_reason_positive": "The text for the bumblebee colonies says that Bombus terrestris audax was the species used in the experiements. No other species are mentioned",
+      "user_reason_negative": "",
+      "user_rating": 9
+    },
+    "discussion.future_research": {
+      "user_answer_positive": "",
+      "user_answer_negative": "",
+      "user_reason_positive": "",
+      "user_reason_negative": "",
+      "user_rating": 10
+    }
+  }
+}

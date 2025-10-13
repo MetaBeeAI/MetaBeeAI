@@ -1,0 +1,59 @@
+{
+  "QUESTIONS": {
+    "bee_species": {
+      "answer": "1. Bombus terrestris dalmatinus",
+      "reason": "The methodology section specifies the bee species used in the study.",
+      "chunk_ids": [
+        "93e7a4e5-2d16-429c-9a94-0d143e511f2f"
+      ]
+    },
+    "pesticides": {
+      "answer": "1. Clothianidin: field exposure via treated oilseed rape (OSR) seeds at 10 g per kg of seed\n2. Beta-cyfluthrin: field exposure via treated oilseed rape (OSR) seeds at 2 g per kg of seed",
+      "reason": "The study provides explicit information on the pesticides used, their application rates, and exposure methods.",
+      "chunk_ids": [
+        "fbb42613-42ba-42ed-b122-ce234d1479a7",
+        "9db82313-0a99-4006-87fc-851efcb9927f",
+        "50cfd71f-5cf9-45dc-a23b-f340d039e9e0"
+      ]
+    },
+    "additional_stressors": {
+      "answer": "No additional stressors were tested.",
+      "reason": "The provided text does not mention any additional stressors such as temperature, parasites, pathogens, other chemicals, or diet and nutrition stress that were tested and controlled for in the study. The text only refers to environmental conditions that were recorded, not tested.",
+      "chunk_ids": [
+        "9e7778e2-baac-4dfc-bdea-4f7fbb17d6f0",
+        "4b16ee7a-0dc5-4d0e-8204-e4a6c5a69e56",
+        "0a4d7006-b70e-4ac0-99bd-d733ca57e2e3",
+        "62d4afa7-13ec-43e7-a776-020658040c98",
+        "1c75c21e-a931-4207-91f4-cc73fd619f98"
+      ]
+    },
+    "experimental_methodology": {
+      "answer": "1. **Colony Assessment (field):**\n   - **Study Design:** Randomized field experiment with tripols (multi-hives) assigned randomly to treatment and location.\n   - **Sample Size:** 9 colonies per site (3 tripols) and 1 additional single hive for pollen collection, totaling 10 hives per location.\n   - **Variables Measured:** Colony health, queen presence, worker homogeneity, and pollen collection.\n\n2. **Colony Composition (field):**\n   - **Study Design:** Observational study with controlled colony composition.\n   - **Sample Size:** Each hive consisted of a mother queen and 40 to 50 workers of the same age.\n   - **Variables Measured:** Worker age homogeneity, queen health, and colony temperature maintenance.\n\n3. **Colony Weight and Worker Estimation (field):**\n   - **Study Design:** Observational study conducted during the exposure phase.\n   - **Sample Size:** Not specified.\n   - **Variables Measured:** Hive weight, estimated number of workers, flight activity, guarding and cooling behavior.\n\n4. **Pollen Collection and Analysis (field):**\n   - **Study Design:** Field survey conducted at two different time points during OSR flowering.\n   - **Sample Size:** Approximately 20 returning foragers with pollen loads collected during the first sampling event and approximately 40 during the second.\n   - **Variables Measured:** Pollen composition from returning bumble bee workers.\n\n5. **Reproductive Success (field experiment):**\n   - **Study Design:** Field experiment with colonies placed at different distances from a reference and test site.\n   - **Sample Size:** 54 colonies per treatment, with specific counts of 37 colonies at the reference site and 41 at the test site.\n   - **Variables Measured:** Number of young queens, queen brood cells, and reproductive success (sum of young queens and queen brood cells).",
+      "reason": "The text provides detailed information about the empirical methodologies used in the study, including sample sizes, study design, and variables measured.",
+      "chunk_ids": [
+        "34eb81df-8c21-480c-9ae9-b4b07b9e3105",
+        "56e95025-3344-4ef4-a68c-2477a3475e71",
+        "92eb12d0-7bc0-4495-b893-d436291d9a79"
+      ]
+    },
+    "significance": {
+      "answer": "- No adverse effect of clothianidin-treated OSR on bumble bee colony development was observed, as measured by hive weight.\n- No effect on the number of worker bumble bees was detected.\n- No effect on the numbers of young queens and queen brood cells, considered the most biologically meaningful endpoint, was observed.\n- Residue analysis confirmed exposure to clothianidin in test site colonies, with measured levels ranging from 1.0 to 1.3 \u00b5g/kg in three locations.\n- Bumble bees were observed foraging on crops treated with clothianidin, indicating direct exposure to this pesticide.",
+      "reason": "The study focused on the effects of clothianidin-treated oilseed rape (OSR) on bumble bee colonies, specifically examining colony development and reproduction metrics.",
+      "chunk_ids": [
+        "1f06bf6a-8287-4579-a50e-504d7f1c4c9f",
+        "c5198d57-b9ce-4a09-a1c0-ff26c2ca517b",
+        "05e4edca-8d9a-4cce-9a48-9257c998b4be",
+        "2ec3d406-dadb-4b9b-ab22-715cf637912e"
+      ]
+    },
+    "future_research": {
+      "answer": "No future research directions were suggested.",
+      "reason": "The authors did not explicitly suggest any future research directions in the discussion section of the text provided.",
+      "chunk_ids": [
+        "f9219b45-b8f8-4a00-9429-72dedbe25d19",
+        "36dd5ae1-4597-4d04-b407-8487896137c7",
+        "abf543b2-c198-4e7a-827b-14b61006d05d"
+      ]
+    }
+  }
+}

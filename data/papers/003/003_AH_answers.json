@@ -1,0 +1,53 @@
+{
+  "QUESTIONS": {
+    "bee_and_pesticides.bee_species": {
+      "user_answer_positive": "Bombus terrestris audax were specified as the sub species of study.",
+      "user_answer_negative": "",
+      "user_reason_positive": "Sub-species given",
+      "user_reason_negative": "too long and not needed",
+      "user_rating": 9
+    },
+    "bee_and_pesticides.pesticides": {
+      "user_answer_positive": "Thiamethoxam (Pestanal analytical standard) is the insecticide studied. Concentrations of 1, 5, 10, 15, 20, 30, 50 and 100 ng of active ingredient/bee were used. Exposure was oral in sucrose (50 degrees Brix). The insecticide was given after 3 hours of starvation. The total exposure was 96 hours.",
+      "user_answer_negative": "Missed the concentrations used - see suppl material and results section",
+      "user_reason_positive": "Thiamethoxam is the only insecticide studied here. OECD guidelines for oral bioassay followed.",
+      "user_reason_negative": "Missed the concentrations used - see suppl material and results section",
+      "user_rating": 3
+    },
+    "bee_and_pesticides.additional_stressors": {
+      "user_answer_positive": "The additional strressor here is the trypanosome parasite Crithidia bombi. The exposure was to approximately 10,000 C. bombi cells orally in 10ul sucose solution (50 degree Brix) given after 3 hours of starvation. After 7 days these bees were included in further a experiment with thiamethoxam done over 96 hours.",
+      "user_answer_negative": "The AI answer misses dose and method of exposure and also duration of tests. Also confuses primary and additional stressors.",
+      "user_reason_positive": "The primary stressor is thiamethoxam, C. bombi is the additional stressor. Dose, methodology and timings all clear in the methods section.",
+      "user_reason_negative": "The AI answer misses dose and method of exposure and also duration of tests. Also confuses primary and additional stressors.",
+      "user_rating": 4
+    },
+    "experimental_methodology": {
+      "user_answer_positive": "The study uses protocols to assess acute oral toxicity (LD50s) published by the OECD. Bioassays with thiamethoxam with and without infection with C. bombi were done. LD50s were calculated to look at the effect of poarasite load. Parasite load was confirmed by dissection and microscopy.",
+      "user_answer_negative": "Missed the fact that the study was looking to see the effect of parasite infection on insecticide sensitivity.",
+      "user_reason_positive": "Clear OECD based methods for insecticide bioassay used. Clear methodology for parasite infection. These together will determine the effect of parasite infection on sensitivity to Thiamethoxam.",
+      "user_reason_negative": "Missed the fact that the study was looking to see the effect of parasite infection on insecticide sensitivity.",
+      "user_rating": 7
+    },
+    "discussion.significance": {
+      "user_answer_positive": "This paper studied the interaction between the pesticide thiamrthoxam and the parasite C. bombi. It found that the parasite C. bombi had no impact on the LD50 of thiamethoxam or on sucrose consumptionon in B. terrestris. At lethal doses thiamethoxam was observed to increase C. bombi intensity. It outlined a modified LD50 protocol that can be used to assess how parasites and agrochemicals interact at higher doses, which could be used within the regulatory process.",
+      "user_answer_negative": "A bit generic",
+      "user_reason_positive": "This paper studied the interaction between the pesticide thiamrthoxam and the parasite C. bombi. It developed a modified version of the standard OECD protocol used to determine oral toxicity (LD50s) in bees, that could look at intercations between parasites and pesticides.",
+      "user_reason_negative": "A bit generic",
+      "user_rating": 7
+    },
+    "discussion.future_research": {
+      "user_answer_positive": "Future work is needed:\ni) to determine the mechanism(s) underlying the observation that C. bombi intensity was higher in bees that had been fed a high dose of thiamethoxam and had subsequently died.\nii) to develop methadologies that assess sub-lethal interactions between agrochemicals and parasites in bees.\niii) to understand how novel pesticides intercat with bee parasites.",
+      "user_answer_negative": "Missed therecommendation to understand the mechansim underlying the increase in C. bombi intensity with exposure to lethal concentrations of thiamethoxam.",
+      "user_reason_positive": "Future work on 3 main areas was claerly mentioned in the discussion.",
+      "user_reason_negative": "Too generic really",
+      "user_rating": 7
+    },
+    "discussion.limitations": {
+      "user_answer_positive": "Acute toxicity (LD50s) tests are important in generating toxicity data but do not detect the sub-lethal effects of chronic pesticide exposure and even this modified protocol would not pick up interactions between chronic exposure and bee parasites. The number of different bee parasites makes testing interactions between agrochemicals and all of them impractical. The lack of understanding of parasite life-history is also a limiting factor. More tests need to be developed to determine the intercation between bee parasite load and agrochemical toxicity.",
+      "user_answer_negative": "",
+      "user_reason_positive": "More tests need to be developed to determine the intercation between bee parasite load and agrochemical toxicity. Lack of sub-lethal effects testing.",
+      "user_reason_negative": "",
+      "user_rating": 8
+    }
+  }
+}

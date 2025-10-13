@@ -1,0 +1,53 @@
+{
+  "QUESTIONS": {
+    "bee_and_pesticides.bee_species": {
+      "user_answer_positive": "Bombus terrestris dalmantinus named as the species tested.",
+      "user_answer_negative": "Bombus terrestris dalmantinus is identified as the species studied",
+      "user_reason_positive": "Bombus terrestris dalmantinus is identified as the species studied here (also referred to as bumble bees and Bombus terrestris) but sub-species is the correct answer.",
+      "user_reason_negative": "Bombus terrestris dalmantinus is identified as the species studied",
+      "user_rating": 9
+    },
+    "bee_and_pesticides.pesticides": {
+      "user_answer_positive": "Clothianidin applied as the seed dressing Elado was used. Elado: 10g clothianidin, 2g beta-cyfluthrin/ kg seed. Exposure to bees was for 22 days (from 24 April), with a post-exposure pahse of 21 days.",
+      "user_answer_negative": "beta-cyfluthrin was also in the seed dressing at 2g per kg seed. Exposure time for bees was 22 days - not autumn 2013-summer 2014",
+      "user_reason_positive": "Clothianidin is the main compound being studied, but this applied with a pyrethroid in a seed dressing.",
+      "user_reason_negative": "Elado seed dressing was used, not only clothianidin. Bee exposure time was not picked out of the text.",
+      "user_rating": 4
+    },
+    "bee_and_pesticides.additional_stressors": {
+      "user_answer_positive": "The text is clear that Elado contains two insecticides, but the effects of these two compounds cannot be separated based on the experimental design. So is not additional stressor. Statistical testing was used to look at the effcet of weather conditions (temperature, humidity, rainfall and windspeed). So these can be considered as additional stressors.",
+      "user_answer_negative": "Missed the weather conditions being monitored",
+      "user_reason_positive": "Weather conditions - rainfall, windspeed, temperature and humidity were recorded as additional stressors. Weather conditions were determined to influence reproductive parameters.",
+      "user_reason_negative": "Missed the weather conditions being monitored",
+      "user_rating": 3
+    },
+    "experimental_methodology": {
+      "user_answer_positive": "Two study sites were used - one reference site without clothianidin treatment and one experimental, references given to other studies that used the sites. Soil samples taken to determine clothianidin residues.\n\nStandardised bumble bee colonies were used in the study. The original queen was found, and hive weight and number of workers were recorded twice a week from 26th April, over the project. Behavioural measures such as abnormal flight activity were recorded.\n\nOSR pollen samples to assess pesticide residues were also taken twice, once in April and once in May.  \n\nDuring the post exposure phase, the presnce of a queen, hive weight and numberof workers were recorded once a week. At the end of the post-exposure phase, hives were frozen and then number of new queens produced were assessed.\n\nWeather conditions were monitored at the sites.",
+      "user_answer_negative": "The use of standardised hives was missed in the answer.",
+      "user_reason_positive": "This was a study to look at field-realistic conditions concerning seed treated OSR crops and bumble bee exposure. Effects on survival, development and reproduction were studied.",
+      "user_reason_negative": "The use of standardised hives was missed in the answer.",
+      "user_rating": 8
+    },
+    "discussion.significance": {
+      "user_answer_positive": "This study found no adverse effect on B. terrestris dalmatinus of OSR treated with Elado seed dressing (Clothianidin and beta-cyfluthrin). No difference in hive weight, or numbers of workers produced were observed. No effect on numbers of young queens produced were observed in the post-exposure phase. Under field-realistic conditions used here clothianidin residue aws lower than often suggested by other studies (max 1.3ug/kg in pollen). This has clear importance for agrigultural practices and regulatory bodies and implies that when used as a seed dressing, the risk of some neonicotinoids may be low to bumblebees. This type of testing could be added to regulatory risk assessments.",
+      "user_answer_negative": "Too generic. No reference to the results of this study.",
+      "user_reason_positive": "The data in the study highlighted no risks to the species of bumblebee used, from the seed dressing of OSR with clothianidin (applied as Elado).",
+      "user_reason_negative": "Too generic.",
+      "user_rating": 4
+    },
+    "discussion.future_research": {
+      "user_answer_positive": "Further work was suggested in reference to foraging behaviour in agricultural landscapes. Repeating field and monitoring studies across years and in other geographical locations is suggested as a means of adrressing outstanding questions. The lack of published standard protocols and methodolgies for PPP testing on bumblebees. It also suggests that some lower tier risk aseessments might be added into the regualtory process for bumblebees.",
+      "user_answer_negative": "The use of standardised hives is not really future research but rather is reported here.",
+      "user_reason_positive": "The discussion section only highlights a small number of areas as 'future research'.",
+      "user_reason_negative": "",
+      "user_rating": 7
+    },
+    "discussion.limitations": {
+      "user_answer_positive": "The lack of standard protocols for use in PPP research in bumblebees is highlighted as a general limitation in the field. The methods reported here use a categorization method that is not suited to detecting small differences in bee numbers and so the endpoint here may be less biologically relevant. The effects on overwintering and breeding success were also not directly measured in this study. The measures used to determine reproductive success were new queen numbers and number of queen brood cells. The weight of individual queens was not recorded due to the experimental set up here, but is considered a good proxy for determining colony fitness by other studies. The logistics and costs of big landscape-scale studies, such as this one may limit how often they can repeated or performed.",
+      "user_answer_negative": "Missed the limitations with estimating worker numbers",
+      "user_reason_positive": "The complexity and high costs of landscape-level monitoring studies such as this were discussed. As well as specific limitations of the set up used - such as the endpoints used to determine worker numbers and colony fitness.",
+      "user_reason_negative": "",
+      "user_rating": 8
+    }
+  }
+}

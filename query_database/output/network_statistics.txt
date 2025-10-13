@@ -1,0 +1,62 @@
+BEE SPECIES - NICOTINIC PESTICIDE NETWORK STATISTICS
+=======================================================
+
+OVERVIEW
+--------------------
+Total bee-pesticide connections: 113
+Total studies across all connections: 1403
+Average studies per connection: 12.42
+
+TOP BEE GENERA BY TOTAL STUDIES
+--------------------------------
+ 1. Apis: 834.0 studies, 11.0 pesticides, 75.8 avg/pesticide
+ 2. Bombus: 248.0 studies, 10.0 pesticides, 24.8 avg/pesticide
+ 3. Osmia: 102.0 studies, 9.0 pesticides, 11.3 avg/pesticide
+ 4. Melipona: 42.0 studies, 8.0 pesticides, 5.2 avg/pesticide
+ 5. Megachile: 33.0 studies, 8.0 pesticides, 4.1 avg/pesticide
+ 6. Scaptotrigona: 21.0 studies, 5.0 pesticides, 4.2 avg/pesticide
+ 7. Tetragonisca: 17.0 studies, 7.0 pesticides, 2.4 avg/pesticide
+ 8. Plebeia: 14.0 studies, 4.0 pesticides, 3.5 avg/pesticide
+ 9. Tetragonula: 13.0 studies, 5.0 pesticides, 2.6 avg/pesticide
+10. Nannotrigona: 11.0 studies, 6.0 pesticides, 1.8 avg/pesticide
+11. Partamona: 10.0 studies, 2.0 pesticides, 5.0 avg/pesticide
+12. Trigona: 8.0 studies, 4.0 pesticides, 2.0 avg/pesticide
+13. Eucera: 8.0 studies, 4.0 pesticides, 2.0 avg/pesticide
+14. Halictus: 8.0 studies, 5.0 pesticides, 1.6 avg/pesticide
+15. Ceratina: 7.0 studies, 5.0 pesticides, 1.4 avg/pesticide
+
+TOP PESTICIDES BY TOTAL STUDIES
+--------------------------------
+ 1. imidacloprid: 488.0 studies, 20.0 bee genera, 24.4 avg/genus
+ 2. thiamethoxam: 259.0 studies, 18.0 bee genera, 14.4 avg/genus
+ 3. clothianidin: 213.0 studies, 12.0 bee genera, 17.8 avg/genus
+ 4. thiacloprid: 115.0 studies, 10.0 bee genera, 11.5 avg/genus
+ 5. acetamiprid: 111.0 studies, 15.0 bee genera, 7.4 avg/genus
+ 6. sulfoxaflor: 64.0 studies, 5.0 bee genera, 12.8 avg/genus
+ 7. flupyradifurone: 60.0 studies, 9.0 bee genera, 6.7 avg/genus
+ 8. spinosad: 58.0 studies, 11.0 bee genera, 5.3 avg/genus
+ 9. dinotefuran: 23.0 studies, 5.0 bee genera, 4.6 avg/genus
+10. spinetoram: 10.0 studies, 7.0 bee genera, 1.4 avg/genus
+
+TOP BEE-PESTICIDE COMBINATIONS
+-----------------------------------
+ 1. Apis + imidacloprid: 284 studies
+ 2. Apis + thiamethoxam: 161 studies
+ 3. Apis + clothianidin: 140 studies
+ 4. Bombus + imidacloprid: 90 studies
+ 5. Apis + thiacloprid: 71 studies
+ 6. Apis + acetamiprid: 65 studies
+ 7. Bombus + thiamethoxam: 47 studies
+ 8. Bombus + clothianidin: 37 studies
+ 9. Apis + flupyradifurone: 36 studies
+10. Apis + sulfoxaflor: 34 studies
+11. Osmia + clothianidin: 23 studies
+12. Osmia + imidacloprid: 22 studies
+13. Apis + spinosad: 21 studies
+14. Bombus + thiacloprid: 21 studies
+15. Melipona + imidacloprid: 20 studies
+16. Apis + dinotefuran: 18 studies
+17. Bombus + sulfoxaflor: 18 studies
+18. Bombus + acetamiprid: 17 studies
+19. Megachile + imidacloprid: 16 studies
+20. Osmia + acetamiprid: 14 studies

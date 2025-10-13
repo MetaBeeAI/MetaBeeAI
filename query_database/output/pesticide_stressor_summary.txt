@@ -1,0 +1,93 @@
+PESTICIDES AND ADDITIONAL STRESSORS DATA SUMMARY
+==================================================
+
+PESTICIDES DATA OVERVIEW
+-------------------------
+Total pesticide entries: 2066
+Non-empty pesticide entries: 2036
+Unique papers with pesticides: 890
+Unique pesticide names: 274
+Nicotinic pesticide entries: 1171
+Other pesticide entries: 865
+
+TOP 15 PESTICIDES (ALL TYPES)
+------------------------------
+ 1. imidacloprid: 406 studies (Nicotinic)
+ 2. thiamethoxam: 223 studies (Nicotinic)
+ 3. clothianidin: 183 studies (Nicotinic)
+ 4. acetamiprid: 96 studies (Nicotinic)
+ 5. thiacloprid: 89 studies (Nicotinic)
+ 6. sulfoxaflor: 51 studies (Nicotinic)
+ 7. flupyradifurone: 47 studies (Nicotinic)
+ 8. dimethoate: 45 studies (Other)
+ 9. spinosad: 43 studies (Nicotinic)
+10. fipronil: 31 studies (Other)
+11. glyphosate: 30 studies (Other)
+12. chlorpyrifos: 27 studies (Other)
+13. deltamethrin: 26 studies (Other)
+14. dinotefuran: 22 studies (Nicotinic)
+15. chlorantraniliprole: 21 studies (Other)
+
+NICOTINIC CHOLINERGIC PESTICIDES
+-----------------------------------
+ 1. imidacloprid: 406 studies, 406 papers
+ 2. thiamethoxam: 223 studies, 223 papers
+ 3. clothianidin: 183 studies, 183 papers
+ 4. acetamiprid: 96 studies, 96 papers
+ 5. thiacloprid: 89 studies, 89 papers
+ 6. sulfoxaflor: 51 studies, 51 papers
+ 7. flupyradifurone: 47 studies, 47 papers
+ 8. spinosad: 43 studies, 43 papers
+ 9. dinotefuran: 22 studies, 22 papers
+10. spinetoram: 9 studies, 9 papers
+11. nitenpyram: 2 studies, 2 papers
+
+ADDITIONAL STRESSORS DATA OVERVIEW
+-----------------------------------
+Total stressor entries: 993
+Non-empty stressor entries: 182
+Unique papers with stressors: 109
+Unique stressor types: 6
+
+STRESSOR TYPES DISTRIBUTION
+------------------------------
+ 1. parasite: 55 entries, 46 papers
+ 2. temperature: 45 entries, 42 papers
+ 3. pathogen: 32 entries, 30 papers
+ 4. chemical: 31 entries, 19 papers
+ 5. other: 14 entries, 14 papers
+ 6. nutritional: 5 entries, 5 papers
+
+PESTICIDE-STRESSOR CO-OCCURRENCE
+-----------------------------------
+Papers with pesticides: 890
+Papers with stressors: 109
+Papers with both: 106
+Papers with only pesticides: 784
+Papers with only stressors: 3
+
+TOP PESTICIDE-STRESSOR COMBINATIONS
+----------------------------------------
+ 1. imidacloprid + temperature: 20 papers (Nicotinic)
+ 2. thiamethoxam + parasite: 18 papers (Nicotinic)
+ 3. clothianidin + parasite: 13 papers (Nicotinic)
+ 4. thiamethoxam + temperature: 12 papers (Nicotinic)
+ 5. imidacloprid + parasite: 11 papers (Nicotinic)
+ 6. thiamethoxam + pathogen: 10 papers (Nicotinic)
+ 7. imidacloprid + chemical: 8 papers (Nicotinic)
+ 8. imidacloprid + other: 7 papers (Nicotinic)
+ 9. imidacloprid + pathogen: 6 papers (Nicotinic)
+10. thiamethoxam + chemical: 6 papers (Nicotinic)
+11. thiacloprid + parasite: 6 papers (Nicotinic)
+12. acetamiprid + temperature: 5 papers (Nicotinic)
+13. methomyl + temperature: 5 papers (Other)
+14. methomyl + other: 5 papers (Other)
+15. thiacloprid + pathogen: 5 papers (Nicotinic)
+16. clothianidin + temperature: 5 papers (Nicotinic)
+17. sulfoxaflor + parasite: 4 papers (Nicotinic)
+18. methomyl + chemical: 4 papers (Other)
+19. clothianidin + pathogen: 4 papers (Nicotinic)
+20. cyhalothrin + temperature: 3 papers (Other)
+
+SUMMARY COMPLETED
+====================

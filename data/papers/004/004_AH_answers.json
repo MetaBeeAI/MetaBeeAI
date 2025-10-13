@@ -1,0 +1,53 @@
+{
+  "QUESTIONS": {
+    "bee_and_pesticides.bee_species": {
+      "user_answer_positive": "Bombus impatiens",
+      "user_answer_negative": "",
+      "user_reason_positive": "Bombus impatiens was the species used in the study",
+      "user_reason_negative": "",
+      "user_rating": 10
+    },
+    "bee_and_pesticides.pesticides": {
+      "user_answer_positive": "Acetamiprid. Exposure through 2 different routes (both oral) - via 50/50 inverted sugar syrup (50% glucose, 50% fructose in water containing 2.95mM citric acid and 8.32mM sorbic acid) or pollen paste (2.5g pollen/ml 50/50 inverted sugar syrup). A range of different concentrations used for both routes. \nPollen route: 0.452, 4.52, 45.2, 452, or 4520 ppb \nSyrup route: 1.13, 11.3, 113, 1130, or 11,300 ppb\nDuration was 6 weeks.",
+      "user_answer_negative": "",
+      "user_reason_positive": "Acetamiprid. Exposure through 2 different routes - pollen and syrup. A range of different concentrations used for both routes. Duration was 6 weeks.",
+      "user_reason_negative": "",
+      "user_rating": 9
+    },
+    "bee_and_pesticides.additional_stressors": {
+      "user_answer_positive": "No additional stressor noted. Acetamiprid is the insecticide used",
+      "user_answer_negative": "Answer cites acetamiprid as an additional stressor",
+      "user_reason_positive": "No additional stressor noted. Acetamiprid is the insecticide used",
+      "user_reason_negative": "Acetamiprid is the insecticide used - the primary stressor",
+      "user_rating": 1
+    },
+    "experimental_methodology": {
+      "user_answer_positive": "The methods section cited 2 previous papers that outlined more detailed methods. This paper describes an oral bioassay using B. impatiens and sub-lethal exposure to pesticide administered in either syrup or pollen. A number of colony-level endpoints were measured.",
+      "user_answer_negative": "Missed the referencing to more detailed methods",
+      "user_reason_positive": "This paper describes an oral bioassay using B. impatiens and sub-lethal exposure to pesticide administered in either syrup or pollen.",
+      "user_reason_negative": "Missed the referencing to more detailed methods",
+      "user_rating": 9
+    },
+    "discussion.significance": {
+      "user_answer_positive": "This study examined the impact of the route of sub-lethal pesticide exposure (either pollen or syrup) on B. impatiens. It examined the impact of the delivery route on different colony-level outcomes or life stages. It found evidence that the route of delivery impacted brood and adults differently, with increased influence of pollen on brood and syrup on adult workers. Use of both pollen and syrup in ecotox testing is needed to ensure all treatment effects are captured.",
+      "user_answer_negative": "Too generic",
+      "user_reason_positive": "This study highlights that in ecotox oral testing the vehicle of delivery is syrup which mimics nectar (adult food). The addition of pollen as a vehicle would ensure brood-effcets were captured.",
+      "user_reason_negative": "Too generic",
+      "user_rating": 5
+    },
+    "discussion.future_research": {
+      "user_answer_positive": "Future work on colony-level fitness is needed:\ni) to investigate the 2 week delay observed in the maximum pollen consumption and subsequent drone emergence. Perhaps by limiting pollen or syrup availability in the weeks before drone emergence.\nii) to determine how windows of exposure effect the number and weight of reproductives produced.\niii) to track food consumption over time to enable colony level exposure to be assessed\niv) that focuses on pollen consumption and drone numbers, emergence, size and weight as endpoints to allow for direct comparison between studies.\nv) that incorporates route of exposure into the experimental design\nvi) to assess potential exposure route differences in nectar paot utilisation",
+      "user_answer_negative": "",
+      "user_reason_positive": "The paper discusses several future research directions aimed at improving the understanding of bumble bee responses to neonicotinoids.",
+      "user_reason_negative": "",
+      "user_rating": 10
+    },
+    "discussion.limitations": {
+      "user_answer_positive": "The paper discusses the limitations in comparison of delivery route, primarily that this study design cannot isolate how much of each source was consumed by either adults or larvae. Also caste has an impact, as reproductives involved in egg laying require more pollen to meet the requirements of oocyte production. Workers masticate pollen to build the nest and feed the brood and it is unknown how much they consume. It is assumed that larvae consume more pollen than syrup, but it is not known how food predigestation by workers may effect the level of pesticides it contains.",
+      "user_answer_negative": "",
+      "user_reason_positive": "The main limitations are the lack of knowledge around how much of each source of food is consumed by bees of different castes and developemnt stage. The impact of detoxification of food by worker bees prior to feeding brood is also a limitation.",
+      "user_reason_negative": "Too generic, not focused solely on the limitations of the study",
+      "user_rating": 8
+    }
+  }
+}

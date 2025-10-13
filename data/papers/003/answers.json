@@ -1,0 +1,54 @@
+{
+  "QUESTIONS": {
+    "bee_species": {
+      "answer": "1. Bombus terrestris audax",
+      "reason": "The methodology section specifies the bee species used in the study.",
+      "chunk_ids": [
+        "af7846dc-7a3b-4445-9191-087a4a117c49",
+        "a2fd9191-5c69-401b-960d-8e3d77d541a2"
+      ]
+    },
+    "pesticides": {
+      "answer": "1. Thiamethoxam: 5 ng/g of active substance/bee, oral exposure, 96 hours",
+      "reason": "The study provides specific details about the pesticide thiamethoxam, including its dosage, exposure method, and duration.",
+      "chunk_ids": [
+        "667ae264-5038-47fc-9a1e-40585681aae3",
+        "69485f7b-d649-40de-85cc-62ac63fec899"
+      ]
+    },
+    "additional_stressors": {
+      "answer": "1. Parasite stress: Crithidia bombi infection: 10,000 cells per bee, oral inoculation, 15 minutes followed by a 7-day establishment period.",
+      "reason": "The study focused on the interaction between thiamethoxam and *Crithidia bombi* in bumblebees, without testing additional stressors like temperature, other parasites, pathogens, or diet and nutrition stress.",
+      "chunk_ids": [
+        "fe3a475b-c8c0-4110-a23e-92322e2b2aa3",
+        "b8a3c71b-d188-44f8-8042-6398c3e5f253"
+      ]
+    },
+    "experimental_methodology": {
+      "answer": "1. **Parasite Inoculation (lab):**\n   - **Study Design:** Randomized controlled trial with 21 treatment groups, including 2 control groups, 1 *C. bombi* group, 9 thiamethoxam groups, and 9 groups exposed to both thiamethoxam & *C. bombi*.\n   - **Sample Size:** 40 bumblebees per treatment group, individually housed in Nicot cages.\n   - **Variables Measured:** LD\\(_{50}\\) of thiamethoxam.\n\n2. **Parasite Examination (lab):**\n   - **Study Design:** Observational study of 6 bumblebee colonies (*Bombus terrestris audax*).\n   - **Sample Size:** Faeces from 15 workers per colony.\n   - **Variables Measured:** Presence of common bumblebee parasites (*Apicystis bombi, Crithidia spp., Nosema spp.*).\n\n3. **Parasite Analysis (lab):**\n   - **Study Design:** Observational study involving dissection and microscopic examination.\n   - **Sample Size:** All bees screened, with uninoculated bees checked for infection.\n   - **Variables Measured:** Presence and intensity of *C. bombi* cells, body size (thorax width).\n\n4. **LD50 Determination (lab):**\n   - **Study Design:** Laboratory experiment based on OECD guidelines, modified to include *C. bombi* inoculation.\n   - **Sample Size:** Six bumblebee colonies (*Bombus terrestris audax*).\n   - **Variables Measured:** LD50 values of thiamethoxam, presence of common bumblebee parasites.",
+      "reason": "The text provides detailed information on various empirical methodologies used in the study involving bumblebees, focusing on parasite inoculation, parasite examination, and LD50 determination.",
+      "chunk_ids": [
+        "24011ad4-261c-44cc-a725-56c744020c30",
+        "a2fd9191-5c69-401b-960d-8e3d77d541a2",
+        "931483a3-f01f-4802-9149-db1a4c1093f4",
+        "af7846dc-7a3b-4445-9191-087a4a117c49"
+      ]
+    },
+    "significance": {
+      "answer": "- The LD<sub>50</sub> for thiamethoxam was 6.63 ng per bumblebee, with no significant difference in mortality when combined with the parasite *C. bombi* (6.82 ng per bumblebee).\n- Bumblebee size influenced mortality risk, with both smaller and larger bees experiencing increased mortality.\n- Thiamethoxam exposure did not affect sucrose consumption in bumblebees.\n- Higher doses of thiamethoxam correlated with increased intensity of *C. bombi* infection, although this effect was not observed when excluding bees that died during the experiment.",
+      "reason": "The study provides specific insights into the effects of thiamethoxam on bumblebees, particularly in relation to mortality and parasite interaction.",
+      "chunk_ids": [
+        "253d5e1f-1b4a-40a9-91aa-93ea74dab617"
+      ]
+    },
+    "future_research": {
+      "answer": "- Conduct sub-lethal assessments of chronic exposure in bumblebees alongside toxicity tests to detect sub-lethal, but significant, effects.\n- Modify methodologies within the regulatory process to consider the interaction effects between multiple environmental stressors on wild bees.\n- Monitor interactions between pesticides and pathogens.\n- Develop a holistic approach to environmental risk assessment that considers interactions between multiple stressors and models their impact on wild bees.",
+      "reason": "The authors explicitly suggest future research directions in the discussion section, focusing on methodological improvements and targeted research questions.",
+      "chunk_ids": [
+        "55292e1c-4c35-4301-b768-bb4f0ce7f059",
+        "8cdecb24-a6aa-45e3-8053-61ada52a8cd8",
+        "12271872-e617-4ecd-8b9e-b260d80b4989"
+      ]
+    }
+  }
+}

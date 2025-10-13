@@ -1,0 +1,137 @@
+QUESTIONS:
+  bee_species:
+    question: "What bee species were experimentally tested in this study?"
+    instructions:
+      - "Extract species names only from title, abstract, methodology or results sections."
+      - "Provide full scientific names (genus, species, subspecies) exactly as written in the text."
+      - "Include common names only if no scientific name is provided."
+      - "List each species ONLY ONCE, using the MOST SPECIFIC name available in the reference text."
+      - "Never list the same species at different taxonomic levels (e.g., don't list both genus+species AND genus+species+subspecies)."
+      - "Exclude species mentioned only in introduction, discussion, or references."
+      - "If no species are specified, return 'Species not specified'."
+      - "Do not add explanations, context, or repeat less specific versions of a name."
+    output_format: "Numbered list: '1. [Most specific scientific name]; 2. [Most specific scientific name]' etc."
+    example_output: 
+      - "1. Apis mellifera carnica; 2. Bombus terrestris audax; 3. Megachile rotundata"
+      - "1. Bombus terrestris dalmatinus"
+    bad_example_output: 
+      - "1. Bombus terrestris; 2. Bombus terrestris dalmatinus"
+      - "1. Apis mellifera; 2. Apis mellifera carnica; 3. honeybee"
+      - "The species of bee tested was A. mellifera, also known as honeybees, Apis mellifera, or Apis mellifera carnica subspecies."
+    no_info_response: "Species not specified"
+  # Configuration for relevance scoring and chunk selection
+    max_chunks: 5
+    min_score: 0.6
+    description: "High threshold - species should be explicitly stated"
+    
+  pesticides:
+    question: "What pesticide(s) were tested in this study? For each, provide the specific dose(s) tested (or field application rates), exposure method(s) and duration of exposure."
+    instructions:
+      - "Report pesticides that bees were exposed to in the study (including field studies, controlled experiments, etc.)."
+      - "Use the chemical name (not trade name or formulation) unless no other name is given."
+      - "Include doses/concentrations if explicitly reported, or field application rates if explicitly reported."
+      - "Include exposure method if explicitly reported (oral, contact, topical, field exposure, etc.)."
+      - "Include exposure duration if explicitly reported."
+      - "List each pesticide separately."
+      - "Do not add any interpretation, context, or description of results."
+      - "Do not infer missing information—only report what is explicitly stated."
+      - "If only the pesticide name is available, report just the name."
+    output_format: "List of pesticides with: chemical name, and any available details (dose, exposure method, duration)"
+    example_output:
+      - "1. Imidacloprid: 10 and 100 ppb, oral exposure, 7 days; 2. Thiamethoxam: 5 and 25 ppb, contact exposure, acute"
+      - "1. Clothianidin: field exposure via treated oilseed rape at 10 g per kg of seed; 2. Beta-cyfluthrin: field exposure via treated seeds"
+      - "1. Clothianidin; 2. Indoxacarb"
+    bad_example_output: 
+      - "In the study, the researchers tested imidacloprid (Admire) and sufoxaflor (Closer) by feeding bees the pesticides over 10 days."
+      - "The study tested several pesticides including neonicotinoids which are harmful to bees. They used different doses and exposed the bees for some time. The pesticides were applied in various ways to see how they affected the bees."
+    no_info_response: "No pesticides were tested in this study"
+    # Configuration for relevance scoring and chunk selection
+    max_chunks: 5
+    min_score: 0.1
+    description: "Very low threshold - accept any mention of pesticides"
+    
+  additional_stressors:
+    question: "Were the effects of any additional stressors included in the study (like temperature, parasites or pathogens, other chemicals, or diet and nutrition stress)?"
+    instructions:
+      - "Identify all additional stressors, but do not include pesticides"
+      - "Include temperature ranges, parasite/pathogen names, and chemical concentrations, if available."
+      - "Specify how stressors were applied and for how long"
+      - "Only include stressors that were tested and controlled for in the study, do not include variables simply measured in the field"
+      - "Exclude stressors mentioned only in the introduction, discussion, or reference list."
+      - "Do not include potential stressors if only hypothesized to be present, but were not tested."
+      - "If there are no additional stressors described in the study, return 'No additional stressors were tested.'"
+    output_format: "List of stressors with: type, specification, application method, duration"
+    example_output: 
+      - "1. Temperature stress: 35°C for 24 hours; 2.Nosema ceranae infection: 10^5 spores per bee, oral inoculation, 7 days"
+      - "No additional stressors were tested."
+    bad_example_output: "The study considered various environmental factors that might stress bees. Temperature could be important, and there might be parasites present. Nutrition is always a concern for bee health. The researchers probably controlled for these things."
+    # Configuration for relevance scoring and chunk selection
+    max_chunks: 5
+    min_score: 0.5
+    no_info_response: "No additional stressors were tested"
+    description: "Medium threshold - look for non-pesticide stressors"
+        
+  experimental_methodology:
+    question: "What empirical methodologies were used in this paper to collect data on bees? Include sample sizes, study design, and variables measured."
+    instructions:
+      - "Include all empirical work directly involving bees (lab experiments, field experiments, field surveys, or observational studies)."
+      - "Exclude computational analyses, modelling, or purely statistical methods."
+      - "Report sample sizes (number of bees, colonies, or field sites) when available."
+      - "Describe the study design (e.g., randomized, controlled, factorial, observational, longitudinal, survey-based, field manipulation)."
+      - "List the variables quantified (e.g., mortality, foraging efficiency, RNA expression, colony survival, species abundance)."
+      - "If multiple methodologies are described, separate them clearly."
+    output_format: "Description of empirical methods with sample sizes, design, and variables measured"
+    example_output: 
+      - "1. Foraging efficiency (lab): Randomized controlled trial with 20 colonies per treatment. Bees were individually marked and the number of foraging trips recorded. 25 bees per treatment were tested."
+      - "2. Colony survival (field): Longitudinal observational study of 15 colonies placed at pesticide-treated and untreated sites. Mortality and brood development were monitored weekly for 8 weeks."
+      - "3. Species richness (field survey): Transect sampling across 12 sites, with bee abundance and species identity recorded at each location."
+    bad_example_output: 
+      - "The researchers did experiments on bees and used statistical methods like ANOVA and t-tests."
+      - "The study tested pesticides and measured outcomes but did not provide methodological details."
+    max_chunks: 6
+    min_score: 0.4
+    no_info_response: "Empirical methodology not clearly described in this study"
+    description: "Lower threshold – methods may include lab experiments, field studies, or surveys"
+    
+  significance:
+    question: "What are the major experimental findings of this study regarding pesticide effects on bees?"
+    instructions:
+      - "Summarize specific results on how pesticides affected bees, as reported in the results or discussion."
+      - "Include quantified or clearly described experimental outcomes (e.g., changes in survival, foraging, learning, reproduction)."
+      - "Exclude general background statements about bee decline or ecosystem importance."
+      - "Exclude speculation beyond what the authors explicitly report."
+      - "Do not include information from the introduction or methods sections."
+    output_format: "Concise bullet-point summaries of key findings"
+    example_output: 
+      - "At 10% of the LD50, both fipronil and imidacloprid impaired motor function; fipronil reduced foraging efficiency, while imidacloprid reduced both foraging efficiency and colony survival."
+      - "Sublethal exposure to imidacloprid impaired honey bee learning and memory but did not affect foraging efficiency."
+    bad_example_output: 
+      - "The paper emphasizes the economic value of pollination and the global bee decline crisis."
+      - "This research is important because pesticides are harmful to bees, which may influence policy decisions."
+      - "The study shows pesticides are bad for bees, which supports conservation efforts."
+    max_chunks: 5
+    min_score: 0.4
+    no_info_response: "No specific findings regarding pesticide effects were reported in this study"
+    description: "Lower threshold – include explicit findings from results or discussion"
+        
+  future_research:
+    question: "What specific future research directions are suggested by the authors in the discussion?"
+    instructions:
+      - "Extract explicit follow-on research directions identified by the authors."
+      - "Include methodological improvements, new approaches, or targeted research questions."
+      - "Exclude generic statements such as 'more research is needed.'"
+      - "Report only information from the discussion section."
+      - "Do not infer or generate future directions not mentioned by the authors."
+      - "If none are provided, return 'No future research directions were suggested.'"
+    output_format: "List of specific future research directions"
+    example_output: 
+      - "Investigate the molecular mechanisms underlying pesticide-induced cognitive impairment; develop biomarkers for early detection of sublethal effects."
+      - "Assess the impact of combined stressors on bee cognition; evaluate recovery potential after pesticide exposure cessation."
+      - "No future research directions were suggested."
+    bad_example_output: 
+      - "More research is needed in this area. Scientists should continue studying bees and pesticides."
+      - "Future studies could look at different aspects of bee health."
+    max_chunks: 3
+    min_score: 0.4
+    no_info_response: "No future research directions were suggested"
+    description: "Lower threshold – future work is usually found in discussion"

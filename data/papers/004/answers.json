@@ -1,0 +1,52 @@
+{
+  "QUESTIONS": {
+    "bee_species": {
+      "answer": "1. Bombus impatiens",
+      "reason": "The methodology sections of the study specify the bee species used in the experiments.",
+      "chunk_ids": [
+        "2cc7ffa1-3c42-4742-83bd-920a8d4c51ea",
+        "a4cb1c96-c5c2-499c-b5fc-8136b960711a"
+      ]
+    },
+    "pesticides": {
+      "answer": "1. Acetamiprid: \n   - Pollen exposure: 0.452, 4.52, 45.2, 452, or 4520 ppb\n   - Syrup exposure: 1.13, 11.3, 113, 1130, or 11,300 ppb\n   - Exposure method: Oral (via pollen and syrup)\n   - Duration: 6 weeks",
+      "reason": "The study provides detailed information on the pesticide acetamiprid, including doses, exposure methods, and duration.",
+      "chunk_ids": [
+        "2cc7ffa1-3c42-4742-83bd-920a8d4c51ea",
+        "a4cb1c96-c5c2-499c-b5fc-8136b960711a"
+      ]
+    },
+    "additional_stressors": {
+      "answer": "No additional stressors were tested",
+      "reason": "No relevant chunks found for the question.",
+      "chunk_ids": []
+    },
+    "experimental_methodology": {
+      "answer": "1. **Microcolony Experiment (Pollen Study):**\n   - **Design:** Randomized controlled trial with microcolonies.\n   - **Sample Size:** 8 microcolonies per treatment group.\n   - **Variables Measured:** Number of drones, drone weight, total brood area, number of drone pupae, number of dead larvae, and average microcolony weight.\n   - **Treatment:** Acetamiprid-containing pollen at concentrations of 0.452, 4.52, 45.2, 452, or 4520 ppb.\n   - **Duration:** 6 weeks.\n\n2. **Microcolony Experiment (Syrup Study):**\n   - **Design:** Randomized controlled trial with microcolonies.\n   - **Sample Size:** 10 microcolonies per treatment group.\n   - **Variables Measured:** Number of drones, drone weight, total brood area, number of drone pupae, number of dead larvae, and average microcolony weight.\n   - **Treatment:** Acetamiprid-containing syrup at concentrations of 1.13, 11.3, 113, 1130, or 11,300 ppb.\n   - **Duration:** 6 weeks.",
+      "reason": "The text provides detailed empirical methodologies used in the study of bees, focusing on microcolony experiments with specific treatments and measurements.",
+      "chunk_ids": [
+        "2cc7ffa1-3c42-4742-83bd-920a8d4c51ea"
+      ]
+    },
+    "significance": {
+      "answer": "- Acetamiprid delivered via pollen resulted in a significant decrease in drone weight at doses of 52 ppb, 452 ppb, and 11,300 ppb, with a very large effect size.\n- No significant effect on drone weight was observed when acetamiprid was delivered via syrup.\n- A significant reduction in the number of emerged drones was observed when acetamiprid was delivered via syrup at a dose of 1,130 ppb, with a large effect size.\n- No significant reduction in the number of emerged drones was observed when acetamiprid was delivered via pollen at any analyzed dose.\n- The findings suggest that exposure via pollen may lead to higher compound intake by brood and reproductives, potentially affecting body size and fitness.",
+      "reason": "The study provides detailed findings on the effects of acetamiprid, a neonicotinoid pesticide, on bee drones, focusing on drone weight and the number of emerged drones, with emphasis on the method of exposure.",
+      "chunk_ids": [
+        "b1e778ea-aa53-4bea-b318-dac423a6d308",
+        "d944e95f-0c15-469b-9b12-5824214b7cb2",
+        "8fe2e12c-e270-434b-9513-43bb19de5e89",
+        "105b0a16-7dcd-42e7-8d01-bfc9f16e0ea2",
+        "b25d1128-0aa9-49f6-a8d2-1d1aeae9af7a"
+      ]
+    },
+    "future_research": {
+      "answer": "1. Conduct experiments to directly compare exposure route differences to determine if findings apply broadly to various pesticide classes and different castes and pollinator species.\n2. Investigate whether the route of acetamiprid exposure affects associations between microcolony endpoints and drone production.\n3. Investigate the effects of acetamiprid exposure via both pollen and syrup to mimic environmental exposures and capture all relevant treatment effects.\n4. Use drone weight or size, the number of emerged drones, and time to drone emergence as apical endpoints in microcolony analyses to integrate potential treatment effects on food consumption, fecundity, development, and survival.\n5. Track food consumption over time to estimate exposure at the level of the microcolony and to disentangle treatment effects on foraging and colony food needs from brood production.",
+      "reason": "The authors explicitly suggest several specific future research directions in the discussion sections of the text.",
+      "chunk_ids": [
+        "2b4ae097-a8b4-49f4-8144-4250dda3b736",
+        "e173254f-6d7f-4901-bf06-8594ea161731",
+        "b9797245-7d5f-4375-8679-3653075cbd7a"
+      ]
+    }
+  }
+}

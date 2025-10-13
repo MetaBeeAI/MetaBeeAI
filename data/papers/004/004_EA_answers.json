@@ -1,0 +1,53 @@
+{
+  "QUESTIONS": {
+    "bee_and_pesticides.bee_species": {
+      "user_answer_positive": "Bombus impatiens",
+      "user_answer_negative": "",
+      "user_reason_positive": "The species of bee tested in the studies is consistently identified as *Bombus impatiens*, which is a type of bumblebee. This is supported by multiple references throughout the text, confirming that *B. impatiens* was the focus of the neonicotinoid exposure analysis.",
+      "user_reason_negative": "",
+      "user_rating": 10
+    },
+    "bee_and_pesticides.pesticides": {
+      "user_answer_positive": "The pesticide used in the study was acetamiprid. The doses were: 0.452, 4.52, 45.2, 452, or 4520 ppb for pollen and 1.13, 11.3, 113, 1130, or 11,300 ppb for syrup. The exposure method was through feeding either acetamiprid-containing pollen or syrup, and the duration of exposure was six weeks.",
+      "user_answer_negative": "",
+      "user_reason_positive": "The study used acetamiprid as the pesticide, with specific doses and exposure methods detailed. The doses were 0.452, 4.52, 45.2, 452, or 4520 ppb for pollen and 1.13, 11.3, 113, 1130, or 11,300 ppb for syrup. The exposure method was through feeding either acetamiprid-containing pollen or syrup, and the duration of exposure was six weeks.",
+      "user_reason_negative": "Justification is the same as the answer",
+      "user_rating": 10
+    },
+    "bee_and_pesticides.additional_stressors": {
+      "user_answer_positive": "The exposure method involved feeding the microcolonies with acetamiprid-containing pollen or syrup, and the duration of exposure was six weeks.",
+      "user_answer_negative": "acetamiprid is the key insecticide being tested here",
+      "user_reason_positive": "he exposure duration for both the pollen and syrup studies was six weeks, and the method of exposure involved providing acetamiprid in either pollen or syrup form to the microcolonies. However, no other stressors such as temperature, parasites, pathogens, or nutritional stress were mentioned in any of the fragments. Therefore, the correct answer to the question is that acetamiprid was the only additional stressor identified, with specific doses and exposure methods provided.",
+      "user_reason_negative": "",
+      "user_rating": 4
+    },
+    "experimental_methodology": {
+      "user_answer_positive": "The experimental methodologies used in this paper involved exposing *Bombus impatiens* microcolonies to neonicotinoids via two different routes: one study used pollen as the exposure medium, while another used syrup.",
+      "user_answer_negative": "The doses were 0.452, 4.52, 45.2, 452, or 4520 ppb in pollen and 1.13, 11.3, 113, 1130, or 11,300 ppb in syrup. The exposure duration for both the pollen and syrup studies was six weeks, and the method of exposure involved providing acetamiprid in either pollen or syrup form to the microcolonies. -This could work well here, taken from the stressors section highlighting the same area.",
+      "user_reason_positive": "The experimental methodologies used in this paper involved exposing *Bombus impatiens* microcolonies to neonicotinoids via two different routes: one study used pollen as the exposure medium, while another used syrup. This indicates that the experimental methodology involved direct exposure of the bees to different routes of neonicotinoid application, which is a clear experimental methodology rather than statistical methods.",
+      "user_reason_negative": "",
+      "user_rating": 7
+    },
+    "discussion.significance": {
+      "user_answer_positive": "The paper underscores the importance of bumble bees as pollinators and the urgent need to understand their decline, particularly due to neonicotinoid exposure. It recommends methodological improvements in research to assess pesticide impacts, which is crucial for conservation and agricultural practices.",
+      "user_answer_negative": "It also highlighted the need to track food consumption.",
+      "user_reason_positive": "The paper discusses the critical role of bumble bees as pollinators and highlights the significant impact of neonicotinoids on their health, particularly through different exposure routes. It suggests that current laboratory methods may overlook important effects by not considering pollen as a delivery vehicle, which could lead to underestimating the risks associated with pesticide exposure in natural settings. This understanding is vital for informing conservation efforts and agricultural practices to protect pollinators.",
+      "user_reason_negative": "",
+      "user_rating": 9
+    },
+    "discussion.future_research": {
+      "user_answer_positive": "Future research should focus on selecting appropriate test article delivery vehicles (pollen or syrup) to reflect environmental exposures, tracking specific endpoints like drone weight and emergence, and monitoring food consumption over time to understand treatment effects on bumble bee colony fitness.",
+      "user_answer_negative": "",
+      "user_reason_positive": "The paper discusses several future research directions aimed at improving the understanding of bumble bee responses to neonicotinoids. It emphasizes the importance of selecting appropriate test article delivery vehicles, such as pollen or syrup, to accurately reflect environmental exposures. Additionally, it suggests that future studies should focus on specific endpoints like drone weight, number of emerged drones, and timing of pollen consumption to better understand the effects of treatments on colony fitness and food consumption. This approach aims to enhance standardization in research methodologies and facilitate comparisons across different studies.",
+      "user_reason_negative": "",
+      "user_rating": 9
+    },
+    "discussion.limitations": {
+      "user_answer_positive": "The paper identifies several limitations in the research, including uncertainty about the consumption rates of pollen and syrup by adults and larvae, the varying needs of brood for nutrients, and the unknown effects of food predigestion by workers on chemical exposure. Furthermore, the discussion highlights that different exposure routes may lead to varying effects on bee development, creating barriers in understanding the full impact of pesticides.",
+      "user_answer_negative": "",
+      "user_reason_positive": "The paper discusses several limitations in the research regarding pesticide effects on bees, particularly focusing on the delivery methods of acetamiprid (pollen vs. syrup). Key barriers include the uncertainty about how much pollen and syrup are consumed by different life stages of bees, which affects the understanding of pesticide exposure. Additionally, the potential for varying effects based on the delivery method and the lack of correlation between certain microcolony measurements indicate that current methodologies may not fully capture the complexities of pesticide impacts on bee populations. These limitations hinder the ability to determine effective doses and fully understand the biology of bumble bees.",
+      "user_reason_negative": "",
+      "user_rating": 9
+    }
+  }
+}
