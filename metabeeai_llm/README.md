@@ -79,6 +79,17 @@ python llm_pipeline.py --folders 283C6B42 3ZHNVADM 4KV2ZB36
 
 # Process specific folders in a custom directory
 python llm_pipeline.py --dir /path/to/papers --folders PAPER_ID1 PAPER_ID2
+
+# Use different models for chunk selection and answer generation
+python llm_pipeline.py --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o"
+
+# Use high-quality models for both stages
+python llm_pipeline.py --relevance-model "openai/gpt-4o" --answer-model "openai/gpt-4o"
+
+# Use predefined configurations (easier!)
+python llm_pipeline.py --config fast      # Fast & cheap processing
+python llm_pipeline.py --config balanced  # Balanced speed and quality (recommended)
+python llm_pipeline.py --config quality  # High quality for critical analysis
 ```
 
 **Input data format**: Expects papers in folders with any alphanumeric names like:
@@ -106,15 +117,77 @@ papers/
 
 ---
 
+## Model Selection
+
+The pipeline uses two different LLM models for different stages:
+
+### **Chunk Selection Model** (`--relevance-model`)
+- **Purpose**: Selects the most relevant text chunks for each question
+- **Default**: `openai/gpt-4o-mini` (fast and cost-effective)
+- **Recommended**: `openai/gpt-4o-mini` for speed, `openai/gpt-4o` for accuracy
+
+### **Answer Generation Model** (`--answer-model`)
+- **Purpose**: Generates answers from individual chunks and synthesizes final responses
+- **Default**: `openai/gpt-4o` (high quality)
+- **Recommended**: `openai/gpt-4o` for best results, `openai/gpt-4o-mini` for speed
+
+### **Model Combinations**:
+
+| Use Case | Relevance Model | Answer Model | Description |
+|----------|----------------|--------------|-------------|
+| **Fast & Cheap** | `gpt-4o-mini` | `gpt-4o-mini` | Fastest processing, lowest cost |
+| **Balanced** | `gpt-4o-mini` | `gpt-4o` | Good chunk selection, high-quality answers |
+| **High Quality** | `gpt-4o` | `gpt-4o` | Best accuracy, slower processing |
+
+### **Command Line Examples**:
+```bash
+# Use defaults (from pipeline_config.py)
+python llm_pipeline.py
+
+# Use predefined configurations (recommended)
+python llm_pipeline.py --config fast      # Fast & cheap processing
+python llm_pipeline.py --config balanced  # Balanced speed and quality
+python llm_pipeline.py --config quality  # High quality for critical analysis
+
+# Custom model combinations
+python llm_pipeline.py --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o-mini"
+python llm_pipeline.py --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o"
+python llm_pipeline.py --relevance-model "openai/gpt-4o" --answer-model "openai/gpt-4o"
+```
+
+### **Predefined Configurations**:
+
+The easiest way to use different model combinations is with the `--config` option:
+
+| Configuration | Command | Relevance Model | Answer Model | Use Case |
+|---------------|---------|----------------|--------------|----------|
+| **Fast** | `--config fast` | `gpt-4o-mini` | `gpt-4o-mini` | High-volume processing, cost-sensitive |
+| **Balanced** | `--config balanced` | `gpt-4o-mini` | `gpt-4o` | **Recommended for most use cases** |
+| **Quality** | `--config quality` | `gpt-4o` | `gpt-4o` | Critical analysis, maximum accuracy |
+
+### **Custom Model Selection**:
+```bash
+# Fast processing with mini models
+python llm_pipeline.py --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o-mini"
+
+# Balanced approach (recommended)
+python llm_pipeline.py --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o"
+
+# High quality for critical analysis
+python llm_pipeline.py --relevance-model "openai/gpt-4o" --answer-model "openai/gpt-4o"
+```
+
+---
+
 ### 3. `json_multistage_qa.py` - Core Q&A Engine
 
 **Purpose**: The underlying LLM question-answering engine (used by `llm_pipeline.py`).
 
 **Key Functions**:
-- `ask_json(question, json_path)` - Answers a single question about a paper
-- `get_answer(question, chunk)` - Generates answers from individual text chunks
-- `filter_all_chunks(question, chunks)` - Selects most relevant chunks
-- `reflect_answers(question, chunks)` - Synthesizes final answer from multiple chunks
+- `ask_json(question, json_path, relevance_model, answer_model)` - Answers a single question about a paper
+- `get_answer(question, chunk, model)` - Generates answers from individual text chunks
+- `filter_all_chunks(question, chunks, max_chunks, model)` - Selects most relevant chunks
+- `reflect_answers(question, chunks, model)` - Synthesizes final answer from multiple chunks
 
 **How to run directly** (for testing individual questions):
 ```python
@@ -123,7 +196,9 @@ from json_multistage_qa import ask_json
 
 result = asyncio.run(ask_json(
     question="What methodology was used in this study?",
-    json_path="papers/001/pages/merged_v2.json"
+    json_path="papers/001/pages/merged_v2.json",
+    relevance_model="openai/gpt-4o-mini",
+    answer_model="openai/gpt-4o"
 ))
 print(result['answer'])
 ```

@@ -127,11 +127,19 @@ python process_all.py
 ```bash
 cd metabeeai_llm
 
-# Process all papers
+# Process all papers (uses default configuration)
 python llm_pipeline.py
 
-# Or process specific papers
+# Use predefined configurations (recommended) - look in metabeeai_llm/pipeline_config.py for details on these
+python llm_pipeline.py --config balanced  # Fast relevance + high-quality answers
+python llm_pipeline.py --config fast      # Fast & cheap processing
+python llm_pipeline.py --config quality   # High quality for critical analysis
+
+# Process specific papers
 python llm_pipeline.py --folders 4YD2Y4J8 76DQP2DC
+
+# Custom model selection
+python llm_pipeline.py --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o"
 ```
 
 **What it does**: LLM answers questions from `questions.yml`  
@@ -308,9 +316,9 @@ primate-welfare/
 cd process_pdfs
 python process_all.py
 
-# 3. Extract information
+# 3. Extract information (recommended: use balanced config)
 cd ../metabeeai_llm
-python llm_pipeline.py
+python llm_pipeline.py --config balanced
 ```
 
 **Result**: Structured answers in `answers.json` for each paper
@@ -416,6 +424,38 @@ Questions are fully defined in `metabeeai_llm/questions.yml` with instructions, 
 
 ---
 
+## Model Selection
+
+The LLM pipeline supports different model configurations for optimal performance:
+
+### **Predefined Configurations (Recommended)**
+
+```bash
+# Fast & cheap processing
+python llm_pipeline.py --config fast
+
+# Balanced speed and quality (recommended)
+python llm_pipeline.py --config balanced
+
+# High quality for critical analysis
+python llm_pipeline.py --config quality
+```
+
+### **Custom Model Selection**
+
+```bash
+# Specify individual models
+python llm_pipeline.py --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o"
+```
+
+| Configuration | Relevance Model | Answer Model | Use Case |
+|---------------|----------------|--------------|----------|
+| **Fast** | `gpt-4o-mini` | `gpt-4o-mini` | High-volume processing, cost-sensitive |
+| **Balanced** | `gpt-4o-mini` | `gpt-4o` | **Recommended for most use cases** |
+| **Quality** | `gpt-4o` | `gpt-4o` | Critical analysis, maximum accuracy |
+
+---
+
 ## Configuration
 
 ### Global Configuration (`config.py`)
@@ -492,8 +532,8 @@ Based on typical usage with GPT-4o:
 | **TOTAL** | 10 papers | Full pipeline | **~$3-4** |
 
 **Cost Reduction Options**:
-- Use `gpt-4o-mini` instead of `gpt-4o` (3-5x cheaper)
-- Use `--use-retrieval-only` flag (reduces context)
+- Use `--config fast` instead of `--config quality` (3-5x cheaper)
+- Use `--config balanced` for optimal cost/quality trade-off
 - Process fewer papers initially for testing
 
 ---
@@ -531,9 +571,9 @@ cd process_pdfs
 python process_all.py
 # Output: merged_v2.json for each paper
 
-# 4. Run LLM extraction
+# 4. Run LLM extraction (recommended: balanced config)
 cd ../metabeeai_llm
-python llm_pipeline.py
+python llm_pipeline.py --config balanced
 # Output: answers.json for each paper
 
 # 5. Review answers (optional)
@@ -634,10 +674,8 @@ cat .env
 
 **Issue**: "Context too long" warnings
 ```bash
-# Solution: Increase limit or use retrieval only
-python deepeval_benchmarking.py --max-context-length 300000
-# Or
-python deepeval_benchmarking.py --use-retrieval-only
+# Solution: Use faster models or reduce batch size
+python llm_pipeline.py --config fast
 ```
 
 **Issue**: Empty GUI window
@@ -680,6 +718,9 @@ python deepeval_benchmarking.py --use-retrieval-only
 
 ### LLM Extraction  
 - `metabeeai_llm/llm_pipeline.py` - Extract information from papers
+  - `--config {fast,balanced,quality}` - Use predefined configurations
+  - `--relevance-model` - Specify chunk selection model
+  - `--answer-model` - Specify answer generation model
 - `metabeeai_llm/convert_goldens.py` - Convert CSV → JSON reviewer answers
 
 ### Benchmarking
@@ -706,9 +747,9 @@ python deepeval_benchmarking.py --use-retrieval-only
 - Reviewer answers go in separate files
 
 ### 3. Cost Management
-- Use `gpt-4o-mini` for initial testing
-- Test with `--limit 1` before full runs
-- Monitor costs via `evaluation_cost` fields
+- Use `--config fast` for initial testing
+- Use `--config balanced` for production runs
+- Test with specific papers using `--folders` before full runs
 
 ### 4. Quality Assurance
 - Review edge cases to identify patterns

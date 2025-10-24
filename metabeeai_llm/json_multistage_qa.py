@@ -584,7 +584,7 @@ async def get_top_relevant_chunks(
         return chunks[:max_chunks]
 
 
-async def filter_all_chunks(question: str, chunks: List[Dict[str, Any]], max_chunks: int = 5, batch_size: int = None) -> List[Dict[str, Any]]:
+async def filter_all_chunks(question: str, chunks: List[Dict[str, Any]], max_chunks: int = 5, batch_size: int = None, model: str = None) -> List[Dict[str, Any]]:
     """
     Get the top most relevant chunks for a question using a single LLM call.
     
@@ -593,6 +593,7 @@ async def filter_all_chunks(question: str, chunks: List[Dict[str, Any]], max_chu
         chunks (List[Dict[str, Any]]): List of text chunk dictionaries.
         max_chunks (int): Maximum number of chunks to return.
         batch_size (int): Not used in simplified approach, kept for compatibility.
+        model (str): Model to use for chunk selection (default: RELEVANCE_MODEL).
 
     Returns:
         List[Dict[str, Any]]: List of top relevant chunks.
@@ -606,18 +607,20 @@ async def filter_all_chunks(question: str, chunks: List[Dict[str, Any]], max_chu
     logger.info(f"Selecting top {max_chunks} chunks from {len(chunks)} total chunks using single LLM call")
     
     # Use the new simplified approach
+    selected_model = model if model else RELEVANCE_MODEL
     relevant_chunks = await get_top_relevant_chunks(
         chunks=chunks,
         question=question,
         question_metadata=question_metadata,
-        max_chunks=max_chunks
+        max_chunks=max_chunks,
+        model=selected_model
     )
     
     logger.info(f"Selected {len(relevant_chunks)} relevant chunks")
     return relevant_chunks
 
 
-async def query_all_chunks(question: str, chunks: List[Dict[str, Any]], batch_size: int = 5) -> List[Dict[str, Any]]:
+async def query_all_chunks(question: str, chunks: List[Dict[str, Any]], batch_size: int = 5, model: str = None) -> List[Dict[str, Any]]:
     """
     Query each relevant text chunk to obtain an answer to the question.
     Uses parallel processing with configurable batch sizes for optimal performance.
@@ -626,6 +629,7 @@ async def query_all_chunks(question: str, chunks: List[Dict[str, Any]], batch_si
         question (str): The question to be answered.
         chunks (List[Dict[str, Any]]): List of text chunks that passed the relevance filter.
         batch_size (int): Number of chunks to process in parallel (default: 5).
+        model (str): Model to use for answer generation (default: ANSWER_MODEL).
 
     Returns:
         List[Dict[str, Any]]: List of chunks updated with answers.
@@ -645,7 +649,8 @@ async def query_all_chunks(question: str, chunks: List[Dict[str, Any]], batch_si
         logger.info(f"Processing answer batch {batch_idx + 1}/{len(chunk_batches)} ({len(batch)} chunks)")
         
         # Process this batch in parallel
-        tasks = [get_answer(question, chunk) for chunk in batch]
+        selected_model = model if model else ANSWER_MODEL
+        tasks = [get_answer(question, chunk, selected_model) for chunk in batch]
         batch_results = await asyncio.gather(*tasks, return_exceptions=True)
         
         # Handle any exceptions and collect valid results
@@ -802,9 +807,16 @@ async def process_batches_async(
 # Main Execution Flow
 # --------------------------------------------------------------------------
 
-async def ask_json(question: str = None, json_path: str=None, batch_size=256) -> None:
+async def ask_json(question: str = None, json_path: str=None, batch_size=256, relevance_model: str = None, answer_model: str = None) -> None:
     """
     Main asynchronous entry point for processing text chunks to extract and reflect on answers.
+
+    Args:
+        question (str): The question to ask about the paper
+        json_path (str): Path to the JSON file containing text chunks
+        batch_size (int): Batch size for processing (default: 256)
+        relevance_model (str): Model to use for chunk selection (default: from config)
+        answer_model (str): Model to use for answer generation and reflection (default: from config)
 
     Steps performed:
       1. Load JSON data containing text chunks.
@@ -832,6 +844,13 @@ async def ask_json(question: str = None, json_path: str=None, batch_size=256) ->
     original_chunks: List[Dict[str, Any]] = json_obj.get('data', {}).get('chunks', [])
     BATCH_SIZE: int = batch_size
     
+    # Set up models - use provided models or fall back to config defaults
+    selected_relevance_model = relevance_model if relevance_model else RELEVANCE_MODEL
+    selected_answer_model = answer_model if answer_model else ANSWER_MODEL
+    
+    logger.info(f"Using relevance model: {selected_relevance_model}")
+    logger.info(f"Using answer model: {selected_answer_model}")
+    
     # Create a fresh copy of chunks for each question to avoid state persistence
     # This prevents chunks from being modified by previous questions
     chunks = [chunk.copy() for chunk in original_chunks]
@@ -855,7 +874,8 @@ async def ask_json(question: str = None, json_path: str=None, batch_size=256) ->
     relevant_chunks: List[Dict[str, Any]] = await filter_all_chunks(
         question, chunks, 
         question_config['max_chunks'], 
-        batch_size=relevance_batch_size
+        batch_size=relevance_batch_size,
+        model=selected_relevance_model
     )
 
     if len(relevant_chunks) == 0:
@@ -889,10 +909,11 @@ async def ask_json(question: str = None, json_path: str=None, batch_size=256) ->
     answer_batch_size = min(DEFAULT_ANSWER_BATCH_SIZE, len(relevant_chunks), MAX_CONCURRENT_REQUESTS)
     answered_chunks: List[Dict[str, Any]] = await query_all_chunks(
         question, relevant_chunks, 
-        batch_size=answer_batch_size
+        batch_size=answer_batch_size,
+        model=selected_answer_model
     )
     # Step 3: Reflect on all collected answers to produce the final answer.
-    final_result: Any = await reflect_answers(question, answered_chunks)
+    final_result: Any = await reflect_answers(question, answered_chunks, selected_answer_model)
     # final_result: Any = await process_batches_async(
     #     question, answered_chunks, BATCH_SIZE, reflect_answers, desc="Reflecting answers"
     # )

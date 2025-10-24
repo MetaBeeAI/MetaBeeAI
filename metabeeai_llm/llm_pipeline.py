@@ -35,12 +35,18 @@ with open(questions_path, 'r') as file:
 # ------------------------------------------------------------------------------
 # Helper Function: get_answer
 # ------------------------------------------------------------------------------
-async def get_answer(question_text, json_path):
+async def get_answer(question_text, json_path, relevance_model=None, answer_model=None):
     """
     Retrieves the answer for a given question by calling ask_json.
     Returns a dictionary with the required structure: answer, reason, and chunk_ids.
+    
+    Args:
+        question_text: The question to ask
+        json_path: Path to the JSON file containing text chunks
+        relevance_model: Model to use for chunk selection (defaults to config)
+        answer_model: Model to use for answer generation and reflection (defaults to config)
     """
-    result = await ask_json_async(question_text, json_path)
+    result = await ask_json_async(question_text, json_path, relevance_model=relevance_model, answer_model=answer_model)
     
     # Ensure the result has the required structure
     if isinstance(result, dict):
@@ -62,9 +68,16 @@ async def get_answer(question_text, json_path):
 # ------------------------------------------------------------------------------
 # Generic Recursive Function to Process a Hierarchical Question Tree
 # ------------------------------------------------------------------------------
-async def process_question_tree(tree, json_path, context=None):
+async def process_question_tree(tree, json_path, context=None, relevance_model=None, answer_model=None):
     """
     Recursively traverses the question tree (a nested dictionary) and obtains answers using get_answer.
+
+    Args:
+        tree: The question tree structure
+        json_path: Path to the JSON file containing text chunks
+        context: Context for formatting questions with placeholders
+        relevance_model: Model to use for chunk selection (defaults to config)
+        answer_model: Model to use for answer generation and reflection (defaults to config)
 
     - If a node contains a "question" key, it is treated as a leaf node.
     - The "for_each" key indicates that the associated value should be processed for
@@ -79,7 +92,7 @@ async def process_question_tree(tree, json_path, context=None):
         # If this dictionary has a "question" key, treat it as a leaf.
         if "question" in tree:
             question_text = tree["question"].format(**context)
-            answer = await get_answer(question_text, json_path)
+            answer = await get_answer(question_text, json_path, relevance_model=relevance_model, answer_model=answer_model)
             # Process conditional branch if available.
             return answer
         else:
@@ -89,23 +102,23 @@ async def process_question_tree(tree, json_path, context=None):
                     # If the key is "list", return the list as is.
                     question_of_the_list = value["question"].format(**context)
                     endpoint_name = value["endpoint_name"]
-                    answer = await get_answer(question_of_the_list, json_path)
+                    answer = await get_answer(question_of_the_list, json_path, relevance_model=relevance_model, answer_model=answer_model)
                     list_result = await format_to_list_async(question_of_the_list, answer["answer"])
                     list_items = list_result['answer']
                     result[key] = {}
                     for item in list_items:
                         new_context = context.copy()
                         new_context[endpoint_name] = item
-                        result[key][item] = await process_question_tree(value['for_each'], json_path, new_context)
+                        result[key][item] = await process_question_tree(value['for_each'], json_path, new_context, relevance_model=relevance_model, answer_model=answer_model)
                 else:
-                    result[key] = await process_question_tree(value, json_path, context)
+                    result[key] = await process_question_tree(value, json_path, context, relevance_model=relevance_model, answer_model=answer_model)
             return result
     elif isinstance(tree, list):
-        return [await process_question_tree(item, json_path, context) for item in tree]
+        return [await process_question_tree(item, json_path, context, relevance_model=relevance_model, answer_model=answer_model) for item in tree]
     elif isinstance(tree, str):
         # If the tree itself is a string, treat it as a question.
         question_text = tree.format(**context)
-        return await get_answer(question_text, json_path)
+        return await get_answer(question_text, json_path, relevance_model=relevance_model, answer_model=answer_model)
     else:
         return tree
 
@@ -113,12 +126,17 @@ async def process_question_tree(tree, json_path, context=None):
 # ------------------------------------------------------------------------------
 # Main Function: Retrieve All Answers Based on the Questions Dictionary
 # ------------------------------------------------------------------------------
-async def get_literature_answers(json_path):
+async def get_literature_answers(json_path, relevance_model=None, answer_model=None):
     """
     Processes the entire hierarchical question tree defined in QUESTIONS and returns
     the collected answers.
+    
+    Args:
+        json_path: Path to the JSON file containing text chunks
+        relevance_model: Model to use for chunk selection (defaults to config)
+        answer_model: Model to use for answer generation and reflection (defaults to config)
     """
-    answers = await process_question_tree(QUESTIONS, json_path)
+    answers = await process_question_tree(QUESTIONS, json_path, relevance_model=relevance_model, answer_model=answer_model)
     return answers
 
 
@@ -157,7 +175,7 @@ def merge_json_in_the_folder(folder_path, overwrite=False):
     with open(folder_path + "merged.json", "w") as f:
         json.dump(json_obj, f, indent=2)
 
-async def process_papers(base_dir=None, paper_folders=None, overwrite_merged=False):
+async def process_papers(base_dir=None, paper_folders=None, overwrite_merged=False, relevance_model=None, answer_model=None):
     """
     Processes papers in the specified directory.
     
@@ -165,6 +183,8 @@ async def process_papers(base_dir=None, paper_folders=None, overwrite_merged=Fal
         base_dir: Base directory containing paper folders (defaults to config)
         paper_folders: List of specific paper folder names to process (defaults to all folders)
         overwrite_merged: Whether to overwrite existing merged.json files
+        relevance_model: Model to use for chunk selection (defaults to config)
+        answer_model: Model to use for answer generation and reflection (defaults to config)
     """
     # Import centralized configuration if base_dir not provided
     if base_dir is None:
@@ -248,7 +268,7 @@ async def process_papers(base_dir=None, paper_folders=None, overwrite_merged=Fal
             logging.getLogger().setLevel(logging.ERROR)
             
             try:
-                literature_answers = await get_literature_answers(json_path)
+                literature_answers = await get_literature_answers(json_path, relevance_model=relevance_model, answer_model=answer_model)
             finally:
                 # Restore all output
                 sys.stdout = original_stdout
@@ -323,14 +343,45 @@ if __name__ == "__main__":
                       help="Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM). If not specified, all folders will be processed.")
     parser.add_argument("--overwrite", action="store_true", 
                       help="Overwrite existing merged.json files")
+    parser.add_argument("--relevance-model", type=str, default=None,
+                      help="Model to use for chunk selection (e.g., 'openai/gpt-4o-mini', 'openai/gpt-4o'). Default: from config")
+    parser.add_argument("--answer-model", type=str, default=None,
+                      help="Model to use for answer generation and reflection (e.g., 'openai/gpt-4o-mini', 'openai/gpt-4o'). Default: from config")
+    parser.add_argument("--config", type=str, choices=['fast', 'balanced', 'quality'], default=None,
+                      help="Use predefined configuration: 'fast' (gpt-4o-mini for both), 'balanced' (mini for relevance, gpt-4o for answers), 'quality' (gpt-4o for both)")
     
     # Parse arguments
     args = parser.parse_args()
+    
+    # Handle predefined configurations
+    if args.config:
+        from pipeline_config import FAST_CONFIG, BALANCED_CONFIG, QUALITY_CONFIG
+        
+        config_map = {
+            'fast': FAST_CONFIG,
+            'balanced': BALANCED_CONFIG,
+            'quality': QUALITY_CONFIG
+        }
+        
+        selected_config = config_map[args.config]
+        
+        # Override model arguments with config values if not explicitly provided
+        if args.relevance_model is None:
+            args.relevance_model = selected_config['relevance_model']
+        if args.answer_model is None:
+            args.answer_model = selected_config['answer_model']
+        
+        print(f"🔧 Using {args.config.upper()} configuration:")
+        print(f"   Relevance Model: {args.relevance_model}")
+        print(f"   Answer Model: {args.answer_model}")
+        print(f"   Description: {selected_config['description']}")
     
     # Run the main processing function with the specified parameters
     import asyncio
     asyncio.run(process_papers(
         base_dir=args.dir,
         paper_folders=args.folders,
-        overwrite_merged=args.overwrite
+        overwrite_merged=args.overwrite,
+        relevance_model=args.relevance_model,
+        answer_model=args.answer_model
     )) 
