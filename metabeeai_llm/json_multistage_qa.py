@@ -519,15 +519,25 @@ async def get_top_relevant_chunks(
             # Debug: Log chunk content to see what we're actually working with
             logger.info(f"DEBUG: Chunk {i+1} content preview: {chunk_text[:100]}...")
         
+        # Build dynamic instructions based on question metadata
+        instructions_list = [
+            f"1. Analyze all chunks and select the top {max_chunks} most relevant ones",
+            "2. Skip chunks that are just headers, metadata, or don't contain relevant information",
+            "3. Return ONLY the chunk numbers (1, 2, 3, etc.) in order of relevance",
+            f"4. If fewer than {max_chunks} chunks contain relevant information, return only the relevant ones"
+        ]
+        
+        # Add question-specific instructions if available
+        if question_metadata.get('instructions'):
+            instructions_list.insert(1, f"2. Follow these specific guidelines: {'; '.join(question_metadata['instructions'])}")
+            # Renumber the remaining instructions
+            for i in range(2, len(instructions_list)):
+                instructions_list[i] = f"{i+2}. {instructions_list[i].split('. ', 1)[1]}"
+        
         prompt_parts.extend([
             "",
             "Instructions:",
-            f"1. Analyze all chunks and select the top {max_chunks} most relevant ones",
-            "2. For pesticide questions: ONLY select chunks that actually mention pesticide names, doses, or exposure methods",
-            "3. Prioritize chunks with detailed pesticide information over general mentions",
-            "4. Skip chunks that are just headers, metadata, or don't contain pesticide information",
-            "5. Return ONLY the chunk numbers (1, 2, 3, etc.) in order of relevance",
-            "6. If fewer than {max_chunks} chunks contain pesticide information, return only the relevant ones",
+            *instructions_list,
             "",
             "Response format: Return only the chunk numbers separated by commas, e.g., '1,3,5'"
         ])
@@ -721,10 +731,7 @@ async def reflect_answers(question: str, chunks: List[Dict[str, Any]], model: st
 - Follow the Good Examples pattern exactly
 - AVOID the Bad Examples patterns (no explanations, no context, no repetition)
 - Be concise and direct - provide ONLY the requested information
-- For pesticide questions: Focus on extracting pesticide chemical names first and foremost
-- For pesticide questions: Include experimental details (doses, methods, duration) only if explicitly stated
-- For pesticide questions: A pesticide name alone is a valid answer if no other details are provided
-- Only return "INSUFFICIENT_INFO" if absolutely no pesticide information can be found
+- Only return "INSUFFICIENT_INFO" if absolutely no relevant information can be found
 - If information is contradictory, try to resolve conflicts and provide the most likely answer
 - Ensure your answer matches the quality and format of the Good Examples
 </Important Guidelines>

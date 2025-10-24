@@ -4,7 +4,7 @@ This folder contains the LLM-powered question-answering pipeline for extracting 
 
 ## Overview
 
-The pipeline processes PDF documents (already converted to JSON chunks) and answers a predefined set of questions about primate welfare, experimental design, study populations, and findings. Users primarily interact with the system by modifying the `questions.yml` file.
+The pipeline processes PDF documents (already converted to JSON chunks) and answers a predefined set of questions about experimental design, study populations, methodologies, and findings. Users primarily interact with the system by modifying the `questions.yml` file.
 
 ### Key Features
 
@@ -124,7 +124,7 @@ import asyncio
 from json_multistage_qa import ask_json
 
 result = asyncio.run(ask_json(
-    question="What species of bee were tested?",
+    question="What methodology was used in this study?",
     json_path="papers/001/pages/merged_v2.json"
 ))
 print(result['answer'])
@@ -260,9 +260,9 @@ Check the `answers.json` file in each paper folder:
 ```json
 {
   "QUESTIONS": {
-    "bee_species": {
-      "answer": "1. Apis mellifera carnica; 2. Bombus terrestris",
-      "reason": "Species found in methodology section",
+    "methodology": {
+      "answer": "Randomized controlled trial with 20 subjects per group",
+      "reason": "Methodology found in methods section",
       "chunk_ids": ["chunk_001", "chunk_003"]
     },
     ...
@@ -275,7 +275,7 @@ Check the `answers.json` file in each paper folder:
 The pipeline intelligently merges results, so you can add new questions without losing existing work:
 
 ```bash
-# 1. Add a new question to questions.yml (e.g., "welfare")
+# 1. Add a new question to questions.yml (e.g., "findings")
 # 2. Re-run the pipeline
 python llm_pipeline.py
 
@@ -284,7 +284,7 @@ python llm_pipeline.py
 #   "QUESTIONS": {
 #     "design": {...},      ← Preserved from previous run
 #     "population": {...},  ← Preserved from previous run  
-#     "welfare": {...}      ← Newly added
+#     "findings": {...}     ← Newly added
 #   }
 # }
 ```
@@ -382,7 +382,7 @@ The pipeline supports adding new question types to existing papers without losin
 
 ### Workflow for Adding New Questions:
 
-**Example Scenario**: You already have "design" and "population" answers, and want to add "welfare" questions.
+**Example Scenario**: You already have "design" and "population" answers, and want to add "findings" questions.
 
 1. **Edit `questions.yml`** to add your new question:
 
@@ -395,13 +395,13 @@ QUESTIONS:
     # ... existing question ...
   
   welfare:  # NEW QUESTION
-    question: "What welfare measures were used?"
+    question: "What findings were reported?"
     # ... configuration ...
 ```
 
 2. **Run the pipeline** - it will automatically merge results:
 ```bash
-# Process all papers - adds "welfare" answers while keeping "design" and "population"
+# Process all papers - adds "findings" answers while keeping "design" and "population"
 python llm_pipeline.py
 
 # Or process specific papers
@@ -414,7 +414,7 @@ python llm_pipeline.py --folders 283C6B42 3ZHNVADM
   "QUESTIONS": {
     "design": { ... },      // Preserved from previous run
     "population": { ... },  // Preserved from previous run
-    "welfare": { ... }      // Newly added
+    "findings": { ... }     // Newly added
   }
 }
 ```
