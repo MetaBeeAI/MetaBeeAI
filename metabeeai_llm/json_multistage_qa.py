@@ -146,7 +146,7 @@ def get_question_config(question_text: str) -> dict:
         question_text (str): The question text to analyze.
         
     Returns:
-        dict: Configuration with max_chunks, min_score, description, and no_info_response.
+        dict: Configuration with max_chunks, description, and no_info_response.
     """
     question_lower = question_text.lower()
     
@@ -159,7 +159,6 @@ def get_question_config(question_text: str) -> dict:
             # Extract configuration from YAML
             config = {
                 'max_chunks': question_config.get('max_chunks', 5),
-                'min_score': question_config.get('min_score', 0.4),
                 'description': question_config.get('description', 'Default configuration'),
                 'no_info_response': question_config.get('no_info_response', 'Information not found in the provided text.')
             }
@@ -170,7 +169,6 @@ def get_question_config(question_text: str) -> dict:
     logger.info("No question type match found, using default configuration")
     return {
         'max_chunks': 5,
-        'min_score': 0.4,
         'description': 'Default configuration for general questions',
         'no_info_response': 'Information not found in the provided text.'
     }
@@ -189,7 +187,6 @@ def get_default_config(question_type: str) -> dict:
     # Return generic defaults
     return {
         'max_chunks': 5,
-        'min_score': 0.4,
         'description': 'Default configuration for general questions',
         'no_info_response': 'Information not found in the provided text.'
     }
@@ -222,7 +219,6 @@ def get_question_metadata(question_text: str) -> dict:
                 'example_output': question_config.get('example_output', []),
                 'bad_example_output': question_config.get('bad_example_output', []),
                 'max_chunks': question_config.get('max_chunks', 5),
-                'min_score': question_config.get('min_score', 0.4),
                 'no_info_response': question_config.get('no_info_response', 'Information not found in the provided text.'),
                 'description': question_config.get('description', 'Default configuration')
             }
@@ -588,7 +584,7 @@ async def get_top_relevant_chunks(
         return chunks[:max_chunks]
 
 
-async def filter_all_chunks(question: str, chunks: List[Dict[str, Any]], max_chunks: int = 5, min_score: float = 0.3, batch_size: int = None) -> List[Dict[str, Any]]:
+async def filter_all_chunks(question: str, chunks: List[Dict[str, Any]], max_chunks: int = 5, batch_size: int = None) -> List[Dict[str, Any]]:
     """
     Get the top most relevant chunks for a question using a single LLM call.
     
@@ -596,7 +592,6 @@ async def filter_all_chunks(question: str, chunks: List[Dict[str, Any]], max_chu
         question (str): The question used for relevance evaluation.
         chunks (List[Dict[str, Any]]): List of text chunk dictionaries.
         max_chunks (int): Maximum number of chunks to return.
-        min_score (float): Not used in simplified approach, kept for compatibility.
         batch_size (int): Not used in simplified approach, kept for compatibility.
 
     Returns:
@@ -860,7 +855,6 @@ async def ask_json(question: str = None, json_path: str=None, batch_size=256) ->
     relevant_chunks: List[Dict[str, Any]] = await filter_all_chunks(
         question, chunks, 
         question_config['max_chunks'], 
-        question_config['min_score'],
         batch_size=relevance_batch_size
     )
 

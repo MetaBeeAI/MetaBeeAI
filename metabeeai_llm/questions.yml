@@ -19,9 +19,8 @@ QUESTIONS:
       - "1. Apis mellifera; 2. Apis mellifera carnica; 3. honeybee"
       - "The species of bee tested was A. mellifera, also known as honeybees, Apis mellifera, or Apis mellifera carnica subspecies."
     no_info_response: "Species not specified"
-  # Configuration for relevance scoring and chunk selection
+  # Configuration for chunk selection
     max_chunks: 5
-    min_score: 0.6
     description: "High threshold - species should be explicitly stated"
     
   pesticides:
@@ -45,9 +44,8 @@ QUESTIONS:
       - "In the study, the researchers tested imidacloprid (Admire) and sufoxaflor (Closer) by feeding bees the pesticides over 10 days."
       - "The study tested several pesticides including neonicotinoids which are harmful to bees. They used different doses and exposed the bees for some time. The pesticides were applied in various ways to see how they affected the bees."
     no_info_response: "No pesticides were tested in this study"
-    # Configuration for relevance scoring and chunk selection
+    # Configuration for chunk selection
     max_chunks: 5
-    min_score: 0.1
     description: "Very low threshold - accept any mention of pesticides"
     
   additional_stressors:
@@ -65,9 +63,8 @@ QUESTIONS:
       - "1. Temperature stress: 35°C for 24 hours; 2.Nosema ceranae infection: 10^5 spores per bee, oral inoculation, 7 days"
       - "No additional stressors were tested."
     bad_example_output: "The study considered various environmental factors that might stress bees. Temperature could be important, and there might be parasites present. Nutrition is always a concern for bee health. The researchers probably controlled for these things."
-    # Configuration for relevance scoring and chunk selection
+    # Configuration for chunk selection
     max_chunks: 5
-    min_score: 0.5
     no_info_response: "No additional stressors were tested"
     description: "Medium threshold - look for non-pesticide stressors"
         
@@ -89,7 +86,6 @@ QUESTIONS:
       - "The researchers did experiments on bees and used statistical methods like ANOVA and t-tests."
       - "The study tested pesticides and measured outcomes but did not provide methodological details."
     max_chunks: 6
-    min_score: 0.4
     no_info_response: "Empirical methodology not clearly described in this study"
     description: "Lower threshold – methods may include lab experiments, field studies, or surveys"
     
@@ -110,7 +106,6 @@ QUESTIONS:
       - "This research is important because pesticides are harmful to bees, which may influence policy decisions."
       - "The study shows pesticides are bad for bees, which supports conservation efforts."
     max_chunks: 5
-    min_score: 0.4
     no_info_response: "No specific findings regarding pesticide effects were reported in this study"
     description: "Lower threshold – include explicit findings from results or discussion"
         
@@ -132,6 +127,5 @@ QUESTIONS:
       - "More research is needed in this area. Scientists should continue studying bees and pesticides."
       - "Future studies could look at different aspects of bee health."
     max_chunks: 3
-    min_score: 0.4
     no_info_response: "No future research directions were suggested"
     description: "Lower threshold – future work is usually found in discussion"

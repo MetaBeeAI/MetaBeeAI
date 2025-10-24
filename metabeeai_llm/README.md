@@ -42,7 +42,6 @@ question_name:
     - "Example to avoid"
   no_info_response: "Response when information is not found"
   max_chunks: 5  # Maximum number of text chunks to analyze
-  min_score: 0.4  # Minimum relevance score (0-1)
   description: "Brief description of this question"
 ```
 
@@ -55,7 +54,6 @@ question_name:
 - **`bad_example_output`**: Examples to avoid - helps the LLM understand common mistakes
 - **`no_info_response`**: What to return when the paper doesn't contain the requested information
 - **`max_chunks`**: Controls how many text chunks from the paper will be analyzed (higher = more comprehensive but slower)
-- **`min_score`**: Relevance threshold for chunk selection (lower = more permissive, higher = stricter filtering)
 - **`description`**: Internal note about the question's purpose
 
 ---
@@ -308,23 +306,16 @@ In `questions.yml`, tune these parameters:
   - Recommended: 3-7 chunks
   - Higher values for complex questions requiring broad context
 
-- **`min_score`**: Adjust relevance filtering
-  - Lower (0.1-0.3): Permissive, captures more context
-  - Medium (0.4-0.6): Balanced
-  - Higher (0.7-1.0): Strict, only highly relevant chunks
-
 ### Example Tuning:
 
 ```yaml
 # For questions where information might be scattered
 pesticides:
-  max_chunks: 7
-  min_score: 0.2  # Lower threshold to catch all mentions
+  max_chunks: 7  # More chunks for comprehensive coverage
 
 # For questions requiring precise information
 bee_species:
-  max_chunks: 3
-  min_score: 0.7  # Higher threshold for explicit statements
+  max_chunks: 3  # Fewer chunks for focused analysis
 ```
 
 ---
@@ -360,7 +351,7 @@ Each question returns:
 
 ### "No relevant chunks found"
 - **Cause**: Question is too specific or chunks don't contain the information
-- **Fix**: Lower `min_score` in `questions.yml` or rephrase the question
+- **Fix**: Increase `max_chunks` in `questions.yml` or rephrase the question
 
 ### "Rate limit exceeded"
 - **Cause**: Too many parallel requests to OpenAI API
@@ -445,7 +436,6 @@ your_question_name:
     - "Avoid answers like this that are too verbose"
   no_info_response: "Information not found"
   max_chunks: 5
-  min_score: 0.4
   description: "Brief note about this question"
 ```
 
