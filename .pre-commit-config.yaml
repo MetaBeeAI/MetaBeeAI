@@ -1,0 +1,20 @@
+exclude: ".*/PUBLIC/.*"
+
+repos:
+  # Ruff: linting and formatting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.2
+    hooks:
+      - id: ruff
+        args: [--fix]  # auto-fix issues where possible
+      - id: ruff-format     # runs formatter
+
+  # Basic hygiene checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: end-of-file-fixer        # ensures newline at EOF
+        exclude: "\\.csv$"
+      - id: check-yaml                # checks YAML files for syntax errors
+      - id: trailing-whitespace      # removes trailing spaces
+      - id: check-added-large-files  # blocks large files from being committed

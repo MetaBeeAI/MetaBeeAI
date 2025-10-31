@@ -2,8 +2,8 @@ import json
 import os
 import argparse
 import time
-from json_multistage_qa import ask_json as ask_json_async
-from json_multistage_qa import format_to_list as format_to_list_async
+from metabeeai.metabeeai_llm.json_multistage_qa import ask_json as ask_json_async
+from metabeeai.metabeeai_llm.json_multistage_qa import format_to_list as format_to_list_async
 import asyncio
 import yaml
 

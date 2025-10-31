@@ -12,6 +12,8 @@ from pathlib import Path
 from typing import List, Dict, Any
 import json
 
+from metabeeai.process_pdfs.deduplicate_chunks import process_merged_json_file, analyze_chunk_uniqueness
+
 # Try to get the papers directory from config, with fallbacks
 def get_papers_dir():
     """Get the papers directory path with multiple fallback options."""
@@ -57,7 +59,7 @@ def get_papers_dir():
     return os.path.join(os.getcwd(), "papers")
 
 # Import the deduplication module
-from deduplicate_chunks import process_merged_json_file, analyze_chunk_uniqueness
+
 
 # Configure logging
 logging.basicConfig(

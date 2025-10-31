@@ -3,10 +3,10 @@
 
 from .beegui import MainWindow
 from .annotator import annotate_pdf
-from ..process_pdfs.merger import merge_json_in_the_folder
+# TODO this import does not exist
+# from metabeeai.process_pdfs.merger import merge_json_in_the_folder
 
 __all__ = [
     'MainWindow',
     'annotate_pdf',
-    'merge_json_in_the_folder'
 ]
