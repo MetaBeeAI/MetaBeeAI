@@ -6,6 +6,7 @@ from metabeeai.metabeeai_llm.json_multistage_qa import ask_json as ask_json_asyn
 from metabeeai.metabeeai_llm.json_multistage_qa import format_to_list as format_to_list_async
 import asyncio
 import yaml
+import sys
 
 def ask_json(question_text, json_path):
     """
@@ -334,8 +335,11 @@ async def process_papers(base_dir=None, paper_folders=None, overwrite_merged=Fal
         print(f"❌ Failed papers: {', '.join(failed_papers)}")
     print(f"📝 Detailed log: {log_file}")
 
-if __name__ == "__main__":
-    # Set up argument parser
+def main(argv=None):
+    """Main entry point."""
+    if argv is None:
+        argv = sys.argv[1:]
+
     parser = argparse.ArgumentParser(description="Process paper folders to extract literature answers")
     parser.add_argument("--dir", type=str, default=None, 
                       help="Base directory containing paper folders (default: auto-detect from config)")
@@ -348,21 +352,14 @@ if __name__ == "__main__":
     parser.add_argument("--answer-model", type=str, default=None,
                       help="Model to use for answer generation and reflection (e.g., 'openai/gpt-4o-mini', 'openai/gpt-4o'). Default: from config")
     parser.add_argument("--config", type=str, choices=['fast', 'balanced', 'quality'], default=None,
-                      help="Use predefined configuration: 'fast' (gpt-4o-mini for both), 'balanced' (mini for relevance, gpt-4o for answers), 'quality' (gpt-4o for both)")
-    
-    # Parse arguments
-    args = parser.parse_args()
-    
+                      help="Use predefined configuration: 'fast', 'balanced', or 'quality'")
+
+    args = parser.parse_args(argv)
+
     # Handle predefined configurations
     if args.config:
-        from pipeline_config import FAST_CONFIG, BALANCED_CONFIG, QUALITY_CONFIG
-        
-        config_map = {
-            'fast': FAST_CONFIG,
-            'balanced': BALANCED_CONFIG,
-            'quality': QUALITY_CONFIG
-        }
-        
+        from metabeeai.metabeeai_llm.pipeline_config import FAST_CONFIG, BALANCED_CONFIG, QUALITY_CONFIG
+        config_map = {'fast': FAST_CONFIG, 'balanced': BALANCED_CONFIG, 'quality': QUALITY_CONFIG}
         selected_config = config_map[args.config]
         
         # Override model arguments with config values if not explicitly provided
@@ -375,13 +372,16 @@ if __name__ == "__main__":
         print(f"   Relevance Model: {args.relevance_model}")
         print(f"   Answer Model: {args.answer_model}")
         print(f"   Description: {selected_config['description']}")
-    
-    # Run the main processing function with the specified parameters
+
     import asyncio
     asyncio.run(process_papers(
         base_dir=args.dir,
         paper_folders=args.folders,
         overwrite_merged=args.overwrite,
         relevance_model=args.relevance_model,
-        answer_model=args.answer_model
-    )) 
+        answer_model=args.answer_model,
+    ))
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

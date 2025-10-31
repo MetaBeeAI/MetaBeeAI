@@ -52,7 +52,7 @@ Repository = "https://github.com/MetaBeeAI/MetaBeeAI"
 Issues = "https://github.com/MetaBeeAI/MetaBeeAI/issues"
 
 [project.scripts]
-# gonna need to add cli stuff here i think
+metabeeai = "metabeeai.cli:main"
 
 [tool.setuptools]
 package-dir = { "" = "src" }
