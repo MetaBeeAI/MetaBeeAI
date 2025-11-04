@@ -36,7 +36,7 @@ parser.add_argument('--use-retrieval-only', action='store_true',
 
 args = parser.parse_args()
 
-# Set API keys from environment
+# TODO: So this shouldnt be in the base level script, all of this needs to be moved to a function
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
 if not openai_api_key:
