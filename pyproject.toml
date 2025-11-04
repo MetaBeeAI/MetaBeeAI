@@ -7,7 +7,7 @@ name = "metabeeai"
 version = "0.1.0"
 description = "MetaBeeAI LLM Pipeline for PDF processing and data extraction"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 license = { text = "MIT" } # TODO: Check with rachel on what license she wants, set pyproj to the same license as in the repo
 
 authors = [
