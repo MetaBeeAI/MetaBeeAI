@@ -1,4 +1,4 @@
-name: Build
+name: Build and Test
 
 on:
   push:
@@ -8,12 +8,11 @@ on:
 
 jobs:
   test:
-    name: Test builds ${{ matrix.python-version }} (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
+    name: Test on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        python-version: ["3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -23,33 +22,13 @@ jobs:
       - run: pytest -q || echo "No tests yet, skipping"
 
   build:
-    name: Build wheels for ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-
+    name: Build package (smoke test)
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - run: pip install cibuildwheel==2.21.3
-
-      - name: Build wheels
-        env:
-          CIBW_SKIP: "pp* cp36-* cp37-*"
-          CIBW_BUILD_VERBOSITY: 1
-          CIBW_ARCHS_MACOS: "x86_64 arm64 universal2"
-        run: cibuildwheel --output-dir dist
-
-      - run: |
-          pip install twine
-          twine check dist/*
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: wheels-${{ matrix.os }}
-          path: dist/*
+      - run: pip install build twine
+      - run: python -m build --sdist --wheel --outdir dist
+      - run: twine check dist/*

@@ -1,13 +1,13 @@
-name: 🚀 Publish to PyPI
+name: Publish to PyPI
 
 on:
   push:
     tags:
-      - 'v*.*.*'  # e.g. v0.1.0 # TODO: run on release candidates too
+      - 'v*.*.*'  # e.g. v0.1.0 # TOOD: run on release candidates?
 
 jobs:
   build-all:
-    name: Build wheels
+    name: Build distributions
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -21,33 +21,27 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install cibuildwheel
-        run: pip install cibuildwheel==2.21.3
+      - name: Install build dependencies
+        run: pip install build twine
 
-      - name: Build wheels
-        env:
-          CIBW_SKIP: "pp* cp36-* cp37-*"
-          CIBW_BUILD_VERBOSITY: 1
-          CIBW_ARCHS_MACOS: "x86_64 arm64 universal2"
-        run: cibuildwheel --output-dir dist
+      - name: Build sdist and wheel
+        run: python -m build --sdist --wheel --outdir dist
 
-      - name: Check built wheels
-        run: |
-          pip install twine
-          twine check dist/*
+      - name: Check built distributions
+        run: twine check dist/*
 
       - uses: actions/upload-artifact@v4
         with:
-          name: wheels-${{ matrix.os }}
+          name: dist-${{ matrix.os }}
           path: dist/*
 
   publish:
-    name: 🚢 Publish to PyPI
+    name: Publish to PyPI
     needs: build-all
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download all built wheels
+      - name: Download all built distributions
         uses: actions/download-artifact@v4
         with:
           path: dist
@@ -55,7 +49,7 @@ jobs:
       - name: Flatten artifacts
         run: mv dist/*/* dist/ || true
 
-      - name: Verify wheels
+      - name: Verify distributions
         run: |
           pip install twine
           twine check dist/*
