@@ -107,7 +107,7 @@ def validate_papers_directory(papers_dir, paper_folders, merge_only=False):
 
 def run_full_pipeline(papers_dir, start_folder, end_folder, paper_folders, skip_split=False, 
                      skip_api=False, skip_merge=False, skip_deduplicate=False,
-                     filter_types=None):
+                     filter_types=None, pages_per_split=1):
     """
     Run the complete PDF processing pipeline.
     
@@ -121,6 +121,7 @@ def run_full_pipeline(papers_dir, start_folder, end_folder, paper_folders, skip_
         skip_merge: Skip JSON merging step
         skip_deduplicate: Skip deduplication step
         filter_types: List of chunk types to filter out during merging
+        pages_per_split: Number of pages per split (1 for single-page, 2 for overlapping 2-page)
     """
     print("="*60)
     print("MetaBeeAI PDF Processing Pipeline")
@@ -132,10 +133,11 @@ def run_full_pipeline(papers_dir, start_folder, end_folder, paper_folders, skip_
     
     # Step 1: Split PDFs
     if not skip_split:
-        print("STEP 1/4: Splitting PDFs into overlapping 2-page segments")
+        mode_desc = "single-page" if pages_per_split == 1 else "overlapping 2-page"
+        print(f"STEP 1/4: Splitting PDFs into {mode_desc} segments")
         print("-"*60)
         try:
-            split_pdfs(papers_dir)
+            split_pdfs(papers_dir, pages_per_split=pages_per_split)
             print("✓ PDF splitting completed\n")
         except Exception as e:
             print(f"✗ Error during PDF splitting: {e}")
@@ -238,6 +240,12 @@ Examples:
   
   # Process with chunk type filtering (remove marginalia)
   python process_all.py --start 95UKMIEY --end CX9M8HCM --filter-chunk-type marginalia
+  
+  # Split PDFs into single-page documents (default)
+  python process_all.py --pages 1
+  
+  # Split PDFs into overlapping 2-page documents
+  python process_all.py --pages 2
         """
     )
     
@@ -297,6 +305,14 @@ Examples:
         nargs='+',
         default=[],
         help='Chunk types to filter out during merging (e.g., marginalia figure)'
+    )
+    
+    parser.add_argument(
+        '--pages',
+        type=int,
+        choices=[1, 2],
+        default=1,
+        help='Number of pages per split: 1 for single-page (default), 2 for overlapping 2-page'
     )
     
     args = parser.parse_args()
@@ -385,7 +401,8 @@ Examples:
             skip_api=args.skip_api,
             skip_merge=args.skip_merge,
             skip_deduplicate=args.skip_deduplicate,
-            filter_types=args.filter_chunk_type
+            filter_types=args.filter_chunk_type,
+            pages_per_split=args.pages
         )
         
         if success:
