@@ -1,6 +1,0 @@
-"bee_species": "What species of bee(s) were tested?"
-"pesticides": "What pesticide(s) were used in this study, and what was the dose, exposure method and duration of exposure of the pesticide(s)?"
-"addional_stressors": "Were any additional stressors or combination used (like temperature, parasites or pathogens, other chemicals or nutrition stress)? What was the dose, exposure method and duration of exposure of the additional stressor?"
-"experimental_methodology": "What experimental methodologies was used in this paper? (e.g. experiment done on the bees, not statistical methods)"
-"significance": "Summarize the paper's discussion regarding the importance to the field."
-"future_research": "Summarize the paper's discussion regarding future research directions."

@@ -132,6 +132,28 @@ def extract_reviewer_answer(extended_data, question_key):
     return None
 
 
+def extract_user_rating(extended_data, question_key):
+    """Extract user rating from answers_extended.json."""
+    if 'QUESTIONS' not in extended_data:
+        return None
+    
+    questions = extended_data['QUESTIONS']
+    
+    # Try direct access first
+    if question_key in questions:
+        question_data = questions[question_key]
+        if isinstance(question_data, dict):
+            return question_data.get('user_rating')
+    
+    # Try with nested paths (in case question_key is just the last part)
+    for full_path, question_data in questions.items():
+        if extract_question_name(full_path) == question_key:
+            if isinstance(question_data, dict):
+                return question_data.get('user_rating')
+    
+    return None
+
+
 def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
     """
     Prepare benchmarking data by extracting questions, answers, and context.
@@ -150,7 +172,9 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
     print(f"❓ Found {len(questions)} questions: {list(questions.keys())}")
     print("=" * 60)
     
-    benchmark_data = []
+    # New structure: papers dict and test_cases list
+    papers_data = {}  # paper_id -> {context: [...], chunk_map: {...}}
+    test_cases = []  # List of test case entries
     papers_processed = 0
     papers_skipped = 0
     
@@ -198,6 +222,9 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
         
         print(f"  📄 Found {len(chunk_map)} text chunks")
         
+        # Store paper context once (only if we have questions to add)
+        paper_has_questions = False
+        
         # Process each question
         for question_key, question_text in questions.items():
             # Extract LLM answer
@@ -205,6 +232,9 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
             
             # Extract reviewer answer from answers_extended.json
             reviewer_answer = extract_reviewer_answer(extended_answers, question_key)
+            
+            # Extract user rating from answers_extended.json
+            user_rating = extract_user_rating(extended_answers, question_key)
             
             # Only include if we have both LLM and reviewer answers
             if not llm_answer or not reviewer_answer:
@@ -214,39 +244,55 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
             # Get retrieval context
             retrieval_context = get_retrieval_context(chunk_map, llm_chunk_ids)
             
-            # Create benchmark data entry (same format as prep_benchmark_data.py)
+            # Store paper context once (first time we encounter this paper)
+            if paper_id not in papers_data:
+                papers_data[paper_id] = {
+                    "context": all_context,
+                    "chunk_map": chunk_map
+                }
+            
+            # Create test case entry (without full context - it's stored in papers_data)
             entry = {
                 "paper_id": paper_id,
                 "question_key": question_key,
                 "input": question_text,
                 "actual_output": llm_answer,
                 "expected_output": reviewer_answer,
-                "context": all_context,
                 "retrieval_context": retrieval_context,
-                "chunk_ids": llm_chunk_ids
+                "chunk_ids": llm_chunk_ids,
+                "user_rating": user_rating
             }
             
-            benchmark_data.append(entry)
-            print(f"  ✅ Added {question_key} (LLM: {len(llm_answer)} chars, Reviewer: {len(reviewer_answer)} chars, Retrieval: {len(retrieval_context)} chunks)")
+            test_cases.append(entry)
+            paper_has_questions = True
+            rating_str = f", Rating: {user_rating}" if user_rating is not None else ""
+            print(f"  ✅ Added {question_key} (LLM: {len(llm_answer)} chars, Reviewer: {len(reviewer_answer)} chars, Retrieval: {len(retrieval_context)} chunks{rating_str})")
         
-        papers_processed += 1
+        if paper_has_questions:
+            papers_processed += 1
     
-    # Save to JSON file
+    # Save to JSON file with new structure
+    output_data = {
+        "papers": papers_data,
+        "test_cases": test_cases
+    }
+    
     with open(output_path, 'w') as f:
-        json.dump(benchmark_data, f, indent=2)
+        json.dump(output_data, f, indent=2)
     
     # Summary
     print("\n" + "=" * 60)
     print(f"🎉 BENCHMARK DATA PREPARATION COMPLETED!")
     print(f"✅ Papers processed: {papers_processed}")
     print(f"⏭️  Papers skipped: {papers_skipped}")
-    print(f"📊 Total benchmark entries: {len(benchmark_data)}")
+    print(f"📊 Total benchmark entries: {len(test_cases)}")
+    print(f"📚 Papers with context: {len(papers_data)}")
     print(f"💾 Output saved to: {output_path}")
     
     # Print statistics by question type
     print("\n📈 Entries by question type:")
     question_counts = {}
-    for entry in benchmark_data:
+    for entry in test_cases:
         q_key = entry['question_key']
         question_counts[q_key] = question_counts.get(q_key, 0) + 1
     

@@ -1,6 +1,9 @@
 """
-Combined DeepEval benchmarking script that runs both standard metrics and G-Eval metrics.
-Reads from benchmark_data.json format and saves results without context fields.
+DeepEval benchmarking script that evaluates LLM outputs against GUI reviewer answers.
+
+Reads from benchmark_data_gui.json (output from prep_benchmark_data_from_GUI_answers.py)
+and compares LLM-generated answers (actual_output) with reviewer answers (expected_output)
+from the GUI interface.
 """
 
 import json
@@ -10,16 +13,23 @@ import argparse
 import datetime
 from dotenv import load_dotenv
 
+# Add parent directory to path to access config
+script_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(script_dir)
+sys.path.insert(0, parent_dir)
+
+from config import get_data_dir
+
 # Load environment variables from .env file
 load_dotenv()
 
 # Set up command line argument parsing
 parser = argparse.ArgumentParser(description='Evaluate benchmark dataset with DeepEval (Standard + G-Eval)')
 parser.add_argument('--question', '-q', 
-                   choices=['design', 'population', 'welfare'],
-                   help='Question type to filter by (optional - if not specified, processes all questions)')
-parser.add_argument('--input', '-i', type=str, default='data/benchmark_data.json',
-                   help='Input benchmark data file (default: data/benchmark_data.json)')
+                   type=str,
+                   help='Question key to filter by (optional - if not specified, processes all questions). Must match a question_key from the benchmark data.')
+parser.add_argument('--input', '-i', type=str, default=None,
+                   help='Input benchmark data file (default: auto-detect from config)')
 parser.add_argument('--limit', '-l', type=int, 
                    help='Maximum number of test cases to process (optional)')
 parser.add_argument('--batch-size', '-b', type=int, default=25,
@@ -33,9 +43,75 @@ parser.add_argument('--max-context-length', type=int, default=200000,
                    help='Maximum context length in characters to process (default: 200000, ~50K tokens for gpt-4o)')
 parser.add_argument('--use-retrieval-only', action='store_true',
                    help='Use only retrieval_context instead of full context to reduce token usage')
+parser.add_argument('--list-questions', action='store_true',
+                   help='List all available question keys in the benchmark data and exit')
 
 args = parser.parse_args()
 
+# Set default input path if not provided (use same logic as prep_benchmark_data_from_GUI_answers.py)
+if args.input is None:
+    args.input = os.path.join(get_data_dir(), "benchmark_data_gui.json")
+
+# Load benchmark dataset first (needed for --list-questions)
+# This is done before API key check so we can list questions without API key
+print(f"📂 Loading benchmark data from: {args.input}")
+with open(args.input, "r") as f:
+    raw_data = json.load(f)
+
+# Expected format: {papers: {...}, test_cases: [...]}
+if not isinstance(raw_data, dict) or "test_cases" not in raw_data:
+    raise ValueError(
+        f"Invalid format: Expected dict with 'papers' and 'test_cases' keys.\n"
+        f"This script only works with output from prep_benchmark_data_from_GUI_answers.py"
+    )
+
+papers_data = raw_data.get("papers", {})
+test_cases_data = raw_data.get("test_cases", [])
+print(f"📚 Loaded {len(papers_data)} papers, {len(test_cases_data)} test cases")
+
+# Expand test cases with context from papers_data
+data = []
+for entry in test_cases_data:
+    # Create a copy to avoid modifying the original
+    entry_copy = entry.copy()
+    paper_id = entry_copy.get("paper_id")
+    if paper_id and paper_id in papers_data:
+        # Add context from papers_data
+        entry_copy["context"] = papers_data[paper_id].get("context", [])
+    else:
+        # Error if paper not found
+        print(f"⚠️  Warning: No context found for paper_id '{paper_id}', using empty context")
+        entry_copy["context"] = []
+    data.append(entry_copy)
+
+# Extract available question keys from the data
+available_question_keys = sorted(set(entry.get("question_key") for entry in data if entry.get("question_key")))
+
+# Count test cases per question
+question_counts = {}
+for entry in data:
+    q_key = entry.get("question_key")
+    if q_key:
+        question_counts[q_key] = question_counts.get(q_key, 0) + 1
+
+# If --list-questions flag is set, print and exit
+if args.list_questions:
+    print("\n" + "="*60)
+    print("📋 AVAILABLE QUESTION KEYS IN BENCHMARK DATA")
+    print("="*60)
+    if available_question_keys:
+        print(f"\nFound {len(available_question_keys)} question type(s):\n")
+        for q_key in available_question_keys:
+            count = question_counts.get(q_key, 0)
+            print(f"  • {q_key} ({count} test case{'s' if count != 1 else ''})")
+        print(f"\n💡 Usage: python deepeval_benchmarking.py --question <question_key>")
+        print(f"   Example: python deepeval_benchmarking.py --question {available_question_keys[0]}")
+    else:
+        print("\n⚠️  No question keys found in the dataset.")
+    print("="*60 + "\n")
+    sys.exit(0)
+
+# Only check API key and load deepeval if we're actually running evaluation
 # Set API keys from environment
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
@@ -51,20 +127,21 @@ from deepeval import evaluate
 from deepeval.metrics import FaithfulnessMetric, ContextualPrecisionMetric, ContextualRecallMetric, GEval
 from deepeval.models import GPTModel
 
-# Load benchmark dataset
-print(f"📂 Loading benchmark data from: {args.input}")
-with open(args.input, "r") as f:
-    data = json.load(f)
+print(f"📋 Available question keys in dataset: {', '.join(available_question_keys) if available_question_keys else 'None'}")
 
 # Filter by question type (optional)
-print(f"Original dataset: {len(data)} test cases")
+print(f"\nOriginal dataset: {len(data)} test cases")
 
 if args.question:
-    filtered_data = [entry for entry in data if entry["question_key"] == args.question]
-    print(f"Filtered by '{args.question}': {len(filtered_data)} test cases")
+    filtered_data = [entry for entry in data if entry.get("question_key") == args.question]
+    if len(filtered_data) == 0:
+        print(f"\n❌ Error: No test cases found for question key '{args.question}'")
+        print(f"📋 Available question keys: {', '.join(available_question_keys) if available_question_keys else 'None'}")
+        sys.exit(1)
+    print(f"✅ Filtered by '{args.question}': {len(filtered_data)} test cases")
 else:
     filtered_data = data
-    print("Processing all question types")
+    print(f"✅ Processing all question types")
 
 # Apply limit if specified
 if args.limit and len(filtered_data) > args.limit:
@@ -113,14 +190,15 @@ for i, entry in enumerate(filtered_data):
         test_case = LLMTestCase(
             input=entry["input"],
             actual_output=entry["actual_output"],  # LLM generated answer
-            expected_output=entry["expected_output"],  # Human reviewer answer (gold standard)
+            expected_output=entry["expected_output"],  # GUI reviewer answer (expected output)
             context=context_to_use,  # Full paper context or retrieval context only
             retrieval_context=retrieval_context,  # Retrieval context for metrics that need it
             name=f"paper_{entry['paper_id']}_case_{i}",  # Unique name for each test case
             additional_metadata={
-                "paper_id": entry["paper_id"],
-                "question_key": entry["question_key"],
-                "chunk_ids": entry.get("chunk_ids", [])
+                "paper_id": entry.get("paper_id"),
+                "question_key": entry.get("question_key"),
+                "chunk_ids": entry.get("chunk_ids", []),
+                "user_rating": entry.get("user_rating")  # Include user_rating if available
             }
         )
         
@@ -231,8 +309,10 @@ for metric in geval_metrics:
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 question_type = args.question if args.question else "all_questions"
 
-# Create results directory if it doesn't exist
-results_dir = "llm_benchmarking/deepeval_results"
+# Create results directory in the same directory as the input file
+# Input file is in get_data_dir(), so output goes to get_data_dir()/deepeval_results/
+input_dir = os.path.dirname(os.path.abspath(args.input))
+results_dir = os.path.join(input_dir, "deepeval_results")
 os.makedirs(results_dir, exist_ok=True)
 
 # Generate unique filenames
