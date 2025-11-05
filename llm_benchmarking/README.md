@@ -707,4 +707,3 @@ For issues or questions:
 ---
 
 **Last Updated**: 2025  
-**Pipeline Version**: 3.0 (Simplified GUI-based pipeline)
