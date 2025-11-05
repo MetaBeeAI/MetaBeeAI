@@ -167,9 +167,9 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
     # Load questions from yml
     questions = load_questions_from_yml(questions_yml_path)
     
-    print(f"📊 Loading questions from: {questions_yml_path}")
-    print(f"📁 Papers directory: {papers_dir}")
-    print(f"❓ Found {len(questions)} questions: {list(questions.keys())}")
+    print(f"Loading questions from: {questions_yml_path}")
+    print(f"Papers directory: {papers_dir}")
+    print(f"Found {len(questions)} questions: {list(questions.keys())}")
     print("=" * 60)
     
     # New structure: papers dict and test_cases list
@@ -186,19 +186,19 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
         if not os.path.isdir(paper_path) or paper_id.startswith('.'):
             continue
         
-        print(f"\n🔄 Processing paper: {paper_id}")
+        print(f"\nProcessing paper: {paper_id}")
         
         # Check if answers_extended.json exists (papers with GUI reviewer answers)
         extended_answers_path = os.path.join(paper_path, "answers_extended.json")
         answers_path = os.path.join(paper_path, "answers.json")
         
         if not os.path.exists(extended_answers_path):
-            print(f"  ⏭️  Skipping (no answers_extended.json)")
+            print(f"  [SKIP] Skipping (no answers_extended.json)")
             papers_skipped += 1
             continue
         
         if not os.path.exists(answers_path):
-            print(f"  ⚠️  Warning: No answers.json found")
+            print(f"  [WARNING] No answers.json found")
             papers_skipped += 1
             continue
         
@@ -212,7 +212,7 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
         # Load merged_v2.json for context
         merged_data = load_merged_json(paper_path)
         if not merged_data:
-            print(f"  ⚠️  Warning: No merged_v2.json found")
+            print(f"  [WARNING] No merged_v2.json found")
             papers_skipped += 1
             continue
         
@@ -220,7 +220,7 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
         chunk_map = get_text_chunks(merged_data)
         all_context = list(chunk_map.values())
         
-        print(f"  📄 Found {len(chunk_map)} text chunks")
+        print(f"  Found {len(chunk_map)} text chunks")
         
         # Store paper context once (only if we have questions to add)
         paper_has_questions = False
@@ -238,7 +238,7 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
             
             # Only include if we have both LLM and reviewer answers
             if not llm_answer or not reviewer_answer:
-                print(f"  ⏭️  Skipping {question_key} (missing LLM or reviewer answer)")
+                print(f"  [SKIP] Skipping {question_key} (missing LLM or reviewer answer)")
                 continue
             
             # Get retrieval context
@@ -266,7 +266,7 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
             test_cases.append(entry)
             paper_has_questions = True
             rating_str = f", Rating: {user_rating}" if user_rating is not None else ""
-            print(f"  ✅ Added {question_key} (LLM: {len(llm_answer)} chars, Reviewer: {len(reviewer_answer)} chars, Retrieval: {len(retrieval_context)} chunks{rating_str})")
+            print(f"  [OK] Added {question_key} (LLM: {len(llm_answer)} chars, Reviewer: {len(reviewer_answer)} chars, Retrieval: {len(retrieval_context)} chunks{rating_str})")
         
         if paper_has_questions:
             papers_processed += 1
@@ -282,15 +282,15 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
     
     # Summary
     print("\n" + "=" * 60)
-    print(f"🎉 BENCHMARK DATA PREPARATION COMPLETED!")
-    print(f"✅ Papers processed: {papers_processed}")
-    print(f"⏭️  Papers skipped: {papers_skipped}")
-    print(f"📊 Total benchmark entries: {len(test_cases)}")
-    print(f"📚 Papers with context: {len(papers_data)}")
-    print(f"💾 Output saved to: {output_path}")
+    print(f"BENCHMARK DATA PREPARATION COMPLETED!")
+    print(f"[OK] Papers processed: {papers_processed}")
+    print(f"[SKIP] Papers skipped: {papers_skipped}")
+    print(f"Total benchmark entries: {len(test_cases)}")
+    print(f"Papers with context: {len(papers_data)}")
+    print(f"Output saved to: {output_path}")
     
     # Print statistics by question type
-    print("\n📈 Entries by question type:")
+    print("\nEntries by question type:")
     question_counts = {}
     for entry in test_cases:
         q_key = entry['question_key']

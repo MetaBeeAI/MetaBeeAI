@@ -1,7 +1,7 @@
 """
 DeepEval benchmarking script that evaluates LLM outputs against GUI reviewer answers.
 
-Reads from benchmark_data_gui.json (output from prep_benchmark_data_from_GUI_answers.py)
+Reads from benchmark_data_gui.json (output from prep_benchmark_data.py)
 and compares LLM-generated answers (actual_output) with reviewer answers (expected_output)
 from the GUI interface.
 """
@@ -48,13 +48,13 @@ parser.add_argument('--list-questions', action='store_true',
 
 args = parser.parse_args()
 
-# Set default input path if not provided (use same logic as prep_benchmark_data_from_GUI_answers.py)
+# Set default input path if not provided (use same logic as prep_benchmark_data.py)
 if args.input is None:
     args.input = os.path.join(get_data_dir(), "benchmark_data_gui.json")
 
 # Load benchmark dataset first (needed for --list-questions)
 # This is done before API key check so we can list questions without API key
-print(f"📂 Loading benchmark data from: {args.input}")
+print(f"Loading benchmark data from: {args.input}")
 with open(args.input, "r") as f:
     raw_data = json.load(f)
 
@@ -62,12 +62,12 @@ with open(args.input, "r") as f:
 if not isinstance(raw_data, dict) or "test_cases" not in raw_data:
     raise ValueError(
         f"Invalid format: Expected dict with 'papers' and 'test_cases' keys.\n"
-        f"This script only works with output from prep_benchmark_data_from_GUI_answers.py"
+        f"This script only works with output from prep_benchmark_data.py"
     )
 
 papers_data = raw_data.get("papers", {})
 test_cases_data = raw_data.get("test_cases", [])
-print(f"📚 Loaded {len(papers_data)} papers, {len(test_cases_data)} test cases")
+print(f"Loaded {len(papers_data)} papers, {len(test_cases_data)} test cases")
 
 # Expand test cases with context from papers_data
 data = []
@@ -80,7 +80,7 @@ for entry in test_cases_data:
         entry_copy["context"] = papers_data[paper_id].get("context", [])
     else:
         # Error if paper not found
-        print(f"⚠️  Warning: No context found for paper_id '{paper_id}', using empty context")
+        print(f"[WARNING] No context found for paper_id '{paper_id}', using empty context")
         entry_copy["context"] = []
     data.append(entry_copy)
 
@@ -97,17 +97,17 @@ for entry in data:
 # If --list-questions flag is set, print and exit
 if args.list_questions:
     print("\n" + "="*60)
-    print("📋 AVAILABLE QUESTION KEYS IN BENCHMARK DATA")
+    print("AVAILABLE QUESTION KEYS IN BENCHMARK DATA")
     print("="*60)
     if available_question_keys:
         print(f"\nFound {len(available_question_keys)} question type(s):\n")
         for q_key in available_question_keys:
             count = question_counts.get(q_key, 0)
             print(f"  • {q_key} ({count} test case{'s' if count != 1 else ''})")
-        print(f"\n💡 Usage: python deepeval_benchmarking.py --question <question_key>")
+        print(f"\nUsage: python deepeval_benchmarking.py --question <question_key>")
         print(f"   Example: python deepeval_benchmarking.py --question {available_question_keys[0]}")
     else:
-        print("\n⚠️  No question keys found in the dataset.")
+        print("\n[WARNING] No question keys found in the dataset.")
     print("="*60 + "\n")
     sys.exit(0)
 
@@ -119,7 +119,7 @@ if not openai_api_key:
     raise ValueError("OPENAI_API_KEY not found in .env file")
 
 os.environ["OPENAI_API_KEY"] = openai_api_key
-print("✅ OpenAI API key loaded from .env file")
+print("[OK] OpenAI API key loaded from .env file")
 
 from deepeval.dataset import EvaluationDataset
 from deepeval.test_case import LLMTestCase, LLMTestCaseParams
@@ -127,7 +127,7 @@ from deepeval import evaluate
 from deepeval.metrics import FaithfulnessMetric, ContextualPrecisionMetric, ContextualRecallMetric, GEval
 from deepeval.models import GPTModel
 
-print(f"📋 Available question keys in dataset: {', '.join(available_question_keys) if available_question_keys else 'None'}")
+print(f"Available question keys in dataset: {', '.join(available_question_keys) if available_question_keys else 'None'}")
 
 # Filter by question type (optional)
 print(f"\nOriginal dataset: {len(data)} test cases")
@@ -135,13 +135,13 @@ print(f"\nOriginal dataset: {len(data)} test cases")
 if args.question:
     filtered_data = [entry for entry in data if entry.get("question_key") == args.question]
     if len(filtered_data) == 0:
-        print(f"\n❌ Error: No test cases found for question key '{args.question}'")
-        print(f"📋 Available question keys: {', '.join(available_question_keys) if available_question_keys else 'None'}")
+        print(f"\n[ERROR] No test cases found for question key '{args.question}'")
+        print(f"Available question keys: {', '.join(available_question_keys) if available_question_keys else 'None'}")
         sys.exit(1)
-    print(f"✅ Filtered by '{args.question}': {len(filtered_data)} test cases")
+    print(f"[OK] Filtered by '{args.question}': {len(filtered_data)} test cases")
 else:
     filtered_data = data
-    print(f"✅ Processing all question types")
+    print(f"[OK] Processing all question types")
 
 # Apply limit if specified
 if args.limit and len(filtered_data) > args.limit:
@@ -162,7 +162,7 @@ for i, entry in enumerate(filtered_data):
     missing_fields = [field for field in required_fields if not entry.get(field)]
     
     if missing_fields:
-        print(f"⚠️  Skipping test case {i+1}: Missing fields {missing_fields}")
+        print(f"[WARNING] Skipping test case {i+1}: Missing fields {missing_fields}")
         skipped_count += 1
         continue
     
@@ -181,7 +181,7 @@ for i, entry in enumerate(filtered_data):
     context_length = len(str(context_to_use))
     
     if context_length > args.max_context_length:
-        print(f"⚠️  Skipping test case {i+1}: Context too long ({context_length:,} chars, max: {args.max_context_length:,})")
+        print(f"[WARNING] Skipping test case {i+1}: Context too long ({context_length:,} chars, max: {args.max_context_length:,})")
         skipped_count += 1
         continue
     
@@ -210,12 +210,12 @@ for i, entry in enumerate(filtered_data):
         dataset.add_test_case(test_case)
         
     except Exception as e:
-        print(f"⚠️  Error creating test case {i+1}: {e}")
+        print(f"[WARNING] Error creating test case {i+1}: {e}")
         skipped_count += 1
         continue
 
 if skipped_count > 0:
-    print(f"⚠️  Skipped {skipped_count} test cases due to missing data or errors")
+    print(f"[WARNING] Skipped {skipped_count} test cases due to missing data or errors")
 
 print("Dataset created successfully!")
 print(f"Dataset contains {len(dataset.test_cases)} test cases")
@@ -223,14 +223,14 @@ print(f"Dataset contains {len(dataset.test_cases)} test cases")
 # Warn about long contexts
 long_context_count = sum(1 for entry in filtered_data if len(str(entry.get("context", ""))) > 100000)
 if long_context_count > 0:
-    print(f"⚠️  WARNING: {long_context_count} test cases have very long context (>100K chars)")
-    print(f"💡 RECOMMENDED: Use --batch-size 10-15 or --use-retrieval-only for best stability")
+    print(f"[WARNING] {long_context_count} test cases have very long context (>100K chars)")
+    print(f"RECOMMENDED: Use --batch-size 10-15 or --use-retrieval-only for best stability")
     
 # Show context usage mode
 if args.use_retrieval_only:
-    print(f"📝 Using retrieval_context only (reduced token usage)")
+    print(f"Using retrieval_context only (reduced token usage)")
 else:
-    print(f"📝 Using full context from papers")
+    print(f"Using full context from papers")
 
 # Configure the specified model
 evaluation_model = GPTModel(model=args.model)
@@ -261,7 +261,7 @@ geval_metrics = [
 
 metrics = standard_metrics + geval_metrics
 
-print(f"\n💰 Using {args.model} for evaluation")
+print(f"\nUsing {args.model} for evaluation")
 
 # Model information with context limits
 model_info = {
@@ -292,12 +292,12 @@ model_info = {
 }
 
 selected_info = model_info[args.model]
-print(f"💰 Cost per 1K tokens: Input ${selected_info['input']:.4f}, Output ${selected_info['output']:.4f}")
-print(f"💰 {selected_info['description']}")
-print(f"🪟 Context window: {selected_info['context_window']}")
-print(f"📏 Max context length setting: {args.max_context_length:,} chars")
+print(f"Cost per 1K tokens: Input ${selected_info['input']:.4f}, Output ${selected_info['output']:.4f}")
+print(f"{selected_info['description']}")
+print(f"Context window: {selected_info['context_window']}")
+print(f"Max context length setting: {args.max_context_length:,} chars")
 
-print(f"\n📊 Evaluating with {len(metrics)} metrics (3 Standard + 2 G-Eval):")
+print(f"\nEvaluating with {len(metrics)} metrics (3 Standard + 2 G-Eval):")
 print("  Standard Metrics:")
 for metric in standard_metrics:
     print(f"    - {metric.__class__.__name__}")
@@ -319,8 +319,8 @@ os.makedirs(results_dir, exist_ok=True)
 results_file = f"{results_dir}/combined_results_{question_type}_{timestamp}.json"
 results_jsonl_file = f"{results_dir}/combined_results_{question_type}_{timestamp}.jsonl"
 
-print(f"\n📁 Output files will be saved in: {results_dir}/")
-print(f"📁 File prefix: combined_results_{question_type}_{timestamp}")
+print(f"\nOutput files will be saved in: {results_dir}/")
+print(f"File prefix: combined_results_{question_type}_{timestamp}")
 
 # Function to save results incrementally (without context fields)
 def save_results_incrementally(results_list, filename, jsonl_filename):
@@ -344,10 +344,10 @@ def save_results_incrementally(results_list, filename, jsonl_filename):
             for result in cleaned_results:
                 f.write(json.dumps(result) + "\n")
         
-        print(f"💾 Incremental save: {len(cleaned_results)} results saved to {filename}")
+        print(f"Incremental save: {len(cleaned_results)} results saved to {filename}")
         return True
     except Exception as e:
-        print(f"⚠️  Incremental save failed: {e}")
+        print(f"[WARNING] Incremental save failed: {e}")
         return False
 
 # Function to process test cases in batches
@@ -356,14 +356,14 @@ def process_test_cases_in_batches(test_cases, batch_size=25, max_retries=5):
     total_cases = len(test_cases)
     processed_results = []
     
-    print(f"\n🔄 Processing {total_cases} test cases in batches of {batch_size}")
-    print(f"🔄 Maximum retries per batch: {max_retries}")
+    print(f"\nProcessing {total_cases} test cases in batches of {batch_size}")
+    print(f"Maximum retries per batch: {max_retries}")
     
     for batch_start in range(0, total_cases, batch_size):
         batch_end = min(batch_start + batch_size, total_cases)
         batch_cases = test_cases[batch_start:batch_end]
         
-        print(f"\n📦 Processing batch {batch_start//batch_size + 1}: cases {batch_start+1}-{batch_end}")
+        print(f"\nProcessing batch {batch_start//batch_size + 1}: cases {batch_start+1}-{batch_end}")
         
         # Retry logic for each batch
         batch_success = False
@@ -372,7 +372,7 @@ def process_test_cases_in_batches(test_cases, batch_size=25, max_retries=5):
         while not batch_success and retry_count < max_retries:
             try:
                 if retry_count > 0:
-                    print(f"🔄 Retry attempt {retry_count}/{max_retries} for batch {batch_start//batch_size + 1}")
+                    print(f"Retry attempt {retry_count}/{max_retries} for batch {batch_start//batch_size + 1}")
                 
                 # Process this batch
                 eval_output = evaluate(
@@ -428,14 +428,14 @@ def process_test_cases_in_batches(test_cases, batch_size=25, max_retries=5):
                 save_results_incrementally(processed_results, results_file, results_jsonl_file)
                 
                 batch_success = True
-                print(f"✅ Batch {batch_start//batch_size + 1} completed successfully")
+                print(f"[OK] Batch {batch_start//batch_size + 1} completed successfully")
                 
             except Exception as e:
                 retry_count += 1
-                print(f"❌ Batch {batch_start//batch_size + 1} failed (attempt {retry_count}/{max_retries}): {str(e)}")
+                print(f"[ERROR] Batch {batch_start//batch_size + 1} failed (attempt {retry_count}/{max_retries}): {str(e)}")
                 
                 if retry_count >= max_retries:
-                    print(f"⚠️  Batch {batch_start//batch_size + 1} failed after {max_retries} retries. Skipping...")
+                    print(f"[WARNING] Batch {batch_start//batch_size + 1} failed after {max_retries} retries. Skipping...")
                     break
     
     return processed_results
@@ -460,13 +460,13 @@ save_results_incrementally(final_results, results_file, results_jsonl_file)
 print("\n" + "="*60)
 print("EVALUATION COMPLETE!")
 print("="*60)
-print(f"📊 Total test cases processed: {len(final_results)}")
-print(f"📁 Results saved to: {results_file}")
-print(f"📁 JSONL format: {results_jsonl_file}")
+print(f"Total test cases processed: {len(final_results)}")
+print(f"Results saved to: {results_file}")
+print(f"JSONL format: {results_jsonl_file}")
 
 # Calculate average scores
 if final_results:
-    print("\n📈 Average Scores:")
+    print("\nAverage Scores:")
     metric_sums = {}
     metric_counts = {}
     
@@ -486,4 +486,4 @@ if final_results:
         avg_score = metric_sums[metric_name] / metric_counts[metric_name]
         print(f"  - {metric_name}: {avg_score:.3f}")
 
-print("\n✅ Done!")
+print("\nDone!")
