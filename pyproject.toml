@@ -11,7 +11,8 @@ requires-python = ">=3.11"
 license = { text = "MIT" } # TODO: Check with rachel on what license she wants, set pyproj to the same license as in the repo
 
 authors = [
-    { name = "Rachel Parkinson", email = "rachel.parkinson@biology.ox.ac.uk" }
+    { name = "Rachel Parkinson", email = "rachel.parkinson@biology.ox.ac.uk" },
+    { name = "Alasdair Wilson", email = "alasdair.wilson@dtc.ox.ac.uk" }
 ]
 
 keywords = ["pdf", "llm", "nlp", "data extraction", "fastapi", "openai"]
@@ -41,9 +42,19 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest",
-       "ruff", 
-       "mypy"
+dev = [
+    "pytest",
+    "ruff", 
+    "mypy"
+]
+
+docs = [
+    "sphinx>=7.0",
+    "pydata-sphinx-theme>=0.15",
+    "sphinx-autodoc-typehints",
+    "sphinx-gallery",
+    "sphinx-automodapi",
+    "myst-parser"
 ]
 
 [project.urls]
