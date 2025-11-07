@@ -8,6 +8,7 @@ for both LLM and reviewer comparisons across different metrics and question type
 
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 import argparse
@@ -15,11 +16,18 @@ from collections import defaultdict
 import openai
 import pandas as pd
 
+# Add parent directory to path to access config
+script_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(script_dir)
+sys.path.insert(0, parent_dir)
+
+from config import get_data_dir
+
 # Try to load .env file if python-dotenv is available
 try:
     from dotenv import load_dotenv
     load_dotenv()
-    print("✓ Loaded environment variables from .env file")
+    print("[OK] Loaded environment variables from .env file")
 except ImportError:
     print("Note: python-dotenv not installed. Install with: pip install python-dotenv")
     print("Or set environment variables manually.")
@@ -28,23 +36,30 @@ except ImportError:
 class EdgeCaseIdentifier:
     """Identifies edge cases from evaluation results."""
     
-    def __init__(self, results_dir: str = "deepeval-results", 
-                 merged_data_dir: str = "llm_benchmarking/deepeval-analyses/merged-data",
-                 output_dir: str = "llm_benchmarking/edge-cases", 
+    def __init__(self, results_dir: Optional[str] = None, 
+                 merged_data_dir: Optional[str] = None,
+                 output_dir: Optional[str] = None, 
                  openai_api_key: Optional[str] = None,
                  model: str = "gpt-4o"):
         """
         Initialize the EdgeCaseIdentifier.
         
         Args:
-            results_dir: Directory containing individual evaluation results
-            merged_data_dir: Directory containing merged evaluation results
-            output_dir: Directory to save edge case results
+            results_dir: Directory containing individual evaluation results (default: get_data_dir()/deepeval_results)
+            merged_data_dir: Directory containing merged evaluation results (not used, kept for compatibility)
+            output_dir: Directory to save edge case results (default: get_data_dir()/edge_cases)
             openai_api_key: OpenAI API key for LLM summarization
             model: OpenAI model to use for summarization
         """
+        # Use config-based defaults if not provided
+        data_dir = get_data_dir()
+        if results_dir is None:
+            results_dir = os.path.join(data_dir, "deepeval_results")
+        if output_dir is None:
+            output_dir = os.path.join(data_dir, "edge_cases")
+        
         self.results_dir = Path(results_dir)
-        self.merged_data_dir = Path(merged_data_dir)
+        self.merged_data_dir = Path(merged_data_dir) if merged_data_dir else None
         self.output_dir = Path(output_dir)
         self.model = model
         
@@ -76,10 +91,9 @@ class EdgeCaseIdentifier:
         # Create output directory if it doesn't exist
         self.output_dir.mkdir(exist_ok=True)
         
-        # Question types from questions.yml (primate welfare project)
-        self.question_types = [
-            "design", "population", "welfare"
-        ]
+        # Question types - will be extracted dynamically from data if available
+        # Default empty list, will be populated when loading data
+        self.question_types = []
         
         # Metrics we're looking for (matches deepeval_benchmarking.py)
         self.metrics = [
@@ -98,9 +112,9 @@ class EdgeCaseIdentifier:
                 messages=[{"role": "user", "content": "Hello, this is a test."}],
                 max_tokens=10
             )
-            print(f"✓ OpenAI API connection successful. Model: {self.model}")
+            print(f"[OK] OpenAI API connection successful. Model: {self.model}")
         except Exception as e:
-            print(f"✗ OpenAI API connection failed: {e}")
+            print(f"[ERROR] OpenAI API connection failed: {e}")
             self.openai_client = None
     
     def load_merged_data(self, source: str) -> List[Dict]:
@@ -132,6 +146,17 @@ class EdgeCaseIdentifier:
                         print(f"    Loaded {len(data)} entries from {file_path.name}")
             except Exception as e:
                 print(f"  Error loading {file_path.name}: {e}")
+        
+        # Extract unique question types from loaded data
+        if all_data and not self.question_types:
+            question_types_set = set()
+            for entry in all_data:
+                question_key = entry.get("question_key")
+                if question_key:
+                    question_types_set.add(question_key)
+            self.question_types = sorted(list(question_types_set))
+            if self.question_types:
+                print(f"  Extracted question types from data: {', '.join(self.question_types)}")
         
         return all_data
     
@@ -1102,20 +1127,20 @@ def main():
     parser.add_argument(
         "--results-dir",
         type=str,
-        default="llm_benchmarking/deepeval_results",
-        help="Directory containing evaluation results (default: llm_benchmarking/deepeval_results)"
+        default=None,
+        help="Directory containing evaluation results (default: auto-detect from config)"
     )
     parser.add_argument(
         "--merged-data-dir",
         type=str,
-        default="llm_benchmarking/deepeval-analyses/merged-data",
-        help="Directory containing merged evaluation results (default: llm_benchmarking/deepeval-analyses/merged-data)"
+        default=None,
+        help="Directory containing merged evaluation results (not used, kept for compatibility)"
     )
     parser.add_argument(
         "--output-dir",
         type=str,
-        default="llm_benchmarking/edge-cases",
-        help="Output directory for edge cases (default: llm_benchmarking/edge-cases)"
+        default=None,
+        help="Output directory for edge cases (default: auto-detect from config)"
     )
     parser.add_argument(
         "--openai-api-key",
