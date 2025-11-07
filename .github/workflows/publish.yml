@@ -1,0 +1,61 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # e.g. v0.1.0 # TOOD: run on release candidates?
+
+jobs:
+  build-all:
+    name: Build distributions
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install build dependencies
+        run: pip install build twine
+
+      - name: Build sdist and wheel
+        run: python -m build --sdist --wheel --outdir dist
+
+      - name: Check built distributions
+        run: twine check dist/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.os }}
+          path: dist/*
+
+  publish:
+    name: Publish to PyPI
+    needs: build-all
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download all built distributions
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+
+      - name: Flatten artifacts
+        run: mv dist/*/* dist/ || true
+
+      - name: Verify distributions
+        run: |
+          pip install twine
+          twine check dist/*
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}

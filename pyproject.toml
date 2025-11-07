@@ -1,0 +1,90 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "metabeeai"
+version = "0.1.0"
+description = "MetaBeeAI LLM Pipeline for PDF processing and data extraction"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" } # TODO: Check with rachel on what license she wants, set pyproj to the same license as in the repo
+
+authors = [
+    { name = "Rachel Parkinson", email = "rachel.parkinson@biology.ox.ac.uk" },
+    { name = "Alasdair Wilson", email = "alasdair.wilson@dtc.ox.ac.uk" }
+]
+
+keywords = ["pdf", "llm", "nlp", "data extraction", "fastapi", "openai"]
+
+dependencies = [
+    "python-dotenv",
+    "openai",
+    "litellm",
+    "pandas",
+    "numpy",
+    "PyPDF2",
+    "pymupdf",
+    "fastapi",
+    "uvicorn",
+    "python-multipart",
+    "pydantic",
+    "PyYAML",
+    "PyQt5",
+    "unidecode",
+    "termcolor",
+    "tqdm",
+    "matplotlib",
+    "seaborn",
+    "networkx",
+    "deepeval",
+    "requests"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff", 
+    "mypy"
+]
+
+docs = [
+    "sphinx>=7.0",
+    "pydata-sphinx-theme>=0.15",
+    "sphinx-autodoc-typehints",
+    "sphinx-gallery",
+    "sphinx-automodapi",
+    "myst-parser"
+]
+
+[project.urls]
+Homepage = "https://github.com/MetaBeeAI/MetaBeeAI"
+Repository = "https://github.com/MetaBeeAI/MetaBeeAI"
+Issues = "https://github.com/MetaBeeAI/MetaBeeAI/issues"
+
+[project.scripts]
+metabeeai = "metabeeai.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+
+line-length = 128
+target-version = "py311"
+
+lint.select = ["E", "F", "W", "I"]  # pycodestyle, pyflakes, warnings, import sorting
+
+# exclude certain paths
+exclude = [
+    ".venv",
+    "build",
+    "dist"
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

@@ -113,6 +113,7 @@ if args.list_questions:
 
 # Only check API key and load deepeval if we're actually running evaluation
 # Set API keys from environment
+# TODO: So this shouldnt be in the base level script, all of this needs to be moved to a function
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
 if not openai_api_key:
