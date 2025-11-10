@@ -26,6 +26,20 @@ class TestCLISubcommands:
                 cli.main()
             assert exc_info.value.code == 0
     
+    def test_cli_has_review_command(self):
+        """Test that 'review' subcommand exists."""
+        with patch('sys.argv', ['metabee', 'review', '--help']):
+            with pytest.raises(SystemExit) as exc_info:
+                cli.main()
+            assert exc_info.value.code == 0
+    
+    def test_cli_has_prep_benchmark_command(self):
+        """Test that 'prep-benchmark' subcommand exists."""
+        with patch('sys.argv', ['metabee', 'prep-benchmark', '--help']):
+            with pytest.raises(SystemExit) as exc_info:
+                cli.main()
+            assert exc_info.value.code == 0
+    
     def test_cli_requires_subcommand(self):
         """Test that CLI requires a subcommand."""
         with patch('sys.argv', ['metabee']):
@@ -266,6 +280,102 @@ class TestProcessPDFsCommand:
         assert args.pages == expected
 
 
+class TestReviewCommand:
+    """Test the 'review' subcommand."""
+    
+    @patch('metabeeai.cli.handle_review_command')
+    def test_review_command_launches(self, mock_handler):
+        """Test that 'review' command handler is called."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'review']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        # Check handler was called
+        assert mock_handler.called
+        args = mock_handler.call_args[0][0]
+        # Review command has no arguments, just verify it was called
+        assert args is not None
+
+
+class TestPrepBenchmarkCommand:
+    """Test the 'prep-benchmark' subcommand."""
+    
+    @patch('metabeeai.cli.handle_prep_benchmark_command')
+    def test_prep_benchmark_defaults(self, mock_handler):
+        """Test that 'prep-benchmark' command has correct default values."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'prep-benchmark']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        # Check handler was called
+        assert mock_handler.called
+        args = mock_handler.call_args[0][0]
+        
+        # Check defaults
+        assert args.papers_dir is None
+        assert args.questions_yml is None
+        assert args.output is None
+    
+    @patch('metabeeai.cli.handle_prep_benchmark_command')
+    def test_prep_benchmark_with_papers_dir(self, mock_handler):
+        """Test 'prep-benchmark' command with --papers-dir argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'prep-benchmark', '--papers-dir', '/test/papers']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.papers_dir == '/test/papers'
+    
+    @patch('metabeeai.cli.handle_prep_benchmark_command')
+    def test_prep_benchmark_with_questions_yml(self, mock_handler):
+        """Test 'prep-benchmark' command with --questions-yml argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'prep-benchmark', '--questions-yml', '/test/questions.yml']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.questions_yml == '/test/questions.yml'
+    
+    @patch('metabeeai.cli.handle_prep_benchmark_command')
+    def test_prep_benchmark_with_output(self, mock_handler):
+        """Test 'prep-benchmark' command with --output argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'prep-benchmark', '--output', '/test/output.json']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.output == '/test/output.json'
+    
+    @patch('metabeeai.cli.handle_prep_benchmark_command')
+    def test_prep_benchmark_with_all_args(self, mock_handler):
+        """Test 'prep-benchmark' command with all arguments."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', [
+            'metabee', 'prep-benchmark',
+            '--papers-dir', '/test/papers',
+            '--questions-yml', '/test/questions.yml',
+            '--output', '/test/output.json'
+        ]):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.papers_dir == '/test/papers'
+        assert args.questions_yml == '/test/questions.yml'
+        assert args.output == '/test/output.json'
+
+
 class TestDefaultBehavior:
     """Test that defaults result in running all steps (not skipping anything)."""
     
@@ -305,6 +415,8 @@ class TestInstalledCLI:
         assert result.returncode == 0
         assert 'llm' in result.stdout
         assert 'process-pdfs' in result.stdout
+        assert 'review' in result.stdout
+        assert 'prep-benchmark' in result.stdout
     
     def test_installed_cli_llm_help(self):
         """Test that the installed CLI 'llm' subcommand shows help."""
@@ -333,6 +445,22 @@ class TestInstalledCLI:
         assert '--merge-only' in result.stdout
         assert '--filter-chunk-type' in result.stdout
         assert '--pages' in result.stdout
+    
+    def test_installed_cli_review_help(self):
+        """Test that the installed CLI 'review' subcommand shows help."""
+        import subprocess
+        result = subprocess.run(['metabeeai', 'review', '--help'], capture_output=True, text=True)
+        assert result.returncode == 0
+        # Review command has no arguments, just verify it doesn't error
+    
+    def test_installed_cli_prep_benchmark_help(self):
+        """Test that the installed CLI 'prep-benchmark' subcommand shows help."""
+        import subprocess
+        result = subprocess.run(['metabeeai', 'prep-benchmark', '--help'], capture_output=True, text=True)
+        assert result.returncode == 0
+        assert '--papers-dir' in result.stdout
+        assert '--questions-yml' in result.stdout
+        assert '--output' in result.stdout
     
     def test_installed_cli_requires_subcommand(self):
         """Test that the installed CLI requires a subcommand."""

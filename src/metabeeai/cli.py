@@ -5,7 +5,9 @@ MetaBeeAI Command-Line Interface
 Provides multiple subcommands:
 - `metabeeai llm`: Run the LLM pipeline to extract literature answers
 - `metabeeai process-pdfs`: Process PDFs through the complete pipeline (split, API, merge, deduplicate)
-Future: add subcommands for run-all, benchmarking, query_database, etc.
+- `metabeeai review`: Launch GUI for reviewing and annotating LLM output
+- `metabeeai prep-benchmark`: Prepare benchmarking data from GUI reviewer answers
+Future: add subcommands for run-all, run benchmarks, query_database, etc.
 """
 
 import sys
@@ -61,6 +63,26 @@ def handle_process_pdfs_command(args):
     if args.pages != 1:
         sys.argv.extend(["--pages", str(args.pages)])
     sys.exit(process_module.main())
+
+
+def handle_review_command(args):
+    """Handle the 'review' subcommand (GUI for reviewing and annotating LLM output)."""
+    beegui_module = importlib.import_module("metabeeai.llm_review_software.beegui")
+    sys.exit(beegui_module.main())
+
+
+def handle_prep_benchmark_command(args):
+    """Handle the 'prep-benchmark' subcommand."""
+    prep_module = importlib.import_module("metabeeai.llm_benchmarking.prep_benchmark_data")
+    # Build sys.argv from parsed args
+    sys.argv = ["prep_benchmark_data.py"]
+    if args.papers_dir:
+        sys.argv.extend(["--papers-dir", args.papers_dir])
+    if args.questions_yml:
+        sys.argv.extend(["--questions-yml", args.questions_yml])
+    if args.output:
+        sys.argv.extend(["--output", args.output])
+    sys.exit(prep_module.main())
 
 
 def main():
@@ -180,10 +202,43 @@ def main():
         help="Number of pages per split: 1 for single-page (default), 2 for overlapping 2-page",
     )
 
+    # --- metabee review ------------------------------------------------------
+    review_parser = subparsers.add_parser(
+        "review",
+        help="Launch GUI for reviewing and annotating LLM output"
+    )
+    # No arguments needed - the GUI handles file selection
+
+    # --- metabee prep-benchmark ----------------------------------------------
+    prep_benchmark_parser = subparsers.add_parser(
+        "prep-benchmark",
+        help="Prepare benchmarking data from GUI reviewer answers"
+    )
+    prep_benchmark_parser.add_argument(
+        "--papers-dir",
+        type=str,
+        default=None,
+        help="Base directory containing paper folders (default: auto-detect from config)",
+    )
+    prep_benchmark_parser.add_argument(
+        "--questions-yml",
+        type=str,
+        default=None,
+        help="Path to questions.yml file (default: ../metabeeai_llm/questions.yml)",
+    )
+    prep_benchmark_parser.add_argument(
+        "--output",
+        type=str,
+        default=None,
+        help="Output file path (default: data/benchmark_data_gui.json)",
+    )
+
     # Map commands to their handler functions
     command_handlers = {
         "llm": handle_llm_command,
         "process-pdfs": handle_process_pdfs_command,
+        "review": handle_review_command,
+        "prep-benchmark": handle_prep_benchmark_command,
     }
 
     # Parse top-level args
