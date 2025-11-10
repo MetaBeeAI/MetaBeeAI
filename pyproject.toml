@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "MetaBeeAI LLM Pipeline for PDF processing and data extraction"
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" } # TODO: Check with rachel on what license she wants, set pyproj to the same license as in the repo
+license = { text = "BSD-3-Clause" }
 
 authors = [
     { name = "Rachel Parkinson", email = "rachel.parkinson@biology.ox.ac.uk" },
