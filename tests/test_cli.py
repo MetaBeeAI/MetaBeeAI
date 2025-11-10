@@ -40,6 +40,20 @@ class TestCLISubcommands:
                 cli.main()
             assert exc_info.value.code == 0
     
+    def test_cli_has_benchmark_command(self):
+        """Test that 'benchmark' subcommand exists."""
+        with patch('sys.argv', ['metabee', 'benchmark', '--help']):
+            with pytest.raises(SystemExit) as exc_info:
+                cli.main()
+            assert exc_info.value.code == 0
+    
+    def test_cli_has_edge_cases_command(self):
+        """Test that 'edge-cases' subcommand exists."""
+        with patch('sys.argv', ['metabee', 'edge-cases', '--help']):
+            with pytest.raises(SystemExit) as exc_info:
+                cli.main()
+            assert exc_info.value.code == 0
+    
     def test_cli_requires_subcommand(self):
         """Test that CLI requires a subcommand."""
         with patch('sys.argv', ['metabee']):
@@ -376,6 +390,323 @@ class TestPrepBenchmarkCommand:
         assert args.output == '/test/output.json'
 
 
+class TestBenchmarkCommand:
+    """Test the 'benchmark' subcommand."""
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_defaults(self, mock_handler):
+        """Test that 'benchmark' command has correct default values."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        # Check handler was called
+        assert mock_handler.called
+        args = mock_handler.call_args[0][0]
+        
+        # Check defaults
+        assert args.question is None
+        assert args.input is None
+        assert args.limit is None
+        assert args.batch_size == 25
+        assert args.max_retries == 5
+        assert args.model == "gpt-4o"
+        assert args.max_context_length == 200000
+        assert args.use_retrieval_only is False
+        assert args.list_questions is False
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_question(self, mock_handler):
+        """Test 'benchmark' command with --question argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark', '--question', 'test_question']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.question == 'test_question'
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_short_question_flag(self, mock_handler):
+        """Test 'benchmark' command with -q short flag."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark', '-q', 'test_q']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.question == 'test_q'
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_input(self, mock_handler):
+        """Test 'benchmark' command with --input argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark', '--input', '/test/input.json']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.input == '/test/input.json'
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_limit(self, mock_handler):
+        """Test 'benchmark' command with --limit argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark', '--limit', '10']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.limit == 10
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_batch_size(self, mock_handler):
+        """Test 'benchmark' command with --batch-size argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark', '--batch-size', '15']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.batch_size == 15
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_max_retries(self, mock_handler):
+        """Test 'benchmark' command with --max-retries argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark', '--max-retries', '3']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.max_retries == 3
+    
+    @pytest.mark.parametrize("model", ["gpt-4o-mini", "gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"])
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_model_choices(self, mock_handler, model):
+        """Test 'benchmark' command with different --model choices."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark', '--model', model]):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.model == model
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_max_context_length(self, mock_handler):
+        """Test 'benchmark' command with --max-context-length argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark', '--max-context-length', '100000']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.max_context_length == 100000
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_use_retrieval_only(self, mock_handler):
+        """Test 'benchmark' command with --use-retrieval-only flag."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark', '--use-retrieval-only']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.use_retrieval_only is True
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_list_questions(self, mock_handler):
+        """Test 'benchmark' command with --list-questions flag."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark', '--list-questions']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.list_questions is True
+    
+    @patch('metabeeai.cli.handle_benchmark_command')
+    def test_benchmark_with_all_args(self, mock_handler):
+        """Test 'benchmark' command with all arguments."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', [
+            'metabee', 'benchmark',
+            '--question', 'test_question',
+            '--input', '/test/input.json',
+            '--limit', '50',
+            '--batch-size', '10',
+            '--max-retries', '3',
+            '--model', 'gpt-4o-mini',
+            '--max-context-length', '150000',
+            '--use-retrieval-only'
+        ]):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.question == 'test_question'
+        assert args.input == '/test/input.json'
+        assert args.limit == 50
+        assert args.batch_size == 10
+        assert args.max_retries == 3
+        assert args.model == 'gpt-4o-mini'
+        assert args.max_context_length == 150000
+        assert args.use_retrieval_only is True
+
+
+class TestEdgeCasesCommand:
+    """Test the 'edge-cases' subcommand."""
+    
+    @patch('metabeeai.cli.handle_edge_cases_command')
+    def test_edge_cases_defaults(self, mock_handler):
+        """Test that 'edge-cases' command has correct default values."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'edge-cases']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        # Check handler was called
+        assert mock_handler.called
+        args = mock_handler.call_args[0][0]
+        
+        # Check defaults
+        assert args.num_cases == 20
+        assert args.results_dir is None
+        assert args.merged_data_dir is None
+        assert args.output_dir is None
+        assert args.openai_api_key is None
+        assert args.model == "gpt-4o"
+        assert args.generate_summaries_only is False
+        assert args.contextual_only is False
+        assert args.generate_contextual_summaries_only is False
+    
+    @patch('metabeeai.cli.handle_edge_cases_command')
+    def test_edge_cases_with_num_cases(self, mock_handler):
+        """Test 'edge-cases' command with --num-cases argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'edge-cases', '--num-cases', '10']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.num_cases == 10
+    
+    @patch('metabeeai.cli.handle_edge_cases_command')
+    def test_edge_cases_with_results_dir(self, mock_handler):
+        """Test 'edge-cases' command with --results-dir argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'edge-cases', '--results-dir', '/test/results']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.results_dir == '/test/results'
+    
+    @patch('metabeeai.cli.handle_edge_cases_command')
+    def test_edge_cases_with_output_dir(self, mock_handler):
+        """Test 'edge-cases' command with --output-dir argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'edge-cases', '--output-dir', '/test/output']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.output_dir == '/test/output'
+    
+    @patch('metabeeai.cli.handle_edge_cases_command')
+    def test_edge_cases_with_model(self, mock_handler):
+        """Test 'edge-cases' command with --model argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'edge-cases', '--model', 'gpt-4o-mini']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.model == 'gpt-4o-mini'
+    
+    @patch('metabeeai.cli.handle_edge_cases_command')
+    def test_edge_cases_with_generate_summaries_only(self, mock_handler):
+        """Test 'edge-cases' command with --generate-summaries-only flag."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'edge-cases', '--generate-summaries-only']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.generate_summaries_only is True
+    
+    @patch('metabeeai.cli.handle_edge_cases_command')
+    def test_edge_cases_with_contextual_only(self, mock_handler):
+        """Test 'edge-cases' command with --contextual-only flag."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'edge-cases', '--contextual-only']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.contextual_only is True
+    
+    @patch('metabeeai.cli.handle_edge_cases_command')
+    def test_edge_cases_with_generate_contextual_summaries_only(self, mock_handler):
+        """Test 'edge-cases' command with --generate-contextual-summaries-only flag."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'edge-cases', '--generate-contextual-summaries-only']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.generate_contextual_summaries_only is True
+    
+    @patch('metabeeai.cli.handle_edge_cases_command')
+    def test_edge_cases_with_all_args(self, mock_handler):
+        """Test 'edge-cases' command with all arguments."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', [
+            'metabee', 'edge-cases',
+            '--num-cases', '15',
+            '--results-dir', '/test/results',
+            '--merged-data-dir', '/test/merged',
+            '--output-dir', '/test/output',
+            '--openai-api-key', 'test-key',
+            '--model', 'gpt-4-turbo',
+            '--contextual-only'
+        ]):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.num_cases == 15
+        assert args.results_dir == '/test/results'
+        assert args.merged_data_dir == '/test/merged'
+        assert args.output_dir == '/test/output'
+        assert args.openai_api_key == 'test-key'
+        assert args.model == 'gpt-4-turbo'
+        assert args.contextual_only is True
+
+
 class TestDefaultBehavior:
     """Test that defaults result in running all steps (not skipping anything)."""
     
@@ -417,6 +748,8 @@ class TestInstalledCLI:
         assert 'process-pdfs' in result.stdout
         assert 'review' in result.stdout
         assert 'prep-benchmark' in result.stdout
+        assert 'benchmark' in result.stdout
+        assert 'edge-cases' in result.stdout
     
     def test_installed_cli_llm_help(self):
         """Test that the installed CLI 'llm' subcommand shows help."""
@@ -461,6 +794,33 @@ class TestInstalledCLI:
         assert '--papers-dir' in result.stdout
         assert '--questions-yml' in result.stdout
         assert '--output' in result.stdout
+    
+    def test_installed_cli_benchmark_help(self):
+        """Test that the installed CLI 'benchmark' subcommand shows help."""
+        import subprocess
+        result = subprocess.run(['metabeeai', 'benchmark', '--help'], capture_output=True, text=True)
+        assert result.returncode == 0
+        assert '--question' in result.stdout
+        assert '--input' in result.stdout
+        assert '--limit' in result.stdout
+        assert '--batch-size' in result.stdout
+        assert '--max-retries' in result.stdout
+        assert '--model' in result.stdout
+        assert '--max-context-length' in result.stdout
+        assert '--use-retrieval-only' in result.stdout
+        assert '--list-questions' in result.stdout
+    
+    def test_installed_cli_edge_cases_help(self):
+        """Test that the installed CLI 'edge-cases' subcommand shows help."""
+        import subprocess
+        result = subprocess.run(['metabeeai', 'edge-cases', '--help'], capture_output=True, text=True)
+        assert result.returncode == 0
+        assert '--num-cases' in result.stdout
+        assert '--results-dir' in result.stdout
+        assert '--output-dir' in result.stdout
+        assert '--model' in result.stdout
+        assert '--generate-summaries-only' in result.stdout
+        assert '--contextual-only' in result.stdout
     
     def test_installed_cli_requires_subcommand(self):
         """Test that the installed CLI requires a subcommand."""

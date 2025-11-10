@@ -7,7 +7,8 @@ Provides multiple subcommands:
 - `metabeeai process-pdfs`: Process PDFs through the complete pipeline (split, API, merge, deduplicate)
 - `metabeeai review`: Launch GUI for reviewing and annotating LLM output
 - `metabeeai prep-benchmark`: Prepare benchmarking data from GUI reviewer answers
-Future: add subcommands for run-all, run benchmarks, query_database, etc.
+- `metabeeai benchmark`: Run DeepEval benchmarking on LLM outputs
+- `metabeeai edge-cases`: Identify edge cases (low-scoring examples) from benchmarking results
 """
 
 import sys
@@ -83,6 +84,58 @@ def handle_prep_benchmark_command(args):
     if args.output:
         sys.argv.extend(["--output", args.output])
     sys.exit(prep_module.main())
+
+
+def handle_benchmark_command(args):
+    """Handle the 'benchmark' subcommand."""
+    benchmark_module = importlib.import_module("metabeeai.llm_benchmarking.deepeval_benchmarking")
+    # Build sys.argv from parsed args
+    sys.argv = ["deepeval_benchmarking.py"]
+    if args.question:
+        sys.argv.extend(["--question", args.question])
+    if args.input:
+        sys.argv.extend(["--input", args.input])
+    if args.limit:
+        sys.argv.extend(["--limit", str(args.limit)])
+    if args.batch_size != 25:  # Only add if different from default
+        sys.argv.extend(["--batch-size", str(args.batch_size)])
+    if args.max_retries != 5:  # Only add if different from default
+        sys.argv.extend(["--max-retries", str(args.max_retries)])
+    if args.model != "gpt-4o":  # Only add if different from default
+        sys.argv.extend(["--model", args.model])
+    if args.max_context_length != 200000:  # Only add if different from default
+        sys.argv.extend(["--max-context-length", str(args.max_context_length)])
+    if args.use_retrieval_only:
+        sys.argv.append("--use-retrieval-only")
+    if args.list_questions:
+        sys.argv.append("--list-questions")
+    sys.exit(benchmark_module.main())
+
+
+def handle_edge_cases_command(args):
+    """Handle the 'edge-cases' subcommand."""
+    edge_cases_module = importlib.import_module("metabeeai.llm_benchmarking.edge_cases")
+    # Build sys.argv from parsed args
+    sys.argv = ["edge_cases.py"]
+    if args.num_cases != 20:  # Only add if different from default
+        sys.argv.extend(["--num-cases", str(args.num_cases)])
+    if args.results_dir:
+        sys.argv.extend(["--results-dir", args.results_dir])
+    if args.merged_data_dir:
+        sys.argv.extend(["--merged-data-dir", args.merged_data_dir])
+    if args.output_dir:
+        sys.argv.extend(["--output-dir", args.output_dir])
+    if args.openai_api_key:
+        sys.argv.extend(["--openai-api-key", args.openai_api_key])
+    if args.model != "gpt-4o":  # Only add if different from default
+        sys.argv.extend(["--model", args.model])
+    if args.generate_summaries_only:
+        sys.argv.append("--generate-summaries-only")
+    if args.contextual_only:
+        sys.argv.append("--contextual-only")
+    if args.generate_contextual_summaries_only:
+        sys.argv.append("--generate-contextual-summaries-only")
+    sys.exit(edge_cases_module.main())
 
 
 def main():
@@ -233,12 +286,128 @@ def main():
         help="Output file path (default: data/benchmark_data_gui.json)",
     )
 
+    # --- metabee benchmark ---------------------------------------------------
+    benchmark_parser = subparsers.add_parser(
+        "benchmark",
+        help="Run DeepEval benchmarking on LLM outputs"
+    )
+    benchmark_parser.add_argument(
+        "--question", "-q",
+        type=str,
+        help="Question key to filter by (optional - if not specified, processes all questions)",
+    )
+    benchmark_parser.add_argument(
+        "--input", "-i",
+        type=str,
+        default=None,
+        help="Input benchmark data file (default: auto-detect from config)",
+    )
+    benchmark_parser.add_argument(
+        "--limit", "-l",
+        type=int,
+        help="Maximum number of test cases to process (optional)",
+    )
+    benchmark_parser.add_argument(
+        "--batch-size", "-b",
+        type=int,
+        default=25,
+        help="Number of test cases to process per batch (default: 25)",
+    )
+    benchmark_parser.add_argument(
+        "--max-retries", "-r",
+        type=int,
+        default=5,
+        help="Maximum retries per batch (default: 5)",
+    )
+    benchmark_parser.add_argument(
+        "--model", "-m",
+        type=str,
+        default="gpt-4o",
+        choices=["gpt-4o-mini", "gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"],
+        help="OpenAI model to use for evaluation (default: gpt-4o)",
+    )
+    benchmark_parser.add_argument(
+        "--max-context-length",
+        type=int,
+        default=200000,
+        help="Maximum context length in characters to process (default: 200000, ~50K tokens for gpt-4o)",
+    )
+    benchmark_parser.add_argument(
+        "--use-retrieval-only",
+        action="store_true",
+        help="Use only retrieval_context instead of full context to reduce token usage",
+    )
+    benchmark_parser.add_argument(
+        "--list-questions",
+        action="store_true",
+        help="List all available question keys in the benchmark data and exit",
+    )
+
+    # --- metabee edge-cases --------------------------------------------------
+    edge_cases_parser = subparsers.add_parser(
+        "edge-cases",
+        help="Identify edge cases (low-scoring examples) from benchmarking results"
+    )
+    edge_cases_parser.add_argument(
+        "--num-cases",
+        type=int,
+        default=20,
+        help="Number of edge cases to identify per question type (default: 20)",
+    )
+    edge_cases_parser.add_argument(
+        "--results-dir",
+        type=str,
+        default=None,
+        help="Directory containing evaluation results (default: auto-detect from config)",
+    )
+    edge_cases_parser.add_argument(
+        "--merged-data-dir",
+        type=str,
+        default=None,
+        help="Directory containing merged evaluation results (not used, kept for compatibility)",
+    )
+    edge_cases_parser.add_argument(
+        "--output-dir",
+        type=str,
+        default=None,
+        help="Output directory for edge cases (default: auto-detect from config)",
+    )
+    edge_cases_parser.add_argument(
+        "--openai-api-key",
+        type=str,
+        default=None,
+        help="OpenAI API key for LLM summarization (or set OPENAI_API_KEY env var)",
+    )
+    edge_cases_parser.add_argument(
+        "--model",
+        type=str,
+        default="gpt-4o",
+        help="OpenAI model to use for summarization (default: gpt-4o)",
+    )
+    edge_cases_parser.add_argument(
+        "--generate-summaries-only",
+        action="store_true",
+        help="Only generate LLM summaries for existing edge case files (skip edge case identification)",
+    )
+    edge_cases_parser.add_argument(
+        "--contextual-only",
+        action="store_true",
+        help="Only run contextual measures analysis (Faithfulness, Contextual Precision, Contextual Recall) for LLM data",
+    )
+    edge_cases_parser.add_argument(
+        "--generate-contextual-summaries-only",
+        action="store_true",
+        help="Only generate LLM summaries for existing contextual edge case files (skip edge case identification)",
+    )
+
     # Map commands to their handler functions
     command_handlers = {
         "llm": handle_llm_command,
         "process-pdfs": handle_process_pdfs_command,
         "review": handle_review_command,
         "prep-benchmark": handle_prep_benchmark_command,
+        "benchmark": handle_benchmark_command,
+        "edge-cases": handle_edge_cases_command,
     }
 
     # Parse top-level args
