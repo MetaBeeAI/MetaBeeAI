@@ -9,6 +9,7 @@ Provides multiple subcommands:
 - `metabeeai prep-benchmark`: Prepare benchmarking data from GUI reviewer answers
 - `metabeeai benchmark`: Run DeepEval benchmarking on LLM outputs
 - `metabeeai edge-cases`: Identify edge cases (low-scoring examples) from benchmarking results
+- `metabeeai plot-metrics`: Create visualization plots from benchmarking results
 """
 
 import sys
@@ -136,6 +137,18 @@ def handle_edge_cases_command(args):
     if args.generate_contextual_summaries_only:
         sys.argv.append("--generate-contextual-summaries-only")
     sys.exit(edge_cases_module.main())
+
+
+def handle_plot_metrics_command(args):
+    """Handle the 'plot-metrics' subcommand."""
+    plot_module = importlib.import_module("metabeeai.llm_benchmarking.plot_metrics_comparison")
+    # Build sys.argv from parsed args
+    sys.argv = ["plot_metrics_comparison.py"]
+    if args.results_dir:
+        sys.argv.extend(["--results-dir", args.results_dir])
+    if args.output_dir:
+        sys.argv.extend(["--output-dir", args.output_dir])
+    sys.exit(plot_module.main())
 
 
 def main():
@@ -400,6 +413,24 @@ def main():
         help="Only generate LLM summaries for existing contextual edge case files (skip edge case identification)",
     )
 
+    # --- metabee plot-metrics ------------------------------------------------
+    plot_metrics_parser = subparsers.add_parser(
+        "plot-metrics",
+        help="Create visualization plots from benchmarking results"
+    )
+    plot_metrics_parser.add_argument(
+        "--results-dir",
+        type=str,
+        default=None,
+        help="Directory containing evaluation results (default: auto-detect from config)",
+    )
+    plot_metrics_parser.add_argument(
+        "--output-dir",
+        type=str,
+        default=None,
+        help="Output directory for plots (default: same as results-dir)",
+    )
+
     # Map commands to their handler functions
     command_handlers = {
         "llm": handle_llm_command,
@@ -408,6 +439,7 @@ def main():
         "prep-benchmark": handle_prep_benchmark_command,
         "benchmark": handle_benchmark_command,
         "edge-cases": handle_edge_cases_command,
+        "plot-metrics": handle_plot_metrics_command,
     }
 
     # Parse top-level args

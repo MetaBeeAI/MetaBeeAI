@@ -54,6 +54,13 @@ class TestCLISubcommands:
                 cli.main()
             assert exc_info.value.code == 0
     
+    def test_cli_has_plot_metrics_command(self):
+        """Test that 'plot-metrics' subcommand exists."""
+        with patch('sys.argv', ['metabee', 'plot-metrics', '--help']):
+            with pytest.raises(SystemExit) as exc_info:
+                cli.main()
+            assert exc_info.value.code == 0
+    
     def test_cli_requires_subcommand(self):
         """Test that CLI requires a subcommand."""
         with patch('sys.argv', ['metabee']):
@@ -707,6 +714,68 @@ class TestEdgeCasesCommand:
         assert args.contextual_only is True
 
 
+class TestPlotMetricsCommand:
+    """Test the 'plot-metrics' subcommand."""
+    
+    @patch('metabeeai.cli.handle_plot_metrics_command')
+    def test_plot_metrics_defaults(self, mock_handler):
+        """Test that 'plot-metrics' command has correct default values."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'plot-metrics']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        # Check handler was called
+        assert mock_handler.called
+        args = mock_handler.call_args[0][0]
+        
+        # Check defaults
+        assert args.results_dir is None
+        assert args.output_dir is None
+    
+    @patch('metabeeai.cli.handle_plot_metrics_command')
+    def test_plot_metrics_with_results_dir(self, mock_handler):
+        """Test 'plot-metrics' command with --results-dir argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'plot-metrics', '--results-dir', '/test/results']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.results_dir == '/test/results'
+    
+    @patch('metabeeai.cli.handle_plot_metrics_command')
+    def test_plot_metrics_with_output_dir(self, mock_handler):
+        """Test 'plot-metrics' command with --output-dir argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'plot-metrics', '--output-dir', '/test/output']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.output_dir == '/test/output'
+    
+    @patch('metabeeai.cli.handle_plot_metrics_command')
+    def test_plot_metrics_with_all_args(self, mock_handler):
+        """Test 'plot-metrics' command with all arguments."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', [
+            'metabee', 'plot-metrics',
+            '--results-dir', '/test/results',
+            '--output-dir', '/test/output'
+        ]):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.results_dir == '/test/results'
+        assert args.output_dir == '/test/output'
+
+
 class TestDefaultBehavior:
     """Test that defaults result in running all steps (not skipping anything)."""
     
@@ -750,6 +819,7 @@ class TestInstalledCLI:
         assert 'prep-benchmark' in result.stdout
         assert 'benchmark' in result.stdout
         assert 'edge-cases' in result.stdout
+        assert 'plot-metrics' in result.stdout
     
     def test_installed_cli_llm_help(self):
         """Test that the installed CLI 'llm' subcommand shows help."""
@@ -821,6 +891,14 @@ class TestInstalledCLI:
         assert '--model' in result.stdout
         assert '--generate-summaries-only' in result.stdout
         assert '--contextual-only' in result.stdout
+    
+    def test_installed_cli_plot_metrics_help(self):
+        """Test that the installed CLI 'plot-metrics' subcommand shows help."""
+        import subprocess
+        result = subprocess.run(['metabeeai', 'plot-metrics', '--help'], capture_output=True, text=True)
+        assert result.returncode == 0
+        assert '--results-dir' in result.stdout
+        assert '--output-dir' in result.stdout
     
     def test_installed_cli_requires_subcommand(self):
         """Test that the installed CLI requires a subcommand."""
