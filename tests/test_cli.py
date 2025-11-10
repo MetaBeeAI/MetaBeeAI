@@ -61,6 +61,16 @@ class TestCLISubcommands:
                 cli.main()
             assert exc_info.value.code == 0
     
+    @patch('metabeeai.cli.handle_benchmark_all_command')
+    def test_cli_has_benchmark_all_command(self, mock_handler):
+        """Test that CLI has benchmark-all command."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark-all']):
+            with pytest.raises(SystemExit) as exc_info:
+                cli.main()
+            assert exc_info.value.code == 0
+    
     def test_cli_requires_subcommand(self):
         """Test that CLI requires a subcommand."""
         with patch('sys.argv', ['metabee']):
@@ -776,6 +786,76 @@ class TestPlotMetricsCommand:
         assert args.output_dir == '/test/output'
 
 
+class TestBenchmarkAllCommand:
+    """Test the 'benchmark-all' subcommand."""
+    
+    @patch('metabeeai.cli.handle_benchmark_all_command')
+    def test_benchmark_all_defaults(self, mock_handler):
+        """Test that 'benchmark-all' command has correct default values."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark-all']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        # Check handler was called
+        assert mock_handler.called
+        args = mock_handler.call_args[0][0]
+        
+        # Check defaults
+        assert args.skip_prep is False
+        assert args.skip_evaluation is False
+        assert args.skip_plotting is False
+        assert args.skip_edge_cases is False
+        assert args.question is None
+        assert args.limit is None
+    
+    @patch('metabeeai.cli.handle_benchmark_all_command')
+    def test_benchmark_all_with_skip_prep(self, mock_handler):
+        """Test 'benchmark-all' command with --skip-prep flag."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark-all', '--skip-prep']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.skip_prep is True
+    
+    @patch('metabeeai.cli.handle_benchmark_all_command')
+    def test_benchmark_all_with_question(self, mock_handler):
+        """Test 'benchmark-all' command with --question argument."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', ['metabee', 'benchmark-all', '--question', 'bee_species']):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.question == 'bee_species'
+    
+    @patch('metabeeai.cli.handle_benchmark_all_command')
+    def test_benchmark_all_with_all_skip_flags(self, mock_handler):
+        """Test 'benchmark-all' command with all skip flags."""
+        mock_handler.side_effect = SystemExit(0)
+        
+        with patch('sys.argv', [
+            'metabee', 'benchmark-all',
+            '--skip-prep',
+            '--skip-evaluation',
+            '--skip-plotting',
+            '--skip-edge-cases'
+        ]):
+            with pytest.raises(SystemExit):
+                cli.main()
+        
+        args = mock_handler.call_args[0][0]
+        assert args.skip_prep is True
+        assert args.skip_evaluation is True
+        assert args.skip_plotting is True
+        assert args.skip_edge_cases is True
+
+
 class TestDefaultBehavior:
     """Test that defaults result in running all steps (not skipping anything)."""
     
@@ -820,6 +900,7 @@ class TestInstalledCLI:
         assert 'benchmark' in result.stdout
         assert 'edge-cases' in result.stdout
         assert 'plot-metrics' in result.stdout
+        assert 'benchmark-all' in result.stdout
     
     def test_installed_cli_llm_help(self):
         """Test that the installed CLI 'llm' subcommand shows help."""
@@ -899,6 +980,17 @@ class TestInstalledCLI:
         assert result.returncode == 0
         assert '--results-dir' in result.stdout
         assert '--output-dir' in result.stdout
+    
+    def test_installed_cli_benchmark_all_help(self):
+        """Test that the installed CLI 'benchmark-all' subcommand shows help."""
+        import subprocess
+        result = subprocess.run(['metabeeai', 'benchmark-all', '--help'], capture_output=True, text=True)
+        assert result.returncode == 0
+        assert '--skip-prep' in result.stdout
+        assert '--skip-evaluation' in result.stdout
+        assert '--skip-plotting' in result.stdout
+        assert '--skip-edge-cases' in result.stdout
+        assert '--question' in result.stdout
     
     def test_installed_cli_requires_subcommand(self):
         """Test that the installed CLI requires a subcommand."""

@@ -10,6 +10,7 @@ Provides multiple subcommands:
 - `metabeeai benchmark`: Run DeepEval benchmarking on LLM outputs
 - `metabeeai edge-cases`: Identify edge cases (low-scoring examples) from benchmarking results
 - `metabeeai plot-metrics`: Create visualization plots from benchmarking results
+- `metabeeai benchmark-all`: Run complete benchmarking pipeline (prep → eval → plot → edge-cases)
 """
 
 import sys
@@ -149,6 +150,27 @@ def handle_plot_metrics_command(args):
     if args.output_dir:
         sys.argv.extend(["--output-dir", args.output_dir])
     sys.exit(plot_module.main())
+
+
+def handle_benchmark_all_command(args):
+    """Handle the 'benchmark-all' subcommand (runs complete benchmarking pipeline)."""
+    run_bench_module = importlib.import_module("metabeeai.llm_benchmarking.run_benchmarking")
+    # Build sys.argv from parsed args - only passing through most common flags
+    # Users needing fine control should use individual commands
+    sys.argv = ["run_benchmarking.py"]
+    if args.skip_prep:
+        sys.argv.append("--skip-prep")
+    if args.skip_evaluation:
+        sys.argv.append("--skip-evaluation")
+    if args.skip_plotting:
+        sys.argv.append("--skip-plotting")
+    if args.skip_edge_cases:
+        sys.argv.append("--skip-edge-cases")
+    if args.question:
+        sys.argv.extend(["--question", args.question])
+    if args.limit:
+        sys.argv.extend(["--limit", str(args.limit)])
+    sys.exit(run_bench_module.main())
 
 
 def main():
@@ -431,6 +453,42 @@ def main():
         help="Output directory for plots (default: same as results-dir)",
     )
 
+    # --- metabee benchmark-all -----------------------------------------------
+    benchmark_all_parser = subparsers.add_parser(
+        "benchmark-all",
+        help="Run complete benchmarking pipeline (prep → eval → plot → edge-cases)"
+    )
+    benchmark_all_parser.add_argument(
+        "--skip-prep",
+        action="store_true",
+        help="Skip benchmark data preparation step",
+    )
+    benchmark_all_parser.add_argument(
+        "--skip-evaluation",
+        action="store_true",
+        help="Skip DeepEval benchmarking step",
+    )
+    benchmark_all_parser.add_argument(
+        "--skip-plotting",
+        action="store_true",
+        help="Skip plotting step",
+    )
+    benchmark_all_parser.add_argument(
+        "--skip-edge-cases",
+        action="store_true",
+        help="Skip edge case analysis step",
+    )
+    benchmark_all_parser.add_argument(
+        "--question", "-q",
+        type=str,
+        help="Question key to filter by (applies to evaluation and edge-cases steps)",
+    )
+    benchmark_all_parser.add_argument(
+        "--limit", "-l",
+        type=int,
+        help="Maximum number of test cases to process (applies to evaluation step)",
+    )
+
     # Map commands to their handler functions
     command_handlers = {
         "llm": handle_llm_command,
@@ -440,6 +498,7 @@ def main():
         "benchmark": handle_benchmark_command,
         "edge-cases": handle_edge_cases_command,
         "plot-metrics": handle_plot_metrics_command,
+        "benchmark-all": handle_benchmark_all_command,
     }
 
     # Parse top-level args
