@@ -12,7 +12,9 @@ license = { text = "MIT" } # TODO: Check with rachel on what license she wants, 
 
 authors = [
     { name = "Rachel Parkinson", email = "rachel.parkinson@biology.ox.ac.uk" },
-    { name = "Alasdair Wilson", email = "alasdair.wilson@dtc.ox.ac.uk" }
+    { name = "Alasdair Wilson", email = "alasdair.wilson@dtc.ox.ac.uk" },
+    { name = "Shuxiang Cao", email = "shuxiang.cao@physics.ox.ac.uk" },
+    { name = "Mikael Mieskolainen", email = "mikael.mieskolainen@cern.ch" }
 ]
 
 keywords = ["pdf", "llm", "nlp", "data extraction", "fastapi", "openai"]
