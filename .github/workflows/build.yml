@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install .[dev]
-      - run: pytest --cov=metabeeai .
+      - run: pytest .
 
   build:
     name: Build package (smoke test)
