@@ -42,6 +42,6 @@ The full pipeline can be ran, using the CLI command:
 
    metabeeai run
 
-For a detailed breakdown of the usage and options, please refer to the  :doc:`User Guide <user_guide/index>`.
+For a detailed breakdown of the usage and options, please refer to the  :doc:`User Guide <guide/index>`.
 
 For the full API reference, please refer to the :doc:`API Reference <api/index>`.

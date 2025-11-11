@@ -186,7 +186,7 @@ python split_pdf.py /path/to/papers --pages 2
 
 Creates JSON files with the following structure:
 
-```json
+```text
 {
   "data": {
     "chunks": [
@@ -197,10 +197,10 @@ Creates JSON files with the following structure:
         "grounding": [
           {
             "page": 0,
-            "bbox": [x1, y1, x2, y2]
+            "bbox": ["x1", "y1", "x2", "y2"]
           }
         ],
-        "metadata": {...}
+        "metadata": {"confidence": 0.95}
       }
     ]
   }
@@ -262,16 +262,16 @@ python merger.py --basepath /path/to/data --filter-chunk-type marginalia figure
 
 **Output format**:
 
-```json
+```text
 {
   "data": {
     "chunks": [
       {
         "chunk_id": "unique_id",
-        "text": "...",
+        "text": "…",
         "chunk_type": "paragraph",
-        "grounding": [{"page": 0, "bbox": [...]}],
-        "metadata": {...}
+        "grounding": [{"page": 0, "bbox": [0,0,100,200]}],
+        "metadata": {"confidence": 0.93}
       }
     ]
   }
@@ -289,13 +289,13 @@ Processes all `merged_v2.json` files in a directory to remove duplicates.
 
 **Output**: Creates a summary JSON file with:
 
-```json
+```text
 {
   "status": "completed",
   "total_papers": 10,
   "processed_papers": 10,
   "total_duplicates_removed": 145,
-  "results": [...]
+  "results": ["…"]
 }
 ```
 
@@ -333,26 +333,17 @@ python batch_deduplicate.py --verbose
 
 The pipeline produces a `merged_v2.json` file for each paper with the following structure:
 
-```json
+```text
 {
   "data": {
     "chunks": [
       {
         "chunk_id": "unique_chunk_identifier",
-        "text": "The extracted text content from the PDF...",
+        "text": "The extracted text content from the PDF…",
         "chunk_type": "paragraph",
-        "grounding": [
-          {
-            "page": 0,
-            "bbox": [x1, y1, x2, y2]
-          }
-        ],
+        "grounding": [{"page": 0, "bbox": [0,0,100,200]}],
         "chunk_ids": ["id1", "id2"],
-        "metadata": {
-          "confidence": 0.95,
-          "font_size": 12,
-          ...
-        }
+        "metadata": {"confidence": 0.95, "font_size": 12}
       }
     ]
   },
@@ -366,7 +357,7 @@ The pipeline produces a `merged_v2.json` file for each paper with the following 
 }
 ```
 
-### Field Descriptions:
+### Field Descriptions
 
 - **chunk_id**: Unique identifier for this chunk
 - **text**: Extracted text content
@@ -541,6 +532,7 @@ python merger.py --basepath /path/to/data --filter-chunk-type marginalia
 ```
 
 Common chunk types to filter:
+
 - `marginalia` - Headers, footers, page numbers
 - `figure` - Figure captions (if you only want main text)
 - `table` - Table content (if you only want prose)
@@ -626,4 +618,3 @@ After processing your PDFs:
 - **Data Analysis**: See `../query_database` for analyzing extracted data
 - **Configuration**: See `../config.py` for centralized configuration
 
----

@@ -17,7 +17,8 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx_autodoc_typehints",
     "sphinx_automodapi.automodapi",
-    "sphinx_gallery.gen_gallery",
+    # Gallery disabled due to zero examples; avoids needless processing and warnings
+    # "sphinx_gallery.gen_gallery",
     "myst_parser",
 ]
 
@@ -25,9 +26,15 @@ autosummary_generate = True
 autoclass_content = "both"
 html_theme = "pydata_sphinx_theme"
 
+exclude_patterns = [
+    # Exclude stale autosummary files for non-existent API symbols
+    "generated/api/metabeeai.metabeeai_llm.check_chunk_ids_in_pages_dir.rst",
+]
+
+# Preserve gallery config for future re-enable
 sphinx_gallery_conf = {
-    "examples_dirs": "../examples",       # path to example scripts
-    'gallery_dirs': os.path.join('generated', 'gallery'), # where to save generated gallery
+    "examples_dirs": "../examples",
+    'gallery_dirs': os.path.join('generated', 'gallery'),
     'filename_pattern': '^((?!skip_).)*$',
     "default_thumb_file": "_static/gallery_default.png",
     "download_all_examples": True,
