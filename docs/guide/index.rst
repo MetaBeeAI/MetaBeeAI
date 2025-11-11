@@ -1,5 +1,5 @@
-MetaBeeAI Literature Review Pipeline
-====================================
+App Pipeline
+============
 
 A comprehensive pipeline for extracting, analyzing, and benchmarking structured information from scientific literature using Large Language Models and Vision AI.
 
