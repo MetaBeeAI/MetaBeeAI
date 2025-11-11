@@ -26,12 +26,24 @@ def format_to_list(question,text,model='gpt-4o-mini'):
 # ------------------------------------------------------------------------------
 # Use {placeholder} format syntax in any question that should be parameterized.
 
-# Get the directory where this script is located
-script_dir = os.path.dirname(os.path.abspath(__file__))
-questions_path = os.path.join(script_dir, 'questions.yml')
+# Lazy load questions to avoid import-time errors
+_QUESTIONS = None
 
-with open(questions_path, 'r') as file:
-    QUESTIONS = yaml.safe_load(file)
+def _get_questions():
+    """
+    Lazy loads the questions.yml file when first accessed.
+    Returns the questions dictionary.
+    """
+    global _QUESTIONS
+    if _QUESTIONS is None:
+        # Get the directory where this script is located
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        questions_path = os.path.join(script_dir, 'questions.yml')
+        
+        with open(questions_path, 'r') as file:
+            _QUESTIONS = yaml.safe_load(file)
+    
+    return _QUESTIONS
 
 # ------------------------------------------------------------------------------
 # Helper Function: get_answer
@@ -137,7 +149,8 @@ async def get_literature_answers(json_path, relevance_model=None, answer_model=N
         relevance_model: Model to use for chunk selection (defaults to config)
         answer_model: Model to use for answer generation and reflection (defaults to config)
     """
-    answers = await process_question_tree(QUESTIONS, json_path, relevance_model=relevance_model, answer_model=answer_model)
+    questions = _get_questions()
+    answers = await process_question_tree(questions, json_path, relevance_model=relevance_model, answer_model=answer_model)
     return answers
 
 
@@ -251,7 +264,8 @@ async def process_papers(base_dir=None, paper_folders=None, overwrite_merged=Fal
                 continue
             
             # Process the paper with progress tracking
-            print(f"  📖 Processing {len(QUESTIONS)} questions...")
+            questions = _get_questions()
+            print(f"  📖 Processing {len(questions)} questions...")
             
             # Temporarily reduce logging verbosity and suppress all output during processing
             import logging
