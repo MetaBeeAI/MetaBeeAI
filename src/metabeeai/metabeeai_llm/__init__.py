@@ -14,7 +14,6 @@ from importlib import metadata
 __all__ = [
     "split_pdfs",
     "process_papers",
-    "check_chunk_ids_in_pages_dir",
     "get_literature_answers",
     "merge_json_in_the_folder",
 ]

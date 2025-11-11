@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install .[dev]
-      - run: pytest -q || echo "No tests yet, skipping"
+      - run: pytest .
 
   build:
     name: Build package (smoke test)
