@@ -20,10 +20,18 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Import processing modules
-from split_pdf import split_pdfs
-from va_process_papers import process_papers
-from merger import process_all_papers
-from batch_deduplicate import batch_deduplicate
+try:
+    # Try relative imports first (when used as module)
+    from .split_pdf import split_pdfs
+    from .va_process_papers import process_papers
+    from .merger import process_all_papers
+    from .batch_deduplicate import batch_deduplicate
+except ImportError:
+    # Fall back to direct imports (when run as script)
+    from split_pdf import split_pdfs
+    from va_process_papers import process_papers
+    from merger import process_all_papers
+    from batch_deduplicate import batch_deduplicate
 
 def get_papers_dir():
     """Get the papers directory from config or environment."""

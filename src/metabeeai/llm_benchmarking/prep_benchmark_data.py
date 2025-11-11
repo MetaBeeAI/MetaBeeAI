@@ -300,7 +300,8 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
         print(f"  - {q_key}: {count} entries")
 
 
-if __name__ == "__main__":
+def main():
+    """Main entry point for the prep_benchmark_data script."""
     import argparse
     
     parser = argparse.ArgumentParser(
@@ -339,3 +340,7 @@ if __name__ == "__main__":
     
     # Run the preparation
     prepare_benchmark_data(args.papers_dir, args.questions_yml, args.output)
+
+
+if __name__ == "__main__":
+    main()
