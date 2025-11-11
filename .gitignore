@@ -221,3 +221,5 @@ llm_benchmarking/deepeval-results/*
 **/generated/
 **/gen_modules/
 
+# Windows Alternate Data Streams artifacts copied into repo
+*:Zone.Identifier

@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.abspath("../src"))
 
 project = "MetaBeeAI"
 release = "0.1.0"
+version = release
 year = datetime.now().year
 copyright = f"{year}, MetaBeeAI Contributors"
 
