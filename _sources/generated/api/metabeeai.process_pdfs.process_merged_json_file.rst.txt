@@ -1,0 +1,6 @@
+process_merged_json_file
+========================
+
+.. currentmodule:: metabeeai.process_pdfs
+
+.. autofunction:: process_merged_json_file

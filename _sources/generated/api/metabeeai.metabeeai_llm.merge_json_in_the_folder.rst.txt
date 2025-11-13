@@ -1,0 +1,6 @@
+merge_json_in_the_folder
+========================
+
+.. currentmodule:: metabeeai.metabeeai_llm
+
+.. autofunction:: merge_json_in_the_folder

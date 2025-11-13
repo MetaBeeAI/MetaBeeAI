@@ -1,0 +1,6 @@
+deduplicate_chunks
+==================
+
+.. currentmodule:: metabeeai.process_pdfs
+
+.. autofunction:: deduplicate_chunks

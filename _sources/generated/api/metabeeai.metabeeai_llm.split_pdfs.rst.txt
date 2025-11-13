@@ -1,0 +1,6 @@
+split_pdfs
+==========
+
+.. currentmodule:: metabeeai.metabeeai_llm
+
+.. autofunction:: split_pdfs

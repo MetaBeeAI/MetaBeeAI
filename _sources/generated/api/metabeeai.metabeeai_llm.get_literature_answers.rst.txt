@@ -1,0 +1,6 @@
+get_literature_answers
+======================
+
+.. currentmodule:: metabeeai.metabeeai_llm
+
+.. autofunction:: get_literature_answers

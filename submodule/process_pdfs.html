@@ -1,0 +1,1213 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PDF Processing Pipeline &#8212; MetaBeeAI 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/bee.css?v=c7d4ab96" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'submodule/process_pdfs';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MetaBeeAI LLM" href="metabeeai_llm.html" />
+    <link rel="prev" title="Submodules" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/metabeeai.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/metabeeai_dark.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">MetaBeeAI</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quick Start Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../guide/index.html">
+    App Pipeline
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Submodules
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MetaBeeAI/MetaBeeAI" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quick Start Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../guide/index.html">
+    App Pipeline
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Submodules
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MetaBeeAI/MetaBeeAI" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">PDF Processing Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metabeeai_llm.html">MetaBeeAI LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm_review_software.html">LLM Review Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="llm_benchmarking.html">LLM Benchmarking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="query_database.html">Query Database</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Submodules</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">PDF Processing Pipeline</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pdf-processing-pipeline">
+<h1>PDF Processing Pipeline<a class="headerlink" href="#pdf-processing-pipeline" title="Link to this heading">#</a></h1>
+<p>This folder contains scripts for converting PDF scientific papers into structured JSON format suitable for LLM-based information extraction.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The PDF processing pipeline converts raw PDF papers into structured JSON chunks through four main steps, each of these steps can be run independently or together via the <code class="docutils literal notranslate"><span class="pre">process_all.py</span></code> script.</p>
+<ol class="arabic simple">
+<li><p><strong>Split PDFs</strong> - Break papers into single-page documents or overlapping 2-page segments</p></li>
+<li><p><strong>Vision API Processing</strong> - Extract text and structure using Landing AI’s Vision Agentic API</p></li>
+<li><p><strong>Merge JSON Files</strong> - Combine individual page JSON files into a single document</p></li>
+<li><p><strong>Deduplicate Chunks</strong> - Remove duplicate text chunks (primarily for overlapping pages)</p></li>
+</ol>
+<hr class="docutils" />
+<p><strong>Input Data Format</strong>: Your papers must be organized as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>papers/
+├── 95UKMIEY/
+│   └── 95UKMIEY_main.pdf
+├── CX9M8HCM/
+│   └── CX9M8HCM_main.pdf
+├── V7984AAU/
+│   └── V7984AAU_main.pdf
+...
+</pre></div>
+</div>
+<p>For each pdf you intend to process, you need:</p>
+<ul class="simple">
+<li><p>A PDF file named with a unique alphanumeric key in the form of <code class="docutils literal notranslate"><span class="pre">{key}_main.pdf</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">95UKMIEY_main.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">CX9M8HCM_main.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">001_main.pdf</span></code>, etc.)</p></li>
+<li><p>The PDF should be placed in a folder named with the same key, e.g., <code class="docutils literal notranslate"><span class="pre">papers/001/001_main.pdf</span></code></p></li>
+<li><p>Folders will be processed in alphanumeric (lexicographic) order</p></li>
+<li><p>PDFs should be complete scientific papers (not split or partial)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="execution">
+<h2>Execution<a class="headerlink" href="#execution" title="Link to this heading">#</a></h2>
+<p>Run all steps for all papers in directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>process_all.py
+</pre></div>
+</div>
+<p>Run all steps for a range of papers (alphanumeric order):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>process_all.py<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM
+</pre></div>
+</div>
+<p>Run with a custom directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>process_all.py<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM
+</pre></div>
+</div>
+<section id="merge-only-mode">
+<h3>Merge-only mode<a class="headerlink" href="#merge-only-mode" title="Link to this heading">#</a></h3>
+<p>To skip the expensive PDF splitting and Vision API processing steps (if already done previously), you can use <code class="docutils literal notranslate"><span class="pre">--merge-only</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers - only merge and deduplicate</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--merge-only
+
+<span class="c1"># Process specific papers - only merge and deduplicate</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--merge-only<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="running-individual-steps">
+<h2>Running individual steps<a class="headerlink" href="#running-individual-steps" title="Link to this heading">#</a></h2>
+<section id="process-all-py-whole-pdf-processing-pipeline">
+<h3><code class="docutils literal notranslate"><span class="pre">process_all.py</span></code> - <strong>Whole PDF Processing Pipeline</strong><a class="headerlink" href="#process-all-py-whole-pdf-processing-pipeline" title="Link to this heading">#</a></h3>
+<p>Orchestrates all four steps of the PDF processing pipeline in sequence.</p>
+<section id="output">
+<h4>Output<a class="headerlink" href="#output" title="Link to this heading">#</a></h4>
+<p>Creates the following files for each paper:</p>
+<ul class="simple">
+<li><p>The split PDFs: <code class="docutils literal notranslate"><span class="pre">papers/XXX/pages/main_p01-02.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">main_p02-03.pdf</span></code>, etc.</p></li>
+<li><p>The API responses: <code class="docutils literal notranslate"><span class="pre">papers/XXX/pages/main_p01-02.pdf.json</span></code>, etc.</p></li>
+<li><p>The final merged and deduplicated file: <code class="docutils literal notranslate"><span class="pre">papers/XXX/pages/merged_v2.json</span></code></p></li>
+</ul>
+</section>
+<section id="options">
+<h4>Options<a class="headerlink" href="#options" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--start</span> <span class="pre">FOLDER</span></code>: First folder name to process (optional; defaults to first folder in alphanumeric order)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--end</span> <span class="pre">FOLDER</span></code>: Last folder name to process (optional; defaults to last folder in alphanumeric order)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--dir</span> <span class="pre">PATH</span></code>: Custom papers directory (default: from config/env)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--merge-only</span></code>: Only run merge and deduplication steps (skip expensive PDF splitting and API processing)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--skip-split</span></code>: Skip PDF splitting step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--skip-api</span></code>: Skip Vision API processing step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--skip-merge</span></code>: Skip JSON merging step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--skip-deduplicate</span></code>: Skip chunk deduplication step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--filter-chunk-type</span> <span class="pre">TYPE</span> <span class="pre">[TYPE</span> <span class="pre">...]</span></code>: Filter out specific chunk types (e.g., marginalia, figure)</p></li>
+</ul>
+</section>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers (all steps)</span>
+python<span class="w"> </span>process_all.py
+
+<span class="c1"># Process papers in a specific range (alphanumeric order)</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM
+
+<span class="c1"># Process papers from a starting folder to the end</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
+
+<span class="c1"># Merge-only mode (skip expensive PDF splitting and API processing)</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--merge-only
+
+<span class="c1"># Merge-only and specific range of papers</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--merge-only<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM
+
+<span class="c1"># Filter out marginalia chunks during merging</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="split-pdf-pdf-splitter">
+<h3><code class="docutils literal notranslate"><span class="pre">split_pdf</span></code> - PDF Splitter<a class="headerlink" href="#split-pdf-pdf-splitter" title="Link to this heading">#</a></h3>
+<p>Splits multi-page PDFs into either a collection of single-page documents or overlapping 2-page segments.
+These smaller PDFs can be fed into the Vision API for text extraction, where the full documents are too large to process at once.</p>
+<p><strong>Why overlapping pages?</strong>: Scientific papers often have content that spans across pages (tables, paragraphs). Overlapping 2-page segments ensure we don’t lose information at page boundaries.
+In practice, we have found the single-page mode to be sufficient for most papers, but you may find using overlapping pages improves text continuity in some cases.</p>
+<ol class="arabic simple">
+<li><p>Finds all <code class="docutils literal notranslate"><span class="pre">{folder_name}_main.pdf</span></code> files in paper folders</p></li>
+<li><p>Creates a <code class="docutils literal notranslate"><span class="pre">pages/</span></code> subdirectory in each paper folder</p></li>
+<li><p>Generates split PDFs, the length of which is controlled by the <code class="docutils literal notranslate"><span class="pre">--pages</span></code> parameter.</p></li>
+</ol>
+<section id="id1">
+<h4>Output<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p><strong>Single-page mode (–pages 1)</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">main_p01.pdf</span></code> (page 1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">main_p02.pdf</span></code> (page 2)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">main_p03.pdf</span></code> (page 3)</p></li>
+<li><p>etc.</p></li>
+</ul>
+<p><strong>Overlapping 2-page mode (–pages 2)</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">main_p01-02.pdf</span></code> (pages 1-2)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">main_p02-03.pdf</span></code> (pages 2-3)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">main_p03-04.pdf</span></code> (pages 3-4)</p></li>
+<li><p>etc.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h4>Options<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--pages</span> <span class="pre">{1,2}</span></code>: Number of pages per split (default: 1)</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> = single-page documents (<code class="docutils literal notranslate"><span class="pre">main_p01.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">main_p02.pdf</span></code>, etc.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> = overlapping 2-page documents (<code class="docutils literal notranslate"><span class="pre">main_p01-02.pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">main_p02-03.pdf</span></code>, etc.)</p></li>
+</ul>
+</li>
+<li><p><strong>Single-page mode</strong>: A 10-page paper generates 10 split PDFs of 1 page each.</p></li>
+<li><p><strong>2-page mode</strong>: A 10-page paper generates 9 overlapping split PDFs of 2 pages each.</p></li>
+</ul>
+</section>
+<section id="split-pdf-examples">
+<h4><code class="docutils literal notranslate"><span class="pre">split_pdf</span></code> examples<a class="headerlink" href="#split-pdf-examples" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split into single-page documents (default)</span>
+python<span class="w"> </span>split_pdf.py<span class="w"> </span>/path/to/papers
+
+<span class="c1"># Split into single-page documents (explicit)</span>
+python<span class="w"> </span>split_pdf.py<span class="w"> </span>/path/to/papers<span class="w"> </span>--pages<span class="w"> </span><span class="m">1</span>
+
+<span class="c1"># Split into overlapping 2-page documents</span>
+python<span class="w"> </span>split_pdf.py<span class="w"> </span>/path/to/papers<span class="w"> </span>--pages<span class="w"> </span><span class="m">2</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="va-process-papers-vision-api-processor">
+<h3><code class="docutils literal notranslate"><span class="pre">va_process_papers</span></code> - Vision API Processor<a class="headerlink" href="#va-process-papers-vision-api-processor" title="Link to this heading">#</a></h3>
+<p><strong>Purpose</strong>: Processes each split PDF through Landing AI’s Vision Agentic Document Analysis API to extract text and structure.</p>
+<ol class="arabic simple">
+<li><p>Processes folders in alphanumeric order</p></li>
+<li><p>Finds all split PDF files in <code class="docutils literal notranslate"><span class="pre">papers/{FOLDER}/pages/</span></code></p></li>
+<li><p>Sends each PDF to the Vision Agentic API</p></li>
+<li><p>Saves the JSON response as <code class="docutils literal notranslate"><span class="pre">{pdf_filename}.json</span></code></p></li>
+<li><p>Skips files that already have JSON outputs (resume-friendly)</p></li>
+<li><p>Logs all processing activity with timestamps</p></li>
+</ol>
+<section id="id3">
+<h4>Output<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<p>Creates JSON files with the following structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+  &quot;data&quot;: {
+    &quot;chunks&quot;: [
+      {
+        &quot;chunk_id&quot;: &quot;unique_id&quot;,
+        &quot;text&quot;: &quot;Extracted text content...&quot;,
+        &quot;chunk_type&quot;: &quot;paragraph&quot;,
+        &quot;grounding&quot;: [
+          {
+            &quot;page&quot;: 0,
+            &quot;bbox&quot;: [&quot;x1&quot;, &quot;y1&quot;, &quot;x2&quot;, &quot;y2&quot;]
+          }
+        ],
+        &quot;metadata&quot;: {&quot;confidence&quot;: 0.95}
+      }
+    ]
+  }
+}
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h4>Options<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--dir</span> <span class="pre">PATH</span></code>: Papers directory (default: data/papers)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--start</span> <span class="pre">FOLDER</span></code>: Starting folder name (alphanumeric order, e.g., 95UKMIEY, CX9M8HCM)</p></li>
+</ul>
+<p><strong>Important</strong>: SSince this step accesses the Vision API, it requires a valid <code class="docutils literal notranslate"><span class="pre">LANDING_AI_API_KEY</span></code> in your <code class="docutils literal notranslate"><span class="pre">.env</span></code> file.</p>
+</section>
+<section id="va-process-papers-examples">
+<h4><code class="docutils literal notranslate"><span class="pre">va_process_papers</span></code> examples<a class="headerlink" href="#va-process-papers-examples" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers in the default directory</span>
+python<span class="w"> </span>va_process_papers.py<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
+
+<span class="c1"># Process papers starting from a specific paper</span>
+python<span class="w"> </span>va_process_papers.py<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="merger-py-json-merger">
+<h3><code class="docutils literal notranslate"><span class="pre">merger.py</span></code> - JSON Merger<a class="headerlink" href="#merger-py-json-merger" title="Link to this heading">#</a></h3>
+<p>The output of the Vision API is one JSON file per split PDF, this step combines these JSON files into a single <code class="docutils literal notranslate"><span class="pre">merged_v2.json</span></code> file per paper, handling overlapping pages correctly.</p>
+<ol class="arabic simple">
+<li><p>Finds all <code class="docutils literal notranslate"><span class="pre">main_*.json</span></code> files in <code class="docutils literal notranslate"><span class="pre">papers/XXX/pages/</span></code></p></li>
+<li><p>Adjusts page numbers to account for overlapping pages</p></li>
+<li><p>Merges all chunks into a single JSON structure</p></li>
+<li><p>Optionally filters out specified chunk types</p></li>
+<li><p>Saves as <code class="docutils literal notranslate"><span class="pre">merged_v2.json</span></code></p></li>
+</ol>
+<p>Since pages overlap, the merger maps overlapping pages to the same global page number to avoid duplication.</p>
+<ul class="simple">
+<li><p>File 1 (pages 1-2): Global pages 1-2</p></li>
+<li><p>File 2 (pages 2-3): Page 2 maps to global page 2, page 3 becomes global page 3</p></li>
+<li><p>File 3 (pages 3-4): Page 3 maps to global page 3, page 4 becomes global page 4</p></li>
+</ul>
+<section id="id5">
+<h4>Options<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--basepath</span> <span class="pre">PATH</span></code>: Base path containing the <code class="docutils literal notranslate"><span class="pre">papers/</span></code> folder</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--filter-chunk-type</span> <span class="pre">TYPE</span> <span class="pre">[TYPE</span> <span class="pre">...]</span></code>: Chunk types to exclude from output</p></li>
+</ul>
+</section>
+<section id="merger-py-examples">
+<h4><code class="docutils literal notranslate"><span class="pre">merger.py</span></code> examples<a class="headerlink" href="#merger-py-examples" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Merge all papers</span>
+python<span class="w"> </span>merger.py<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data
+
+<span class="c1"># Filter out marginalia chunks</span>
+python<span class="w"> </span>merger.py<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
+
+<span class="c1"># Filter multiple chunk types</span>
+python<span class="w"> </span>merger.py<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia<span class="w"> </span>figure
+</pre></div>
+</div>
+<p><strong>Output format</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+  &quot;data&quot;: {
+    &quot;chunks&quot;: [
+      {
+        &quot;chunk_id&quot;: &quot;unique_id&quot;,
+        &quot;text&quot;: &quot;…&quot;,
+        &quot;chunk_type&quot;: &quot;paragraph&quot;,
+        &quot;grounding&quot;: [{&quot;page&quot;: 0, &quot;bbox&quot;: [0,0,100,200]}],
+        &quot;metadata&quot;: {&quot;confidence&quot;: 0.93}
+      }
+    ]
+  }
+}
+</pre></div>
+</div>
+</section>
+</section>
+<section id="batch-deduplicate-py-batch-deduplication">
+<h3><code class="docutils literal notranslate"><span class="pre">batch_deduplicate.py</span></code> - Batch Deduplication<a class="headerlink" href="#batch-deduplicate-py-batch-deduplication" title="Link to this heading">#</a></h3>
+<p>Processes all <code class="docutils literal notranslate"><span class="pre">merged_v2.json</span></code> files in a directory to remove duplicates.</p>
+<ol class="arabic simple">
+<li><p>Finds all folders in the papers directory with <code class="docutils literal notranslate"><span class="pre">merged_v2.json</span></code> files</p></li>
+<li><p>Analyzes each file for duplicate chunks</p></li>
+<li><p>Deduplicates and overwrites the file (unless <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code>)</p></li>
+<li><p>Generates a summary report</p></li>
+</ol>
+<p><strong>Output</strong>: Creates a summary JSON file with:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;total_papers&quot;: 10,
+  &quot;processed_papers&quot;: 10,
+  &quot;total_duplicates_removed&quot;: 145,
+  &quot;results&quot;: [&quot;…&quot;]
+}
+</pre></div>
+</div>
+<section id="id6">
+<h4>Options<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--base-dir</span> <span class="pre">PATH</span></code>: Base directory containing paper folders</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--start-paper</span> <span class="pre">N</span></code>: First paper number to process (for numeric folders only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--end-paper</span> <span class="pre">N</span></code>: Last paper number to process (for numeric folders only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--dry-run</span></code>: Analyze files without making changes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">FILE</span></code>: Save results summary to file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--verbose</span></code>, <code class="docutils literal notranslate"><span class="pre">-v</span></code>: Enable verbose logging</p></li>
+</ul>
+</section>
+<section id="batch-deduplicate-py-examples">
+<h4><code class="docutils literal notranslate"><span class="pre">batch_deduplicate.py</span></code> examples<a class="headerlink" href="#batch-deduplicate-py-examples" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Deduplicate all papers</span>
+python<span class="w"> </span>batch_deduplicate.py
+
+<span class="c1"># Deduplicate papers in a range (for numeric folders, backward compatibility)</span>
+python<span class="w"> </span>batch_deduplicate.py<span class="w"> </span>--start-paper<span class="w"> </span><span class="m">1</span><span class="w"> </span>--end-paper<span class="w"> </span><span class="m">10</span>
+
+<span class="c1"># Dry run (analyze without modifying files)</span>
+python<span class="w"> </span>batch_deduplicate.py<span class="w"> </span>--dry-run
+
+<span class="c1"># Custom directory</span>
+python<span class="w"> </span>batch_deduplicate.py<span class="w"> </span>--base-dir<span class="w"> </span>/path/to/papers
+
+<span class="c1"># Verbose output</span>
+python<span class="w"> </span>batch_deduplicate.py<span class="w"> </span>--verbose
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="output-data-format">
+<h2>Output Data Format<a class="headerlink" href="#output-data-format" title="Link to this heading">#</a></h2>
+<section id="final-output-merged-v2-json">
+<h3>Final Output: <code class="docutils literal notranslate"><span class="pre">merged_v2.json</span></code><a class="headerlink" href="#final-output-merged-v2-json" title="Link to this heading">#</a></h3>
+<p>The pipeline produces a <code class="docutils literal notranslate"><span class="pre">merged_v2.json</span></code> file for each paper with the following structure:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+  &quot;data&quot;: {
+    &quot;chunks&quot;: [
+      {
+        &quot;chunk_id&quot;: &quot;unique_chunk_identifier&quot;,
+        &quot;text&quot;: &quot;The extracted text content from the PDF…&quot;,
+        &quot;chunk_type&quot;: &quot;paragraph&quot;,
+        &quot;grounding&quot;: [{&quot;page&quot;: 0, &quot;bbox&quot;: [0,0,100,200]}],
+        &quot;chunk_ids&quot;: [&quot;id1&quot;, &quot;id2&quot;],
+        &quot;metadata&quot;: {&quot;confidence&quot;: 0.95, &quot;font_size&quot;: 12}
+      }
+    ]
+  },
+  &quot;deduplication_info&quot;: {
+    &quot;original_chunks&quot;: 500,
+    &quot;unique_chunks&quot;: 450,
+    &quot;duplicates_removed&quot;: 50,
+    &quot;duplication_rate&quot;: 10.0,
+    &quot;duplicate_groups&quot;: 25
+  }
+}
+</pre></div>
+</div>
+</section>
+<section id="field-descriptions">
+<h3>Field Descriptions<a class="headerlink" href="#field-descriptions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>chunk_id</strong>: Unique identifier for this chunk</p></li>
+<li><p><strong>text</strong>: Extracted text content</p></li>
+<li><p><strong>chunk_type</strong>: Type of content (paragraph, heading, table, figure, marginalia, etc.)</p></li>
+<li><p><strong>grounding</strong>: Location information</p>
+<ul>
+<li><p><strong>page</strong>: Page number (0-indexed)</p></li>
+<li><p><strong>bbox</strong>: Bounding box coordinates [x1, y1, x2, y2]</p></li>
+</ul>
+</li>
+<li><p><strong>chunk_ids</strong>: List of all chunk IDs with identical text (after deduplication)</p></li>
+<li><p><strong>metadata</strong>: Additional information from the Vision API</p></li>
+<li><p><strong>deduplication_info</strong>: Statistics about the deduplication process</p></li>
+</ul>
+<p>This format is designed to be consumed by the LLM pipeline in <code class="docutils literal notranslate"><span class="pre">../metabeeai_llm/</span></code>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="understanding-the-process-flow">
+<h2>Understanding the Process Flow<a class="headerlink" href="#understanding-the-process-flow" title="Link to this heading">#</a></h2>
+<section id="complete-pipeline-flow">
+<h3>Complete Pipeline Flow<a class="headerlink" href="#complete-pipeline-flow" title="Link to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Raw PDF → Split PDF → Vision API → Individual JSONs → Merged JSON → Deduplicated JSON
+</pre></div>
+</div>
+<p><strong>Detailed steps</strong> (example with overlapping 2-page mode):</p>
+<ol class="arabic">
+<li><p><strong>Input</strong>: <code class="docutils literal notranslate"><span class="pre">95UKMIEY_main.pdf</span></code> (10 pages)</p></li>
+<li><p><strong>After Splitting</strong> (with <code class="docutils literal notranslate"><span class="pre">--pages</span> <span class="pre">2</span></code>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pages/main_p01-02.pdf
+pages/main_p02-03.pdf
+pages/main_p03-04.pdf
+...
+pages/main_p09-10.pdf
+</pre></div>
+</div>
+<p><strong>Or with single-page mode</strong> (<code class="docutils literal notranslate"><span class="pre">--pages</span> <span class="pre">1</span></code>, default):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pages/main_p01.pdf
+pages/main_p02.pdf
+pages/main_p03.pdf
+...
+pages/main_p10.pdf
+</pre></div>
+</div>
+</li>
+<li><p><strong>After API Processing</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pages/main_p01-02.pdf.json  (or main_p01.pdf.json in single-page mode)
+pages/main_p02-03.pdf.json  (or main_p02.pdf.json in single-page mode)
+...
+pages/main_p09-10.pdf.json  (or main_p10.pdf.json in single-page mode)
+</pre></div>
+</div>
+</li>
+<li><p><strong>After Merging</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pages/merged_v2.json (contains all chunks with adjusted page numbers)
+</pre></div>
+</div>
+</li>
+<li><p><strong>After Deduplication</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pages/merged_v2.json (duplicates removed, chunk IDs preserved)
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting-faq">
+<h2>Troubleshooting FAQ<a class="headerlink" href="#troubleshooting-faq" title="Link to this heading">#</a></h2>
+<section id="landing-ai-api-key-not-found">
+<h3>“LANDING_AI_API_KEY not found”<a class="headerlink" href="#landing-ai-api-key-not-found" title="Link to this heading">#</a></h3>
+<ul>
+<li><p><strong>Cause</strong>: API key not configured in <code class="docutils literal notranslate"><span class="pre">.env</span></code> file</p></li>
+<li><p><strong>Fix</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>../env.example<span class="w"> </span>../.env
+<span class="c1"># Edit .env and add your LANDING_AI_API_KEY</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="pdf-file-not-found">
+<h3>“PDF file not found”<a class="headerlink" href="#pdf-file-not-found" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: PDF file not named correctly or in wrong location</p></li>
+<li><p><strong>Fix</strong>: Ensure PDFs are named <code class="docutils literal notranslate"><span class="pre">{folder_number}_main.pdf</span></code> and in the correct folder</p></li>
+</ul>
+</section>
+<section id="no-merged-v2-json-files-found">
+<h3>“No merged_v2.json files found”<a class="headerlink" href="#no-merged-v2-json-files-found" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: Merger step hasn’t been run yet or failed</p></li>
+<li><p><strong>Fix</strong>: Run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">merger.py</span> <span class="pre">--basepath</span> <span class="pre">/path/to/data</span></code> first</p></li>
+</ul>
+</section>
+<section id="api-processing-is-slow">
+<h3>API processing is slow<a class="headerlink" href="#api-processing-is-slow" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: Vision API processes each page individually</p></li>
+<li><p><strong>Solution</strong>: This is normal. Processing time depends on:</p>
+<ul>
+<li><p>Number of papers</p></li>
+<li><p>Pages per paper</p></li>
+<li><p>API response time</p></li>
+<li><p>The script will automatically resume if interrupted</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="duplicate-chunks-remain-after-deduplication">
+<h3>Duplicate chunks remain after deduplication<a class="headerlink" href="#duplicate-chunks-remain-after-deduplication" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: Chunks might have slight text differences</p></li>
+<li><p><strong>Fix</strong>: Check the deduplication_info in merged_v2.json for statistics</p></li>
+<li><p><strong>Note</strong>: Only exact text matches are considered duplicates</p></li>
+</ul>
+</section>
+<section id="out-of-api-quota">
+<h3>Out of API quota<a class="headerlink" href="#out-of-api-quota" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: Too many API calls</p></li>
+<li><p><strong>Fix</strong>:</p>
+<ul>
+<li><p>The script automatically skips already-processed files</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">--start</span></code> parameter to resume from a specific paper</p></li>
+<li><p>Contact Landing AI to increase your quota</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="advanced-usage">
+<h2>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Link to this heading">#</a></h2>
+<section id="merge-only-mode-cost-effective">
+<h3>Merge-Only Mode (Cost-Effective)<a class="headerlink" href="#merge-only-mode-cost-effective" title="Link to this heading">#</a></h3>
+<p>If you’ve already run the expensive PDF splitting and Vision API processing steps, you can use <code class="docutils literal notranslate"><span class="pre">--merge-only</span></code> to only run the merge and deduplication steps:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers - merge and deduplicate only</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--merge-only
+
+<span class="c1"># Process specific papers - merge and deduplicate only</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--merge-only<span class="w"> </span>--start<span class="w"> </span><span class="m">1</span><span class="w"> </span>--end<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<p>This is useful when:</p>
+<ul class="simple">
+<li><p>You’ve already processed PDFs through the Vision API</p></li>
+<li><p>You want to re-run merging with different filter options</p></li>
+<li><p>You want to re-deduplicate after manual edits to JSON files</p></li>
+<li><p>You’re testing the merge/deduplication logic without API costs</p></li>
+</ul>
+<p><strong>Note</strong>: Merge-only mode validates that JSON files exist (not PDFs) and automatically skips the split and API steps.</p>
+</section>
+<section id="processing-all-papers-automatically">
+<h3>Processing All Papers Automatically<a class="headerlink" href="#processing-all-papers-automatically" title="Link to this heading">#</a></h3>
+<p>If you don’t specify <code class="docutils literal notranslate"><span class="pre">--start</span></code> and <code class="docutils literal notranslate"><span class="pre">--end</span></code>, the pipeline will automatically detect and process all folders in your papers directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers found in the directory</span>
+python<span class="w"> </span>process_all.py
+
+<span class="c1"># Process all papers with merge-only</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--merge-only
+</pre></div>
+</div>
+<p>The script will:</p>
+<ol class="arabic simple">
+<li><p>Scan the papers directory for all subfolders</p></li>
+<li><p>Sort them alphanumerically (lexicographic order: <code class="docutils literal notranslate"><span class="pre">283C6B42</span></code>, <code class="docutils literal notranslate"><span class="pre">3ZHNVADM</span></code>, <code class="docutils literal notranslate"><span class="pre">4KV2ZB36</span></code>, etc.)</p></li>
+<li><p>Process from the first to the last folder found</p></li>
+</ol>
+</section>
+<section id="filtering-chunk-types">
+<h3>Filtering Chunk Types<a class="headerlink" href="#filtering-chunk-types" title="Link to this heading">#</a></h3>
+<p>You can filter out specific chunk types during merging:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove marginalia (page numbers, headers, footers)</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
+
+<span class="c1"># Remove multiple types</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia<span class="w"> </span>figure
+
+<span class="c1"># When running merger separately</span>
+python<span class="w"> </span>merger.py<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
+</pre></div>
+</div>
+<p>Common chunk types to filter:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">marginalia</span></code> - Headers, footers, page numbers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">figure</span></code> - Figure captions (if you only want main text)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">table</span></code> - Table content (if you only want prose)</p></li>
+</ul>
+</section>
+<section id="resuming-processing">
+<h3>Resuming Processing<a class="headerlink" href="#resuming-processing" title="Link to this heading">#</a></h3>
+<p>If processing is interrupted, the pipeline is resume-friendly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># API processing automatically skips existing JSON files</span>
+python<span class="w"> </span>va_process_papers.py<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
+
+<span class="c1"># Process all with resumption from a specific folder</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
+
+<span class="c1"># Deduplication can be re-run on specific papers (numeric folders)</span>
+python<span class="w"> </span>batch_deduplicate.py<span class="w"> </span>--start-paper<span class="w"> </span><span class="m">50</span><span class="w"> </span>--end-paper<span class="w"> </span><span class="m">100</span>
+</pre></div>
+</div>
+</section>
+<section id="dry-run-mode">
+<h3>Dry Run Mode<a class="headerlink" href="#dry-run-mode" title="Link to this heading">#</a></h3>
+<p>Test the pipeline without making changes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze duplication without modifying files</span>
+python<span class="w"> </span>batch_deduplicate.py<span class="w"> </span>--dry-run
+
+<span class="c1"># See what would happen</span>
+python<span class="w"> </span>batch_deduplicate.py<span class="w"> </span>--dry-run<span class="w"> </span>--verbose
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="performance-tips">
+<h2>Performance Tips<a class="headerlink" href="#performance-tips" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Parallel Processing</strong>: The Vision API processes one file at a time. For faster processing, consider running multiple instances on different paper ranges:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal 1</span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--start<span class="w"> </span>283C6B42<span class="w"> </span>--end<span class="w"> </span>76DQP2DC
+
+<span class="c1"># Terminal 2  </span>
+python<span class="w"> </span>process_all.py<span class="w"> </span>--start<span class="w"> </span>8BV8BLU8<span class="w"> </span>--end<span class="w"> </span>ZTRRIKQ3
+</pre></div>
+</div>
+</li>
+<li><p><strong>Resume from Failures</strong>: If processing fails partway through, use <code class="docutils literal notranslate"><span class="pre">--skip-split</span></code> and <code class="docutils literal notranslate"><span class="pre">--start</span></code> to resume:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>process_all.py<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--skip-split
+</pre></div>
+</div>
+</li>
+<li><p><strong>Monitor Progress</strong>: Check log files created in the papers directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tail<span class="w"> </span>-f<span class="w"> </span>papers/processing_log_*.txt
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<p>After processing your PDFs:</p>
+<ol class="arabic">
+<li><p>Verify output files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>papers/95UKMIEY/pages/merged_v2.json
+</pre></div>
+</div>
+</li>
+<li><p>Check deduplication statistics in the JSON file</p></li>
+<li><p>Proceed to the LLM pipeline:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>../metabeeai_llm
+python<span class="w"> </span>llm_pipeline.py<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="related-documentation">
+<h2>Related Documentation<a class="headerlink" href="#related-documentation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>LLM Pipeline</strong>: See <code class="docutils literal notranslate"><span class="pre">./metabeeai_llm</span></code> for LLM-based extraction</p></li>
+<li><p><strong>Data Analysis</strong>: See <code class="docutils literal notranslate"><span class="pre">../query_database</span></code> for analyzing extracted data</p></li>
+<li><p><strong>Configuration</strong>: See <code class="docutils literal notranslate"><span class="pre">../config.py</span></code> for centralized configuration</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Submodules</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="metabeeai_llm.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">MetaBeeAI LLM</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution">Execution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-only-mode">Merge-only mode</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-individual-steps">Running individual steps</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#process-all-py-whole-pdf-processing-pipeline"><code class="docutils literal notranslate"><span class="pre">process_all.py</span></code> - <strong>Whole PDF Processing Pipeline</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#options">Options</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-pdf-pdf-splitter"><code class="docutils literal notranslate"><span class="pre">split_pdf</span></code> - PDF Splitter</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Output</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Options</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#split-pdf-examples"><code class="docutils literal notranslate"><span class="pre">split_pdf</span></code> examples</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#va-process-papers-vision-api-processor"><code class="docutils literal notranslate"><span class="pre">va_process_papers</span></code> - Vision API Processor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Output</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Options</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#va-process-papers-examples"><code class="docutils literal notranslate"><span class="pre">va_process_papers</span></code> examples</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merger-py-json-merger"><code class="docutils literal notranslate"><span class="pre">merger.py</span></code> - JSON Merger</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Options</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#merger-py-examples"><code class="docutils literal notranslate"><span class="pre">merger.py</span></code> examples</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-deduplicate-py-batch-deduplication"><code class="docutils literal notranslate"><span class="pre">batch_deduplicate.py</span></code> - Batch Deduplication</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Options</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-deduplicate-py-examples"><code class="docutils literal notranslate"><span class="pre">batch_deduplicate.py</span></code> examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-data-format">Output Data Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-output-merged-v2-json">Final Output: <code class="docutils literal notranslate"><span class="pre">merged_v2.json</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#field-descriptions">Field Descriptions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-process-flow">Understanding the Process Flow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-pipeline-flow">Complete Pipeline Flow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-faq">Troubleshooting FAQ</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#landing-ai-api-key-not-found">“LANDING_AI_API_KEY not found”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pdf-file-not-found">“PDF file not found”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-merged-v2-json-files-found">“No merged_v2.json files found”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-processing-is-slow">API processing is slow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicate-chunks-remain-after-deduplication">Duplicate chunks remain after deduplication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#out-of-api-quota">Out of API quota</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-usage">Advanced Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-only-mode-cost-effective">Merge-Only Mode (Cost-Effective)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-all-papers-automatically">Processing All Papers Automatically</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-chunk-types">Filtering Chunk Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resuming-processing">Resuming Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dry-run-mode">Dry Run Mode</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-tips">Performance Tips</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-documentation">Related Documentation</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/submodule/process_pdfs.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, MetaBeeAI Contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

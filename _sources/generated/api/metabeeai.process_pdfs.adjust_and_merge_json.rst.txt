@@ -1,0 +1,6 @@
+adjust_and_merge_json
+=====================
+
+.. currentmodule:: metabeeai.process_pdfs
+
+.. autofunction:: adjust_and_merge_json

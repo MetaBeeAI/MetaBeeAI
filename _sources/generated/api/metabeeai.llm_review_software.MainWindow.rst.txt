@@ -1,0 +1,77 @@
+MainWindow
+==========
+
+.. currentmodule:: metabeeai.llm_review_software
+
+.. autoclass:: MainWindow
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~MainWindow.auto_save
+      ~MainWindow.computeAnnotation
+      ~MainWindow.compute_progress_for_current_paper
+      ~MainWindow.create_question_panel
+      ~MainWindow.decreaseFontSize
+      ~MainWindow.handle_hover_annotations
+      ~MainWindow.handle_wheel_zoom
+      ~MainWindow.increaseFontSize
+      ~MainWindow.keyPressEvent
+      ~MainWindow.log_field_change
+      ~MainWindow.on_chunk_selected
+      ~MainWindow.on_next_page
+      ~MainWindow.on_next_paper
+      ~MainWindow.on_paper_selected
+      ~MainWindow.on_prev_page
+      ~MainWindow.on_prev_paper
+      ~MainWindow.on_question_selected
+      ~MainWindow.on_star_rating_changed
+      ~MainWindow.on_zoom_changed
+      ~MainWindow.open_folder
+      ~MainWindow.populate_questions
+      ~MainWindow.render_current_page
+      ~MainWindow.resizeEvent
+      ~MainWindow.setTheme
+      ~MainWindow.set_annotation_mode
+      ~MainWindow.show_about
+      ~MainWindow.toggleFullScreen
+      ~MainWindow.updateAnnotations
+      ~MainWindow.updateFontSize
+      ~MainWindow.update_modification_label
+      ~MainWindow.update_progress_display
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: auto_save
+   .. automethod:: computeAnnotation
+   .. automethod:: compute_progress_for_current_paper
+   .. automethod:: create_question_panel
+   .. automethod:: decreaseFontSize
+   .. automethod:: handle_hover_annotations
+   .. automethod:: handle_wheel_zoom
+   .. automethod:: increaseFontSize
+   .. automethod:: keyPressEvent
+   .. automethod:: log_field_change
+   .. automethod:: on_chunk_selected
+   .. automethod:: on_next_page
+   .. automethod:: on_next_paper
+   .. automethod:: on_paper_selected
+   .. automethod:: on_prev_page
+   .. automethod:: on_prev_paper
+   .. automethod:: on_question_selected
+   .. automethod:: on_star_rating_changed
+   .. automethod:: on_zoom_changed
+   .. automethod:: open_folder
+   .. automethod:: populate_questions
+   .. automethod:: render_current_page
+   .. automethod:: resizeEvent
+   .. automethod:: setTheme
+   .. automethod:: set_annotation_mode
+   .. automethod:: show_about
+   .. automethod:: toggleFullScreen
+   .. automethod:: updateAnnotations
+   .. automethod:: updateFontSize
+   .. automethod:: update_modification_label
+   .. automethod:: update_progress_display

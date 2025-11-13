@@ -1,0 +1,6 @@
+process_papers
+==============
+
+.. currentmodule:: metabeeai.process_pdfs
+
+.. autofunction:: process_papers
