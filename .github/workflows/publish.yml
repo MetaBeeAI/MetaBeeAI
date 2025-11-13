@@ -48,6 +48,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: dist
+      
+      - name: Upgrade packaging
+        run: pip install --upgrade packaging
 
       - name: Flatten artifacts
         run: mv dist/*/* dist/ || true
