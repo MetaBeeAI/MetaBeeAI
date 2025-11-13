@@ -23,6 +23,9 @@ jobs:
 
       - name: Install build dependencies
         run: pip install build twine
+      
+      - name: Upgrade packaging
+        run: pip install --upgrade packaging
 
       - name: Build sdist and wheel
         run: python -m build --sdist --wheel --outdir dist
