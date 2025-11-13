@@ -6,13 +6,9 @@ on:
       - 'v*.*.*'  # e.g. v0.1.0 # TOOD: run on release candidates?
 
 jobs:
-  build-all:
-    name: Build distributions
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+  build:
+    name: Build distributions (Ubuntu)
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -27,9 +23,6 @@ jobs:
       - name: Upgrade packaging
         run: pip install --upgrade packaging
 
-      - name: Clean dist directory
-        run: rm -rf dist && mkdir -p dist
-
       - name: Build sdist and wheel
         run: python -m build --sdist --wheel --outdir dist
 
@@ -38,30 +31,58 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: dist-${{ matrix.os }}
+          name: dist
           path: |
             dist/*.whl
             dist/*.tar.gz
 
+  test-install:
+    name: Install smoke test (${ { matrix.os } })
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download built distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Install built package
+        run: >-
+          python -c "import glob,sys,subprocess; files=glob.glob('dist/*.whl') or glob.glob('dist/*.tar.gz');
+          assert files, 'No built distributions found'; subprocess.check_call([sys.executable,'-m','pip','install','--upgrade','pip']);
+          subprocess.check_call([sys.executable,'-m','pip','install',files[0]])"
+
+      - name: Smoke test CLI
+        run: metabeeai --help
+
   publish:
     name: Publish to PyPI
-    needs: build-all
+    needs: [build, test-install]
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Download all built distributions
         uses: actions/download-artifact@v4
         with:
+          name: dist
           path: dist
+          # Single artifact from build job
       
       - name: Upgrade packaging
         run: pip install --upgrade packaging
-
-      - name: Flatten artifacts
-        run: |
-          mv dist/*/*.whl dist/ 2>/dev/null || true
-          mv dist/*/*.tar.gz dist/ 2>/dev/null || true
-          find dist -mindepth 1 -type d -exec rm -rf {} +
 
       - name: Verify distributions
         run: |
