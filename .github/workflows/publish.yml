@@ -27,16 +27,21 @@ jobs:
       - name: Upgrade packaging
         run: pip install --upgrade packaging
 
+      - name: Clean dist directory
+        run: rm -rf dist && mkdir -p dist
+
       - name: Build sdist and wheel
         run: python -m build --sdist --wheel --outdir dist
 
       - name: Check built distributions
-        run: twine check dist/*
+        run: twine check dist/*.whl dist/*.tar.gz
 
       - uses: actions/upload-artifact@v4
         with:
           name: dist-${{ matrix.os }}
-          path: dist/*
+          path: |
+            dist/*.whl
+            dist/*.tar.gz
 
   publish:
     name: Publish to PyPI
@@ -53,12 +58,15 @@ jobs:
         run: pip install --upgrade packaging
 
       - name: Flatten artifacts
-        run: mv dist/*/* dist/ || true
+        run: |
+          mv dist/*/*.whl dist/ 2>/dev/null || true
+          mv dist/*/*.tar.gz dist/ 2>/dev/null || true
+          find dist -mindepth 1 -type d -exec rm -rf {} +
 
       - name: Verify distributions
         run: |
           pip install twine
-          twine check dist/*
+          twine check dist/*.whl dist/*.tar.gz
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
