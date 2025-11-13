@@ -74,8 +74,29 @@ def load_questions_config():
         # Return default configuration if YAML loading fails
         return {}
 
-# Load the configuration
-QUESTIONS_CONFIG = load_questions_config()
+# Lazy load the configuration only when needed
+_QUESTIONS_CONFIG = None
+
+def get_questions_config():
+    """Get the questions configuration, loading it only once."""
+    global _QUESTIONS_CONFIG
+    if _QUESTIONS_CONFIG is None:
+        _QUESTIONS_CONFIG = load_questions_config()
+    return _QUESTIONS_CONFIG
+
+# For backward compatibility, keep QUESTIONS_CONFIG as a property-like access
+# But it won't be loaded at import time
+class _ConfigProxy:
+    def __getitem__(self, key):
+        return get_questions_config()[key]
+    
+    def get(self, key, default=None):
+        return get_questions_config().get(key, default)
+    
+    def __contains__(self, key):
+        return key in get_questions_config()
+
+QUESTIONS_CONFIG = _ConfigProxy()
 
 # --------------------------------------------------------------------------
 # Data Models using Pydantic for response validation

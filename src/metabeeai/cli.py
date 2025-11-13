@@ -10,7 +10,7 @@ Provides multiple subcommands:
 - `metabeeai benchmark`: Run DeepEval benchmarking on LLM outputs
 - `metabeeai edge-cases`: Identify edge cases (low-scoring examples) from benchmarking results
 - `metabeeai plot-metrics`: Create visualization plots from benchmarking results
-- `metabeeai benchmark-all`: Run complete benchmarking pipeline (prep → eval → plot → edge-cases)
+- `metabeeai benchmark-all`: Run complete benchmarking pipeline (prep -> eval -> plot -> edge-cases)
 """
 
 import sys
@@ -456,7 +456,7 @@ def main():
     # --- metabee benchmark-all -----------------------------------------------
     benchmark_all_parser = subparsers.add_parser(
         "benchmark-all",
-        help="Run complete benchmarking pipeline (prep → eval → plot → edge-cases)"
+        help="Run complete benchmarking pipeline (prep -> eval -> plot -> edge-cases)"
     )
     benchmark_all_parser.add_argument(
         "--skip-prep",

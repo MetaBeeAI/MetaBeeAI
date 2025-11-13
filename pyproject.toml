@@ -73,6 +73,9 @@ package-dir = { "" = "src" }
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+metabeeai = ["metabeeai_llm/questions.yml"]
+
 [tool.ruff]
 
 line-length = 128
