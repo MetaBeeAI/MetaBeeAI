@@ -1,0 +1,8 @@
+# Example MetaBeeAI config file
+# All options can be overridden by environment variables or CLI args
+
+papers_dir: ./data/papers
+results_dir: ./data/results
+api_key: "YOUR_API_KEY_HERE"
+model: "gpt-4o"
+# Add more options as needed

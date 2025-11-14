@@ -1,3 +1,50 @@
+# Centralized configuration loader for MetaBeeAI
+# Hierarchy: CLI arg > env var > YAML > hardcoded default
+import os
+import yaml
+
+DEFAULT_CONFIG_PATHS = [
+    os.path.join(os.getcwd(), "config.yaml"),
+    os.path.expanduser("~/.metabeeai/config.yaml"),
+]
+
+def load_config(cli_config_path=None):
+    """
+    Load config from YAML file, with path determined by:
+    1. CLI arg (if provided)
+    2. METABEEAI_CONFIG_FILE env var
+    3. Default locations (cwd/config.yaml, ~/.metabeeai/config.yaml)
+    Returns a dict (may be empty if no file found).
+    """
+    config_path = (
+        cli_config_path
+        or os.environ.get("METABEEAI_CONFIG_FILE")
+        or next((p for p in DEFAULT_CONFIG_PATHS if os.path.isfile(p)), None)
+    )
+    if config_path and os.path.isfile(config_path):
+        with open(config_path, "r") as f:
+            return yaml.safe_load(f) or {}
+    return {}
+
+def get_config_value(key, cli_value=None, config=None, env_var=None, default=None):
+    """
+    Get the effective value for a config parameter, using the hierarchy:
+    1. CLI arg (cli_value)
+    2. Environment variable (env_var, if provided)
+    3. YAML config (config dict, if provided)
+    4. Hardcoded default
+    """
+    if cli_value is not None:
+        return cli_value
+    if env_var and os.environ.get(env_var) is not None:
+        return os.environ[env_var]
+    if config and key in config:
+        return config[key]
+    return default
+
+# Example usage in an entrypoint:
+# config = load_config(cli_config_path=args.config)
+# papers_dir = get_config_value("papers_dir", cli_value=args.papers_dir, config=config, env_var="METABEEAI_PAPERS_DIR", default="./data/papers")
 # config.py
 # Centralized configuration for MetaBeeAI pipeline
 

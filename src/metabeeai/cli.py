@@ -177,9 +177,16 @@ def main():
     """CLI entrypoint for metabeeai."""
     load_dotenv()  # auto-load API keys and config
 
+
     parser = argparse.ArgumentParser(
         prog="metabee",
         description="MetaBeeAI command-line interface",
+    )
+    parser.add_argument(
+        "--config",
+        type=str,
+        default=None,
+        help="Path to config YAML file (overrides METABEEAI_CONFIG_FILE and defaults)",
     )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
