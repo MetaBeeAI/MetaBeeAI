@@ -345,7 +345,8 @@ EXAMPLES:
 - Current: "mJcm²" from "UV light exposure: 30 mJ/cm²" → other, "UV light"
 - Current: "32C" from "Temperature stress: 32°C" → temperature, "32°C"
 
-Return ONLY a JSON object with "type" and "name" keys for the best match. If no good match found, return {{"type": "{stressor_type}", "name": "{stressor_name}"}}.
+Return ONLY a JSON object with "type" and "name" keys for the best match. If no good match found,
+return {{"type": "{stressor_type}", "name": "{stressor_name}"}}.
 """
 
         response = client.chat.completions.create(

@@ -16,12 +16,13 @@ from typing import Dict, List, Optional, Tuple
 import openai
 import pandas as pd
 
+from metabeeai.config import get_data_dir
+
 # Add parent directory to path to access config
 script_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(script_dir)
 sys.path.insert(0, parent_dir)
 
-from config import get_data_dir
 
 # Try to load .env file if python-dotenv is available
 try:
@@ -111,7 +112,9 @@ class EdgeCaseIdentifier:
             response = self.openai_client.chat.completions.create(
                 model=self.model, messages=[{"role": "user", "content": "Hello, this is a test."}], max_tokens=10
             )
-            print(f"[OK] OpenAI API connection successful. Model: {self.model}")
+            print(
+                f"[OK] OpenAI API connection successful. Model: {self.model}, response: {response.choices[0].message.content}"
+            )
         except Exception as e:
             print(f"[ERROR] OpenAI API connection failed: {e}")
             self.openai_client = None
@@ -242,9 +245,11 @@ class EdgeCaseIdentifier:
             return "No detailed reasons found in the edge cases."
 
         # Create a focused prompt for analyzing the reasons
-        prompt = f"""Analyze the evaluation reasons for {len(edge_cases)} low-scoring edge cases for the question type: "{question_type}".
+        prompt = f"""Analyze the evaluation reasons for {len(edge_cases)}
+                     low-scoring edge cases for the question type: "{question_type}".
 
-I've extracted {len(all_reasons)} evaluation reasons from these cases. Please provide a CONCISE summary with exactly TWO sections:
+I've extracted {len(all_reasons)} evaluation reasons from these cases.
+Please provide a CONCISE summary with exactly TWO sections:
 
 **Section 1: Main Issues (max 3 primary issues)**
 - Identify the 3 most critical problems causing low scores
@@ -272,7 +277,8 @@ Here are the evaluation reasons to analyze:
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are an expert analyst specializing in evaluating LLM responses. Provide concise, structured summaries with exactly the requested format. Be brief and actionable.",
+                        "content": "You are an expert analyst specializing in evaluating LLM responses. "
+                        "Provide concise, structured summaries with exactly the requested format. Be brief and actionable.",
                     },
                     {"role": "user", "content": prompt},
                 ],
@@ -562,7 +568,8 @@ Here are the evaluation reasons to analyze:
             f.write("# Contextual Measures Edge Case Analysis Report\n\n")
             f.write(f"*Generated on: {pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
             f.write(
-                "*This report focuses on Faithfulness, Contextual Precision, and Contextual Recall measures for LLM data only.*\n\n"
+                "*This report focuses on Faithfulness, Contextual Precision, "
+                "and Contextual Recall measures for LLM data only.*\n\n"
             )
 
             # Overall statistics
@@ -586,7 +593,8 @@ Here are the evaluation reasons to analyze:
                         f.write("## Overall Statistics\n\n")
                         f.write(f"- **Total Cases**: {stats.get('total_cases', 0)}\n")
                         f.write(
-                            f"- **Score Range**: {stats.get('score_range', {}).get('min', 0):.3f} - {stats.get('score_range', {}).get('max', 0):.3f}\n"
+                            f"- **Score Range**: {stats.get('score_range', {}).get('min', 0):.3f}"
+                            f" - {stats.get('score_range', {}).get('max', 0):.3f}\n"
                         )
                         f.write(f"- **Average Score**: {stats.get('score_range', {}).get('mean', 0):.3f}\n\n")
 
@@ -802,7 +810,8 @@ Here are the evaluation reasons to analyze:
                             f.write("### Overall Statistics\n\n")
                             f.write(f"- **Total Cases**: {stats.get('total_cases', 0)}\n")
                             f.write(
-                                f"- **Score Range**: {stats.get('score_range', {}).get('min', 0):.3f} - {stats.get('score_range', {}).get('max', 0):.3f}\n"
+                                f"- **Score Range**: {stats.get('score_range', {}).get('min', 0):.3f} "
+                                / f"- {stats.get('score_range', {}).get('max', 0):.3f}\n"
                             )
                             f.write(f"- **Average Score**: {stats.get('score_range', {}).get('mean', 0):.3f}\n\n")
 
@@ -835,7 +844,8 @@ Here are the evaluation reasons to analyze:
                                     f.write("**Sample Edge Cases:**\n\n")
                                     for i, case in enumerate(sample_cases[:3], 1):
                                         f.write(
-                                            f"{i}. **{case.get('name', 'Unknown')}** (Paper {case.get('paper_id', 'Unknown')})\n"
+                                            f"{i}. **{case.get('name', 'Unknown')}** "
+                                            f"(Paper {case.get('paper_id', 'Unknown')})\n"
                                         )
                                         f.write(f"   - Combined Score: {case.get('combined_score', 0):.3f}\n")
                                         f.write(f"   - Input: {case.get('input', 'N/A')}\n")
@@ -1068,7 +1078,7 @@ Here are the evaluation reasons to analyze:
             self.generate_source_summary_report(source, edge_cases)
 
         # Generate overall summary report
-        summary = self.generate_summary_report(all_edge_cases)
+        # summary = self.generate_summary_report(all_edge_cases)
 
         # Now generate LLM summaries from the created files
         print("\nGenerating LLM summaries from edge case files...")

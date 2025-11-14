@@ -167,7 +167,8 @@ def create_co_occurrence_matrix(bee_df: pd.DataFrame, pesticides_df: pd.DataFram
     bee_genera_multiple_studies = bee_study_counts[bee_study_counts >= 3].index.tolist()
 
     print(
-        f"  Filtering to {len(bee_genera_multiple_studies)} bee genera with ≥3 studies (removed {len(bee_study_counts) - len(bee_genera_multiple_studies)} with <3 studies)"
+        f"Filtering to {len(bee_genera_multiple_studies)} bee genera with ≥3 studies "
+        f"(removed {len(bee_study_counts) - len(bee_genera_multiple_studies)} with <3 studies)"
     )
 
     co_occurrence_df_filtered = co_occurrence_df_deduped[
@@ -265,8 +266,8 @@ def create_bipartite_network(co_occurrence_matrix: pd.DataFrame, output_dir: str
     pesticide_pos = {k: v for k, v in pos.items() if k in pesticide_nodes_sorted}
 
     # Add labels with white background rectangles
-    # Bee labels (left side)
-    bee_labels = {bee: bee for bee in bee_nodes_sorted}
+    # Bee labels (left side) TODO: should these be used?
+    # bee_labels = {bee: bee for bee in bee_nodes_sorted}
     for bee, (x, y) in bee_pos.items():
         # Add white rectangle behind text
         ax.text(
@@ -280,8 +281,8 @@ def create_bipartite_network(co_occurrence_matrix: pd.DataFrame, output_dir: str
             bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8, edgecolor="none"),
         )
 
-    # Pesticide labels (right side)
-    pesticide_labels = {pesticide: pesticide for pesticide in pesticide_nodes_sorted}
+    # Pesticide labels (right side) TODO: should these be used?
+    # pesticide_labels = {pesticide: pesticide for pesticide in pesticide_nodes_sorted}
     for pesticide, (x, y) in pesticide_pos.items():
         # Add white rectangle behind text
         ax.text(
@@ -453,8 +454,8 @@ def create_pesticide_stressor_network(output_dir: str):
     stressor_pos = {k: v for k, v in pos.items() if k in stressor_nodes_sorted}
 
     # Add labels with white background rectangles
-    # Pesticide labels (left side)
-    pesticide_labels = {pesticide: pesticide for pesticide in pesticide_nodes_sorted}
+    # Pesticide labels (left side) TODO: should these be used?
+    # pesticide_labels = {pesticide: pesticide for pesticide in pesticide_nodes_sorted}
     for pesticide, (x, y) in pesticide_pos.items():
         # Add white rectangle behind text
         ax.text(
@@ -468,8 +469,8 @@ def create_pesticide_stressor_network(output_dir: str):
             bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8, edgecolor="none"),
         )
 
-    # Stressor labels (right side)
-    stressor_labels = {stressor: stressor for stressor in stressor_nodes_sorted}
+    # Stressor labels (right side) TODO: should these be used?
+    # stressor_labels = {stressor: stressor for stressor in stressor_nodes_sorted}
     for stressor, (x, y) in stressor_pos.items():
         # Add white rectangle behind text
         ax.text(
@@ -606,7 +607,8 @@ def create_tripartite_network(bee_pesticide_matrix: pd.DataFrame, output_dir: st
     stressor_nodes = [n for n in G.nodes() if G.nodes[n]["node_type"] == "stressor"]
 
     print(
-        f"  Tripartite network has {len(bee_nodes)} bee genera, {len(pesticide_nodes)} pesticides, and {len(stressor_nodes)} stressor types"
+        f"  Tripartite network has {len(bee_nodes)} bee genera, "
+        f"{len(pesticide_nodes)} pesticides, and {len(stressor_nodes)} stressor types"
     )
 
     # Sort nodes by study count (most studied at top)
@@ -677,8 +679,8 @@ def create_tripartite_network(bee_pesticide_matrix: pd.DataFrame, output_dir: st
     stressor_pos = {k: v for k, v in pos.items() if k in stressor_nodes_sorted}
 
     # Add labels with white background rectangles
-    # Bee labels (left side)
-    bee_labels = {bee: bee for bee in bee_nodes_sorted}
+    # Bee labels (left side) # TODO: should these be used?
+    # bee_labels = {bee: bee for bee in bee_nodes_sorted}
     for bee, (x, y) in bee_pos.items():
         # Add white rectangle behind text
         ax.text(
@@ -692,8 +694,8 @@ def create_tripartite_network(bee_pesticide_matrix: pd.DataFrame, output_dir: st
             bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.6, edgecolor="none"),
         )
 
-    # Pesticide labels (center)
-    pesticide_labels = {pesticide: pesticide for pesticide in pesticide_nodes_sorted}
+    # Pesticide labels (center) # TODO: should these be used?
+    # pesticide_labels = {pesticide: pesticide for pesticide in pesticide_nodes_sorted}
     for pesticide, (x, y) in pesticide_pos.items():
         # Add white rectangle behind text
         ax.text(
@@ -707,8 +709,8 @@ def create_tripartite_network(bee_pesticide_matrix: pd.DataFrame, output_dir: st
             bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.6, edgecolor="none"),
         )
 
-    # Stressor labels (right side)
-    stressor_labels = {stressor: stressor for stressor in stressor_nodes_sorted}
+    # Stressor labels (right side) # TODO: should these be used?
+    # stressor_labels = {stressor: stressor for stressor in stressor_nodes_sorted}
     for stressor, (x, y) in stressor_pos.items():
         # Add white rectangle behind text
         ax.text(

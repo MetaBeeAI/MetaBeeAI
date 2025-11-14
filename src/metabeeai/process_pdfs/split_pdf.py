@@ -25,7 +25,7 @@ def split_pdfs(papers_dir=None, pages_per_split=1):
         import sys
 
         sys.path.append("..")
-        from config import get_papers_dir
+        from metabeeai.config import get_papers_dir
 
         papers_dir = get_papers_dir()
 
@@ -75,7 +75,8 @@ def split_pdfs(papers_dir=None, pages_per_split=1):
                     splits_created += 1
 
                 print(
-                    f"Successfully processed {subfolder}_main.pdf ({total_pages} pages, created {splits_created} single-page PDFs)"
+                    f"Successfully processed {subfolder}_main.pdf ({total_pages} pages, "
+                    f"created {splits_created} single-page PDFs)"
                 )
 
             elif pages_per_split == 2:
@@ -93,7 +94,8 @@ def split_pdfs(papers_dir=None, pages_per_split=1):
                     splits_created += 1
 
                 print(
-                    f"Successfully processed {subfolder}_main.pdf ({total_pages} pages, created {splits_created} overlapping 2-page PDFs)"
+                    f"Successfully processed {subfolder}_main.pdf ({total_pages} pages, "
+                    f"created {splits_created} overlapping 2-page PDFs)"
                 )
 
         except Exception as e:

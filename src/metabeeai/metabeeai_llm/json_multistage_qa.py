@@ -1,10 +1,12 @@
 import asyncio
 import json
 import logging
+import os
 import time
 from pprint import pprint
 from typing import Any, Callable, Dict, List
 
+import yaml
 from litellm import acompletion
 from pydantic import BaseModel
 from tqdm import tqdm  # progress bar for loops
@@ -47,11 +49,6 @@ except ImportError:
         DEFAULT_ANSWER_BATCH_SIZE = 5  # Default batch size for answer generation
         MAX_CONCURRENT_REQUESTS = 25  # Maximum concurrent API requests to avoid rate limiting
         BATCH_DELAY = 0.1  # Default delay between batches
-
-# Load questions configuration from YAML file
-import os
-
-import yaml
 
 
 def load_questions_config():
@@ -336,7 +333,7 @@ def assess_answer_quality(question: str, chunks: List[Dict[str, Any]], final_ans
 
     # Check if answer contains the expected format/patterns
     output_format = question_metadata.get("output_format", "")
-    example_outputs = question_metadata.get("example_output", [])
+    # example_outputs = question_metadata.get("example_output", []) # TODO: unused
 
     quality_metrics = {"confidence": "medium", "issues": [], "recommendations": []}
 
@@ -562,7 +559,8 @@ async def get_top_relevant_chunks(
             "Bad Examples:",
             *[f"- {example}" for example in question_metadata.get("bad_example_output", [])],
             "",
-            f"Task: From the following {len(filtered_chunks)} text chunks, select the top {max_chunks} most relevant chunks that will best answer the question.",
+            f"Task: From the following {len(filtered_chunks)} text chunks, "
+            f"select the top {max_chunks} most relevant chunks that will best answer the question.",
             "",
             "Text Chunks:",
         ]
@@ -605,7 +603,8 @@ async def get_top_relevant_chunks(
         messages = [
             {
                 "role": "system",
-                "content": "You are an expert at identifying the most relevant text chunks for scientific questions. Return only the chunk numbers in order of relevance.",
+                "content": "You are an expert at identifying the most relevant text chunks for scientific questions. "
+                "Return only the chunk numbers in order of relevance.",
             },
             {"role": "user", "content": prompt},
         ]
@@ -631,7 +630,8 @@ async def get_top_relevant_chunks(
                     if 0 <= idx < len(filtered_chunks):
                         selected_chunks.append(filtered_chunks[idx])
                         logger.info(
-                            f"DEBUG: Selected chunk {idx+1}: {filtered_chunks[idx].get('chunk_id')} - Content: {filtered_chunks[idx].get('text', '')[:100]}..."
+                            f"DEBUG: Selected chunk {idx+1}: {filtered_chunks[idx].get('chunk_id')} - "
+                            f"Content: {filtered_chunks[idx].get('text', '')[:100]}..."
                         )
 
                 logger.info(f"Selected {len(selected_chunks)} chunks from {len(filtered_chunks)} total chunks")
@@ -753,7 +753,6 @@ async def reflect_answers(question: str, chunks: List[Dict[str, Any]], model: st
     """
     # Get question metadata to access no_info_response
     question_metadata = get_question_metadata(question)
-    no_info_response = question_metadata.get("no_info_response", "Information not found in the provided text.")
 
     formatted_chunks: str = "\n".join(
         f"""
@@ -906,7 +905,7 @@ async def ask_json(
             import sys
 
             sys.path.append("..")
-            from config import get_papers_dir
+            from metabeeai.config import get_papers_dir
 
             default_papers_dir = get_papers_dir()
             json_path = os.path.join(default_papers_dir, "001", "pages", "merged_v2.json")
@@ -917,7 +916,7 @@ async def ask_json(
     # Load JSON data from file.
     json_obj: Dict[str, Any] = load_json_file(json_path)
     original_chunks: List[Dict[str, Any]] = json_obj.get("data", {}).get("chunks", [])
-    BATCH_SIZE: int = batch_size
+    # BATCH_SIZE: int = batch_size # TODO: should this be being used somewhere?
 
     # Set up models - use provided models or fall back to config defaults
     selected_relevance_model = relevance_model if relevance_model else RELEVANCE_MODEL

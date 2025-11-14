@@ -247,7 +247,7 @@ def batch_deduplicate(
         results.append(result)
 
         # Check if processing was successful (either status="success" or success=True)
-        if result.get("status") == "success" or result.get("success") == True:
+        if result.get("status") == "success" or result.get("success"):
             total_processed += 1
             # Count duplicates from deduplication_info
             if "deduplication_info" in result:

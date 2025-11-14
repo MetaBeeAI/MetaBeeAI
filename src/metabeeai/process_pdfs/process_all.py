@@ -39,7 +39,7 @@ def get_papers_dir():
     """Get the papers directory from config or environment."""
     try:
         sys.path.append("..")
-        from config import get_papers_dir as config_get_papers_dir
+        from metabeeai.config import get_papers_dir as config_get_papers_dir
 
         return config_get_papers_dir()
     except ImportError:
@@ -190,8 +190,6 @@ def run_full_pipeline(
         print("STEP 3/4: Merging JSON files into merged_v2.json")
         print("-" * 60)
         try:
-            # Get base path (parent of papers dir)
-            base_path = str(Path(papers_dir).parent)
             process_all_papers(papers_dir, filter_types or [])
             print("✓ JSON merging completed\n")
         except Exception as e:

@@ -17,11 +17,11 @@ def convert_relative_to_absolute(page, rel_box):
     # Get page dimensions (width, height)
     width, height = page.rect.width, page.rect.height
     # Convert relative (0-1) coordinates to absolute values
-    l = rel_box["l"] * width
-    t = rel_box["t"] * height
-    r = rel_box["r"] * width
-    b = rel_box["b"] * height
-    return fitz.Rect(l, t, r, b)
+    left = rel_box["l"] * width
+    top = rel_box["t"] * height
+    right = rel_box["r"] * width
+    bottom = rel_box["b"] * height
+    return fitz.Rect(left, top, right, bottom)
 
 
 def annotate_pdf(pdf_path, merged_json_path, output_pdf, answers_json_path=None):

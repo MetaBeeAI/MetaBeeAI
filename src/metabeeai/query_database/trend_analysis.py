@@ -384,10 +384,14 @@ def generate_summary_report(analysis_data: Dict, measures: Dict, output_dir: str
         f.write("EXTREME CASES\n")
         f.write("-" * 15 + "\n")
         f.write(
-            f"Most studied combination: {measures['most_studied_combination']['bee_species']} + {measures['most_studied_combination']['pesticide']} ({measures['most_studied_combination']['count']} studies)\n"
+            f"Most studied combination: {measures['most_studied_combination']['bee_species']} + "
+            f"{measures['most_studied_combination']['pesticide']} "
+            f"({measures['most_studied_combination']['count']} studies)\n"
         )
         f.write(
-            f"Least studied combination: {measures['least_studied_combination']['bee_species']} + {measures['least_studied_combination']['pesticide']} ({measures['least_studied_combination']['count']} studies)\n"
+            f"Least studied combination: {measures['least_studied_combination']['bee_species']} + "
+            f"{measures['least_studied_combination']['pesticide']} "
+            f"({measures['least_studied_combination']['count']} studies)\n"
         )
 
     print(f"  Summary report saved to: {report_file}")

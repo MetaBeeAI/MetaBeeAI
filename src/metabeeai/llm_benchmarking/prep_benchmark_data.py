@@ -11,12 +11,12 @@ import sys
 
 import yaml
 
+from metabeeai.config import get_data_dir, get_papers_dir
+
 # Add parent directory to path to access config
 script_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(script_dir)
 sys.path.insert(0, parent_dir)
-
-from config import get_data_dir, get_papers_dir
 
 
 def load_questions_from_yml(questions_yml_path):
@@ -264,7 +264,9 @@ def prepare_benchmark_data(papers_dir, questions_yml_path, output_path):
             paper_has_questions = True
             rating_str = f", Rating: {user_rating}" if user_rating is not None else ""
             print(
-                f"  [OK] Added {question_key} (LLM: {len(llm_answer)} chars, Reviewer: {len(reviewer_answer)} chars, Retrieval: {len(retrieval_context)} chunks{rating_str})"
+                f"[OK] Added {question_key} (LLM: {len(llm_answer)} chars, "
+                f" Reviewer: {len(reviewer_answer)} chars, Retrieval: "
+                f"{len(retrieval_context)} chunks{rating_str})"
             )
 
         if paper_has_questions:

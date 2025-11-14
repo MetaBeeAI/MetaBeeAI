@@ -13,4 +13,3 @@ Here you will find detailed documentation on the submodules, classes, functions,
    query_database
    llm_benchmarking
    llm_review_software
-

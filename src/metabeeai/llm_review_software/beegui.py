@@ -773,7 +773,7 @@ class MainWindow(QMainWindow):
         parent_dir = os.path.dirname(script_dir)
         if parent_dir not in sys.path:
             sys.path.insert(0, parent_dir)
-        from config import get_papers_dir
+        from metabeeai.config import get_papers_dir
 
         default_folder = get_papers_dir()
 
@@ -935,7 +935,7 @@ class MainWindow(QMainWindow):
                 filled_fields += 1
             try:
                 rating = int(entry.get("user_rating", 0))
-            except:
+            except (AttributeError, ValueError):
                 rating = 0
             if rating != 0:
                 filled_fields += 1
@@ -982,7 +982,7 @@ class MainWindow(QMainWindow):
         self.reason_negative_field.setPlainText(edited.get("user_reason_negative", ""))
         try:
             rating = int(edited.get("user_rating", 0))
-        except:
+        except (AttributeError, ValueError):
             rating = 0
         self.star_rating.setRating(rating)
         self.rating_number_label.setText(str(rating))
@@ -1216,16 +1216,12 @@ class MainWindow(QMainWindow):
         rel_box = ann_data.get("box")
         if not rel_box:
             return None
-        l = int(rel_box.get("l", 0) * img_width) + x_offset
-        t = int(rel_box.get("t", 0) * img_height) + y_offset
-        r = int(rel_box.get("r", 0) * img_width) + x_offset
-        b = int(rel_box.get("b", 0) * img_height) + y_offset
+        left = int(rel_box.get("l", 0) * img_width) + x_offset - padding
+        top = int(rel_box.get("t", 0) * img_height) + y_offset - padding
+        right = int(rel_box.get("r", 0) * img_width) + x_offset + padding
+        bottom = int(rel_box.get("b", 0) * img_height) + y_offset + padding
 
-        l -= padding
-        t -= padding
-        r += padding
-        b += padding
-        rect = QRect(l, t, r - l, b - t)
+        rect = QRect(left, top, right - left, bottom - top)
         return {"rect": rect, "cid": ann_data.get("cid", "")}
 
     def updateAnnotations(self):

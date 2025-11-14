@@ -14,12 +14,12 @@ import sys
 
 from dotenv import load_dotenv
 
+from metabeeai.config import get_data_dir
+
 # Add parent directory to path to access config
 script_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(script_dir)
 sys.path.insert(0, parent_dir)
-
-from config import get_data_dir
 
 
 def main():
@@ -33,7 +33,8 @@ def main():
         "--question",
         "-q",
         type=str,
-        help="Question key to filter by (optional - if not specified, processes all questions). Must match a question_key from the benchmark data.",
+        help="Question key to filter by (optional - if not specified, processes all questions)."
+        " Must match a question_key from the benchmark data.",
     )
     parser.add_argument(
         "--input", "-i", type=str, default=None, help="Input benchmark data file (default: auto-detect from config)"
@@ -203,7 +204,8 @@ def main():
 
         if context_length > args.max_context_length:
             print(
-                f"[WARNING] Skipping test case {i+1}: Context too long ({context_length:,} chars, max: {args.max_context_length:,})"
+                f"[WARNING] Skipping test case {i+1}:\n"
+                f" Context too long ({context_length:,} chars, max: {args.max_context_length:,})"
             )
             skipped_count += 1
             continue
@@ -268,14 +270,14 @@ def main():
     geval_metrics = [
         GEval(
             name="Completeness",
-            criteria="Completeness - assess if the actual output covers all the key points mentioned in the expected output.",
+            criteria="Completeness - assess if output covers all the key points mentioned in the expected output.",
             evaluation_params=[LLMTestCaseParams.ACTUAL_OUTPUT, LLMTestCaseParams.EXPECTED_OUTPUT],
             model=evaluation_model,
             strict_mode=False,
         ),
         GEval(
             name="Accuracy",
-            criteria="Accuracy - evaluate if the actual output contains accurate information that aligns with the expected output.",
+            criteria="Accuracy - evaluate if output contains accurate information that aligns with the expected output.",
             evaluation_params=[LLMTestCaseParams.ACTUAL_OUTPUT, LLMTestCaseParams.EXPECTED_OUTPUT],
             model=evaluation_model,
             strict_mode=False,

@@ -286,10 +286,6 @@ def main():
         help="Number of pages per split: 1 for single-page (default), 2 for overlapping 2-page",
     )
 
-    # --- metabee review ------------------------------------------------------
-    review_parser = subparsers.add_parser("review", help="Launch GUI for reviewing and annotating LLM output")
-    # No arguments needed - the GUI handles file selection
-
     # --- metabee prep-benchmark ----------------------------------------------
     prep_benchmark_parser = subparsers.add_parser("prep-benchmark", help="Prepare benchmarking data from GUI reviewer answers")
     prep_benchmark_parser.add_argument(

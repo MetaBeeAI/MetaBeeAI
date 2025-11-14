@@ -133,7 +133,8 @@ def extract_significance_with_llm(
             )
 
         prompt = f"""
-You are an expert at analyzing scientific findings and categorizing them by biological organization level, study type, variables measured, significance, and specific pesticide tested.
+You are an expert at analyzing scientific findings and categorizing them by biological organization level,
+study type, variables measured, significance, and specific pesticide tested.
 
 TASK: Extract and categorize ONLY findings about BIOLOGICAL EFFECTS on bees, not exposure confirmation or residue analysis.
 
@@ -165,11 +166,16 @@ For each finding, extract:
 
 2. **study_type**: Whether this was a "field" or "lab" study (infer from context)
 
-3. **variable_measured**: The specific biological variable or endpoint measured (e.g., "drone weight", "reproductive output", "mortality", "colony development")
+3. **variable_measured**: The specific biological variable or endpoint measured
+    (e.g., "drone weight", "reproductive output", "mortality", "colony development")
 
-4. **significance**: Whether the effect was "significant" or "not significant" (look for explicit statements of significance, p-values, or clear language about effects)
+4. **significance**: Whether the effect was "significant" or "not significant"
+    (look for explicit statements of significance, p-values, or clear language about effects)
 
-5. **pesticide_tested**: The specific pesticide that was tested for this effect. If multiple pesticides were tested, determine which one is associated with this specific finding. If the finding is about a general effect or all pesticides combined, use "multiple" or "all pesticides". If no specific pesticide is mentioned, use "unspecified".
+5. **pesticide_tested**: The specific pesticide that was tested for this effect.
+    If multiple pesticides were tested, determine which one is associated with this specific finding.
+    If the finding is about a general effect or all pesticides combined, use "multiple" or "all pesticides".
+    If no specific pesticide is mentioned, use "unspecified".
 
 EXAMPLES:
 - "No adverse effect of clothianidin on colony development" → pesticide_tested: "clothianidin"
@@ -182,7 +188,9 @@ DO NOT INCLUDE:
 - "Bumble bees were observed foraging" (this is observation, not effect)
 - "Measured levels ranging from X to Y" (this is residue analysis)
 
-Return ONLY a JSON array of objects with "level", "study_type", "variable_measured", "significance", and "pesticide_tested" keys. Extract each distinct biological effect finding as a separate object.
+Return ONLY a JSON array of objects with "level", "study_type", "variable_measured",
+"significance", and "pesticide_tested" keys.
+Extract each distinct biological effect finding as a separate object.
 """
 
         response = client.chat.completions.create(
@@ -482,11 +490,12 @@ def main():
     print("\nSample results:")
     for i, result in enumerate(entries_with_data[:10]):
         print(
-            f"  {result['paper_id']}: {result['level']} | {result['study_type']} | {result['variable_measured']} | {result['significance']}"
+            f"{result['paper_id']}: {result['level']} | {result['study_type']} | "
+            f"{result['variable_measured']} | {result['significance']}"
         )
 
     if len(entries_with_data) > 10:
-        print(f"  ... and {len(entries_with_data) - 10} more entries")
+        print(f"... and {len(entries_with_data) - 10} more entries")
 
 
 if __name__ == "__main__":

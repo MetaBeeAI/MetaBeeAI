@@ -223,7 +223,7 @@ async def process_papers(base_dir=None, paper_folders=None, overwrite_merged=Fal
         import sys
 
         sys.path.append("..")
-        from config import get_papers_dir
+        from metabeeai.config import get_papers_dir
 
         base_dir = get_papers_dir()
 
@@ -384,7 +384,8 @@ def main(argv=None):
         type=str,
         nargs="+",
         default=None,
-        help="Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM). If not specified, all folders will be processed.",
+        help="Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM)."
+        " If not specified, all folders will be processed.",
     )
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing merged.json files")
     parser.add_argument(
@@ -397,7 +398,8 @@ def main(argv=None):
         "--answer-model",
         type=str,
         default=None,
-        help="Model to use for answer generation and reflection (e.g., 'openai/gpt-4o-mini', 'openai/gpt-4o'). Default: from config",
+        help="Model to use for answer generation and reflection"
+        "(e.g., 'openai/gpt-4o-mini', 'openai/gpt-4o'). Default: from config",
     )
     parser.add_argument(
         "--config",

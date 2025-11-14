@@ -22,12 +22,12 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+from metabeeai.config import get_data_dir
+
 # Add parent directory to path to access config
 script_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(script_dir)
 sys.path.insert(0, parent_dir)
-
-from config import get_data_dir
 
 
 def run_command(cmd, description, cwd=None):
@@ -39,7 +39,7 @@ def run_command(cmd, description, cwd=None):
     print()
 
     try:
-        result = subprocess.run(cmd, check=True, capture_output=False, text=True, cwd=cwd)
+        _ = subprocess.run(cmd, check=True, capture_output=False, text=True, cwd=cwd)
         print(f"[OK] {description} completed successfully")
         return True
     except subprocess.CalledProcessError as e:

@@ -20,7 +20,7 @@ def process_papers(papers_dir=None, start_folder=None):
         import sys
 
         sys.path.append("..")
-        from config import get_papers_dir
+        from metabeeai.config import get_papers_dir
 
         papers_dir = get_papers_dir()
 

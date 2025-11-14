@@ -167,7 +167,8 @@ def process_merged_json_file(json_file_path: Path, output_path: Path = None) -> 
         # Analyze uniqueness
         uniqueness_analysis = analyze_chunk_uniqueness(chunks)
         logger.info(
-            f"Found {uniqueness_analysis['duplicate_chunks']} duplicates ({uniqueness_analysis['duplication_rate']}% duplication rate)"
+            f"Found {uniqueness_analysis['duplicate_chunks']}"
+            f" duplicates ({uniqueness_analysis['duplication_rate']}% duplication rate)"
         )
 
         # Deduplicate if needed

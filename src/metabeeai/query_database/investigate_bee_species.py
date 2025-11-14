@@ -345,11 +345,12 @@ def main():
             print(f"  {result['paper_id']}: {result['species_name']} (common: {result['common_name']})")
         else:
             print(
-                f"  {result['paper_id']}: {result['species_name']} -> {result['genus']} {result['species']} {result['subspecies']}"
+                f"{result['paper_id']}: {result['species_name']} -> "
+                f"{result['genus']} {result['species']} {result['subspecies']}"
             )
 
     if len(results) > 5:
-        print(f"  ... and {len(results) - 5} more entries")
+        print(f"... and {len(results) - 5} more entries")
 
 
 if __name__ == "__main__":
