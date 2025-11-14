@@ -381,26 +381,44 @@
                   
   <h1>Source code for metabeeai.llm_review_software.beegui</h1><div class="highlight"><pre>
 <span></span><span class="c1"># MetaBeeAI GUI</span>
-<span class="c1"># </span>
+<span class="c1">#</span>
 <span class="c1"># Execute with:</span>
 <span class="c1">#   python metabeeai_llm/beegui.py</span>
 <span class="c1">#</span>
 <span class="c1"># m.mieskolainen@imperial.ac.uk, 2025</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">fitz</span>  <span class="c1"># PyMuPDF</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">Qt</span><span class="p">,</span> <span class="n">QRect</span><span class="p">,</span> <span class="n">pyqtSignal</span><span class="p">,</span> <span class="n">QPoint</span><span class="p">,</span> <span class="n">QEvent</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtGui</span><span class="w">  </span><span class="kn">import</span> <span class="n">QGuiApplication</span><span class="p">,</span> <span class="n">QImage</span><span class="p">,</span> <span class="n">QPixmap</span><span class="p">,</span> <span class="n">QPainter</span><span class="p">,</span> <span class="n">QPen</span><span class="p">,</span> <span class="n">QColor</span><span class="p">,</span> <span class="n">QFont</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">fitz</span>  <span class="c1"># PyMuPDF</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtCore</span><span class="w"> </span><span class="kn">import</span> <span class="n">QEvent</span><span class="p">,</span> <span class="n">QPoint</span><span class="p">,</span> <span class="n">QRect</span><span class="p">,</span> <span class="n">Qt</span><span class="p">,</span> <span class="n">pyqtSignal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtGui</span><span class="w"> </span><span class="kn">import</span> <span class="n">QColor</span><span class="p">,</span> <span class="n">QFont</span><span class="p">,</span> <span class="n">QGuiApplication</span><span class="p">,</span> <span class="n">QImage</span><span class="p">,</span> <span class="n">QPainter</span><span class="p">,</span> <span class="n">QPen</span><span class="p">,</span> <span class="n">QPixmap</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtWidgets</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">QFrame</span><span class="p">,</span> <span class="n">QMenu</span><span class="p">,</span> <span class="n">QApplication</span><span class="p">,</span> <span class="n">QMainWindow</span><span class="p">,</span> <span class="n">QListWidget</span><span class="p">,</span> <span class="n">QLabel</span><span class="p">,</span> <span class="n">QSplitter</span><span class="p">,</span> <span class="n">QAction</span><span class="p">,</span>
-    <span class="n">QFileDialog</span><span class="p">,</span> <span class="n">QWidget</span><span class="p">,</span> <span class="n">QVBoxLayout</span><span class="p">,</span> <span class="n">QHBoxLayout</span><span class="p">,</span> <span class="n">QTextEdit</span><span class="p">,</span> <span class="n">QPushButton</span><span class="p">,</span>
-    <span class="n">QSlider</span><span class="p">,</span> <span class="n">QGroupBox</span><span class="p">,</span> <span class="n">QToolButton</span><span class="p">,</span> <span class="n">QListWidgetItem</span><span class="p">,</span> <span class="n">QScrollArea</span><span class="p">,</span> <span class="n">QMessageBox</span>
+    <span class="n">QAction</span><span class="p">,</span>
+    <span class="n">QApplication</span><span class="p">,</span>
+    <span class="n">QFileDialog</span><span class="p">,</span>
+    <span class="n">QFrame</span><span class="p">,</span>
+    <span class="n">QGroupBox</span><span class="p">,</span>
+    <span class="n">QHBoxLayout</span><span class="p">,</span>
+    <span class="n">QLabel</span><span class="p">,</span>
+    <span class="n">QListWidget</span><span class="p">,</span>
+    <span class="n">QListWidgetItem</span><span class="p">,</span>
+    <span class="n">QMainWindow</span><span class="p">,</span>
+    <span class="n">QMenu</span><span class="p">,</span>
+    <span class="n">QMessageBox</span><span class="p">,</span>
+    <span class="n">QPushButton</span><span class="p">,</span>
+    <span class="n">QScrollArea</span><span class="p">,</span>
+    <span class="n">QSlider</span><span class="p">,</span>
+    <span class="n">QSplitter</span><span class="p">,</span>
+    <span class="n">QTextEdit</span><span class="p">,</span>
+    <span class="n">QToolButton</span><span class="p">,</span>
+    <span class="n">QVBoxLayout</span><span class="p">,</span>
+    <span class="n">QWidget</span><span class="p">,</span>
 <span class="p">)</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">AutoActivateListWidget</span><span class="p">(</span><span class="n">QListWidget</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
@@ -409,6 +427,7 @@
             <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentItem</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">current</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">itemActivated</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+
 
 <span class="k">class</span><span class="w"> </span><span class="nc">PDFViewer</span><span class="p">(</span><span class="n">QLabel</span><span class="p">):</span>
     <span class="n">resized</span> <span class="o">=</span> <span class="n">pyqtSignal</span><span class="p">()</span>  <span class="c1"># emitted on resize</span>
@@ -441,11 +460,11 @@
         <span class="k">for</span> <span class="n">ann</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotations</span><span class="p">:</span>
             <span class="n">painter</span><span class="o">.</span><span class="n">drawRect</span><span class="p">(</span><span class="n">ann</span><span class="p">[</span><span class="s2">&quot;rect&quot;</span><span class="p">])</span>
         <span class="c1"># Uncomment below to highlight hovered annotations</span>
-        <span class="c1">#for ann in self.hovered_annotations:</span>
+        <span class="c1"># for ann in self.hovered_annotations:</span>
         <span class="c1">#    brush = QColor(255, 255, 0, 100)  # semi-transparent yellow</span>
         <span class="c1">#    painter.fillRect(ann[&quot;rect&quot;], brush)</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
-    
+
     <span class="k">def</span><span class="w"> </span><span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
         <span class="n">pos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hovered_annotations</span> <span class="o">=</span> <span class="p">[]</span>
@@ -460,6 +479,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resized</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
 
+
 <span class="c1"># Define a custom ZoomSlider class.</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ZoomSlider</span><span class="p">(</span><span class="n">QSlider</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mouseDoubleClickEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
@@ -468,14 +488,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
         <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
+
 <span class="c1"># -------------------- PDF Scroll Area --------------------</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">PDFScrollArea</span><span class="p">(</span><span class="n">QScrollArea</span><span class="p">):</span>
     <span class="c1"># Allows panning (by dragging) and zooming via Ctrl+wheel.</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">setFrameShape</span><span class="p">(</span><span class="n">QFrame</span><span class="o">.</span><span class="n">NoFrame</span><span class="p">)</span>  <span class="c1"># Remove the QScrollArea frame</span>
-        
+
         <span class="c1"># Disable automatic resizing so that the PDFViewer can have its own size.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setWidgetResizable</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Changed from True</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>  <span class="c1"># Center the widget when it is smaller than the viewport</span>
@@ -518,6 +539,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">wheelEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
+
 <span class="c1"># -------------------- Star Rating Widget --------------------</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">StarRatingWidget</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_stars</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -549,6 +571,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">current_rating</span> <span class="o">=</span> <span class="n">star_value</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">update_stars</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ratingChanged</span><span class="p">()</span>
+
         <span class="k">return</span> <span class="n">handler</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">update_stars</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -561,7 +584,7 @@
                 <span class="n">btn</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">ratingChanged</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;onRatingChanged&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;onRatingChanged&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">onRatingChanged</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_rating</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">getRating</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -571,12 +594,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">current_rating</span> <span class="o">=</span> <span class="n">rating</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_stars</span><span class="p">()</span>
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">get_questions_for_chunk</span><span class="p">(</span><span class="n">chunk_id</span><span class="p">,</span> <span class="n">questions_data</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recursively traverse questions_data (a dict) and return a list of question keys (as strings)</span>
 <span class="sd">    for which the &#39;chunk_ids&#39; list (if present) contains chunk_id.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">traverse</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="c1"># If this dictionary has chunk_ids, check them.</span>
@@ -588,6 +613,7 @@
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">new_prefix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">prefix</span> <span class="k">else</span> <span class="n">key</span>
                 <span class="n">traverse</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">new_prefix</span><span class="p">)</span>
+
     <span class="n">traverse</span><span class="p">(</span><span class="n">questions_data</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">results</span>
 
@@ -606,7 +632,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">available_geometry</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.0</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">available_geometry</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.0</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">1400</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">current_pdf_doc</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_json_data</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_answers_data</span> <span class="o">=</span> <span class="p">{}</span>
@@ -639,7 +665,7 @@
         <span class="n">paper_nav_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prev_paper_btn</span><span class="p">)</span>
         <span class="n">paper_nav_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next_paper_btn</span><span class="p">)</span>
         <span class="n">paper_nav_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paper_list</span><span class="p">)</span>
-        
+
         <span class="c1"># Page navigation controls for PDF pages</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prev_page_btn</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Prev Page&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prev_page_btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_prev_page</span><span class="p">)</span>
@@ -687,10 +713,10 @@
         <span class="n">pdf_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pdf_scroll_area</span><span class="p">)</span>
         <span class="n">pdf_widget</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
         <span class="n">pdf_widget</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">pdf_layout</span><span class="p">)</span>
-        
+
         <span class="c1"># ---------------- Right Pane: Question Panel, Mode Keys, and Chunk IDs ----------------</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">question_panel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_question_panel</span><span class="p">()</span>
-        
+
         <span class="c1"># Create mode buttons container.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">individual_btn</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;Individual&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">individual_btn</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
@@ -710,10 +736,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">chunk_list</span><span class="o">.</span><span class="n">itemClicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_chunk_selected</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chunk_list</span><span class="o">.</span><span class="n">itemActivated</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_chunk_selected</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chunk_list</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>  <span class="c1"># hide chunk IDs until a question is selected</span>
-        
+
         <span class="n">right_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
         <span class="n">right_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">question_panel</span><span class="p">)</span>
-        <span class="c1">#right_layout.addWidget(QLabel(&quot;&quot;)) # Chunk IDs</span>
+        <span class="c1"># right_layout.addWidget(QLabel(&quot;&quot;)) # Chunk IDs</span>
         <span class="n">right_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_list</span><span class="p">)</span>
         <span class="n">right_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mode_widget</span><span class="p">)</span>
         <span class="n">right_widget</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
@@ -738,13 +764,13 @@
         <span class="n">file_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">openFolderAction</span><span class="p">)</span>
 
         <span class="c1"># ---------------- Option Menu: Theme and Font ----------------</span>
-        
+
         <span class="n">options_menu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">menuBar</span><span class="p">()</span><span class="o">.</span><span class="n">addMenu</span><span class="p">(</span><span class="s2">&quot;Options&quot;</span><span class="p">)</span>
-        
+
         <span class="c1"># Theme Actions.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">darkThemeAction</span>  <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Dark Mode&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">checkable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">darkThemeAction</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Dark Mode&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">checkable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lightThemeAction</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Light Mode&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">checkable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        
+
         <span class="c1"># Default to dark mode.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">darkThemeAction</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">darkThemeAction</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">setTheme</span><span class="p">(</span><span class="s2">&quot;dark&quot;</span><span class="p">))</span>
@@ -757,7 +783,7 @@
         <span class="n">fontSizeWidget</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">fontSizeLayout</span> <span class="o">=</span> <span class="n">QHBoxLayout</span><span class="p">()</span>
         <span class="n">fontSizeLayout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-        
+
         <span class="c1"># Create buttons and label.</span>
         <span class="n">decreaseButton</span> <span class="o">=</span> <span class="n">QPushButton</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fontSizeLabel</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fontSize</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -775,6 +801,7 @@
 
         <span class="c1"># Embed the widget into the menu using QWidgetAction.</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">PyQt5.QtWidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">QWidgetAction</span>  <span class="c1"># ensure this import is present at the top if not already</span>
+
         <span class="n">fontSizeAction</span> <span class="o">=</span> <span class="n">QWidgetAction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">fontSizeAction</span><span class="o">.</span><span class="n">setDefaultWidget</span><span class="p">(</span><span class="n">fontSizeWidget</span><span class="p">)</span>
         <span class="n">fontSizeMenu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">fontSizeAction</span><span class="p">)</span>
@@ -788,7 +815,7 @@
         <span class="n">about_action</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;About&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="n">about_action</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">show_about</span><span class="p">)</span>
         <span class="n">help_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">about_action</span><span class="p">)</span>
-        
+
         <span class="c1"># ---------------- Full-Screen Toggle ----------------</span>
         <span class="c1"># Add an action with the F11 shortcut to toggle full screen mode.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fullScreenAction</span> <span class="o">=</span> <span class="n">QAction</span><span class="p">(</span><span class="s2">&quot;Toggle Full Screen&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
@@ -798,7 +825,7 @@
 
         <span class="c1"># Set default theme to dark.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setTheme</span><span class="p">(</span><span class="s2">&quot;dark&quot;</span><span class="p">)</span>
-        
+
         <span class="c1"># Try to load default folder &quot;data/papers&quot; automatically.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">open_folder</span><span class="p">(</span><span class="n">initial</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -818,7 +845,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">menuBar</span><span class="p">()</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showFullScreen</span><span class="p">()</span></div>
 
-    
+
 <div class="viewcode-block" id="MainWindow.handle_hover_annotations">
 <a class="viewcode-back" href="../../../generated/api/metabeeai.llm_review_software.MainWindow.html#metabeeai.llm_review_software.MainWindow.handle_hover_annotations">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">handle_hover_annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annotations</span><span class="p">):</span>
@@ -844,7 +871,7 @@
                 <span class="n">tooltip_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{</span><span class="n">cid</span><span class="si">}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pdf_viewer</span><span class="o">.</span><span class="n">setToolTip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tooltip_lines</span><span class="p">))</span></div>
 
-        
+
 <div class="viewcode-block" id="MainWindow.setTheme">
 <a class="viewcode-back" href="../../../generated/api/metabeeai.llm_review_software.MainWindow.html#metabeeai.llm_review_software.MainWindow.setTheme">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">setTheme</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theme</span><span class="p">):</span>
@@ -993,7 +1020,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="n">light_style</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">darkThemeAction</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">lightThemeAction</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        
+
         <span class="c1"># Reapply the global font after switching themes.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateFontSize</span><span class="p">()</span></div>
 
@@ -1001,9 +1028,8 @@
 <div class="viewcode-block" id="MainWindow.updateFontSize">
 <a class="viewcode-back" href="../../../generated/api/metabeeai.llm_review_software.MainWindow.html#metabeeai.llm_review_software.MainWindow.updateFontSize">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">updateFontSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        
         <span class="n">new_font</span> <span class="o">=</span> <span class="n">QFont</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fontSize</span><span class="p">)</span>
-        
+
         <span class="c1"># Update the global application font.</span>
         <span class="n">QApplication</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">new_font</span><span class="p">)</span>
         <span class="c1"># Also update the main window&#39;s font.</span>
@@ -1015,9 +1041,9 @@
             <span class="n">widget</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span>
         <span class="c1"># Force the main window to repaint.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span>
-        
+
         <span class="c1"># Update the font size label (if it exists).</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;fontSizeLabel&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;fontSizeLabel&quot;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fontSizeLabel</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fontSize</span><span class="p">))</span></div>
 
 
@@ -1044,7 +1070,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">render_current_page</span><span class="p">()</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span></div>
 
-        
+
     <span class="c1"># Enable left/right key navigation for PDF pages.</span>
 <div class="viewcode-block" id="MainWindow.keyPressEvent">
 <a class="viewcode-back" href="../../../generated/api/metabeeai.llm_review_software.MainWindow.html#metabeeai.llm_review_software.MainWindow.keyPressEvent">[docs]</a>
@@ -1058,7 +1084,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span></div>
 
-    
+
 <div class="viewcode-block" id="MainWindow.handle_wheel_zoom">
 <a class="viewcode-back" href="../../../generated/api/metabeeai.llm_review_software.MainWindow.html#metabeeai.llm_review_software.MainWindow.handle_wheel_zoom">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">handle_wheel_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
@@ -1074,18 +1100,18 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">create_question_panel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">panel</span> <span class="o">=</span> <span class="n">QGroupBox</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
-        
+
         <span class="c1"># Always visible: the question list.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">question_list</span> <span class="o">=</span> <span class="n">AutoActivateListWidget</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">question_list</span><span class="o">.</span><span class="n">itemClicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_question_selected</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">question_list</span><span class="o">.</span><span class="n">itemActivated</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_question_selected</span><span class="p">)</span>  <span class="c1"># allow Enter key activation</span>
         <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;&lt;center&gt;&lt;h3&gt;Questions&lt;/h3&gt;&lt;/center&gt;&lt;/b&gt;&quot;</span><span class="p">))</span>
         <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">question_list</span><span class="p">)</span>
-        
+
         <span class="c1"># Container for controls to be hidden until a question is selected.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">question_controls</span> <span class="o">=</span> <span class="n">QWidget</span><span class="p">()</span>
         <span class="n">qc_layout</span> <span class="o">=</span> <span class="n">QVBoxLayout</span><span class="p">()</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">answer_field</span> <span class="o">=</span> <span class="n">QTextEdit</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">answer_field</span><span class="o">.</span><span class="n">setReadOnly</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reason_field</span> <span class="o">=</span> <span class="n">QTextEdit</span><span class="p">()</span>
@@ -1094,7 +1120,7 @@
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">answer_field</span><span class="p">)</span>
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QLabel</span><span class="p">(</span><span class="s2">&quot;AI Reason&quot;</span><span class="p">))</span>
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reason_field</span><span class="p">)</span>
-        
+
         <span class="c1">## Star rating</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span> <span class="o">=</span> <span class="n">StarRatingWidget</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">onRatingChanged</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_star_rating_changed</span>
@@ -1104,7 +1130,7 @@
         <span class="n">star_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rating_number_label</span><span class="p">)</span>
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QLabel</span><span class="p">())</span>
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">star_layout</span><span class="p">)</span>
-        
+
         <span class="c1">## User answers</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">answer_positive_field</span> <span class="o">=</span> <span class="n">QTextEdit</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">answer_negative_field</span> <span class="o">=</span> <span class="n">QTextEdit</span><span class="p">()</span>
@@ -1115,7 +1141,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">answer_negative_field</span><span class="o">.</span><span class="n">textChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_save</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reason_positive_field</span><span class="o">.</span><span class="n">textChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_save</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reason_negative_field</span><span class="o">.</span><span class="n">textChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_save</span><span class="p">)</span>
-        
+
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QLabel</span><span class="p">(</span><span class="s1">&#39;&lt;font color=&quot;green&quot;&gt;Answer (✓)&lt;/font&gt;&#39;</span><span class="p">))</span>
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">answer_positive_field</span><span class="p">)</span>
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QLabel</span><span class="p">(</span><span class="s1">&#39;&lt;font color=&quot;green&quot;&gt;Reason (✓)&lt;/font&gt;&#39;</span><span class="p">))</span>
@@ -1124,10 +1150,10 @@
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">answer_negative_field</span><span class="p">)</span>
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">QLabel</span><span class="p">(</span><span class="s1">&#39;&lt;font color=&quot;red&quot;&gt;Reason (✗)&lt;/font&gt;&#39;</span><span class="p">))</span>
         <span class="n">qc_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reason_negative_field</span><span class="p">)</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">question_controls</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">qc_layout</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">question_controls</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>  <span class="c1"># hide controls until a question is selected</span>
-        
+
         <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">question_controls</span><span class="p">)</span>
         <span class="n">panel</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">panel</span></div>
@@ -1167,13 +1193,15 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">open_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># Import centralized configuration for default folder</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
         <span class="n">script_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
         <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">script_dir</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">parent_dir</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
             <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">parent_dir</span><span class="p">)</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_papers_dir</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_papers_dir</span>
+
         <span class="n">default_folder</span> <span class="o">=</span> <span class="n">get_papers_dir</span><span class="p">()</span>
-        
+
         <span class="k">if</span> <span class="n">initial</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">default_folder</span><span class="p">):</span>
                 <span class="n">folder</span> <span class="o">=</span> <span class="n">default_folder</span>
@@ -1197,12 +1225,11 @@
         <span class="k">for</span> <span class="n">foldername</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_papers_dir</span><span class="p">)):</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_papers_dir</span><span class="p">,</span> <span class="n">foldername</span><span class="p">)</span>
             <span class="c1"># Accept folders that are alphanumeric (paper IDs) and not hidden (starting with .)</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">foldername</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">foldername</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">foldername</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">foldername</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
                 <span class="c1"># Add the paper number only; progress will be added on selection.</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">paper_list</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">foldername</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 
-        
 <div class="viewcode-block" id="MainWindow.on_prev_paper">
 <a class="viewcode-back" href="../../../generated/api/metabeeai.llm_review_software.MainWindow.html#metabeeai.llm_review_software.MainWindow.on_prev_paper">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">on_prev_paper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1304,7 +1331,7 @@
         <span class="n">progress</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_progress_for_current_paper</span><span class="p">()</span>
         <span class="c1"># Update the current item&#39;s text with the progress percentage.</span>
         <span class="n">item</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">paper_id</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">progress</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
-        
+
         <span class="c1"># Re-enable auto_save after programmatic updates.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">suppress_auto_save</span> <span class="o">=</span> <span class="kc">False</span></div>
 
@@ -1326,7 +1353,7 @@
         <span class="n">questions_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_answers_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;QUESTIONS&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="n">extended_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">answers_extended_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;QUESTIONS&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="n">all_keys</span> <span class="o">=</span> <span class="n">questions_keys</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">extended_keys</span><span class="p">)</span>
-        
+
         <span class="n">total_questions</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_keys</span><span class="p">)</span>
         <span class="n">total_fields</span> <span class="o">=</span> <span class="n">total_questions</span> <span class="o">*</span> <span class="mi">5</span>
         <span class="k">if</span> <span class="n">total_fields</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1345,7 +1372,7 @@
                 <span class="n">filled_fields</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">rating</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_rating&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
                 <span class="n">rating</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">if</span> <span class="n">rating</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">filled_fields</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -1353,7 +1380,6 @@
         <span class="c1"># Use floor, if we are near maximum (e.g. missing one)</span>
         <span class="n">percentage</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">filled_fields</span> <span class="o">/</span> <span class="n">total_fields</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">percentage</span></div>
-
 
 
 <div class="viewcode-block" id="MainWindow.populate_questions">
@@ -1399,11 +1425,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">reason_negative_field</span><span class="o">.</span><span class="n">setPlainText</span><span class="p">(</span><span class="n">edited</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_reason_negative&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">rating</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">edited</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_rating&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
             <span class="n">rating</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">setRating</span><span class="p">(</span><span class="n">rating</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rating_number_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rating</span><span class="p">))</span>
-        
+
         <span class="c1"># Update chunk list: this may change the list of chunk IDs to annotate.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chunk_list</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_question_chunk_ids</span> <span class="o">=</span> <span class="n">question_obj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;chunk_ids&quot;</span><span class="p">,</span> <span class="p">[])</span>
@@ -1417,12 +1443,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">chunk_list</span><span class="o">.</span><span class="n">selectAll</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">chunk_list</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-        
+
         <span class="c1"># Show question controls, mode keys, and chunk list.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">question_controls</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode_widget</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chunk_list</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-        
+
         <span class="c1"># Optionally, set the current page based on a grounding found.</span>
         <span class="n">page_set</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">cid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_question_chunk_ids</span><span class="p">:</span>
@@ -1445,14 +1471,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">updateAnnotations</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">loading_question</span> <span class="o">=</span> <span class="kc">False</span></div>
 
-    
+
 <div class="viewcode-block" id="MainWindow.auto_save">
 <a class="viewcode-back" href="../../../generated/api/metabeeai.llm_review_software.MainWindow.html#metabeeai.llm_review_software.MainWindow.auto_save">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">auto_save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># If auto-save is suppressed or we are loading a question, do nothing.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_question_id</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">loading_question</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;suppress_auto_save&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
             <span class="k">return</span>
-        
+
         <span class="c1"># Log which field triggered the auto_save if available.</span>
         <span class="n">sender</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">sender</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1471,14 +1497,14 @@
             <span class="s2">&quot;user_answer_negative&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">answer_negative_field</span><span class="o">.</span><span class="n">toPlainText</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
             <span class="s2">&quot;user_reason_positive&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">reason_positive_field</span><span class="o">.</span><span class="n">toPlainText</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
             <span class="s2">&quot;user_reason_negative&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">reason_negative_field</span><span class="o">.</span><span class="n">toPlainText</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
-            <span class="s2">&quot;user_rating&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">getRating</span><span class="p">()</span>
+            <span class="s2">&quot;user_rating&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">getRating</span><span class="p">(),</span>
         <span class="p">}</span>
         <span class="n">default_data</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;user_answer_positive&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="s2">&quot;user_answer_negative&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="s2">&quot;user_reason_positive&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="s2">&quot;user_reason_negative&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;user_rating&quot;</span><span class="p">:</span> <span class="mi">0</span>  <span class="c1"># default rating is 0</span>
+            <span class="s2">&quot;user_rating&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1"># default rating is 0</span>
         <span class="p">}</span>
         <span class="n">answers_extended_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_paper_folder</span><span class="p">,</span> <span class="s2">&quot;answers_extended.json&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">new_data</span> <span class="o">==</span> <span class="n">default_data</span><span class="p">:</span>
@@ -1515,10 +1541,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">modified_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Modified: </span><span class="si">{</span><span class="n">mod_dt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving answers_extended.json: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        
+
         <span class="c1"># Update the current paper&#39;s progress percentage in real time.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_progress_display</span><span class="p">()</span></div>
-
 
 
 <div class="viewcode-block" id="MainWindow.set_annotation_mode">
@@ -1545,7 +1570,6 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">on_chunk_selected</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">chunk_list</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updateAnnotations</span><span class="p">()</span></div>
 
-    
 
 <div class="viewcode-block" id="MainWindow.on_chunk_selected">
 <a class="viewcode-back" href="../../../generated/api/metabeeai.llm_review_software.MainWindow.html#metabeeai.llm_review_software.MainWindow.on_chunk_selected">[docs]</a>
@@ -1562,7 +1586,7 @@
             <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_annotation</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cid&quot;</span><span class="p">:</span> <span class="n">cid</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">:</span> <span class="n">grounding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">),</span> <span class="s2">&quot;page&quot;</span><span class="p">:</span> <span class="n">grounding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;page&quot;</span><span class="p">)}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">current_page_num</span> <span class="o">=</span> <span class="n">grounding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;page&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">render_current_page</span><span class="p">()</span></div>
 
 
@@ -1593,7 +1617,6 @@
 <div class="viewcode-block" id="MainWindow.render_current_page">
 <a class="viewcode-back" href="../../../generated/api/metabeeai.llm_review_software.MainWindow.html#metabeeai.llm_review_software.MainWindow.render_current_page">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">render_current_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_pdf_doc</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_pdf_doc</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_page_num</span><span class="p">]</span>
@@ -1603,10 +1626,10 @@
         <span class="n">viewer_width</span><span class="p">,</span> <span class="n">viewer_height</span> <span class="o">=</span> <span class="n">viewer_size</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">viewer_size</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
         <span class="n">base_scale</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">viewer_width</span> <span class="o">/</span> <span class="n">orig_width</span><span class="p">,</span> <span class="n">viewer_height</span> <span class="o">/</span> <span class="n">orig_height</span><span class="p">)</span>
         <span class="n">effective_scale</span> <span class="o">=</span> <span class="n">base_scale</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_zoom</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span>
-        
+
         <span class="n">resolution_factor</span> <span class="o">=</span> <span class="mf">1.0</span>
         <span class="n">matrix</span> <span class="o">=</span> <span class="n">fitz</span><span class="o">.</span><span class="n">Matrix</span><span class="p">(</span><span class="n">effective_scale</span> <span class="o">*</span> <span class="n">resolution_factor</span><span class="p">,</span> <span class="n">effective_scale</span> <span class="o">*</span> <span class="n">resolution_factor</span><span class="p">)</span>
-        
+
         <span class="n">pix</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">get_pixmap</span><span class="p">(</span><span class="n">matrix</span><span class="o">=</span><span class="n">matrix</span><span class="p">)</span>
         <span class="n">rendered_width</span><span class="p">,</span> <span class="n">rendered_height</span> <span class="o">=</span> <span class="n">pix</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">pix</span><span class="o">.</span><span class="n">height</span>
 
@@ -1614,10 +1637,11 @@
         <span class="n">displayed_rect</span> <span class="o">=</span> <span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rendered_width</span><span class="p">,</span> <span class="n">rendered_height</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pdf_scroll_area</span><span class="o">.</span><span class="n">pdf_viewer</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">rendered_width</span><span class="p">,</span> <span class="n">rendered_height</span><span class="p">)</span>
 
-        <span class="n">image</span> <span class="o">=</span> <span class="n">QImage</span><span class="p">(</span><span class="n">pix</span><span class="o">.</span><span class="n">samples</span><span class="p">,</span> <span class="n">pix</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">pix</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">pix</span><span class="o">.</span><span class="n">stride</span><span class="p">,</span>
-                    <span class="n">QImage</span><span class="o">.</span><span class="n">Format_RGBA8888</span> <span class="k">if</span> <span class="n">pix</span><span class="o">.</span><span class="n">alpha</span> <span class="k">else</span> <span class="n">QImage</span><span class="o">.</span><span class="n">Format_RGB888</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">QImage</span><span class="p">(</span>
+            <span class="n">pix</span><span class="o">.</span><span class="n">samples</span><span class="p">,</span> <span class="n">pix</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">pix</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">pix</span><span class="o">.</span><span class="n">stride</span><span class="p">,</span> <span class="n">QImage</span><span class="o">.</span><span class="n">Format_RGBA8888</span> <span class="k">if</span> <span class="n">pix</span><span class="o">.</span><span class="n">alpha</span> <span class="k">else</span> <span class="n">QImage</span><span class="o">.</span><span class="n">Format_RGB888</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">rendered_pixmap</span> <span class="o">=</span> <span class="n">QPixmap</span><span class="o">.</span><span class="n">fromImage</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-        
+
         <span class="c1"># Prepare annotations (adjust x_offset and y_offset to 0 now)</span>
         <span class="n">annotations</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotation_mode</span> <span class="o">==</span> <span class="s2">&quot;individual&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_annotation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1629,8 +1653,9 @@
                     <span class="c1"># Loop over all groundings in the chunk.</span>
                     <span class="k">for</span> <span class="n">grounding</span> <span class="ow">in</span> <span class="n">chunk</span><span class="p">[</span><span class="s2">&quot;grounding&quot;</span><span class="p">]:</span>
                         <span class="k">if</span> <span class="n">grounding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;page&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page_num</span><span class="p">:</span>
-                            <span class="n">ann</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeAnnotation</span><span class="p">({</span><span class="s2">&quot;cid&quot;</span><span class="p">:</span> <span class="n">cid</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">:</span> <span class="n">grounding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">)},</span>
-                                                        <span class="n">rendered_width</span><span class="p">,</span> <span class="n">rendered_height</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                            <span class="n">ann</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeAnnotation</span><span class="p">(</span>
+                                <span class="p">{</span><span class="s2">&quot;cid&quot;</span><span class="p">:</span> <span class="n">cid</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">:</span> <span class="n">grounding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">)},</span> <span class="n">rendered_width</span><span class="p">,</span> <span class="n">rendered_height</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+                            <span class="p">)</span>
                             <span class="k">if</span> <span class="n">ann</span><span class="p">:</span>
                                 <span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ann</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">annotation_mode</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_question_chunk_ids</span><span class="p">:</span>
@@ -1641,8 +1666,9 @@
                     <span class="k">if</span> <span class="s2">&quot;grounding&quot;</span> <span class="ow">in</span> <span class="n">chunk</span><span class="p">:</span>
                         <span class="k">for</span> <span class="n">grounding</span> <span class="ow">in</span> <span class="n">chunk</span><span class="p">[</span><span class="s2">&quot;grounding&quot;</span><span class="p">]:</span>
                             <span class="k">if</span> <span class="n">grounding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;page&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page_num</span><span class="p">:</span>
-                                <span class="n">ann</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeAnnotation</span><span class="p">({</span><span class="s2">&quot;cid&quot;</span><span class="p">:</span> <span class="n">cid</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">:</span> <span class="n">grounding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">)},</span>
-                                                            <span class="n">rendered_width</span><span class="p">,</span> <span class="n">rendered_height</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                                <span class="n">ann</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeAnnotation</span><span class="p">(</span>
+                                    <span class="p">{</span><span class="s2">&quot;cid&quot;</span><span class="p">:</span> <span class="n">cid</span><span class="p">,</span> <span class="s2">&quot;box&quot;</span><span class="p">:</span> <span class="n">grounding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">)},</span> <span class="n">rendered_width</span><span class="p">,</span> <span class="n">rendered_height</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+                                <span class="p">)</span>
                                 <span class="k">if</span> <span class="n">ann</span><span class="p">:</span>
                                     <span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ann</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pdf_scroll_area</span><span class="o">.</span><span class="n">pdf_viewer</span><span class="o">.</span><span class="n">setAnnotations</span><span class="p">(</span><span class="n">annotations</span><span class="p">)</span>
@@ -1657,16 +1683,12 @@
         <span class="n">rel_box</span> <span class="o">=</span> <span class="n">ann_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">rel_box</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
-        <span class="n">l</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel_box</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">img_width</span><span class="p">)</span> <span class="o">+</span> <span class="n">x_offset</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel_box</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">img_height</span><span class="p">)</span> <span class="o">+</span> <span class="n">y_offset</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel_box</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">img_width</span><span class="p">)</span> <span class="o">+</span> <span class="n">x_offset</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel_box</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">img_height</span><span class="p">)</span> <span class="o">+</span> <span class="n">y_offset</span>
-        
-        <span class="n">l</span> <span class="o">-=</span> <span class="n">padding</span>
-        <span class="n">t</span> <span class="o">-=</span> <span class="n">padding</span>
-        <span class="n">r</span> <span class="o">+=</span> <span class="n">padding</span>
-        <span class="n">b</span> <span class="o">+=</span> <span class="n">padding</span>
-        <span class="n">rect</span> <span class="o">=</span> <span class="n">QRect</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="n">l</span><span class="p">,</span> <span class="n">b</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel_box</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">img_width</span><span class="p">)</span> <span class="o">+</span> <span class="n">x_offset</span> <span class="o">-</span> <span class="n">padding</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel_box</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">img_height</span><span class="p">)</span> <span class="o">+</span> <span class="n">y_offset</span> <span class="o">-</span> <span class="n">padding</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel_box</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">img_width</span><span class="p">)</span> <span class="o">+</span> <span class="n">x_offset</span> <span class="o">+</span> <span class="n">padding</span>
+        <span class="n">bottom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel_box</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">img_height</span><span class="p">)</span> <span class="o">+</span> <span class="n">y_offset</span> <span class="o">+</span> <span class="n">padding</span>
+
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">QRect</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">-</span> <span class="n">top</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;rect&quot;</span><span class="p">:</span> <span class="n">rect</span><span class="p">,</span> <span class="s2">&quot;cid&quot;</span><span class="p">:</span> <span class="n">ann_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cid&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)}</span></div>
 
 
@@ -1704,11 +1726,13 @@
 </div>
 
 
+
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="n">app</span> <span class="o">=</span> <span class="n">QApplication</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
     <span class="n">window</span> <span class="o">=</span> <span class="n">MainWindow</span><span class="p">()</span>
     <span class="n">window</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">exec_</span><span class="p">())</span>
+
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">main</span><span class="p">()</span>

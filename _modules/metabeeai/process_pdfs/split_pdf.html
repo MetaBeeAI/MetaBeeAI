@@ -381,18 +381,18 @@
                   
   <h1>Source code for metabeeai.process_pdfs.split_pdf</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python3</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">PyPDF2</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">PyPDF2</span>
+
 
 <div class="viewcode-block" id="split_pdfs">
 <a class="viewcode-back" href="../../../generated/api/metabeeai.process_pdfs.split_pdfs.html#metabeeai.metabeeai_llm.split_pdfs">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">split_pdfs</span><span class="p">(</span><span class="n">papers_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pages_per_split</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Split PDFs in the specified directory into single-page or overlapping 2-page segments.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        papers_dir: Directory containing paper subfolders (defaults to config)</span>
 <span class="sd">        pages_per_split: Number of pages per split (1 or 2). Default is 1.</span>
@@ -403,61 +403,66 @@
     <span class="k">if</span> <span class="n">pages_per_split</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: pages_per_split must be 1 or 2, got </span><span class="si">{</span><span class="n">pages_per_split</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span>
-    
+
     <span class="c1"># Import centralized configuration if papers_dir not provided</span>
     <span class="k">if</span> <span class="n">papers_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_papers_dir</span>
+
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_papers_dir</span>
+
         <span class="n">papers_dir</span> <span class="o">=</span> <span class="n">get_papers_dir</span><span class="p">()</span>
-    
+
     <span class="c1"># Validate papers directory</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">papers_dir</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: Directory &#39;</span><span class="si">{</span><span class="n">papers_dir</span><span class="si">}</span><span class="s2">&#39; does not exist&quot;</span><span class="p">)</span>
         <span class="k">return</span>
-    
+
     <span class="c1"># Get all subfolders in the specified directory</span>
     <span class="n">subfolders</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">papers_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">papers_dir</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
-    
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">subfolders</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No subfolders found in &#39;</span><span class="si">{</span><span class="n">papers_dir</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
         <span class="k">return</span>
-    
+
     <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;single-page&quot;</span> <span class="k">if</span> <span class="n">pages_per_split</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;overlapping 2-page&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">subfolders</span><span class="p">)</span><span class="si">}</span><span class="s2"> subfolders to process in </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2"> mode&quot;</span><span class="p">)</span>
-    
+
     <span class="k">for</span> <span class="n">subfolder</span> <span class="ow">in</span> <span class="n">subfolders</span><span class="p">:</span>
         <span class="c1"># Create pages directory if it doesn&#39;t exist</span>
         <span class="n">pages_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">papers_dir</span><span class="p">,</span> <span class="n">subfolder</span><span class="p">,</span> <span class="s2">&quot;pages&quot;</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">pages_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        
+
         <span class="c1"># Construct path to main PDF using subfolder name</span>
         <span class="n">pdf_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">papers_dir</span><span class="p">,</span> <span class="n">subfolder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">subfolder</span><span class="si">}</span><span class="s2">_main.pdf&quot;</span><span class="p">)</span>
-        
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PDF file not found at </span><span class="si">{</span><span class="n">pdf_path</span><span class="si">}</span><span class="s2">, skipping...&quot;</span><span class="p">)</span>
             <span class="k">continue</span>
-        
+
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># read the PDF</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing </span><span class="si">{</span><span class="n">pdf_path</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
             <span class="n">pdf_reader</span> <span class="o">=</span> <span class="n">PyPDF2</span><span class="o">.</span><span class="n">PdfReader</span><span class="p">(</span><span class="n">pdf_path</span><span class="p">)</span>
             <span class="n">total_pages</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pdf_reader</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span>
-            
+
             <span class="k">if</span> <span class="n">pages_per_split</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="c1"># Create single-page PDFs</span>
                 <span class="n">splits_created</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_pages</span><span class="p">):</span>
                     <span class="n">pdf_writer</span> <span class="o">=</span> <span class="n">PyPDF2</span><span class="o">.</span><span class="n">PdfWriter</span><span class="p">()</span>
                     <span class="n">pdf_writer</span><span class="o">.</span><span class="n">add_page</span><span class="p">(</span><span class="n">pdf_reader</span><span class="o">.</span><span class="n">pages</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                    
+
                     <span class="n">output_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pages_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;main_p</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">)</span>
                     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">:</span>
                         <span class="n">pdf_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
                     <span class="n">splits_created</span> <span class="o">+=</span> <span class="mi">1</span>
-                
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully processed </span><span class="si">{</span><span class="n">subfolder</span><span class="si">}</span><span class="s2">_main.pdf (</span><span class="si">{</span><span class="n">total_pages</span><span class="si">}</span><span class="s2"> pages, created </span><span class="si">{</span><span class="n">splits_created</span><span class="si">}</span><span class="s2"> single-page PDFs)&quot;</span><span class="p">)</span>
-            
+
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Successfully processed </span><span class="si">{</span><span class="n">subfolder</span><span class="si">}</span><span class="s2">_main.pdf (</span><span class="si">{</span><span class="n">total_pages</span><span class="si">}</span><span class="s2"> pages, &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;created </span><span class="si">{</span><span class="n">splits_created</span><span class="si">}</span><span class="s2"> single-page PDFs)&quot;</span>
+                <span class="p">)</span>
+
             <span class="k">elif</span> <span class="n">pages_per_split</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                 <span class="c1"># Create overlapping 2-page PDFs</span>
                 <span class="n">splits_created</span> <span class="o">=</span> <span class="mi">0</span>
@@ -466,48 +471,52 @@
                     <span class="c1"># Add current page and next page</span>
                     <span class="n">pdf_writer</span><span class="o">.</span><span class="n">add_page</span><span class="p">(</span><span class="n">pdf_reader</span><span class="o">.</span><span class="n">pages</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
                     <span class="n">pdf_writer</span><span class="o">.</span><span class="n">add_page</span><span class="p">(</span><span class="n">pdf_reader</span><span class="o">.</span><span class="n">pages</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
-                    
+
                     <span class="n">output_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pages_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;main_p</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">)</span>
                     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">output_file</span><span class="p">:</span>
                         <span class="n">pdf_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
                     <span class="n">splits_created</span> <span class="o">+=</span> <span class="mi">1</span>
-                
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully processed </span><span class="si">{</span><span class="n">subfolder</span><span class="si">}</span><span class="s2">_main.pdf (</span><span class="si">{</span><span class="n">total_pages</span><span class="si">}</span><span class="s2"> pages, created </span><span class="si">{</span><span class="n">splits_created</span><span class="si">}</span><span class="s2"> overlapping 2-page PDFs)&quot;</span><span class="p">)</span>
-            
+
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Successfully processed </span><span class="si">{</span><span class="n">subfolder</span><span class="si">}</span><span class="s2">_main.pdf (</span><span class="si">{</span><span class="n">total_pages</span><span class="si">}</span><span class="s2"> pages, &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;created </span><span class="si">{</span><span class="n">splits_created</span><span class="si">}</span><span class="s2"> overlapping 2-page PDFs)&quot;</span>
+                <span class="p">)</span>
+
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing </span><span class="si">{</span><span class="n">pdf_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="c1"># Set up command line argument parsing</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
-        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Split PDFs into single-page or overlapping 2-page documents&#39;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Split PDFs into single-page or overlapping 2-page documents&quot;</span><span class="p">,</span>
         <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
         <span class="n">epilog</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">Examples:</span>
 <span class="s2">  # Split into single-page documents (default)</span>
 <span class="s2">  </span><span class="si">%(prog)s</span><span class="s2"> /path/to/papers</span>
 <span class="s2">  </span><span class="si">%(prog)s</span><span class="s2"> /path/to/papers --pages 1</span>
-<span class="s2">  </span>
+
 <span class="s2">  # Split into overlapping 2-page documents</span>
 <span class="s2">  </span><span class="si">%(prog)s</span><span class="s2"> /path/to/papers --pages 2</span>
-<span class="s2">        &quot;&quot;&quot;</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;directory&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Directory containing paper subfolders&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;directory&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Directory containing paper subfolders&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s1">&#39;--pages&#39;</span><span class="p">,</span> 
-        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> 
-        <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+        <span class="s2">&quot;--pages&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Number of pages per split: 1 for single-page (default), 2 for overlapping 2-page&#39;</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of pages per split: 1 for single-page (default), 2 for overlapping 2-page&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    
+
     <span class="c1"># Parse arguments</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-    
+
     <span class="c1"># Run the main function</span>
     <span class="n">split_pdfs</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span> <span class="n">pages_per_split</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing complete!&quot;</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing complete!&quot;</span><span class="p">)</span>
 </pre></div>
 
                 </article>

@@ -152,7 +152,7 @@ In practice, we have found the single-page mode to be sufficient for most papers
 - `--pages {1,2}`: Number of pages per split (default: 1)
   - `1` = single-page documents (`main_p01.pdf`, `main_p02.pdf`, etc.)
   - `2` = overlapping 2-page documents (`main_p01-02.pdf`, `main_p02-03.pdf`, etc.)
-  
+
 - **Single-page mode**: A 10-page paper generates 10 split PDFs of 1 page each.
 - **2-page mode**: A 10-page paper generates 9 overlapping split PDFs of 2 pages each.
 
@@ -468,7 +468,7 @@ Raw PDF → Split PDF → Vision API → Individual JSONs → Merged JSON → De
 ### Out of API quota
 
 - **Cause**: Too many API calls
-- **Fix**: 
+- **Fix**:
   - The script automatically skips already-processed files
   - Use `--start` parameter to resume from a specific paper
   - Contact Landing AI to increase your quota
@@ -573,8 +573,8 @@ python batch_deduplicate.py --dry-run --verbose
    ```bash
    # Terminal 1
    python process_all.py --start 283C6B42 --end 76DQP2DC
-   
-   # Terminal 2  
+
+   # Terminal 2
    python process_all.py --start 8BV8BLU8 --end ZTRRIKQ3
    ```
 
@@ -617,4 +617,3 @@ After processing your PDFs:
 - **LLM Pipeline**: See `./metabeeai_llm` for LLM-based extraction
 - **Data Analysis**: See `../query_database` for analyzing extracted data
 - **Configuration**: See `../config.py` for centralized configuration
-
