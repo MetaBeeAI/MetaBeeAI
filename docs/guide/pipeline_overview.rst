@@ -25,7 +25,7 @@ Stages
    - **Input:** JSON chunks
    - **Output:** Structured question–answer pairs with traceable sources
    - **API Reference:** :doc:`MetaBeeAI LLM <../api/metabeeai_llm>`
-  
+
 1. **Human Review & Annotation → Validated Answers**
    - **Submodule:** :doc:`llm_review_software <../submodule/llm_review_software>`
    - **Purpose:** Provide a graphical interface for human review and validation of LLM answers
@@ -46,4 +46,3 @@ Stages
    - **Input:** Structured and benchmarked results
    - **Output:** Analytical summaries, visualizations, and derived datasets
    - **API Reference:** :doc:`Query Database <../api/query_database>`
-

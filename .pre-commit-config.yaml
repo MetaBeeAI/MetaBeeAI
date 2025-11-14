@@ -1,4 +1,4 @@
-exclude: ".*/PUBLIC/.*"
+exclude: "^data/"
 
 repos:
   # Ruff: linting and formatting
