@@ -1,7 +1,7 @@
 Complete Workflow
 =================
 
-The MetaBeeAI pipeline can be run end-to-end or executed in stages.  
+The MetaBeeAI pipeline can be run end-to-end or executed in stages.
 Each stage corresponds to one of the core submodules introduced in the :doc:`Pipeline Overview <pipeline_overview>` section.
 
 .. note::
@@ -15,7 +15,7 @@ Step 1 — Process PDFs to JSON
    cd process_pdfs
    python process_all.py
 
-**Purpose:** Convert PDFs into structured JSON chunks using the `process_pdfs <api/process_pdfs>`_ submodule.  
+**Purpose:** Convert PDFs into structured JSON chunks using the `process_pdfs <api/process_pdfs>`_ submodule.
 **Output:** ``data/papers/{paper_id}/pages/merged_v2.json``
 
 Step 2 — Extract Information with LLM
@@ -39,8 +39,8 @@ Step 2 — Extract Information with LLM
    # Custom model selection
    python llm_pipeline.py --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o"
 
-**Purpose:** Run LLM-based extraction using the `metabeeai_llm <api/metabeeai_llm>`_ submodule.  
-**Input:** JSON chunks from Stage 1  
+**Purpose:** Run LLM-based extraction using the `metabeeai_llm <api/metabeeai_llm>`_ submodule.
+**Input:** JSON chunks from Stage 1
 **Output:** ``data/papers/{paper_id}/answers.json``
 
 Questions are defined in ``metabeeai_llm/questions.yml``.
@@ -53,7 +53,7 @@ Step 3 — Human Review (Optional)
    cd llm_review_software
    python beegui.py
 
-**Purpose:** Launch the graphical review interface provided by the `llm_review_software <api/llm_review_software>`_ submodule.  
+**Purpose:** Launch the graphical review interface provided by the `llm_review_software <api/llm_review_software>`_ submodule.
 **Output:** ``data/papers/{paper_id}/answers_extended.json``
 
 Features include PDF viewing, answer editing, and quality ratings.
@@ -84,7 +84,7 @@ If you used the GUI review tool, reviewer data is already available in ``answers
    # For GUI reviewer answers
    python prep_benchmark_data_from_GUI_answers.py
 
-**Purpose:** Generate benchmarking datasets using the `llm_benchmarking <api/llm_benchmarking>`_ submodule.  
+**Purpose:** Generate benchmarking datasets using the `llm_benchmarking <api/llm_benchmarking>`_ submodule.
 **Output:** ``data/benchmark_data.json`` or ``data/benchmark_data_gui.json``
 
 4c. **Run Evaluation**
@@ -131,5 +131,5 @@ Step 5 — Data Analysis
 
    python investigate_pesticides.py
 
-**Purpose:** Perform large-scale data aggregation and analysis using the `query_database <api/query_database>`_ submodule.  
+**Purpose:** Perform large-scale data aggregation and analysis using the `query_database <api/query_database>`_ submodule.
 **Output:** Analytical reports, plots, and datasets in ``query_database/output/``.

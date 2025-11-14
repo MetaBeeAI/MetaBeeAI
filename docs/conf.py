@@ -35,8 +35,8 @@ exclude_patterns = [
 # Preserve gallery config for future re-enable
 sphinx_gallery_conf = {
     "examples_dirs": "../examples",
-    'gallery_dirs': os.path.join('generated', 'gallery'),
-    'filename_pattern': '^((?!skip_).)*$',
+    "gallery_dirs": os.path.join("generated", "gallery"),
+    "filename_pattern": "^((?!skip_).)*$",
     "default_thumb_file": "_static/gallery_default.png",
     "download_all_examples": True,
     "backreferences_dir": "gen_modules/backreferences",
@@ -50,7 +50,7 @@ html_theme_options = {
     "logo": {
         "text": "MetaBeeAI",
         "image_light": "_static/metabeeai.png",
-        "image_dark": "_static/metabeeai_dark.png", 
+        "image_dark": "_static/metabeeai_dark.png",
     },
     "show_nav_level": 2,
     "icon_links": [

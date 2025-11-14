@@ -8,7 +8,7 @@ Installation
 
 MetaBeeAI can be installed using pip. Open your terminal and run:
 
-.. code-block:: bash        
+.. code-block:: bash
 
    pip install metabeeai
 

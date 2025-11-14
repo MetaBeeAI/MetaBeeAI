@@ -20,7 +20,7 @@ Extract structured data from LLM answers for different question types:
 # Extract bee species data
 python investigate_bee_species.py
 
-# Extract pesticide data  
+# Extract pesticide data
 python investigate_pesticides.py
 
 # Extract additional stressors data
@@ -59,10 +59,10 @@ python network_analysis.py
 python investigate_bee_species.py
 ```
 
-**Input**: 
+**Input**:
 - `{papers_dir}/{paper_id}/answers.json` - LLM-generated answers
 
-**Output**: 
+**Output**:
 - `output/bee_species_data.json` - Structured bee species data
 
 **Data structure**:
@@ -96,10 +96,10 @@ python investigate_bee_species.py
 python investigate_pesticides.py
 ```
 
-**Input**: 
+**Input**:
 - `{papers_dir}/{paper_id}/answers.json` - LLM-generated answers
 
-**Output**: 
+**Output**:
 - `output/pesticides_data.json` - Structured pesticide data
 
 **Data structure**:
@@ -132,10 +132,10 @@ python investigate_pesticides.py
 python investigate_additional_stressors.py
 ```
 
-**Input**: 
+**Input**:
 - `{papers_dir}/{paper_id}/answers.json` - LLM-generated answers
 
-**Output**: 
+**Output**:
 - `output/additional_stressors_data.json` - Structured stressor data
 
 **Data structure**:
@@ -166,10 +166,10 @@ python investigate_additional_stressors.py
 python investigate_significance.py
 ```
 
-**Input**: 
+**Input**:
 - `{papers_dir}/{paper_id}/answers.json` - LLM-generated answers
 
-**Output**: 
+**Output**:
 - `output/significance_data.json` - Structured findings data
 
 **Data structure**:
@@ -201,18 +201,18 @@ python investigate_significance.py
 python trend_analysis.py
 ```
 
-**Input**: 
+**Input**:
 - `output/bee_species_data.json` - From `investigate_bee_species.py`
 - `output/pesticides_data.json` - From `investigate_pesticides.py`
 
-**Output**: 
+**Output**:
 - `output/trend_analysis_plots/top_bee_pesticide_combinations.png` - Most common bee-pesticide pairs
 - `output/trend_analysis_plots/most_studied_bee_species.png` - Most frequently studied species
 - `output/trend_analysis_plots/most_tested_nicotinic_pesticides.png` - Most tested neonicotinoids
 - `output/trend_analysis_report.txt` - Statistical summary report
 
 **What it does**:
-1. **Filters data**: 
+1. **Filters data**:
    - Focuses on nicotinic cholinergic pesticides (neonicotinoids, sulfoximines, butenolides, spinosyns)
    - Standardizes bee species names (uses genus + species when available)
    - Excludes papers without proper species identification
@@ -251,12 +251,12 @@ python trend_analysis.py
 python network_analysis.py
 ```
 
-**Input**: 
+**Input**:
 - `output/bee_species_data.json` - From `investigate_bee_species.py`
 - `output/pesticides_data.json` - From `investigate_pesticides.py`
 - `output/additional_stressors_data.json` - From `investigate_additional_stressors.py`
 
-**Output**: 
+**Output**:
 - `output/network_plots/tripartite_network.png` - 3-way network: bees, pesticides, stressors
 - `output/network_statistics.txt` - Network connectivity statistics
 - `output/pesticide_stressor_summary.txt` - Co-occurrence analysis
@@ -498,4 +498,3 @@ Core dependencies (install via `pip install -r ../requirements.txt`):
 ---
 
 **Last Updated**: October 2025
-

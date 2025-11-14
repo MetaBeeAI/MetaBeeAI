@@ -1,24 +1,42 @@
 # MetaBeeAI GUI
-# 
+#
 # Execute with:
 #   python metabeeai_llm/beegui.py
 #
 # m.mieskolainen@imperial.ac.uk, 2025
 
-import sys
+import json
 import math
 import os
-import json
-import fitz  # PyMuPDF
+import sys
 from datetime import datetime
 
-from PyQt5.QtCore import Qt, QRect, pyqtSignal, QPoint, QEvent
-from PyQt5.QtGui  import QGuiApplication, QImage, QPixmap, QPainter, QPen, QColor, QFont
+import fitz  # PyMuPDF
+from PyQt5.QtCore import QEvent, QPoint, QRect, Qt, pyqtSignal
+from PyQt5.QtGui import QColor, QFont, QGuiApplication, QImage, QPainter, QPen, QPixmap
 from PyQt5.QtWidgets import (
-    QFrame, QMenu, QApplication, QMainWindow, QListWidget, QLabel, QSplitter, QAction,
-    QFileDialog, QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QPushButton,
-    QSlider, QGroupBox, QToolButton, QListWidgetItem, QScrollArea, QMessageBox
+    QAction,
+    QApplication,
+    QFileDialog,
+    QFrame,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QListWidget,
+    QListWidgetItem,
+    QMainWindow,
+    QMenu,
+    QMessageBox,
+    QPushButton,
+    QScrollArea,
+    QSlider,
+    QSplitter,
+    QTextEdit,
+    QToolButton,
+    QVBoxLayout,
+    QWidget,
 )
+
 
 class AutoActivateListWidget(QListWidget):
     def keyPressEvent(self, event):
@@ -27,6 +45,7 @@ class AutoActivateListWidget(QListWidget):
             current = self.currentItem()
             if current:
                 self.itemActivated.emit(current)
+
 
 class PDFViewer(QLabel):
     resized = pyqtSignal()  # emitted on resize
@@ -59,11 +78,11 @@ class PDFViewer(QLabel):
         for ann in self.annotations:
             painter.drawRect(ann["rect"])
         # Uncomment below to highlight hovered annotations
-        #for ann in self.hovered_annotations:
+        # for ann in self.hovered_annotations:
         #    brush = QColor(255, 255, 0, 100)  # semi-transparent yellow
         #    painter.fillRect(ann["rect"], brush)
         painter.end()
-    
+
     def mouseMoveEvent(self, event):
         pos = event.pos()
         self.hovered_annotations = []
@@ -78,6 +97,7 @@ class PDFViewer(QLabel):
         super().resizeEvent(event)
         self.resized.emit()
 
+
 # Define a custom ZoomSlider class.
 class ZoomSlider(QSlider):
     def mouseDoubleClickEvent(self, event):
@@ -86,14 +106,15 @@ class ZoomSlider(QSlider):
             self.setValue(100)
         event.accept()
 
+
 # -------------------- PDF Scroll Area --------------------
 class PDFScrollArea(QScrollArea):
     # Allows panning (by dragging) and zooming via Ctrl+wheel.
     def __init__(self, parent=None):
         super().__init__(parent)
-        
+
         self.setFrameShape(QFrame.NoFrame)  # Remove the QScrollArea frame
-        
+
         # Disable automatic resizing so that the PDFViewer can have its own size.
         self.setWidgetResizable(False)  # Changed from True
         self.setAlignment(Qt.AlignCenter)  # Center the widget when it is smaller than the viewport
@@ -136,6 +157,7 @@ class PDFScrollArea(QScrollArea):
         else:
             super().wheelEvent(event)
 
+
 # -------------------- Star Rating Widget --------------------
 class StarRatingWidget(QWidget):
     def __init__(self, max_stars=10, parent=None):
@@ -167,6 +189,7 @@ class StarRatingWidget(QWidget):
                 self.current_rating = star_value
             self.update_stars()
             self.ratingChanged()
+
         return handler
 
     def update_stars(self):
@@ -179,7 +202,7 @@ class StarRatingWidget(QWidget):
                 btn.setChecked(False)
 
     def ratingChanged(self):
-        if hasattr(self, 'onRatingChanged'):
+        if hasattr(self, "onRatingChanged"):
             self.onRatingChanged(self.current_rating)
 
     def getRating(self):
@@ -189,12 +212,14 @@ class StarRatingWidget(QWidget):
         self.current_rating = rating
         self.update_stars()
 
+
 def get_questions_for_chunk(chunk_id, questions_data):
     """
     Recursively traverse questions_data (a dict) and return a list of question keys (as strings)
     for which the 'chunk_ids' list (if present) contains chunk_id.
     """
     results = []
+
     def traverse(data, prefix=""):
         if isinstance(data, dict):
             # If this dictionary has chunk_ids, check them.
@@ -206,6 +231,7 @@ def get_questions_for_chunk(chunk_id, questions_data):
             for key, value in data.items():
                 new_prefix = f"{prefix}.{key}" if prefix else key
                 traverse(value, new_prefix)
+
     traverse(questions_data)
     return results
 
@@ -222,7 +248,7 @@ class MainWindow(QMainWindow):
             self.resize(int(available_geometry.width() * 1.0), int(available_geometry.height() * 1.0))
         else:
             self.resize(1400, 900)
-        
+
         self.current_pdf_doc = None
         self.current_json_data = None
         self.current_answers_data = {}
@@ -255,7 +281,7 @@ class MainWindow(QMainWindow):
         paper_nav_layout.addWidget(self.prev_paper_btn)
         paper_nav_layout.addWidget(self.next_paper_btn)
         paper_nav_layout.addWidget(self.paper_list)
-        
+
         # Page navigation controls for PDF pages
         self.prev_page_btn = QPushButton("Prev Page")
         self.prev_page_btn.clicked.connect(self.on_prev_page)
@@ -303,10 +329,10 @@ class MainWindow(QMainWindow):
         pdf_layout.addWidget(self.pdf_scroll_area)
         pdf_widget = QWidget()
         pdf_widget.setLayout(pdf_layout)
-        
+
         # ---------------- Right Pane: Question Panel, Mode Keys, and Chunk IDs ----------------
         self.question_panel = self.create_question_panel()
-        
+
         # Create mode buttons container.
         self.individual_btn = QPushButton("Individual")
         self.individual_btn.setCheckable(True)
@@ -326,10 +352,10 @@ class MainWindow(QMainWindow):
         self.chunk_list.itemClicked.connect(self.on_chunk_selected)
         self.chunk_list.itemActivated.connect(self.on_chunk_selected)
         self.chunk_list.hide()  # hide chunk IDs until a question is selected
-        
+
         right_layout = QVBoxLayout()
         right_layout.addWidget(self.question_panel)
-        #right_layout.addWidget(QLabel("")) # Chunk IDs
+        # right_layout.addWidget(QLabel("")) # Chunk IDs
         right_layout.addWidget(self.chunk_list)
         right_layout.addWidget(self.mode_widget)
         right_widget = QWidget()
@@ -354,13 +380,13 @@ class MainWindow(QMainWindow):
         file_menu.addAction(openFolderAction)
 
         # ---------------- Option Menu: Theme and Font ----------------
-        
+
         options_menu = self.menuBar().addMenu("Options")
-        
+
         # Theme Actions.
-        self.darkThemeAction  = QAction("Dark Mode", self, checkable=True)
+        self.darkThemeAction = QAction("Dark Mode", self, checkable=True)
         self.lightThemeAction = QAction("Light Mode", self, checkable=True)
-        
+
         # Default to dark mode.
         self.darkThemeAction.setChecked(True)
         self.darkThemeAction.triggered.connect(lambda: self.setTheme("dark"))
@@ -373,7 +399,7 @@ class MainWindow(QMainWindow):
         fontSizeWidget = QWidget(self)
         fontSizeLayout = QHBoxLayout()
         fontSizeLayout.setContentsMargins(5, 5, 5, 5)
-        
+
         # Create buttons and label.
         decreaseButton = QPushButton("-")
         self.fontSizeLabel = QLabel(f"{self.fontSize}")
@@ -391,6 +417,7 @@ class MainWindow(QMainWindow):
 
         # Embed the widget into the menu using QWidgetAction.
         from PyQt5.QtWidgets import QWidgetAction  # ensure this import is present at the top if not already
+
         fontSizeAction = QWidgetAction(self)
         fontSizeAction.setDefaultWidget(fontSizeWidget)
         fontSizeMenu.addAction(fontSizeAction)
@@ -404,7 +431,7 @@ class MainWindow(QMainWindow):
         about_action = QAction("About", self)
         about_action.triggered.connect(self.show_about)
         help_menu.addAction(about_action)
-        
+
         # ---------------- Full-Screen Toggle ----------------
         # Add an action with the F11 shortcut to toggle full screen mode.
         self.fullScreenAction = QAction("Toggle Full Screen", self)
@@ -414,7 +441,7 @@ class MainWindow(QMainWindow):
 
         # Set default theme to dark.
         self.setTheme("dark")
-        
+
         # Try to load default folder "data/papers" automatically.
         self.open_folder(initial=True)
 
@@ -428,7 +455,7 @@ class MainWindow(QMainWindow):
         else:
             self.menuBar().setVisible(False)
             self.showFullScreen()
-    
+
     def handle_hover_annotations(self, annotations):
         if not annotations:
             self.pdf_viewer.setToolTip("")
@@ -451,7 +478,7 @@ class MainWindow(QMainWindow):
                 # When a question is selected, show just the chunk id.
                 tooltip_lines.append(f"<b>{cid}</b>")
         self.pdf_viewer.setToolTip("\n".join(tooltip_lines))
-        
+
     def setTheme(self, theme):
         if theme == "dark":
             dark_style = """
@@ -598,14 +625,13 @@ class MainWindow(QMainWindow):
             self.setStyleSheet(light_style)
             self.darkThemeAction.setChecked(False)
             self.lightThemeAction.setChecked(True)
-        
+
         # Reapply the global font after switching themes.
         self.updateFontSize()
 
     def updateFontSize(self):
-        
         new_font = QFont("Helvetica", self.fontSize)
-        
+
         # Update the global application font.
         QApplication.setFont(new_font)
         # Also update the main window's font.
@@ -617,9 +643,9 @@ class MainWindow(QMainWindow):
             widget.repaint()
         # Force the main window to repaint.
         self.repaint()
-        
+
         # Update the font size label (if it exists).
-        if hasattr(self, 'fontSizeLabel'):
+        if hasattr(self, "fontSizeLabel"):
             self.fontSizeLabel.setText(str(self.fontSize))
 
     def increaseFontSize(self):
@@ -636,7 +662,7 @@ class MainWindow(QMainWindow):
         if self.zoom_slider.value() == 100:
             self.render_current_page()
         super().resizeEvent(event)
-        
+
     # Enable left/right key navigation for PDF pages.
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Left:
@@ -647,7 +673,7 @@ class MainWindow(QMainWindow):
             event.accept()
         else:
             super().keyPressEvent(event)
-    
+
     def handle_wheel_zoom(self, delta):
         if delta > 0:
             new_zoom = min(self.current_zoom + 10, 400)
@@ -658,18 +684,18 @@ class MainWindow(QMainWindow):
     def create_question_panel(self):
         panel = QGroupBox("")
         layout = QVBoxLayout()
-        
+
         # Always visible: the question list.
         self.question_list = AutoActivateListWidget()
         self.question_list.itemClicked.connect(self.on_question_selected)
         self.question_list.itemActivated.connect(self.on_question_selected)  # allow Enter key activation
         layout.addWidget(QLabel("<b><center><h3>Questions</h3></center></b>"))
         layout.addWidget(self.question_list)
-        
+
         # Container for controls to be hidden until a question is selected.
         self.question_controls = QWidget()
         qc_layout = QVBoxLayout()
-        
+
         self.answer_field = QTextEdit()
         self.answer_field.setReadOnly(True)
         self.reason_field = QTextEdit()
@@ -678,7 +704,7 @@ class MainWindow(QMainWindow):
         qc_layout.addWidget(self.answer_field)
         qc_layout.addWidget(QLabel("AI Reason"))
         qc_layout.addWidget(self.reason_field)
-        
+
         ## Star rating
         self.star_rating = StarRatingWidget(10)
         self.star_rating.onRatingChanged = self.on_star_rating_changed
@@ -688,7 +714,7 @@ class MainWindow(QMainWindow):
         star_layout.addWidget(self.rating_number_label)
         qc_layout.addWidget(QLabel())
         qc_layout.addLayout(star_layout)
-        
+
         ## User answers
         self.answer_positive_field = QTextEdit()
         self.answer_negative_field = QTextEdit()
@@ -699,7 +725,7 @@ class MainWindow(QMainWindow):
         self.answer_negative_field.textChanged.connect(self.auto_save)
         self.reason_positive_field.textChanged.connect(self.auto_save)
         self.reason_negative_field.textChanged.connect(self.auto_save)
-        
+
         qc_layout.addWidget(QLabel('<font color="green">Answer (✓)</font>'))
         qc_layout.addWidget(self.answer_positive_field)
         qc_layout.addWidget(QLabel('<font color="green">Reason (✓)</font>'))
@@ -708,10 +734,10 @@ class MainWindow(QMainWindow):
         qc_layout.addWidget(self.answer_negative_field)
         qc_layout.addWidget(QLabel('<font color="red">Reason (✗)</font>'))
         qc_layout.addWidget(self.reason_negative_field)
-        
+
         self.question_controls.setLayout(qc_layout)
         self.question_controls.hide()  # hide controls until a question is selected
-        
+
         layout.addWidget(self.question_controls)
         panel.setLayout(layout)
         return panel
@@ -742,13 +768,15 @@ class MainWindow(QMainWindow):
     def open_folder(self, initial=False):
         # Import centralized configuration for default folder
         import sys
+
         script_dir = os.path.dirname(os.path.abspath(__file__))
         parent_dir = os.path.dirname(script_dir)
         if parent_dir not in sys.path:
             sys.path.insert(0, parent_dir)
         from config import get_papers_dir
+
         default_folder = get_papers_dir()
-        
+
         if initial:
             if os.path.isdir(default_folder):
                 folder = default_folder
@@ -772,11 +800,10 @@ class MainWindow(QMainWindow):
         for foldername in sorted(os.listdir(self.base_papers_dir)):
             path = os.path.join(self.base_papers_dir, foldername)
             # Accept folders that are alphanumeric (paper IDs) and not hidden (starting with .)
-            if os.path.isdir(path) and not foldername.startswith('.') and foldername.isalnum():
+            if os.path.isdir(path) and not foldername.startswith(".") and foldername.isalnum():
                 # Add the paper number only; progress will be added on selection.
                 self.paper_list.addItem(f"{foldername}")
 
-        
     def on_prev_paper(self):
         current_row = self.paper_list.currentRow()
         if current_row > 0:
@@ -870,7 +897,7 @@ class MainWindow(QMainWindow):
         progress = self.compute_progress_for_current_paper()
         # Update the current item's text with the progress percentage.
         item.setText(f"{paper_id} ({progress}%)")
-        
+
         # Re-enable auto_save after programmatic updates.
         self.suppress_auto_save = False
 
@@ -889,7 +916,7 @@ class MainWindow(QMainWindow):
         questions_keys = set(self.current_answers_data.get("QUESTIONS", {}).keys())
         extended_keys = set(self.answers_extended_data.get("QUESTIONS", {}).keys())
         all_keys = questions_keys.union(extended_keys)
-        
+
         total_questions = len(all_keys)
         total_fields = total_questions * 5
         if total_fields == 0:
@@ -916,7 +943,6 @@ class MainWindow(QMainWindow):
         # Use floor, if we are near maximum (e.g. missing one)
         percentage = math.floor((filled_fields / total_fields) * 100)
         return percentage
-
 
     def populate_questions(self):
         self.questions_map = {}
@@ -960,7 +986,7 @@ class MainWindow(QMainWindow):
             rating = 0
         self.star_rating.setRating(rating)
         self.rating_number_label.setText(str(rating))
-        
+
         # Update chunk list: this may change the list of chunk IDs to annotate.
         self.chunk_list.clear()
         self.current_question_chunk_ids = question_obj.get("chunk_ids", [])
@@ -974,12 +1000,12 @@ class MainWindow(QMainWindow):
             self.chunk_list.selectAll()
         else:
             self.chunk_list.setDisabled(False)
-        
+
         # Show question controls, mode keys, and chunk list.
         self.question_controls.show()
         self.mode_widget.show()
         self.chunk_list.show()
-        
+
         # Optionally, set the current page based on a grounding found.
         page_set = False
         for cid in self.current_question_chunk_ids:
@@ -1001,12 +1027,12 @@ class MainWindow(QMainWindow):
         self.render_current_page()
         self.updateAnnotations()
         self.loading_question = False
-    
+
     def auto_save(self):
         # If auto-save is suppressed or we are loading a question, do nothing.
         if not self.current_question_id or self.loading_question or getattr(self, "suppress_auto_save", False):
             return
-        
+
         # Log which field triggered the auto_save if available.
         sender = self.sender()
         if sender is not None:
@@ -1025,14 +1051,14 @@ class MainWindow(QMainWindow):
             "user_answer_negative": self.answer_negative_field.toPlainText().strip(),
             "user_reason_positive": self.reason_positive_field.toPlainText().strip(),
             "user_reason_negative": self.reason_negative_field.toPlainText().strip(),
-            "user_rating": self.star_rating.getRating()
+            "user_rating": self.star_rating.getRating(),
         }
         default_data = {
             "user_answer_positive": "",
             "user_answer_negative": "",
             "user_reason_positive": "",
             "user_reason_negative": "",
-            "user_rating": 0  # default rating is 0
+            "user_rating": 0,  # default rating is 0
         }
         answers_extended_path = os.path.join(self.current_paper_folder, "answers_extended.json")
         if new_data == default_data:
@@ -1069,10 +1095,9 @@ class MainWindow(QMainWindow):
             self.modified_label.setText(f"Modified: {mod_dt}")
         except Exception as e:
             print(f"Error saving answers_extended.json: {e}")
-        
+
         # Update the current paper's progress percentage in real time.
         self.update_progress_display()
-
 
     def set_annotation_mode(self, mode):
         self.annotation_mode = mode
@@ -1095,7 +1120,6 @@ class MainWindow(QMainWindow):
                 self.chunk_list.setCurrentRow(0)
                 self.on_chunk_selected(self.chunk_list.item(0))
         self.updateAnnotations()
-    
 
     def on_chunk_selected(self, item):
         if self.annotation_mode == "all":
@@ -1110,7 +1134,7 @@ class MainWindow(QMainWindow):
             return
         self.current_annotation = {"cid": cid, "box": grounding.get("box"), "page": grounding.get("page")}
         self.current_page_num = grounding.get("page", 0)
-        
+
         self.render_current_page()
 
     def on_prev_page(self):
@@ -1129,7 +1153,6 @@ class MainWindow(QMainWindow):
         self.render_current_page()
 
     def render_current_page(self):
-        
         if not self.current_pdf_doc:
             return
         page = self.current_pdf_doc[self.current_page_num]
@@ -1139,10 +1162,10 @@ class MainWindow(QMainWindow):
         viewer_width, viewer_height = viewer_size.width(), viewer_size.height()
         base_scale = min(viewer_width / orig_width, viewer_height / orig_height)
         effective_scale = base_scale * (self.current_zoom / 100.0)
-        
+
         resolution_factor = 1.0
         matrix = fitz.Matrix(effective_scale * resolution_factor, effective_scale * resolution_factor)
-        
+
         pix = page.get_pixmap(matrix=matrix)
         rendered_width, rendered_height = pix.width, pix.height
 
@@ -1150,10 +1173,11 @@ class MainWindow(QMainWindow):
         displayed_rect = QRect(0, 0, rendered_width, rendered_height)
         self.pdf_scroll_area.pdf_viewer.resize(rendered_width, rendered_height)
 
-        image = QImage(pix.samples, pix.width, pix.height, pix.stride,
-                    QImage.Format_RGBA8888 if pix.alpha else QImage.Format_RGB888).copy()
+        image = QImage(
+            pix.samples, pix.width, pix.height, pix.stride, QImage.Format_RGBA8888 if pix.alpha else QImage.Format_RGB888
+        ).copy()
         rendered_pixmap = QPixmap.fromImage(image)
-        
+
         # Prepare annotations (adjust x_offset and y_offset to 0 now)
         annotations = []
         if self.annotation_mode == "individual" and self.current_annotation is not None:
@@ -1165,8 +1189,9 @@ class MainWindow(QMainWindow):
                     # Loop over all groundings in the chunk.
                     for grounding in chunk["grounding"]:
                         if grounding.get("page") == self.current_page_num:
-                            ann = self.computeAnnotation({"cid": cid, "box": grounding.get("box")},
-                                                        rendered_width, rendered_height, 0, 0)
+                            ann = self.computeAnnotation(
+                                {"cid": cid, "box": grounding.get("box")}, rendered_width, rendered_height, 0, 0
+                            )
                             if ann:
                                 annotations.append(ann)
         elif self.annotation_mode == "all" and self.current_question_chunk_ids:
@@ -1177,8 +1202,9 @@ class MainWindow(QMainWindow):
                     if "grounding" in chunk:
                         for grounding in chunk["grounding"]:
                             if grounding.get("page") == self.current_page_num:
-                                ann = self.computeAnnotation({"cid": cid, "box": grounding.get("box")},
-                                                            rendered_width, rendered_height, 0, 0)
+                                ann = self.computeAnnotation(
+                                    {"cid": cid, "box": grounding.get("box")}, rendered_width, rendered_height, 0, 0
+                                )
                                 if ann:
                                     annotations.append(ann)
         self.pdf_scroll_area.pdf_viewer.setAnnotations(annotations)
@@ -1194,7 +1220,7 @@ class MainWindow(QMainWindow):
         t = int(rel_box.get("t", 0) * img_height) + y_offset
         r = int(rel_box.get("r", 0) * img_width) + x_offset
         b = int(rel_box.get("b", 0) * img_height) + y_offset
-        
+
         l -= padding
         t -= padding
         r += padding
@@ -1226,11 +1252,13 @@ class MainWindow(QMainWindow):
         else:
             self.modified_label.setText("Modified: Never")
 
+
 def main():
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
+
 
 if __name__ == "__main__":
     main()

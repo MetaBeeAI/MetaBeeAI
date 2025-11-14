@@ -154,13 +154,13 @@ python split_pdf.py /path/to/papers --pages 2
 1. Finds all `{folder_name}_main.pdf` files in paper folders
 2. Creates a `pages/` subdirectory in each paper folder
 3. Generates split PDFs based on `--pages` option:
-   
+
    **Single-page mode (--pages 1)**:
    - `main_p01.pdf` (page 1)
    - `main_p02.pdf` (page 2)
    - `main_p03.pdf` (page 3)
    - etc.
-   
+
    **Overlapping 2-page mode (--pages 2)**:
    - `main_p01-02.pdf` (pages 1-2)
    - `main_p02-03.pdf` (pages 2-3)
@@ -495,7 +495,7 @@ Raw PDF → Split PDF → Vision API → Individual JSONs → Merged JSON → De
    ...
    pages/main_p09-10.pdf
    ```
-   
+
    **Or with single-page mode** (`--pages 1`, default):
    ```
    pages/main_p01.pdf
@@ -529,7 +529,7 @@ Raw PDF → Split PDF → Vision API → Individual JSONs → Merged JSON → De
 
 ### "LANDING_AI_API_KEY not found"
 - **Cause**: API key not configured in `.env` file
-- **Fix**: 
+- **Fix**:
   ```bash
   cp ../env.example ../.env
   # Edit .env and add your LANDING_AI_API_KEY
@@ -558,7 +558,7 @@ Raw PDF → Split PDF → Vision API → Individual JSONs → Merged JSON → De
 
 ### Out of API quota
 - **Cause**: Too many API calls
-- **Fix**: 
+- **Fix**:
   - The script automatically skips already-processed files
   - Use `--start` parameter to resume from a specific paper
   - Contact Landing AI to increase your quota
@@ -659,8 +659,8 @@ python batch_deduplicate.py --dry-run --verbose
    ```bash
    # Terminal 1
    python process_all.py --start 283C6B42 --end 76DQP2DC
-   
-   # Terminal 2  
+
+   # Terminal 2
    python process_all.py --start 8BV8BLU8 --end ZTRRIKQ3
    ```
 
@@ -715,4 +715,3 @@ After processing your PDFs:
 ---
 
 **Last Updated**: October 2025
-

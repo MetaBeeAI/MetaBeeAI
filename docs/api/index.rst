@@ -7,10 +7,10 @@ Here you will find detailed documentation on the submodules, classes, functions,
 .. toctree::
    :maxdepth: 1
    :caption: Modules
-    
+
    metabeeai_llm
    process_pdfs
    query_database
    llm_benchmarking
    llm_review_software
-   
+

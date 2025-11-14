@@ -1,6 +1,6 @@
 # Splitted json merger tool which handles both single-page and overlapping
 # 2-page PDF formats
-# 
+#
 # Execute with:
 #   python metabeeai_llm/merger.py --basepath data
 #
@@ -9,33 +9,36 @@
 import argparse
 import json
 import os
+
 from termcolor import cprint
+
 
 def detect_page_mode(json_files):
     """
     Detect whether PDFs are single-page or 2-page overlapping format.
-    
+
     Returns:
-        str: 'single' for single-page (main_p01.pdf.json), 
+        str: 'single' for single-page (main_p01.pdf.json),
              'overlap' for 2-page overlapping (main_p01-02.pdf.json)
     """
     if not json_files:
-        return 'single'
-    
+        return "single"
+
     # Check the first filename for the pattern
     first_file = os.path.basename(json_files[0])
     # Remove .json extension and check if there's a hyphen in the page numbers
     # Pattern: main_p01-02.pdf.json (overlap) vs main_p01.pdf.json (single)
-    if '-' in first_file and 'main_p' in first_file:
-        return 'overlap'
-    return 'single'
+    if "-" in first_file and "main_p" in first_file:
+        return "overlap"
+    return "single"
+
 
 def adjust_and_merge_json(json_files, output_file, filter_types=None):
     if filter_types is None:
         filter_types = []
     merged = {"data": {"chunks": []}}
     page_offset = 0  # global offset for merged pages
-    
+
     # Detect whether we're dealing with single-page or overlapping 2-page PDFs
     page_mode = detect_page_mode(json_files)
 
@@ -59,7 +62,7 @@ def adjust_and_merge_json(json_files, output_file, filter_types=None):
             file_min_page = 0
             file_max_page = 0
 
-        if page_mode == 'single':
+        if page_mode == "single":
             # Single-page mode: no overlap, just sequential pages
             for chunk in data["data"]["chunks"]:
                 if filter_types and "chunk_type" in chunk and chunk["chunk_type"] in filter_types:
@@ -110,7 +113,7 @@ def adjust_and_merge_json(json_files, output_file, filter_types=None):
                         chunk["grounding"] = new_grounding
                     merged["data"]["chunks"].append(chunk)
                 # Update offset based on the number of pages in the current file.
-                page_offset += (file_max_page - file_min_page)
+                page_offset += file_max_page - file_min_page
 
     with open(output_file, "w", encoding="utf-8") as out:
         json.dump(merged, out, indent=2)
@@ -118,10 +121,9 @@ def adjust_and_merge_json(json_files, output_file, filter_types=None):
 
 def process_all_papers(base_papers_dir, filter_types):
     # Process each paper folder in alphanumeric sorted order
-    paper_folders = sorted([
-        folder for folder in os.listdir(base_papers_dir)
-        if os.path.isdir(os.path.join(base_papers_dir, folder))
-    ])
+    paper_folders = sorted(
+        [folder for folder in os.listdir(base_papers_dir) if os.path.isdir(os.path.join(base_papers_dir, folder))]
+    )
 
     for paper_folder in paper_folders:
         paper_path = os.path.join(base_papers_dir, paper_folder)
@@ -130,15 +132,13 @@ def process_all_papers(base_papers_dir, filter_types):
         if os.path.isdir(pages_dir):
             # Find all JSON files starting with "main_" in the pages subfolder.
             json_files = [
-                os.path.join(pages_dir, f)
-                for f in os.listdir(pages_dir)
-                if f.startswith("main_") and f.endswith(".json")
+                os.path.join(pages_dir, f) for f in os.listdir(pages_dir) if f.startswith("main_") and f.endswith(".json")
             ]
             json_files.sort()
             if json_files:
                 output_file = os.path.join(pages_dir, "merged_v2.json")
                 page_mode = detect_page_mode(json_files)
-                mode_desc = "single-page" if page_mode == 'single' else "overlapping 2-page"
+                mode_desc = "single-page" if page_mode == "single" else "overlapping 2-page"
                 adjust_and_merge_json(json_files, output_file, filter_types)
                 cprint(f"Paper {paper_folder}: Merged {len(json_files)} files ({mode_desc} mode) into {output_file}", "green")
 
@@ -149,28 +149,24 @@ def process_all_papers(base_papers_dir, filter_types):
                 total_chunks = len(chunks)
 
                 # Compute unique pages from all grounding entries.
-                pages = {g["page"]
-                         for chunk in chunks if "grounding" in chunk
-                         for g in chunk["grounding"]}
+                pages = {g["page"] for chunk in chunks if "grounding" in chunk for g in chunk["grounding"]}
                 total_pages = max(pages) + 1 if pages else 0
                 print(f"Paper {paper_folder}: Total pages: {total_pages}, Total chunks: {total_chunks}")
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Merge JSON files for papers and print page/chunk counts per paper."
-    )
+    parser = argparse.ArgumentParser(description="Merge JSON files for papers and print page/chunk counts per paper.")
     parser.add_argument(
         "--basepath",
         type=str,
         default=os.getcwd(),
-        help="Base path containing the 'papers' folder. Defaults to the current working directory."
+        help="Base path containing the 'papers' folder. Defaults to the current working directory.",
     )
     parser.add_argument(
         "--filter-chunk-type",
-        nargs='+',
+        nargs="+",
         default=[],
-        help="List of keywords for filtering out chunks based on 'chunk_type' (e.g., marginalia)."
+        help="List of keywords for filtering out chunks based on 'chunk_type' (e.g., marginalia).",
     )
     args = parser.parse_args()
 

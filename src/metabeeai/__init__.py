@@ -11,6 +11,6 @@ _submodules = [
 ]
 
 for _name in _submodules:
-        globals()[_name] = import_module(f"{__name__}.{_name}")
+    globals()[_name] = import_module(f"{__name__}.{_name}")
 
 __all__ = _submodules

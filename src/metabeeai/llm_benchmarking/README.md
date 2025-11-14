@@ -706,4 +706,4 @@ For issues or questions:
 
 ---
 
-**Last Updated**: 2025  
+**Last Updated**: 2025
