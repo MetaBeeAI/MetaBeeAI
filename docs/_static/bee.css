@@ -1,0 +1,228 @@
+/* docs/_static/bee.css  -------------------------------------------- */
+/* MetaBeeAI Bee theme (yellow/black) for PyData-Sphinx-Theme */
+
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900");
+
+/* ================================================================== */
+/* Root tokens and base palette                                       */
+/* ================================================================== */
+:root {
+  --pst-color-danger: #d72d47;
+  --pst-color-info: #276be9;
+  --pst-color-success: #00843f;
+  --pst-color-warning: #f66a0a;
+  --pst-foundation-black: #000;
+  --pst-foundation-white: #fff;
+
+  --pst-font-family-base: "Source Sans Pro", var(--pst-font-family-base-system);
+  --pst-font-size-base: 17px;
+  --pst-header-height: 3.5rem;
+  --pst-sidebar-font-size: 1em;
+
+  /* Bee palette */
+  --bee-yellow: #f7c600;
+  --bee-honey:  #ffeb99;
+  --bee-black:  #000000;
+  --bee-light:  #fffbe6;
+  --bee-gray:   #444444;
+
+  /* Default light-mode header/footer/sidebar mapping */
+  --pst-color-background-header: var(--bee-light);
+  --pst-color-text-on-header: var(--bee-black);
+  --pst-color-background-footer: var(--bee-light);
+  --pst-color-background-sidebar: var(--bee-light);
+}
+
+/* ================================================================== */
+/* Light mode                                                         */
+/* ================================================================== */
+html[data-theme="light"] {
+  --pst-color-accent-bg: #fff9d6;
+  --pst-color-accent: var(--bee-yellow);
+  --pst-color-attention-bg: var(--bee-honey);
+  --pst-color-attention: var(--bee-yellow);
+  --pst-color-background: var(--bee-light);
+  --pst-color-border-muted: rgba(23, 23, 26, 0.2);
+  --pst-color-border: #d1d5da;
+  --pst-color-danger-bg: #f9e1e4;
+  --pst-color-heading-color: var(--bee-black);
+  --pst-color-info-bg: #dce7fc;
+  --pst-color-inline-code-links: var(--bee-black);
+  --pst-color-inline-code: var(--bee-black);
+  --pst-color-link-hover: var(--bee-yellow);
+  --pst-color-link: var(--bee-black);
+  --pst-color-link-active: var(--bee-yellow);
+  --pst-color-on-background: var(--bee-black);
+  --pst-color-on-surface: var(--bee-black);
+  --pst-color-primary-bg: var(--bee-honey);
+  --pst-color-primary: var(--bee-yellow);
+  --pst-color-secondary-bg: #fef9e1;
+  --pst-color-secondary: var(--bee-yellow);
+  --pst-color-shadow: rgba(0, 0, 0, 0.1);
+  --pst-color-success-bg: #eaf5e5;
+  --pst-color-surface: var(--bee-light);
+  --pst-color-target: var(--bee-honey);
+  --pst-color-text-muted: #555;
+  --pst-color-warning-bg: #fff4b0;
+  --pst-color-table-row-hover-bg: var(--bee-honey);
+
+  /* Header/Sidebar in light mode */
+  --pst-color-background-header: var(--bee-light);
+  --pst-color-text-on-header: var(--bee-black);
+  --pst-color-background-sidebar: var(--bee-light);
+  --pst-color-background-footer: var(--bee-light);
+}
+
+/* ================================================================== */
+/* Dark mode                                                          */
+/* ================================================================== */
+html[data-theme="dark"] {
+  --pst-color-accent-bg: #222000;
+  --pst-color-accent: var(--bee-yellow);
+  --pst-color-attention-bg: #333000;
+  --pst-color-attention: var(--bee-yellow);
+  --pst-color-background: #1b1b1b;   /* softer dark background */
+  --pst-color-surface: #222222;
+  --pst-color-border-muted: #444;
+  --pst-color-border: #666;
+  --pst-color-danger-bg: #4e111b;
+  --pst-color-heading-color: var(--bee-yellow);
+  --pst-color-info-bg: #333;
+  --pst-color-inline-code-links: var(--bee-yellow);
+  --pst-color-inline-code: var(--bee-yellow);
+  --pst-color-link-hover: #ffeb99;
+  --pst-color-link: #f7c600;
+  --pst-color-link-active: #ffeb99;
+  --pst-color-on-background: var(--bee-yellow);
+  --pst-color-on-surface: var(--bee-yellow);
+  --pst-color-primary-bg: #333000;
+  --pst-color-primary: var(--bee-yellow);
+  --pst-color-secondary-bg: #222;
+  --pst-color-secondary: var(--bee-yellow);
+  --pst-color-shadow: rgba(0, 0, 0, 0.3);
+  --pst-color-success-bg: #002f17;
+  --pst-color-target: #ffeb99;
+  --pst-color-text-muted: #ccc;
+  --pst-color-warning-bg: #332a00;
+  --pst-color-table-row-hover-bg: #222;
+
+  /* Header/Footer/Sidebar for dark mode */
+  --pst-color-background-header: #2a2a2a;   /* dark grey header */
+  --pst-color-text-on-header: var(--bee-yellow);
+  --pst-color-background-sidebar: #1b1b1b;
+  --pst-color-background-footer: #1b1b1b;
+}
+
+/* ================================================================== */
+/* Global tweaks                                                      */
+/* ================================================================== */
+html[data-theme="dark"] .tooltipster-content {
+  background-color: var(--pst-color-background);
+}
+
+.hxr-hoverxref { border-bottom: none; }
+
+/* Sphinx-Gallery colours */
+:root,
+html,
+body {
+  --sg-download-a-background-color: var(--pst-color-background-footer);
+  --sg-download-a-color: var(--pst-color-link);
+  --sg-thumb-hover-border: var(--bee-yellow);
+}
+.sphx-glr-download a > code { color: var(--sg-download-a-color); }
+
+/* ================================================================== */
+/* Header / Navbar                                                    */
+/* ================================================================== */
+.bd-header {
+  background-color: var(--pst-color-background-header) !important;
+  border-bottom: 3px solid var(--bee-yellow);
+  box-shadow: none;
+  margin-bottom: -3px;
+}
+.bd-header .navbar-nav li.nav-item { padding-left: 0.6rem; }
+
+.bd-header .navbar-nav li a.nav-link {
+  color: var(--pst-color-text-on-header);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.bd-header .navbar-nav li a.nav-link:hover,
+.bd-header .navbar-nav li a.nav-link:focus {
+  color: var(--bee-yellow);
+  border-bottom: 2px solid var(--bee-yellow);
+  padding-bottom: 0.2rem;
+}
+.bd-header a.navbar-brand {
+  font-weight: bold;
+  color: var(--bee-yellow);
+}
+
+/* Icons and toggles */
+html .pst-navbar-icon,
+.search-button,
+.theme-switch-button span,
+.bd-header label.sidebar-toggle {
+  color: var(--pst-color-text-on-header);
+}
+.search-button:hover { color: var(--bee-yellow); }
+
+/* Dropdown menus */
+.bd-header .navbar-nav .dropdown .dropdown-menu {
+  background-color: var(--pst-color-background-header);
+  border: none;
+  margin-top: 0.86rem;
+}
+
+/* ================================================================== */
+/* Sidebar                                                            */
+/* ================================================================== */
+.bd-sidebar-primary {
+  background-color: var(--pst-color-background-sidebar);
+  border-right: 3px solid var(--bee-yellow);
+  max-height: calc(100vh - var(--pst-header-height));
+  flex-basis: 22%;
+}
+.bd-sidebar-primary,
+.bd-sidebar-secondary {
+  padding-top: 1rem;
+  top: var(--pst-header-height);
+  bottom: 0;
+}
+img.logo__image { height: var(--pst-header-height); }
+
+/* ================================================================== */
+/* Footer                                                             */
+/* ================================================================== */
+.bd-footer {
+  color: var(--pst-color-text-base);
+  background-color: var(--pst-color-background-footer);
+  width: 100%;
+  border-top: none;
+}
+.bd-footer a { color: var(--pst-color-link); }
+
+/* ================================================================== */
+/* Headings / accents                                                 */
+/* ================================================================== */
+h1, h2, h3, h4, h5, h6 { color: var(--bee-yellow) !important; }
+.bd-article h1::after {
+  content: "";
+  display: block;
+  height: 4px;
+  width: 80px;
+  margin-top: 0.5em;
+  background: linear-gradient(90deg, var(--bee-black), var(--bee-yellow), var(--bee-black));
+  border-radius: 2px;
+}
+
+/* ================================================================== */
+/* Utilities                                                          */
+/* ================================================================== */
+a:hover { color: var(--bee-honey); }
+a:visited { color: var(--pst-color-link); }
+code.literal { border: none; background-color: inherit; }
+div.math { flex-direction: row; justify-content: center; }
+.modal { --bs-modal-bg: var(--pst-color-background); }
+html[data-theme="dark"] div.graphviz > object.inheritance { filter: invert(0.9); }

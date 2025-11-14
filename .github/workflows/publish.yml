@@ -6,13 +6,9 @@ on:
       - 'v*.*.*'  # e.g. v0.1.0 # TOOD: run on release candidates?
 
 jobs:
-  build-all:
-    name: Build distributions
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+  build:
+    name: Build distributions (Ubuntu)
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -23,36 +19,75 @@ jobs:
 
       - name: Install build dependencies
         run: pip install build twine
+      
+      - name: Upgrade packaging
+        run: pip install --upgrade packaging
 
       - name: Build sdist and wheel
         run: python -m build --sdist --wheel --outdir dist
 
       - name: Check built distributions
-        run: twine check dist/*
+        run: twine check dist/*.whl dist/*.tar.gz
 
       - uses: actions/upload-artifact@v4
         with:
-          name: dist-${{ matrix.os }}
-          path: dist/*
+          name: dist
+          path: |
+            dist/*.whl
+            dist/*.tar.gz
+
+  test-install:
+    name: Install smoke test (${ { matrix.os } })
+    needs: build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download built distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Install built package
+        run: >-
+          python -c "import glob,sys,subprocess; files=glob.glob('dist/*.whl') or glob.glob('dist/*.tar.gz');
+          assert files, 'No built distributions found'; subprocess.check_call([sys.executable,'-m','pip','install','--upgrade','pip']);
+          subprocess.check_call([sys.executable,'-m','pip','install',files[0]])"
+
+      - name: Smoke test CLI
+        run: metabeeai --help
 
   publish:
     name: Publish to PyPI
-    needs: build-all
+    needs: [build, test-install]
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Download all built distributions
         uses: actions/download-artifact@v4
         with:
+          name: dist
           path: dist
-
-      - name: Flatten artifacts
-        run: mv dist/*/* dist/ || true
+          # Single artifact from build job
+      
+      - name: Upgrade packaging
+        run: pip install --upgrade packaging
 
       - name: Verify distributions
         run: |
           pip install twine
-          twine check dist/*
+          twine check dist/*.whl dist/*.tar.gz
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
