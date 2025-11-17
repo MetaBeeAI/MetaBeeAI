@@ -905,9 +905,9 @@ async def ask_json(
             import sys
 
             sys.path.append("..")
-            from metabeeai.config import get_papers_dir
+            from metabeeai.config import get_config_param
 
-            default_papers_dir = get_papers_dir()
+            default_papers_dir = get_config_param("papers_dir")
             json_path = os.path.join(default_papers_dir, "001", "pages", "merged_v2.json")
         except ImportError:
             # Fallback to relative path

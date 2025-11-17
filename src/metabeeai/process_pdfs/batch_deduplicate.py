@@ -12,52 +12,16 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List
 
+from metabeeai.config import get_config_param
 from metabeeai.process_pdfs.deduplicate_chunks import analyze_chunk_uniqueness, process_merged_json_file
 
 
-# Try to get the papers directory from config, with fallbacks
 def get_papers_dir():
-    """Get the papers directory path with multiple fallback options."""
-    # Try to load from config.py if available
+    """Get papers directory via centralized config with env/yaml/default precedence."""
     try:
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        parent_dir = os.path.dirname(script_dir)
-        sys.path.append(parent_dir)
-
-        # Try to import config without dotenv dependency
-        config_path = os.path.join(parent_dir, "config.py")
-
-        if os.path.exists(config_path):
-            # Read config file manually to avoid dotenv dependency
-            with open(config_path, "r") as f:
-                config_content = f.read()
-
-            # Extract METABEEAI_DATA_DIR from config content
-            import re
-
-            match = re.search(r'METABEEAI_DATA_DIR["\']?\s*,\s*["\']?([^"\']+)["\']?', config_content)
-            if match:
-                base_dir = match.group(1)
-                papers_dir = os.path.join(base_dir, "papers")
-                if os.path.exists(papers_dir):
-                    return papers_dir
+        return get_config_param("papers_dir")
     except Exception:
-        pass
-
-    # Fallback 1: Check common locations
-    common_paths = [
-        os.path.join(os.path.expanduser("~"), "Documents", "MetaBeeAI_dataset2", "papers"),
-        os.path.join(os.path.expanduser("~"), "Documents", "MetaBeeAI_dataset2"),
-        "data/papers",
-        "papers",
-    ]
-
-    for path in common_paths:
-        if os.path.exists(path):
-            return path
-
-    # Fallback 2: Use current working directory
-    return os.path.join(os.getcwd(), "papers")
+        return os.getenv("METABEEAI_PAPERS_DIR", "data/papers")
 
 
 # Import the deduplication module
@@ -315,7 +279,8 @@ def main():
     """Main entry point for the batch deduplication script."""
     parser = argparse.ArgumentParser(description="Batch deduplicate merged_v2.json files in paper folders")
 
-    parser.add_argument("--base-dir", type=str, help="Base directory containing paper folders (defaults to METABEEAI_DATA_DIR)")
+    parser.add_argument("--config", type=str, default=None, help="Path to config YAML file")
+    parser.add_argument("--base-dir", type=str, help="Base directory containing paper folders (defaults to config)")
 
     parser.add_argument("--dry-run", action="store_true", help="Analyze files without making changes")
 
@@ -328,6 +293,10 @@ def main():
     parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose logging")
 
     args = parser.parse_args()
+
+    # Forward config to centralized loader if provided
+    if args.config:
+        os.environ["METABEEAI_CONFIG_FILE"] = args.config
 
     # Set logging level
     if args.verbose:

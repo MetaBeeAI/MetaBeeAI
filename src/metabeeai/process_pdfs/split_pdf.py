@@ -20,14 +20,11 @@ def split_pdfs(papers_dir=None, pages_per_split=1):
         print(f"Error: pages_per_split must be 1 or 2, got {pages_per_split}")
         return
 
-    # Import centralized configuration if papers_dir not provided
+    # Resolve from config if not provided
     if papers_dir is None:
-        import sys
+        from metabeeai.config import get_config_param
 
-        sys.path.append("..")
-        from metabeeai.config import get_papers_dir
-
-        papers_dir = get_papers_dir()
+        papers_dir = get_config_param("papers_dir")
 
     # Validate papers directory
     if not os.path.exists(papers_dir):
@@ -117,7 +114,7 @@ Examples:
   %(prog)s /path/to/papers --pages 2
         """,
     )
-    parser.add_argument("directory", type=str, help="Directory containing paper subfolders")
+    parser.add_argument("directory", type=str, nargs="?", help="Directory containing paper subfolders (defaults to config)")
     parser.add_argument(
         "--pages",
         type=int,
@@ -125,9 +122,13 @@ Examples:
         choices=[1, 2],
         help="Number of pages per split: 1 for single-page (default), 2 for overlapping 2-page",
     )
+    parser.add_argument("--config", type=str, default=None, help="Path to config YAML file")
 
     # Parse arguments
     args = parser.parse_args()
+
+    if args.config:
+        os.environ["METABEEAI_CONFIG_FILE"] = args.config
 
     # Run the main function
     split_pdfs(args.directory, pages_per_split=args.pages)

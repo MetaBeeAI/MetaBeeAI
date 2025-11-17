@@ -15,14 +15,11 @@ def process_papers(papers_dir=None, start_folder=None):
         papers_dir: Directory containing paper subfolders (defaults to config)
         start_folder: Optional folder name to start processing from (alphanumeric ordering)
     """
-    # Import centralized configuration if papers_dir not provided
+    # Resolve papers_dir from config if not provided
     if papers_dir is None:
-        import sys
+        from metabeeai.config import get_config_param
 
-        sys.path.append("..")
-        from metabeeai.config import get_papers_dir
-
-        papers_dir = get_papers_dir()
+        papers_dir = get_config_param("papers_dir")
 
     # Load environment variables
     load_dotenv()
@@ -130,9 +127,14 @@ Examples:
   %(prog)s --dir data/papers --start CX9M8HCM
         """,
     )
-    parser.add_argument("--dir", type=str, help="Papers directory (default: data/papers)", default="data/papers")
+    parser.add_argument("--config", type=str, default=None, help="Path to config YAML file")
+    parser.add_argument("--dir", type=str, help="Papers directory (default: from config)", default=None)
     parser.add_argument("--start", type=str, help="Starting folder name (alphanumeric, e.g., 95UKMIEY, CX9M8HCM)", default=None)
     args = parser.parse_args()
+
+    # Surface config file to all lookups if provided
+    if args.config:
+        os.environ["METABEEAI_CONFIG_FILE"] = args.config
 
     process_papers(args.dir, args.start)
 

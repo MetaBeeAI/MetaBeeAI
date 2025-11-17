@@ -11,7 +11,7 @@ import sys
 
 import yaml
 
-from metabeeai.config import get_data_dir, get_papers_dir
+from metabeeai.config import get_config_param
 
 # Add parent directory to path to access config
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -306,6 +306,12 @@ def main():
         description="Prepare benchmarking data from papers with GUI reviewer answers (answers_extended.json)"
     )
     parser.add_argument(
+        "--config",
+        type=str,
+        default=None,
+        help="Path to config YAML file (overrides METABEEAI_CONFIG_FILE and defaults)",
+    )
+    parser.add_argument(
         "--papers-dir",
         type=str,
         default=None,
@@ -318,15 +324,16 @@ def main():
 
     args = parser.parse_args()
 
-    # Set defaults
+    # If a cli command is not passed then we resolve it from config.py
     if args.papers_dir is None:
-        args.papers_dir = get_papers_dir()
+        args.papers_dir = get_config_param("papers_dir", config_path=args.config)
 
     if args.questions_yml is None:
         args.questions_yml = os.path.join(parent_dir, "metabeeai_llm", "questions.yml")
 
     if args.output is None:
-        args.output = os.path.join(get_data_dir(), "benchmark_data_gui.json")
+        data_dir = get_config_param("data_dir", config_path=args.config)
+        args.output = os.path.join(data_dir, "benchmark_data_gui.json")
 
     # Run the preparation
     prepare_benchmark_data(args.papers_dir, args.questions_yml, args.output)

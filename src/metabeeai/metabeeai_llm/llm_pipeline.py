@@ -220,12 +220,9 @@ async def process_papers(base_dir=None, paper_folders=None, overwrite_merged=Fal
     """
     # Import centralized configuration if base_dir not provided
     if base_dir is None:
-        import sys
+        from metabeeai.config import get_config_param
 
-        sys.path.append("..")
-        from metabeeai.config import get_papers_dir
-
-        base_dir = get_papers_dir()
+        base_dir = get_config_param("papers_dir")
 
     # Validate base directory
     if not os.path.exists(base_dir):
@@ -376,6 +373,16 @@ def main(argv=None):
         argv = sys.argv[1:]
 
     parser = argparse.ArgumentParser(description="Process paper folders to extract literature answers")
+    # YAML config file path (sets METABEEAI_CONFIG_FILE for downstream lookups)
+    parser.add_argument(
+        "--config",
+        "--config-file",
+        dest="config",
+        type=str,
+        default=None,
+        help="Path to config YAML file (overrides METABEEAI_CONFIG_FILE and defaults)",
+    )
+    # Base directory and selection of folders
     parser.add_argument(
         "--dir", type=str, default=None, help="Base directory containing paper folders (default: auto-detect from config)"
     )
@@ -384,10 +391,13 @@ def main(argv=None):
         type=str,
         nargs="+",
         default=None,
-        help="Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM)."
-        " If not specified, all folders will be processed.",
+        help=(
+            "Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM). "
+            "If not specified, all folders will be processed."
+        ),
     )
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing merged.json files")
+    # Models
     parser.add_argument(
         "--relevance-model",
         type=str,
@@ -398,25 +408,32 @@ def main(argv=None):
         "--answer-model",
         type=str,
         default=None,
-        help="Model to use for answer generation and reflection"
-        "(e.g., 'openai/gpt-4o-mini', 'openai/gpt-4o'). Default: from config",
+        help=(
+            "Model to use for answer generation and reflection (e.g., 'openai/gpt-4o-mini', 'openai/gpt-4o'). "
+            "Default: from config"
+        ),
     )
+    # Preset selector (fast/balanced/quality)
     parser.add_argument(
-        "--config",
+        "--preset",
         type=str,
         choices=["fast", "balanced", "quality"],
         default=None,
-        help="Use predefined configuration: 'fast', 'balanced', or 'quality'",
+        help="Use predefined configuration preset: 'fast', 'balanced', or 'quality'",
     )
 
     args = parser.parse_args(argv)
 
-    # Handle predefined configurations
+    # Respect provided config file for downstream lookups
     if args.config:
+        os.environ["METABEEAI_CONFIG_FILE"] = args.config
+
+    # Handle predefined configurations
+    if args.preset:
         from metabeeai.metabeeai_llm.pipeline_config import BALANCED_CONFIG, FAST_CONFIG, QUALITY_CONFIG
 
         config_map = {"fast": FAST_CONFIG, "balanced": BALANCED_CONFIG, "quality": QUALITY_CONFIG}
-        selected_config = config_map[args.config]
+        selected_config = config_map[args.preset]
 
         # Override model arguments with config values if not explicitly provided
         if args.relevance_model is None:
@@ -424,7 +441,7 @@ def main(argv=None):
         if args.answer_model is None:
             args.answer_model = selected_config["answer_model"]
 
-        print(f"🔧 Using {args.config.upper()} configuration:")
+        print(f"🔧 Using {args.preset.upper()} configuration:")
         print(f"   Relevance Model: {args.relevance_model}")
         print(f"   Answer Model: {args.answer_model}")
         print(f"   Description: {selected_config['description']}")

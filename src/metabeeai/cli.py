@@ -15,6 +15,7 @@ Provides multiple subcommands:
 
 import argparse
 import importlib
+import os
 import sys
 
 from dotenv import load_dotenv
@@ -35,7 +36,9 @@ def handle_llm_command(args):
         sys.argv.extend(["--relevance-model", args.relevance_model])
     if args.answer_model:
         sys.argv.extend(["--answer-model", args.answer_model])
-    if args.config:
+    if getattr(args, "preset", None):
+        sys.argv.extend(["--preset", args.preset])
+    if getattr(args, "config", None):
         sys.argv.extend(["--config", args.config])
     sys.exit(pipeline.main() if hasattr(pipeline, "main") else pipeline.__main__())
 
@@ -65,6 +68,8 @@ def handle_process_pdfs_command(args):
         sys.argv.extend(["--filter-chunk-type"] + args.filter_chunk_type)
     if args.pages != 1:
         sys.argv.extend(["--pages", str(args.pages)])
+    if args.config:
+        sys.argv.extend(["--config", args.config])
     sys.exit(process_module.main())
 
 
@@ -85,6 +90,8 @@ def handle_prep_benchmark_command(args):
         sys.argv.extend(["--questions-yml", args.questions_yml])
     if args.output:
         sys.argv.extend(["--output", args.output])
+    if args.config:
+        sys.argv.extend(["--config", args.config])
     sys.exit(prep_module.main())
 
 
@@ -111,6 +118,8 @@ def handle_benchmark_command(args):
         sys.argv.append("--use-retrieval-only")
     if args.list_questions:
         sys.argv.append("--list-questions")
+    if args.config:
+        sys.argv.extend(["--config", args.config])
     sys.exit(benchmark_module.main())
 
 
@@ -137,6 +146,8 @@ def handle_edge_cases_command(args):
         sys.argv.append("--contextual-only")
     if args.generate_contextual_summaries_only:
         sys.argv.append("--generate-contextual-summaries-only")
+    if args.config:
+        sys.argv.extend(["--config", args.config])
     sys.exit(edge_cases_module.main())
 
 
@@ -149,6 +160,8 @@ def handle_plot_metrics_command(args):
         sys.argv.extend(["--results-dir", args.results_dir])
     if args.output_dir:
         sys.argv.extend(["--output-dir", args.output_dir])
+    if args.config:
+        sys.argv.extend(["--config", args.config])
     sys.exit(plot_module.main())
 
 
@@ -170,13 +183,14 @@ def handle_benchmark_all_command(args):
         sys.argv.extend(["--question", args.question])
     if args.limit:
         sys.argv.extend(["--limit", str(args.limit)])
+    if args.config:
+        sys.argv.extend(["--config", args.config])
     sys.exit(run_bench_module.main())
 
 
 def main():
     """CLI entrypoint for metabeeai."""
     load_dotenv()  # auto-load API keys and config
-
 
     parser = argparse.ArgumentParser(
         prog="metabee",
@@ -225,11 +239,11 @@ def main():
         help="Model for answer generation (e.g., 'openai/gpt-4o')",
     )
     llm_parser.add_argument(
-        "--config",
+        "--preset",
         type=str,
         choices=["fast", "balanced", "quality"],
         default=None,
-        help="Use predefined configuration: " "'fast', 'balanced', or 'quality'",
+        help="Use predefined configuration preset: 'fast', 'balanced', or 'quality'",
     )
 
     # --- metabee process-pdfs ------------------------------------------------
@@ -500,6 +514,18 @@ def main():
 
     # Parse top-level args
     args = parser.parse_args()
+
+    # If a config path looks like a file, set METABEEAI_CONFIG_FILE so all subcommands see it
+    if getattr(args, "config", None):
+        cfg = args.config
+        try:
+            is_file_like = (
+                isinstance(cfg, str) and (cfg.endswith((".yml", ".yaml")) or os.path.sep in cfg) and os.path.exists(cfg)
+            )
+        except Exception:
+            is_file_like = False
+        if is_file_like:
+            os.environ["METABEEAI_CONFIG_FILE"] = cfg
 
     # Dispatch to the appropriate handler
     handler = command_handlers.get(args.command)

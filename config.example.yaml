@@ -1,8 +1,25 @@
 # Example MetaBeeAI config file
 # All options can be overridden by environment variables or CLI args
 
-papers_dir: ./data/papers
-results_dir: ./data/results
-api_key: "YOUR_API_KEY_HERE"
-model: "gpt-4o"
-# Add more options as needed
+# Top-level (global) settings
+data_dir: ./data                  # Base data directory
+papers_dir: ./data/papers         # Shared across all entrypoints
+results_dir: ./data/results       # Shared output directory
+output_dir: ./data/output         # Optional general output directory
+openai_api_key: "YOUR_API_KEY_HERE"  # OpenAI API key (or set OPENAI_API_KEY env var)
+
+# LLM pipeline settings
+llm:
+ relevance_model: "gpt-4o-mini"   # Model for chunk selection
+ answer_model: "gpt-4o"           # Model for answer generation
+ config: "balanced"               # fast, balanced, quality
+
+# PDF processing settings
+process_pdfs:
+ batch_size: 10                   # Number of PDFs to process in parallel
+
+# Benchmarking settings
+benchmark:
+ model: "gpt-4o"                  # Model to use for evaluation
+ batch_size: 25                   # Number of test cases per batch
+ max_retries: 5                   # Max retries per batch

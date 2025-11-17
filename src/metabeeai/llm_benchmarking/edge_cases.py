@@ -16,7 +16,7 @@ from typing import Dict, List, Optional, Tuple
 import openai
 import pandas as pd
 
-from metabeeai.config import get_data_dir
+from metabeeai.config import get_config_param
 
 # Add parent directory to path to access config
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -50,14 +50,14 @@ class EdgeCaseIdentifier:
         Initialize the EdgeCaseIdentifier.
 
         Args:
-            results_dir: Directory containing individual evaluation results (default: get_data_dir()/deepeval_results)
+            results_dir: Directory containing individual evaluation results (default: data_dir/deepeval_results)
             merged_data_dir: Directory containing merged evaluation results (not used, kept for compatibility)
-            output_dir: Directory to save edge case results (default: get_data_dir()/edge_cases)
+            output_dir: Directory to save edge case results (default: data_dir/edge_cases)
             openai_api_key: OpenAI API key for LLM summarization
             model: OpenAI model to use for summarization
         """
         # Use config-based defaults if not provided
-        data_dir = get_data_dir()
+        data_dir = get_config_param("data_dir")
         if results_dir is None:
             results_dir = os.path.join(data_dir, "deepeval_results")
         if output_dir is None:
@@ -1135,6 +1135,12 @@ def main():
     """Main function to run edge case identification."""
     parser = argparse.ArgumentParser(description="Identify edge cases from evaluation results")
     parser.add_argument(
+        "--config",
+        type=str,
+        default=None,
+        help="Path to config YAML file (overrides METABEEAI_CONFIG_FILE and defaults)",
+    )
+    parser.add_argument(
         "--num-cases", type=int, default=20, help="Number of edge cases to identify per question type (default: 20)"
     )
     parser.add_argument(
@@ -1174,12 +1180,19 @@ def main():
 
     args = parser.parse_args()
 
+    # Respect provided config path
+    if args.config:
+        os.environ["METABEEAI_CONFIG_FILE"] = args.config
+
+    # Enrich OpenAI API key from config if not provided via CLI/env
+    openai_api_key = args.openai_api_key or get_config_param("openai_api_key")
+
     # Initialize the identifier
     identifier = EdgeCaseIdentifier(
         results_dir=args.results_dir,
         merged_data_dir=args.merged_data_dir,
         output_dir=args.output_dir,
-        openai_api_key=args.openai_api_key,
+        openai_api_key=openai_api_key,
         model=args.model,
     )
 

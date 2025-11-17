@@ -22,7 +22,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from metabeeai.config import get_data_dir
+from metabeeai.config import get_config_param
 
 # Add parent directory to path to access config
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -53,6 +53,8 @@ def run_command(cmd, description, cwd=None):
 def build_prep_args(args):
     """Build arguments for prep_benchmark_data.py"""
     cmd = [sys.executable, "prep_benchmark_data.py"]
+    if args.config:
+        cmd.extend(["--config", args.config])
     if args.prep_papers_dir:
         cmd.extend(["--papers-dir", args.prep_papers_dir])
     if args.prep_questions_yml:
@@ -65,6 +67,8 @@ def build_prep_args(args):
 def build_deepeval_args(args):
     """Build arguments for deepeval_benchmarking.py"""
     cmd = [sys.executable, "deepeval_benchmarking.py"]
+    if args.config:
+        cmd.extend(["--config", args.config])
     if args.question:
         cmd.extend(["--question", args.question])
     if args.input:
@@ -89,6 +93,8 @@ def build_deepeval_args(args):
 def build_plot_args(args):
     """Build arguments for plot_metrics_comparison.py"""
     cmd = [sys.executable, "plot_metrics_comparison.py"]
+    if args.config:
+        cmd.extend(["--config", args.config])
     if args.plot_results_dir:
         cmd.extend(["--results-dir", args.plot_results_dir])
     if args.plot_output_dir:
@@ -99,6 +105,8 @@ def build_plot_args(args):
 def build_edge_cases_args(args):
     """Build arguments for edge_cases.py"""
     cmd = [sys.executable, "edge_cases.py"]
+    if args.config:
+        cmd.extend(["--config", args.config])
     if args.num_edge_cases:
         cmd.extend(["--num-cases", str(args.num_edge_cases)])
     if args.edge_results_dir:
@@ -188,6 +196,14 @@ Examples:
         """,
     )
 
+    # Global config path for all sub-steps
+    parser.add_argument(
+        "--config",
+        type=str,
+        default=None,
+        help="Path to config YAML file (propagates to all steps)",
+    )
+
     # Step control flags
     parser.add_argument("--skip-prep", action="store_true", help="Skip benchmark data preparation step")
 
@@ -255,6 +271,10 @@ Examples:
 
     args = parser.parse_args()
 
+    # Respect a provided config file and ensure subcommands see it via env
+    if args.config:
+        os.environ["METABEEAI_CONFIG_FILE"] = args.config
+
     # Run the pipeline
     success = run_benchmarking_pipeline(args)
 
@@ -266,7 +286,7 @@ Examples:
         print("[WARNING] BENCHMARKING PIPELINE COMPLETED WITH WARNINGS")
     print("=" * 60)
 
-    data_dir = get_data_dir()
+    data_dir = get_config_param("data_dir")
     print("\nOutput locations:")
     print(f"  - Benchmark data: {os.path.join(data_dir, 'benchmark_data_gui.json')}")
     print(f"  - Evaluation results: {os.path.join(data_dir, 'deepeval_results')}/")

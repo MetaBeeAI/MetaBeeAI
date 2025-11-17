@@ -20,6 +20,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from metabeeai.config import get_config_param
+
 # Import processing modules
 try:
     # Try relative imports first (when used as module)
@@ -36,15 +38,12 @@ except ImportError:
 
 
 def get_papers_dir():
-    """Get the papers directory from config or environment."""
+    """Get the papers directory from config or environment (legacy helper)."""
+    # Prefer configured common param; fallback to env var then default
     try:
-        sys.path.append("..")
-        from metabeeai.config import get_papers_dir as config_get_papers_dir
-
-        return config_get_papers_dir()
-    except ImportError:
-        # Fallback to common path
-        return os.getenv("METABEEAI_DATA_DIR", "data/papers")
+        return get_config_param("papers_dir")
+    except Exception:
+        return os.getenv("METABEEAI_PAPERS_DIR", "data/papers")
 
 
 def validate_environment():
@@ -268,6 +267,7 @@ Examples:
         """,
     )
 
+    parser.add_argument("--config", type=str, default=None, help="Path to config YAML file")
     parser.add_argument("--dir", type=str, default=None, help="Directory containing paper subfolders (defaults to config/env)")
 
     parser.add_argument(
@@ -312,8 +312,12 @@ Examples:
 
     args = parser.parse_args()
 
-    # Get papers directory
-    papers_dir = args.dir if args.dir else get_papers_dir()
+    # If a config file was provided, make it visible to all downstream lookups
+    if args.config:
+        os.environ["METABEEAI_CONFIG_FILE"] = args.config
+
+    # Get papers directory: CLI > config/common-param
+    papers_dir = args.dir if args.dir else get_config_param("papers_dir")
 
     # If merge-only is specified, automatically skip split and API steps
     if args.merge_only:
