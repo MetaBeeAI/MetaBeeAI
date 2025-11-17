@@ -1,125 +1,164 @@
 # Centralized configuration loader for MetaBeeAI
 # Hierarchy: CLI arg > env var > YAML > hardcoded default
 import os
+
 import yaml
+from dotenv import load_dotenv
+
+from metabeeai.logging import setup_logger
+
+logger = setup_logger(__name__)
+
+load_dotenv()
 
 DEFAULT_CONFIG_PATHS = [
     os.path.join(os.getcwd(), "config.yaml"),
     os.path.expanduser("~/.metabeeai/config.yaml"),
 ]
 
-def load_config(cli_config_path=None):
+# Cache for loaded config to avoid re-reading files
+_config_cache = {}
+
+
+def load_config(config_path=None):
     """
-    Load config from YAML file, with path determined by:
-    1. CLI arg (if provided)
+    Load config from YAML file. Path is determined by:
+    1. config_path arg (if provided)
     2. METABEEAI_CONFIG_FILE env var
-    3. Default locations (cwd/config.yaml, ~/.metabeeai/config.yaml)
-    Returns a dict (may be empty if no file found).
+    3. Default locations (./config.yaml, ~/.metabeeai/config.yaml)
+
+    Results are cached. Returns dict (empty if no file found).
     """
-    config_path = (
-        cli_config_path
+    # Determine which config file to use
+    path = (
+        config_path
         or os.environ.get("METABEEAI_CONFIG_FILE")
         or next((p for p in DEFAULT_CONFIG_PATHS if os.path.isfile(p)), None)
     )
-    if config_path and os.path.isfile(config_path):
-        with open(config_path, "r") as f:
-            return yaml.safe_load(f) or {}
+
+    # Check cache
+    if path and path in _config_cache:
+        return _config_cache[path]
+
+    # Load from file
+    if path and os.path.isfile(path):
+        with open(path, "r") as f:
+            config = yaml.safe_load(f) or {}
+            _config_cache[path] = config
+            return config
+
     return {}
 
-def get_config_value(key, cli_value=None, config=None, env_var=None, default=None):
+
+def get_config_value(key, config_path=None, env_var=None, default=None):
     """
-    Get the effective value for a config parameter, using the hierarchy:
-    1. CLI arg (cli_value)
-    2. Environment variable (env_var, if provided)
-    3. YAML config (config dict, if provided)
-    4. Hardcoded default
+    Get a config parameter value using the hierarchy:
+    1. Environment variable (if env_var provided)
+    2. YAML config file (supports dot notation, e.g., 'llm.model')
+    3. Default value
+
+    Note: Check CLI args BEFORE calling this function.
+
+    Args:
+        key: Config key (use dots for nested keys: 'llm.model')
+        config_path: Path to config file (if None, uses default locations)
+        env_var: Environment variable name to check
+        default: Default value if not found elsewhere
+
+    Returns:
+        The config value from the highest priority source
+
+    Example:
+        # In entrypoint after argparse
+        data_dir = args.data_dir if args.data_dir is not None else get_config_value(
+            'data_dir',
+            config_path=args.config,
+            env_var='METABEEAI_DATA_DIR',
+            default='data'
+        )
     """
-    if cli_value is not None:
-        return cli_value
+    # Check environment variable
     if env_var and os.environ.get(env_var) is not None:
         return os.environ[env_var]
-    if config and key in config:
-        return config[key]
+
+    # Check YAML config (load and cache)
+    config = load_config(config_path)
+    if config:
+        # Support dot notation: 'llm.model' -> config['llm']['model']
+        if "." in key:
+            value = config
+            for part in key.split("."):
+                if isinstance(value, dict) and part in value:
+                    value = value[part]
+                else:
+                    value = None
+                    break
+            if value is not None:
+                return value
+        # Direct key lookup
+        if key in config:
+            return config[key]
+
     return default
 
-# Example usage in an entrypoint:
-# config = load_config(cli_config_path=args.config)
-# papers_dir = get_config_value("papers_dir", cli_value=args.papers_dir, config=config, env_var="METABEEAI_PAPERS_DIR", default="./data/papers")
-# config.py
-# Centralized configuration for MetaBeeAI pipeline
 
-import os
-from pathlib import Path
+# Registry of common config parameters (shared across entrypoints)
+COMMON_PARAMS = {
+    "data_dir": {
+        "env_var": "METABEEAI_DATA_DIR",
+        "yaml_key": "data_dir",
+        "default": "data",
+    },
+    "papers_dir": {
+        "env_var": "METABEEAI_PAPERS_DIR",
+        "yaml_key": "papers_dir",
+        "default": "data/papers",
+    },
+    "output_dir": {
+        "env_var": "METABEEAI_OUTPUT_DIR",
+        "yaml_key": "output_dir",
+        "default": "data/output",
+    },
+    "results_dir": {
+        "env_var": "METABEEAI_RESULTS_DIR",
+        "yaml_key": "results_dir",
+        "default": "data/results",
+    },
+    "openai_api_key": {
+        "env_var": "OPENAI_API_KEY",
+        "yaml_key": "openai_api_key",
+        "default": None,
+    },
+    "landing_api_key": {
+        "env_var": "LANDING_API_KEY",
+        "yaml_key": "landing_api_key",
+        "default": None,
+    },
+}
 
-from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
-
-# Data directory configuration
-# Default to "data" if not specified in environment
-DEFAULT_DATA_DIR = "data"
-
-
-def get_data_dir():
+def get_config_param(name, config_path=None):
     """
-    Get the base data directory from environment variable or use default.
+    Get a common config parameter by name.
+
+    Convenience wrapper for parameters shared across entrypoints.
+    For custom params, use get_config_value() directly.
+
+    Args:
+        name: Parameter name (must be in COMMON_PARAMS)
+        config_path: Path to config file
 
     Returns:
-        str: Path to the base data directory
+        The config value
+
+    Example:
+        data_dir = args.data_dir if args.data_dir is not None else get_config_param(
+            'data_dir',
+            config_path=args.config
+        )
     """
-    return os.getenv("METABEEAI_DATA_DIR", DEFAULT_DATA_DIR)
+    if name not in COMMON_PARAMS:
+        raise ValueError(f"Unknown param: '{name}'. Available: {list(COMMON_PARAMS.keys())}")
 
-
-def get_papers_dir():
-    """
-    Get the papers directory path.
-
-    Returns:
-        str: Path to the papers directory
-    """
-    base_dir = get_data_dir()
-    papers_dir = os.path.join(base_dir, "papers")
-    return papers_dir
-
-
-def get_logs_dir():
-    """
-    Get the logs directory path.
-
-    Returns:
-        str: Path to the logs directory
-    """
-    base_dir = get_data_dir()
-    logs_dir = os.path.join(base_dir, "logs")
-    return logs_dir
-
-
-def get_output_dir():
-    """
-    Get the output directory path.
-
-    Returns:
-        str: Path to the output directory
-    """
-    base_dir = get_data_dir()
-    output_dir = os.path.join(base_dir, "output")
-    return output_dir
-
-
-def ensure_directories_exist():
-    """
-    Ensure that all necessary directories exist.
-    Creates them if they don't exist.
-    """
-    directories = [get_data_dir(), get_papers_dir(), get_logs_dir(), get_output_dir()]
-
-    for directory in directories:
-        Path(directory).mkdir(parents=True, exist_ok=True)
-
-
-# Convenience variables for backward compatibility
-BASE_DIR = get_data_dir()
-PAPERS_DIR = get_papers_dir()
-LOGS_DIR = get_logs_dir()
-OUTPUT_DIR = get_output_dir()
+    p = COMMON_PARAMS[name]
+    return get_config_value(p["yaml_key"], config_path=config_path, env_var=p["env_var"], default=p["default"])
