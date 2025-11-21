@@ -615,7 +615,7 @@ pip install -r requirements.txt
 
 ---
 
-(alternative-python-module-syntax)=
+(query-database-alternative-python-module-syntax)=
 ## Alternative: Python Module Syntax
 
 All scripts can be run directly as Python modules. The examples above use this syntax. For programmatic access:

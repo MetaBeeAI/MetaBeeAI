@@ -98,7 +98,7 @@ metabeeai process-pdfs --merge-only
 metabeeai process-pdfs --merge-only --start 95UKMIEY --end CX9M8HCM
 ```
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
 
 ---
 
@@ -138,7 +138,7 @@ metabeeai process-pdfs --pages 2
 metabeeai process-pdfs --skip-split --skip-api
 ```
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
 
 **Command-line options**:
 - `--start FOLDER`: First folder name to process (optional; defaults to first folder in alphanumeric order)
@@ -179,7 +179,7 @@ python -m metabeeai.process_pdfs.split_pdf /path/to/papers --pages 1
 python -m metabeeai.process_pdfs.split_pdf /path/to/papers --pages 2
 ```
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
 
 **Command-line options**:
 - `--pages {1,2}`: Number of pages per split (default: 1)
@@ -250,7 +250,7 @@ python -m metabeeai.process_pdfs.va_process_papers --dir data/papers
 python -m metabeeai.process_pdfs.va_process_papers --dir data/papers --start 95UKMIEY
 ```
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
 
 **Command-line options**:
 - `--dir PATH`: Papers directory (default: data/papers)
@@ -309,7 +309,7 @@ python -m metabeeai.process_pdfs.merger --basepath /path/to/data --filter-chunk-
 python -m metabeeai.process_pdfs.merger --basepath /path/to/data --filter-chunk-type marginalia figure
 ```
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
 
 **Command-line options**:
 - `--basepath PATH`: Base path containing the `papers/` folder
@@ -407,7 +407,7 @@ python -m metabeeai.process_pdfs.batch_deduplicate --base-dir /path/to/papers
 python -m metabeeai.process_pdfs.batch_deduplicate --verbose
 ```
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
 
 **Command-line options**:
 - `--base-dir PATH`: Base directory containing paper folders
@@ -464,7 +464,7 @@ python -m metabeeai.process_pdfs.merger --basepath /path/to/data
 python -m metabeeai.process_pdfs.batch_deduplicate --base-dir /path/to/papers
 ```
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
 
 ---
 
@@ -788,7 +788,7 @@ After processing your PDFs:
 
 ---
 
-(alternative-python-module-syntax)=
+(process-pdfs-alternative-python-module-syntax)=
 ## Alternative: Python Module Syntax
 
 Instead of using the CLI commands, you can also run the scripts directly as Python modules. This is useful if you need to integrate the functionality into other Python scripts or prefer direct module execution.
