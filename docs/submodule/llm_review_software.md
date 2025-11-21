@@ -52,7 +52,7 @@ metabeeai review
 
 The GUI will automatically attempt to load papers from `data/papers/` directory (or you can specify a different folder via File → Open Folder).
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](#alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
 
 ---
 
@@ -158,7 +158,7 @@ The `annotator.py` script creates annotated PDFs with bounding boxes for visuali
 metabeeai annotate-pdfs --basepath /path/to/data
 ```
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](#alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
 
 ### What It Does
 
@@ -324,6 +324,7 @@ The following features are planned for future versions:
 
 ---
 
+(alternative-python-module-syntax)=
 ## Alternative: Python Module Syntax
 
 Instead of using the CLI commands, you can also run the scripts directly as Python modules. This is useful if you need to integrate the functionality into other Python scripts or prefer direct module execution.

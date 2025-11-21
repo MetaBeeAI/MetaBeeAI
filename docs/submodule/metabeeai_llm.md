@@ -114,7 +114,7 @@ metabeeai llm --config quality   # High quality for critical analysis
 metabeeai llm --overwrite
 ```
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](#alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
 
 **Input data format**: Expects papers in folders with any alphanumeric names like:
 ```
@@ -227,7 +227,7 @@ CURRENT_CONFIG = QUALITY_CONFIG  # High quality
 python -m metabeeai.metabeeai_llm.pipeline_config
 ```
 
-**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](#alternative-python-module-syntax) section below.
+**Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](alternative-python-module-syntax) section below.
 
 ---
 
@@ -549,6 +549,7 @@ pip install -r requirements.txt
 
 ---
 
+(alternative-python-module-syntax)=
 ## Alternative: Python Module Syntax
 
 Instead of using the CLI commands, you can also run the scripts directly as Python modules. This is useful if you need to integrate the functionality into other Python scripts or prefer direct module execution.
