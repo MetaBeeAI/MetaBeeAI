@@ -149,7 +149,7 @@ metabeeai prep-benchmark --papers-dir PATH --questions-yml PATH --output PATH
 
 **Data Structure**:
 The output uses an efficient nested structure:
-```json:force:
+```text
 {
   "papers": {
     "002": {
@@ -390,7 +390,7 @@ metabeeai benchmark-all --skip-edge-cases
 
 The new format uses a nested structure for efficiency:
 
-```json:force:
+```text
 {
   "papers": {
     "002": {
@@ -429,7 +429,7 @@ The new format uses a nested structure for efficiency:
 
 ### Evaluation Results Format
 
-```json:force:
+```text
 [
   {
     "test_case_index": 0,

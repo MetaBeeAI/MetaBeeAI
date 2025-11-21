@@ -281,7 +281,7 @@ cp ../env.example ../.env
 The `.env` file is located in the project root directory and is hidden from git for security.
 
 3. **Data Format**: Your papers must be processed into the required JSON format:
-```json:force:
+```text
 {
   "data": {
     "chunks": [
@@ -325,7 +325,7 @@ metabeeai llm --config balanced
 **Step 3: Review Results**
 
 Check the `answers.json` file in each paper folder:
-```json:force:
+```text
 {
   "QUESTIONS": {
     "methodology": {
@@ -393,7 +393,7 @@ bee_species:
 ## Understanding Output Structure
 
 Each question returns:
-```json:force:
+```text
 {
   "answer": "The synthesized answer",
   "reason": "Explanation of how the answer was derived",
@@ -470,7 +470,7 @@ metabeeai llm --folders 283C6B42 3ZHNVADM
 ```
 
 3. **Result**: Your `answers.json` will now contain all three question types:
-```json:force:
+```text
 {
   "QUESTIONS": {
     "design": { ... },      // Preserved from previous run
