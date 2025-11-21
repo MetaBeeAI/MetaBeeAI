@@ -47,7 +47,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="LLM Benchmarking" href="llm_benchmarking.html" />
-    <link rel="prev" title="MetaBeeAI LLM" href="metabeeai_llm.html" />
+    <link rel="prev" title="LLM Pipeline" href="metabeeai_llm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="0.1.0" />
@@ -336,10 +336,10 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="process_pdfs.html">PDF Processing Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metabeeai_llm.html">MetaBeeAI LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metabeeai_llm.html">LLM Pipeline</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">LLM Review Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="llm_benchmarking.html">LLM Benchmarking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="query_database.html">Query Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="query_database.html">Query Database - Data Extraction and Analysis</a></li>
 </ul>
 </div>
 </nav></div>
@@ -402,6 +402,404 @@
                   
   <section id="llm-review-software">
 <h1>LLM Review Software<a class="headerlink" href="#llm-review-software" title="Link to this heading">#</a></h1>
+<p>This submodule provides a graphical user interface (GUI) for reviewing and annotating LLM-generated answers from research papers. Reviewers use this software to create “golden” ground truth answers that are then used in the benchmarking pipeline to evaluate LLM performance.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">llm_review_software</span></code> submodule consists of two main components:</p>
+<ol class="arabic simple">
+<li><p><strong>BeeGUI</strong> (<code class="docutils literal notranslate"><span class="pre">beegui.py</span></code>) - A PyQt5-based GUI application for interactive review and annotation</p></li>
+<li><p><strong>PDF Annotator</strong> (<code class="docutils literal notranslate"><span class="pre">annotator.py</span></code>) - A command-line tool for annotating PDFs with bounding boxes</p></li>
+</ol>
+<section id="purpose">
+<h3>Purpose<a class="headerlink" href="#purpose" title="Link to this heading">#</a></h3>
+<p>The review software allows human reviewers to:</p>
+<ul class="simple">
+<li><p>Review LLM-generated answers from research papers</p></li>
+<li><p>Add, edit, and validate reviewer-provided answers</p></li>
+<li><p>Rate answer quality</p></li>
+<li><p>Select relevant text chunks from PDFs</p></li>
+<li><p>Generate <code class="docutils literal notranslate"><span class="pre">answers_extended.json</span></code> files containing “golden” ground truth answers</p></li>
+</ul>
+<p>These “golden” answers are then used by the <code class="docutils literal notranslate"><span class="pre">llm_benchmarking</span></code> submodule to evaluate LLM performance against human-reviewed ground truth.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>This submodule is part of the <code class="docutils literal notranslate"><span class="pre">metabeeai</span></code> package. Install it via:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>metabeeai
+</pre></div>
+</div>
+<p>Or if installing from source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>/path/to/MetaBeeAI
+</pre></div>
+</div>
+<p><strong>Required dependencies</strong>: PyQt5, PyMuPDF (fitz), termcolor</p>
+</section>
+<hr class="docutils" />
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<section id="launching-the-review-gui">
+<h3>Launching the Review GUI<a class="headerlink" href="#launching-the-review-gui" title="Link to this heading">#</a></h3>
+<p>When the <code class="docutils literal notranslate"><span class="pre">metabeeai</span></code> package is installed, launch the GUI using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>review
+</pre></div>
+</div>
+<p>The GUI will automatically attempt to load papers from <code class="docutils literal notranslate"><span class="pre">data/papers/</span></code> directory (or you can specify a different folder via File → Open Folder).</p>
+<p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#llm-review-software-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="beegui-review-interface">
+<h2>BeeGUI - Review Interface<a class="headerlink" href="#beegui-review-interface" title="Link to this heading">#</a></h2>
+<section id="interface-overview">
+<h3>Interface Overview<a class="headerlink" href="#interface-overview" title="Link to this heading">#</a></h3>
+<p>The GUI consists of three main panes:</p>
+<ol class="arabic simple">
+<li><p><strong>Left Pane</strong>: Paper navigation and controls</p>
+<ul class="simple">
+<li><p>Paper list (shows all available papers with progress percentage)</p></li>
+<li><p>Previous/Next paper buttons</p></li>
+<li><p>Page navigation controls</p></li>
+<li><p>Zoom slider</p></li>
+<li><p>Modification status indicator</p></li>
+</ul>
+</li>
+<li><p><strong>Center Pane</strong>: PDF viewer</p>
+<ul class="simple">
+<li><p>Displays the current PDF page</p></li>
+<li><p>Shows annotations (bounding boxes) for text chunks</p></li>
+<li><p>Supports panning (drag) and zooming (Ctrl+wheel or slider)</p></li>
+<li><p>Hover tooltips show chunk IDs and associated questions</p></li>
+</ul>
+</li>
+<li><p><strong>Right Pane</strong>: Question panel and answer fields</p>
+<ul class="simple">
+<li><p>Question list (from <code class="docutils literal notranslate"><span class="pre">answers.json</span></code>)</p></li>
+<li><p>Answer input fields:</p>
+<ul>
+<li><p>Positive answer</p></li>
+<li><p>Negative answer</p></li>
+<li><p>Positive reason</p></li>
+<li><p>Negative reason</p></li>
+<li><p>Star rating (0-5)</p></li>
+</ul>
+</li>
+<li><p>Chunk ID list (when a question is selected)</p></li>
+<li><p>Mode buttons (Individual/All)</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="workflow">
+<h3>Workflow<a class="headerlink" href="#workflow" title="Link to this heading">#</a></h3>
+<section id="selecting-a-paper">
+<h4>1. Selecting a Paper<a class="headerlink" href="#selecting-a-paper" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Papers are listed in the left pane with their progress percentage</p></li>
+<li><p>Click on a paper ID to load it</p></li>
+<li><p>Use “Prev Paper” / “Next Paper” buttons to navigate</p></li>
+<li><p>Progress shows completion percentage based on filled answer fields</p></li>
+</ul>
+</section>
+<section id="navigating-pdf-pages">
+<h4>2. Navigating PDF Pages<a class="headerlink" href="#navigating-pdf-pages" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Use “Prev Page” / “Next Page” buttons</p></li>
+<li><p>Use the zoom slider or Ctrl+wheel to zoom in/out</p></li>
+<li><p>Double-click the zoom slider to reset to 100%</p></li>
+<li><p>Drag to pan when zoomed in</p></li>
+</ul>
+</section>
+<section id="selecting-questions">
+<h4>3. Selecting Questions<a class="headerlink" href="#selecting-questions" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Questions appear in the right pane (loaded from <code class="docutils literal notranslate"><span class="pre">answers.json</span></code>)</p></li>
+<li><p>Click on a question to select it</p></li>
+<li><p>When selected:</p>
+<ul>
+<li><p>Associated chunks are highlighted on the PDF</p></li>
+<li><p>Chunk IDs are listed below the question panel</p></li>
+<li><p>Answer fields become editable</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="adding-editing-answers">
+<h4>4. Adding/Editing Answers<a class="headerlink" href="#adding-editing-answers" title="Link to this heading">#</a></h4>
+<p>For each question, reviewers can provide:</p>
+<ul class="simple">
+<li><p><strong>Positive Answer</strong> (<code class="docutils literal notranslate"><span class="pre">user_answer_positive</span></code>): The correct/positive answer</p></li>
+<li><p><strong>Negative Answer</strong> (<code class="docutils literal notranslate"><span class="pre">user_answer_negative</span></code>): What should NOT be included</p></li>
+<li><p><strong>Positive Reason</strong> (<code class="docutils literal notranslate"><span class="pre">user_reason_positive</span></code>): Reasoning for the positive answer</p></li>
+<li><p><strong>Negative Reason</strong> (<code class="docutils literal notranslate"><span class="pre">user_reason_negative</span></code>): Reasoning for the negative answer</p></li>
+<li><p><strong>Rating</strong> (<code class="docutils literal notranslate"><span class="pre">user_rating</span></code>): Star rating (0-5) indicating answer quality</p></li>
+</ul>
+<p><strong>Note</strong>: All changes are automatically saved to <code class="docutils literal notranslate"><span class="pre">answers_extended.json</span></code> in the paper folder.</p>
+</section>
+<section id="annotation-modes">
+<h4>5. Annotation Modes<a class="headerlink" href="#annotation-modes" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Individual Mode</strong>: Shows annotations only for the currently selected question</p></li>
+<li><p><strong>All Mode</strong>: Shows annotations for all questions (useful for overview)</p></li>
+</ul>
+</section>
+<section id="viewing-chunks">
+<h4>6. Viewing Chunks<a class="headerlink" href="#viewing-chunks" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>When a question is selected, associated chunk IDs are listed</p></li>
+<li><p>Click on a chunk ID to navigate to that chunk’s location in the PDF</p></li>
+<li><p>Hover over annotations in the PDF to see chunk IDs and related questions</p></li>
+</ul>
+</section>
+</section>
+<section id="keyboard-shortcuts">
+<h3>Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>F11</strong>: Toggle full-screen mode</p></li>
+<li><p><strong>Up/Down arrows</strong>: Navigate paper list (when focused)</p></li>
+</ul>
+</section>
+<section id="menu-options">
+<h3>Menu Options<a class="headerlink" href="#menu-options" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>File → Open Folder</strong>: Select a different papers directory</p></li>
+<li><p><strong>Options → Dark Mode / Light Mode</strong>: Toggle theme</p></li>
+<li><p><strong>Options → Font Size</strong>: Adjust font size (+/- buttons)</p></li>
+<li><p><strong>Help → About</strong>: Application information</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pdf-annotator">
+<h2>PDF Annotator<a class="headerlink" href="#pdf-annotator" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">annotator.py</span></code> script creates annotated PDFs with bounding boxes for visualization purposes.</p>
+<section id="id1">
+<h3>Usage<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>annotate-pdfs<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data
+</pre></div>
+</div>
+<p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#llm-review-software-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
+</section>
+<section id="what-it-does">
+<h3>What It Does<a class="headerlink" href="#what-it-does" title="Link to this heading">#</a></h3>
+<p>The annotator processes all papers in the <code class="docutils literal notranslate"><span class="pre">papers/</span></code> directory and creates annotated PDFs:</p>
+<ul class="simple">
+<li><p><strong>Red boxes</strong>: Question-answer chunks (from <code class="docutils literal notranslate"><span class="pre">merged_v2.json</span></code>)</p></li>
+<li><p><strong>Blue boxes</strong>: Chunks referenced in <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> (with field names as labels)</p></li>
+</ul>
+<p>Output files are saved as <code class="docutils literal notranslate"><span class="pre">{paper_id}_main_annotated.pdf</span></code> in each paper folder.</p>
+</section>
+<section id="command-line-arguments">
+<h3>Command-Line Arguments<a class="headerlink" href="#command-line-arguments" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--basepath</span> <span class="pre">PATH</span></code>: Base path containing the <code class="docutils literal notranslate"><span class="pre">papers</span></code> folder (default: current directory)</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="file-structure">
+<h2>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading">#</a></h2>
+<section id="required-files-for-each-paper">
+<h3>Required Files for Each Paper<a class="headerlink" href="#required-files-for-each-paper" title="Link to this heading">#</a></h3>
+<p>Each paper folder should contain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{paper_id}/
+├── {paper_id}_main.pdf              # Original PDF
+├── answers.json                      # LLM-generated answers (input)
+├── answers_extended.json             # Reviewer answers (output - &quot;golden&quot; answers)
+└── pages/
+    └── merged_v2.json                # Processed paper chunks with grounding
+</pre></div>
+</div>
+</section>
+<section id="output-format-answers-extended-json">
+<h3>Output Format: <code class="docutils literal notranslate"><span class="pre">answers_extended.json</span></code><a class="headerlink" href="#output-format-answers-extended-json" title="Link to this heading">#</a></h3>
+<p>The GUI creates/updates <code class="docutils literal notranslate"><span class="pre">answers_extended.json</span></code> with the following structure:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;QUESTIONS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;question_key&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;user_answer_positive&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reviewer&#39;s positive answer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;user_answer_negative&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;What should NOT be included&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;user_reason_positive&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reasoning for positive answer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;user_reason_negative&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reasoning for negative answer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;user_rating&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This file serves as the “golden” ground truth for benchmarking.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="integration-with-benchmarking-pipeline">
+<h2>Integration with Benchmarking Pipeline<a class="headerlink" href="#integration-with-benchmarking-pipeline" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">answers_extended.json</span></code> files created by this review software are used as ground truth in the benchmarking pipeline:</p>
+<ol class="arabic simple">
+<li><p><strong>Review Phase</strong> (this software):</p>
+<ul class="simple">
+<li><p>Reviewers use BeeGUI to create <code class="docutils literal notranslate"><span class="pre">answers_extended.json</span></code> files</p></li>
+<li><p>These contain human-reviewed “golden” answers</p></li>
+</ul>
+</li>
+<li><p><strong>Benchmarking Phase</strong> (<code class="docutils literal notranslate"><span class="pre">llm_benchmarking</span></code> submodule):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">prep_benchmark_data.py</span></code> reads <code class="docutils literal notranslate"><span class="pre">answers_extended.json</span></code> files</p></li>
+<li><p>Compares LLM answers (<code class="docutils literal notranslate"><span class="pre">answers.json</span></code>) against golden answers</p></li>
+<li><p>Creates benchmark datasets for evaluation</p></li>
+</ul>
+</li>
+</ol>
+<p>See the <code class="docutils literal notranslate"><span class="pre">llm_benchmarking</span></code> README for details on the benchmarking workflow.</p>
+</section>
+<hr class="docutils" />
+<section id="tips-and-best-practices">
+<h2>Tips and Best Practices<a class="headerlink" href="#tips-and-best-practices" title="Link to this heading">#</a></h2>
+<section id="for-reviewers">
+<h3>For Reviewers<a class="headerlink" href="#for-reviewers" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Start with Progress Overview</strong>: Check the progress percentage in the paper list to see completion status</p></li>
+<li><p><strong>Use Annotation Modes</strong>:</p>
+<ul class="simple">
+<li><p>Use “Individual” mode when focusing on one question</p></li>
+<li><p>Use “All” mode to see all annotations and avoid duplicates</p></li>
+</ul>
+</li>
+<li><p><strong>Navigate Efficiently</strong>:</p>
+<ul class="simple">
+<li><p>Use keyboard shortcuts for faster navigation</p></li>
+<li><p>Click chunk IDs to jump to specific locations</p></li>
+</ul>
+</li>
+<li><p><strong>Complete All Fields</strong>: For best benchmarking results, fill in all answer fields (positive/negative answers and reasons)</p></li>
+<li><p><strong>Save Frequently</strong>: Changes auto-save, but you can verify by checking the “Modified” timestamp</p></li>
+</ol>
+</section>
+<section id="data-quality">
+<h3>Data Quality<a class="headerlink" href="#data-quality" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Ensure <code class="docutils literal notranslate"><span class="pre">answers_extended.json</span></code> files are complete before running benchmarking</p></li>
+<li><p>Reviewers should be consistent in their rating criteria</p></li>
+<li><p>Check that chunk IDs in answers match actual PDF content</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="issue-gui-doesn-t-launch">
+<h3>Issue: GUI doesn’t launch<a class="headerlink" href="#issue-gui-doesn-t-launch" title="Link to this heading">#</a></h3>
+<p><strong>Solution</strong>: Ensure PyQt5 is installed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>PyQt5
+</pre></div>
+</div>
+</section>
+<section id="issue-papers-not-showing-in-list">
+<h3>Issue: Papers not showing in list<a class="headerlink" href="#issue-papers-not-showing-in-list" title="Link to this heading">#</a></h3>
+<p><strong>Check</strong>:</p>
+<ol class="arabic simple">
+<li><p>Papers directory exists and contains paper folders</p></li>
+<li><p>Each paper folder has <code class="docutils literal notranslate"><span class="pre">{paper_id}_main.pdf</span></code> and <code class="docutils literal notranslate"><span class="pre">pages/merged_v2.json</span></code></p></li>
+<li><p>Paper folder names are numeric (e.g., “002”, “003”)</p></li>
+</ol>
+</section>
+<section id="issue-pdf-not-displaying">
+<h3>Issue: PDF not displaying<a class="headerlink" href="#issue-pdf-not-displaying" title="Link to this heading">#</a></h3>
+<p><strong>Check</strong>:</p>
+<ol class="arabic simple">
+<li><p>PDF file exists: <code class="docutils literal notranslate"><span class="pre">{paper_id}_main.pdf</span></code></p></li>
+<li><p>File is not corrupted</p></li>
+<li><p>PyMuPDF (fitz) is installed: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pymupdf</span></code></p></li>
+</ol>
+</section>
+<section id="issue-questions-not-appearing">
+<h3>Issue: Questions not appearing<a class="headerlink" href="#issue-questions-not-appearing" title="Link to this heading">#</a></h3>
+<p><strong>Check</strong>:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">answers.json</span></code> exists in the paper folder</p></li>
+<li><p>File has valid JSON structure with “QUESTIONS” key</p></li>
+<li><p>File encoding is UTF-8</p></li>
+</ol>
+</section>
+<section id="issue-answers-not-saving">
+<h3>Issue: Answers not saving<a class="headerlink" href="#issue-answers-not-saving" title="Link to this heading">#</a></h3>
+<p><strong>Check</strong>:</p>
+<ol class="arabic simple">
+<li><p>Write permissions on the paper folder</p></li>
+<li><p>Disk space available</p></li>
+<li><p>Check console output for error messages</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<p>The GUI automatically detects the papers directory from the <code class="docutils literal notranslate"><span class="pre">metabeeai.config</span></code> module. Default location is <code class="docutils literal notranslate"><span class="pre">data/papers/</span></code>.</p>
+<p>You can change the directory via:</p>
+<ul class="simple">
+<li><p><strong>File → Open Folder</strong> menu option</p></li>
+<li><p>The directory is remembered during the session</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="future-enhancements">
+<h2>Future Enhancements<a class="headerlink" href="#future-enhancements" title="Link to this heading">#</a></h2>
+<p>The following features are planned for future versions:</p>
+<ul class="simple">
+<li><p>Screenshots and detailed visual guides for paper selection</p></li>
+<li><p>Step-by-step instructions for adding responses</p></li>
+<li><p>Batch processing capabilities</p></li>
+<li><p>Export/import functionality for reviewer annotations</p></li>
+<li><p>Collaborative review features</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Benchmarking Pipeline</strong>: See <code class="docutils literal notranslate"><span class="pre">llm_benchmarking</span></code> submodule README</p></li>
+<li><p><strong>PDF Processing</strong>: See <code class="docutils literal notranslate"><span class="pre">process_pdfs</span></code> submodule README</p></li>
+<li><p><strong>LLM Pipeline</strong>: See <code class="docutils literal notranslate"><span class="pre">metabeeai_llm</span></code> submodule README</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+<section id="alternative-python-module-syntax">
+<span id="llm-review-software-alternative-python-module-syntax"></span><h2>Alternative: Python Module Syntax<a class="headerlink" href="#alternative-python-module-syntax" title="Link to this heading">#</a></h2>
+<p>Instead of using the CLI commands, you can also run the scripts directly as Python modules. This is useful if you need to integrate the functionality into other Python scripts or prefer direct module execution.</p>
+<section id="id2">
+<h3>Launching the Review GUI<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_review_software.beegui
+</pre></div>
+</div>
+</section>
+<section id="running-the-pdf-annotator">
+<h3>Running the PDF Annotator<a class="headerlink" href="#running-the-pdf-annotator" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_review_software.annotator<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data
+</pre></div>
+</div>
+</section>
+<section id="example-with-custom-options">
+<h3>Example with Custom Options<a class="headerlink" href="#example-with-custom-options" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Annotate PDFs with custom base path</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_review_software.annotator<span class="w"> </span>--basepath<span class="w"> </span>/custom/path/to/data
+</pre></div>
+</div>
+<p>All command-line arguments are identical between CLI commands and Python module syntax. The only difference is the invocation method.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Link to this heading">#</a></h2>
+<p>For issues or questions:</p>
+<ol class="arabic simple">
+<li><p>Check this README first</p></li>
+<li><p>Review error messages in console output</p></li>
+<li><p>Verify file structure matches requirements</p></li>
+<li><p>Check that all dependencies are installed</p></li>
+</ol>
+<hr class="docutils" />
+<p><strong>Last Updated</strong>: Nov 21 2025</p>
+</section>
 </section>
 
 
@@ -420,7 +818,7 @@
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">MetaBeeAI LLM</p>
+        <p class="prev-next-title">LLM Pipeline</p>
       </div>
     </a>
     <a class="right-next"
@@ -442,6 +840,76 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose">Purpose</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-the-review-gui">Launching the Review GUI</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beegui-review-interface">BeeGUI - Review Interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interface-overview">Interface Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-paper">1. Selecting a Paper</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-pdf-pages">2. Navigating PDF Pages</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-questions">3. Selecting Questions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-editing-answers">4. Adding/Editing Answers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#annotation-modes">5. Annotation Modes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-chunks">6. Viewing Chunks</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menu-options">Menu Options</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pdf-annotator">PDF Annotator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-does">What It Does</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-arguments">Command-Line Arguments</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-structure">File Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-files-for-each-paper">Required Files for Each Paper</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-format-answers-extended-json">Output Format: <code class="docutils literal notranslate"><span class="pre">answers_extended.json</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-benchmarking-pipeline">Integration with Benchmarking Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-and-best-practices">Tips and Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-reviewers">For Reviewers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality">Data Quality</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-gui-doesn-t-launch">Issue: GUI doesn’t launch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-papers-not-showing-in-list">Issue: Papers not showing in list</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-pdf-not-displaying">Issue: PDF not displaying</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-questions-not-appearing">Issue: Questions not appearing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-answers-not-saving">Issue: Answers not saving</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-enhancements">Future Enhancements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-python-module-syntax">Alternative: Python Module Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Launching the Review GUI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-pdf-annotator">Running the PDF Annotator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-custom-options">Example with Custom Options</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support">Support</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">

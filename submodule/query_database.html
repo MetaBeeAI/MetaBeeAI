@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Query Database &#8212; MetaBeeAI 0.1.0 documentation</title>
+    <title>Query Database - Data Extraction and Analysis &#8212; MetaBeeAI 0.1.0 documentation</title>
   
   
   
@@ -335,10 +335,10 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="process_pdfs.html">PDF Processing Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metabeeai_llm.html">MetaBeeAI LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metabeeai_llm.html">LLM Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="llm_review_software.html">LLM Review Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="llm_benchmarking.html">LLM Benchmarking</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Query Database</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Query Database - Data Extraction and Analysis</a></li>
 </ul>
 </div>
 </nav></div>
@@ -382,7 +382,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Submodules</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Query Database</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Query Database - Data Extraction and Analysis</span></li>
   </ul>
 </nav>
 </div>
@@ -399,8 +399,677 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="query-database">
-<h1>Query Database<a class="headerlink" href="#query-database" title="Link to this heading">#</a></h1>
+  <section id="query-database-data-extraction-and-analysis">
+<h1>Query Database - Data Extraction and Analysis<a class="headerlink" href="#query-database-data-extraction-and-analysis" title="Link to this heading">#</a></h1>
+<p>This submodule provides tools for querying and analyzing structured data extracted from scientific papers processed through the MetaBeeAI pipeline.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The MetaBeeAI pipeline generates structured JSON data from scientific papers, stored in a queriable format. This submodule provides scripts to:</p>
+<ol class="arabic simple">
+<li><p><strong>Query the database</strong> - Extract structured information from <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> files</p></li>
+<li><p><strong>Perform analyses</strong> - Generate statistical summaries, trends, and network visualizations</p></li>
+<li><p><strong>Create visualizations</strong> - Produce plots and network diagrams showing relationships</p></li>
+</ol>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>This submodule is part of the <code class="docutils literal notranslate"><span class="pre">metabeeai</span></code> package. Install it via:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>metabeeai
+</pre></div>
+</div>
+<p>Or if installing from source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>/path/to/MetaBeeAI
+</pre></div>
+</div>
+<p><strong>Required dependencies</strong>: pandas, numpy, matplotlib, seaborn, networkx, python-dotenv</p>
+</section>
+<hr class="docutils" />
+<section id="understanding-the-database-structure">
+<h2>Understanding the Database Structure<a class="headerlink" href="#understanding-the-database-structure" title="Link to this heading">#</a></h2>
+<section id="data-storage-format">
+<h3>Data Storage Format<a class="headerlink" href="#data-storage-format" title="Link to this heading">#</a></h3>
+<p>The MetaBeeAI pipeline stores extracted information from papers in a structured JSON format. Each processed paper contains an <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> file with question-answer pairs:</p>
+<p><strong>Location</strong>: <code class="docutils literal notranslate"><span class="pre">{METABEEAI_DATA_DIR}/papers/{paper_id}/answers.json</span></code></p>
+<p><strong>Structure</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;QUESTIONS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;bee_species&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Apis mellifera, Bombus terrestris&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Species mentioned in methodology section&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;chunk_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;chunk_001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;chunk_003&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;pesticides&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Imidacloprid at 10 ppb, oral exposure, 7 days&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pesticide details found in methods&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;chunk_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;chunk_005&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;chunk_007&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;additional_stressors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nosema ceranae infection, 10^5 spores per bee&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Additional stressor mentioned in study design&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;chunk_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;chunk_012&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;significance&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;answer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1. Imidacloprid impaired learning. 2. Combined with Nosema increased mortality.&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Key findings extracted from results section&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;chunk_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;chunk_020&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;chunk_021&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="database-configuration">
+<h3>Database Configuration<a class="headerlink" href="#database-configuration" title="Link to this heading">#</a></h3>
+<p>The database location is configured via the <code class="docutils literal notranslate"><span class="pre">METABEEAI_DATA_DIR</span></code> environment variable:</p>
+<p><strong>Set in <code class="docutils literal notranslate"><span class="pre">.env</span></code> file</strong> (project root):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">METABEEAI_DATA_DIR</span><span class="o">=</span>/path/to/your/data/directory
+</pre></div>
+</div>
+<p><strong>Directory structure</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{METABEEAI_DATA_DIR}/
+└── papers/
+    ├── 001/
+    │   ├── answers.json          # LLM-generated answers
+    │   ├── answers_extended.json # Reviewer answers (optional)
+    │   └── pages/
+    │       └── merged_v2.json   # Processed PDF chunks
+    ├── 002/
+    │   └── answers.json
+    ├── 95UKMIEY/
+    │   └── answers.json
+    └── ...
+</pre></div>
+</div>
+</section>
+<section id="querying-the-database">
+<h3>Querying the Database<a class="headerlink" href="#querying-the-database" title="Link to this heading">#</a></h3>
+<p>All scripts in this submodule automatically query the database by:</p>
+<ol class="arabic simple">
+<li><p><strong>Reading <code class="docutils literal notranslate"><span class="pre">METABEEAI_DATA_DIR</span></code></strong> from your <code class="docutils literal notranslate"><span class="pre">.env</span></code> file</p></li>
+<li><p><strong>Scanning <code class="docutils literal notranslate"><span class="pre">{METABEEAI_DATA_DIR}/papers/</span></code></strong> for all paper folders</p></li>
+<li><p><strong>Loading <code class="docutils literal notranslate"><span class="pre">answers.json</span></code></strong> files from each paper folder</p></li>
+<li><p><strong>Extracting structured data</strong> based on question types</p></li>
+<li><p><strong>Saving results</strong> to <code class="docutils literal notranslate"><span class="pre">query_database/output/</span></code></p></li>
+</ol>
+<p><strong>No manual database queries needed</strong> - The scripts handle all data access automatically.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="data-extraction-scripts">
+<h2>Data Extraction Scripts<a class="headerlink" href="#data-extraction-scripts" title="Link to this heading">#</a></h2>
+<p>These scripts query the database and extract structured information from specific question types:</p>
+<section id="investigate-bee-species-py-extract-bee-species-data">
+<h3>1. <code class="docutils literal notranslate"><span class="pre">investigate_bee_species.py</span></code> - Extract Bee Species Data<a class="headerlink" href="#investigate-bee-species-py-extract-bee-species-data" title="Link to this heading">#</a></h3>
+<p><strong>Purpose</strong>: Queries the database for bee species information across all papers.</p>
+<p><strong>What it queries</strong>: Extracts data from the <code class="docutils literal notranslate"><span class="pre">bee_species</span></code> question in each <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> file.</p>
+<p><strong>Usage</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.investigate_bee_species
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output/bee_species_data.json</span></code> - Structured bee species data</p></li>
+</ul>
+<p><strong>Data structure</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;paper_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;729&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;species_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Apis mellifera carnica&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;genus&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Apis&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;species&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mellifera&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;subspecies&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;carnica&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;common_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Carniolan honey bee&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>What it does</strong>:</p>
+<ol class="arabic simple">
+<li><p>Scans all paper directories for <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> files</p></li>
+<li><p>Extracts bee species information from the <code class="docutils literal notranslate"><span class="pre">bee_species</span></code> question</p></li>
+<li><p>Parses species names into taxonomic components (genus, species, subspecies)</p></li>
+<li><p>Identifies common names where available</p></li>
+<li><p>Handles multiple species per paper</p></li>
+<li><p>Validates and standardizes species names</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="investigate-pesticides-py-extract-pesticide-data">
+<h3>2. <code class="docutils literal notranslate"><span class="pre">investigate_pesticides.py</span></code> - Extract Pesticide Data<a class="headerlink" href="#investigate-pesticides-py-extract-pesticide-data" title="Link to this heading">#</a></h3>
+<p><strong>Purpose</strong>: Queries the database for pesticide exposure information.</p>
+<p><strong>What it queries</strong>: Extracts data from the <code class="docutils literal notranslate"><span class="pre">pesticides</span></code> question in each <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> file.</p>
+<p><strong>Usage</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.investigate_pesticides
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output/pesticides_data.json</span></code> - Structured pesticide data</p></li>
+</ul>
+<p><strong>Data structure</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;paper_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;729&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pesticide_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;imidacloprid&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;dose&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10 ppb&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;exposure_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;oral&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7 days&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>What it does</strong>:</p>
+<ol class="arabic simple">
+<li><p>Extracts pesticide information from the <code class="docutils literal notranslate"><span class="pre">pesticides</span></code> question</p></li>
+<li><p>Parses chemical names, doses, exposure methods, and durations</p></li>
+<li><p>Handles multiple pesticides per paper</p></li>
+<li><p>Standardizes pesticide names (converts to lowercase)</p></li>
+<li><p>Extracts quantitative dose information when available</p></li>
+<li><p>Categorizes exposure methods (oral, contact, topical, field, etc.)</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="investigate-additional-stressors-py-extract-stressor-data">
+<h3>3. <code class="docutils literal notranslate"><span class="pre">investigate_additional_stressors.py</span></code> - Extract Stressor Data<a class="headerlink" href="#investigate-additional-stressors-py-extract-stressor-data" title="Link to this heading">#</a></h3>
+<p><strong>Purpose</strong>: Queries the database for non-pesticide stressors tested in studies.</p>
+<p><strong>What it queries</strong>: Extracts data from the <code class="docutils literal notranslate"><span class="pre">additional_stressors</span></code> question in each <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> file.</p>
+<p><strong>Usage</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.investigate_additional_stressors
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output/additional_stressors_data.json</span></code> - Structured stressor data</p></li>
+</ul>
+<p><strong>Data structure</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;paper_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;729&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;stressor_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pathogen&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;stressor_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nosema ceranae&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10^5 spores per bee, oral inoculation, 7 days&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>What it does</strong>:</p>
+<ol class="arabic simple">
+<li><p>Extracts additional stressor information from the <code class="docutils literal notranslate"><span class="pre">additional_stressors</span></code> question</p></li>
+<li><p>Categorizes stressors by type (Temperature, Pathogen, Parasite, Nutritional, Chemical, Environmental)</p></li>
+<li><p>Extracts stressor names and application details</p></li>
+<li><p>Handles multiple stressors per paper</p></li>
+<li><p>Excludes pesticides (captured separately by <code class="docutils literal notranslate"><span class="pre">investigate_pesticides.py</span></code>)</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="investigate-significance-py-extract-findings-data">
+<h3>4. <code class="docutils literal notranslate"><span class="pre">investigate_significance.py</span></code> - Extract Findings Data<a class="headerlink" href="#investigate-significance-py-extract-findings-data" title="Link to this heading">#</a></h3>
+<p><strong>Purpose</strong>: Queries the database for key findings and significance statements.</p>
+<p><strong>What it queries</strong>: Extracts data from the <code class="docutils literal notranslate"><span class="pre">significance</span></code> question in each <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> file.</p>
+<p><strong>Usage</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.investigate_significance
+</pre></div>
+</div>
+<p><strong>Output</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output/significance_data.json</span></code> - Structured findings data</p></li>
+</ul>
+<p><strong>Data structure</strong>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;paper_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;729&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;finding&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Imidacloprid at 10 ppb impaired learning and memory&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cognitive Effects&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>What it does</strong>:</p>
+<ol class="arabic simple">
+<li><p>Extracts key findings from the <code class="docutils literal notranslate"><span class="pre">significance</span></code> question</p></li>
+<li><p>Parses individual findings from multi-point answers</p></li>
+<li><p>Categorizes findings by impact type</p></li>
+<li><p>Preserves both original and processed versions of data</p></li>
+<li><p>Handles quantitative results and effect descriptions</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="analysis-scripts">
+<h2>Analysis Scripts<a class="headerlink" href="#analysis-scripts" title="Link to this heading">#</a></h2>
+<p>These scripts analyze the extracted data and generate visualizations:</p>
+<section id="trend-analysis-py-trend-and-co-occurrence-analysis">
+<h3>5. <code class="docutils literal notranslate"><span class="pre">trend_analysis.py</span></code> - Trend and Co-occurrence Analysis<a class="headerlink" href="#trend-analysis-py-trend-and-co-occurrence-analysis" title="Link to this heading">#</a></h3>
+<p><strong>Purpose</strong>: Analyzes trends and co-occurrence patterns between bee species and pesticides.</p>
+<p><strong>What it analyzes</strong>: Uses extracted data from <code class="docutils literal notranslate"><span class="pre">bee_species_data.json</span></code> and <code class="docutils literal notranslate"><span class="pre">pesticides_data.json</span></code>.</p>
+<p><strong>Usage</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.trend_analysis
+</pre></div>
+</div>
+<p><strong>Input</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output/bee_species_data.json</span></code> - From <code class="docutils literal notranslate"><span class="pre">investigate_bee_species.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/pesticides_data.json</span></code> - From <code class="docutils literal notranslate"><span class="pre">investigate_pesticides.py</span></code></p></li>
+</ul>
+<p><strong>Output</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output/trend_analysis_plots/top_bee_pesticide_combinations.png</span></code> - Most common bee-pesticide pairs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/trend_analysis_plots/most_studied_bee_species.png</span></code> - Most frequently studied species</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/trend_analysis_plots/most_tested_nicotinic_pesticides.png</span></code> - Most tested neonicotinoids</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/trend_analysis_report.txt</span></code> - Statistical summary report</p></li>
+</ul>
+<p><strong>What it does</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Filters data</strong>:</p>
+<ul class="simple">
+<li><p>Focuses on nicotinic cholinergic pesticides (neonicotinoids, sulfoximines, butenolides, spinosyns)</p></li>
+<li><p>Standardizes bee species names (uses genus + species when available)</p></li>
+<li><p>Excludes papers without proper species identification</p></li>
+</ul>
+</li>
+<li><p><strong>Calculates statistics</strong>:</p>
+<ul class="simple">
+<li><p>Counts studies per bee species</p></li>
+<li><p>Counts studies per pesticide</p></li>
+<li><p>Identifies bee-pesticide co-occurrences</p></li>
+<li><p>Ranks top combinations</p></li>
+</ul>
+</li>
+<li><p><strong>Generates visualizations</strong>:</p>
+<ul class="simple">
+<li><p>Bar charts of most studied species and pesticides</p></li>
+<li><p>Co-occurrence frequency plots</p></li>
+<li><p>Top combinations rankings</p></li>
+</ul>
+</li>
+<li><p><strong>Creates summary report</strong>:</p>
+<ul class="simple">
+<li><p>Total papers analyzed</p></li>
+<li><p>Unique species and pesticides</p></li>
+<li><p>Study distribution metrics</p></li>
+<li><p>Top 20 bee-pesticide combinations</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Nicotinic pesticides included</strong>:</p>
+<ul class="simple">
+<li><p><strong>Neonicotinoids</strong>: imidacloprid, thiamethoxam, clothianidin, acetamiprid, thiacloprid, dinotefuran, nitenpyram</p></li>
+<li><p><strong>Sulfoximines</strong>: sulfoxaflor</p></li>
+<li><p><strong>Butenolides</strong>: flupyradifurone</p></li>
+<li><p><strong>Spinosyns</strong>: spinosad, spinetoram</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="network-analysis-py-network-visualization">
+<h3>6. <code class="docutils literal notranslate"><span class="pre">network_analysis.py</span></code> - Network Visualization<a class="headerlink" href="#network-analysis-py-network-visualization" title="Link to this heading">#</a></h3>
+<p><strong>Purpose</strong>: Creates network visualizations showing relationships between bees, pesticides, and stressors.</p>
+<p><strong>What it analyzes</strong>: Uses extracted data from all three extraction scripts.</p>
+<p><strong>Usage</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.network_analysis
+</pre></div>
+</div>
+<p><strong>Input</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output/bee_species_data.json</span></code> - From <code class="docutils literal notranslate"><span class="pre">investigate_bee_species.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/pesticides_data.json</span></code> - From <code class="docutils literal notranslate"><span class="pre">investigate_pesticides.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/additional_stressors_data.json</span></code> - From <code class="docutils literal notranslate"><span class="pre">investigate_additional_stressors.py</span></code></p></li>
+</ul>
+<p><strong>Output</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">output/network_plots/tripartite_network.png</span></code> - 3-way network: bees, pesticides, stressors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/network_statistics.txt</span></code> - Network connectivity statistics</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/pesticide_stressor_summary.txt</span></code> - Co-occurrence analysis</p></li>
+</ul>
+<p><strong>What it does</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Creates tripartite network</strong>:</p>
+<ul class="simple">
+<li><p>Three node types: bee species (green), pesticides (red), stressors (blue)</p></li>
+<li><p>Edge thickness proportional to number of studies</p></li>
+<li><p>Shows complex relationships between all three factors</p></li>
+<li><p>Uses force-directed layout for clarity</p></li>
+</ul>
+</li>
+<li><p><strong>Calculates network statistics</strong>:</p>
+<ul class="simple">
+<li><p>Node counts (species, pesticides, stressors)</p></li>
+<li><p>Edge counts (relationships)</p></li>
+<li><p>Degree centrality (most connected nodes)</p></li>
+<li><p>Network density metrics</p></li>
+<li><p>Papers with single vs. multiple factors</p></li>
+</ul>
+</li>
+<li><p><strong>Analyzes pesticide-stressor interactions</strong>:</p>
+<ul class="simple">
+<li><p>Papers testing pesticides only</p></li>
+<li><p>Papers testing stressors only</p></li>
+<li><p>Papers testing both (interaction studies)</p></li>
+<li><p>Top pesticide-stressor combinations</p></li>
+<li><p>Identifies nicotinic vs. other pesticides</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Network interpretation</strong>:</p>
+<ul class="simple">
+<li><p><strong>Node size</strong>: Number of connections</p></li>
+<li><p><strong>Edge thickness</strong>: Number of studies with that combination</p></li>
+<li><p><strong>Color coding</strong>: Green (bees), Red (pesticides), Blue (stressors)</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="complete-workflow">
+<h2>Complete Workflow<a class="headerlink" href="#complete-workflow" title="Link to this heading">#</a></h2>
+<section id="step-1-configure-database-location">
+<h3>Step 1: Configure Database Location<a class="headerlink" href="#step-1-configure-database-location" title="Link to this heading">#</a></h3>
+<p>Ensure your <code class="docutils literal notranslate"><span class="pre">.env</span></code> file contains:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">METABEEAI_DATA_DIR</span><span class="o">=</span>/path/to/your/data/directory
+</pre></div>
+</div>
+</section>
+<section id="step-2-extract-data-query-database">
+<h3>Step 2: Extract Data (Query Database)<a class="headerlink" href="#step-2-extract-data-query-database" title="Link to this heading">#</a></h3>
+<p>Run all extraction scripts to query the database and extract structured data:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract bee species data</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.investigate_bee_species
+
+<span class="c1"># Extract pesticide data</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.investigate_pesticides
+
+<span class="c1"># Extract additional stressors data</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.investigate_additional_stressors
+
+<span class="c1"># Extract significance/findings data</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.investigate_significance
+</pre></div>
+</div>
+</section>
+<section id="step-3-run-analyses">
+<h3>Step 3: Run Analyses<a class="headerlink" href="#step-3-run-analyses" title="Link to this heading">#</a></h3>
+<p>Analyze the extracted data and create visualizations:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze trends and co-occurrences</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.trend_analysis
+
+<span class="c1"># Create network visualizations</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.network_analysis
+</pre></div>
+</div>
+</section>
+<section id="step-4-review-outputs">
+<h3>Step 4: Review Outputs<a class="headerlink" href="#step-4-review-outputs" title="Link to this heading">#</a></h3>
+<p>Check the generated files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>-lh<span class="w"> </span>output/
+ls<span class="w"> </span>-lh<span class="w"> </span>output/trend_analysis_plots/
+ls<span class="w"> </span>-lh<span class="w"> </span>output/network_plots/
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="output-file-structure">
+<h2>Output File Structure<a class="headerlink" href="#output-file-structure" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>query_database/output/
+├── bee_species_data.json                          # Bee species extraction results
+├── pesticides_data.json                           # Pesticide extraction results
+├── additional_stressors_data.json                 # Stressor extraction results
+├── significance_data.json                         # Findings extraction results
+├── trend_analysis_plots/
+│   ├── top_bee_pesticide_combinations.png         # Most common pairs
+│   ├── most_studied_bee_species.png               # Species frequency
+│   └── most_tested_nicotinic_pesticides.png       # Pesticide frequency
+├── trend_analysis_report.txt                      # Statistical summary
+├── network_plots/
+│   └── tripartite_network.png                     # 3-way network visualization
+├── network_statistics.txt                         # Network metrics
+└── pesticide_stressor_summary.txt                 # Interaction analysis
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="understanding-the-outputs">
+<h2>Understanding the Outputs<a class="headerlink" href="#understanding-the-outputs" title="Link to this heading">#</a></h2>
+<section id="trend-analysis-report">
+<h3>Trend Analysis Report<a class="headerlink" href="#trend-analysis-report" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">trend_analysis_report.txt</span></code> provides:</p>
+<ul class="simple">
+<li><p><strong>Dataset overview</strong>: Total papers, unique species, unique pesticides</p></li>
+<li><p><strong>Top bee species</strong>: Most frequently studied species (e.g., <em>Apis mellifera</em>)</p></li>
+<li><p><strong>Top pesticides</strong>: Most tested nicotinic pesticides (e.g., imidacloprid)</p></li>
+<li><p><strong>Top combinations</strong>: Most common bee-pesticide pairs tested together</p></li>
+<li><p><strong>Study distribution</strong>: How studies are distributed across species and pesticides</p></li>
+</ul>
+</section>
+<section id="network-statistics">
+<h3>Network Statistics<a class="headerlink" href="#network-statistics" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">network_statistics.txt</span></code> provides:</p>
+<ul class="simple">
+<li><p><strong>Network size</strong>: Number of nodes and edges</p></li>
+<li><p><strong>Connectivity</strong>: Most connected species, pesticides, stressors</p></li>
+<li><p><strong>Degree centrality</strong>: Which factors appear in most studies</p></li>
+<li><p><strong>Network density</strong>: How interconnected the research landscape is</p></li>
+</ul>
+</section>
+<section id="pesticide-stressor-summary">
+<h3>Pesticide-Stressor Summary<a class="headerlink" href="#pesticide-stressor-summary" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">pesticide_stressor_summary.txt</span></code> provides:</p>
+<ul class="simple">
+<li><p><strong>Interaction patterns</strong>: Papers testing pesticides alone, stressors alone, or both</p></li>
+<li><p><strong>Co-occurrence</strong>: Most common pesticide-stressor combinations</p></li>
+<li><p><strong>Pesticide classification</strong>: Which pesticides are nicotinic cholinergic</p></li>
+<li><p><strong>Research gaps</strong>: Understudied combinations</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Data Requirements</strong>:</p>
+<ul class="simple">
+<li><p>Must have run the LLM pipeline first (<code class="docutils literal notranslate"><span class="pre">metabeeai</span> <span class="pre">llm</span></code>)</p></li>
+<li><p>Each paper must have an <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> file</p></li>
+<li><p>Database location configured via <code class="docutils literal notranslate"><span class="pre">METABEEAI_DATA_DIR</span></code> in <code class="docutils literal notranslate"><span class="pre">.env</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Expected data structure</strong>:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{METABEEAI_DATA_DIR}/
+└── papers/
+    ├── 001/
+    │   └── answers.json
+    ├── 002/
+    │   └── answers.json
+    ├── 95UKMIEY/
+    │   └── answers.json
+    └── ...
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Environment Configuration</strong>:</p>
+<ul class="simple">
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">.env</span></code> file in project root (if not exists)</p></li>
+<li><p>Add: <code class="docutils literal notranslate"><span class="pre">METABEEAI_DATA_DIR=/path/to/your/data/directory</span></code></p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="data-quality-notes">
+<h2>Data Quality Notes<a class="headerlink" href="#data-quality-notes" title="Link to this heading">#</a></h2>
+<section id="bee-species-standardization">
+<h3>Bee Species Standardization<a class="headerlink" href="#bee-species-standardization" title="Link to this heading">#</a></h3>
+<p>The scripts automatically standardize bee species names:</p>
+<ul class="simple">
+<li><p><strong>Priority 1</strong>: Use genus + species when both available</p></li>
+<li><p><strong>Priority 2</strong>: Use <code class="docutils literal notranslate"><span class="pre">species_name</span></code> field if genus/species missing</p></li>
+<li><p><strong>Filtered out</strong>: “Species not specified” entries</p></li>
+<li><p><strong>Example</strong>: “Apis mellifera carnica” → genus: “Apis”, species: “mellifera”, subspecies: “carnica”</p></li>
+</ul>
+</section>
+<section id="pesticide-name-cleaning">
+<h3>Pesticide Name Cleaning<a class="headerlink" href="#pesticide-name-cleaning" title="Link to this heading">#</a></h3>
+<p>Pesticide names are automatically cleaned:</p>
+<ul class="simple">
+<li><p>Converted to lowercase for consistency</p></li>
+<li><p>Chemical names preferred over trade names</p></li>
+<li><p>Standardized spelling (e.g., “imidacloprid” not “Imidacloprid”)</p></li>
+</ul>
+</section>
+<section id="stressor-categorization">
+<h3>Stressor Categorization<a class="headerlink" href="#stressor-categorization" title="Link to this heading">#</a></h3>
+<p>Stressors are automatically categorized into types:</p>
+<ul class="simple">
+<li><p><strong>Pathogen</strong>: Bacteria, viruses, fungi</p></li>
+<li><p><strong>Parasite</strong>: Varroa, Nosema, tracheal mites</p></li>
+<li><p><strong>Temperature</strong>: Heat stress, cold stress</p></li>
+<li><p><strong>Nutritional</strong>: Diet restriction, pollen quality</p></li>
+<li><p><strong>Chemical</strong>: Non-pesticide chemicals</p></li>
+<li><p><strong>Environmental</strong>: Other environmental factors</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="advanced-usage">
+<h2>Advanced Usage<a class="headerlink" href="#advanced-usage" title="Link to this heading">#</a></h2>
+<section id="custom-database-queries">
+<h3>Custom Database Queries<a class="headerlink" href="#custom-database-queries" title="Link to this heading">#</a></h3>
+<p>You can write custom scripts to query the database:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># Get papers directory from config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_papers_dir</span>
+
+<span class="n">papers_dir</span> <span class="o">=</span> <span class="n">get_papers_dir</span><span class="p">()</span>
+
+<span class="c1"># Query all answers.json files</span>
+<span class="k">for</span> <span class="n">paper_folder</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">papers_dir</span><span class="p">):</span>
+    <span class="n">answers_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">papers_dir</span><span class="p">)</span> <span class="o">/</span> <span class="n">paper_folder</span> <span class="o">/</span> <span class="s2">&quot;answers.json&quot;</span>
+
+    <span class="k">if</span> <span class="n">answers_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">answers_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">answers</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="c1"># Extract specific question</span>
+        <span class="n">bee_species</span> <span class="o">=</span> <span class="n">answers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;QUESTIONS&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bee_species&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Paper </span><span class="si">{</span><span class="n">paper_folder</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">bee_species</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;answer&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="filtering-by-date-range">
+<h3>Filtering by Date Range<a class="headerlink" href="#filtering-by-date-range" title="Link to this heading">#</a></h3>
+<p>If your data includes date information, you can filter papers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Add to any investigate_*.py script</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+
+<span class="c1"># Filter papers from 2020 onwards</span>
+<span class="k">if</span> <span class="n">paper_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">paper_metadata</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">2020</span><span class="p">:</span>
+    <span class="c1"># Process this paper</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="custom-analysis">
+<h3>Custom Analysis<a class="headerlink" href="#custom-analysis" title="Link to this heading">#</a></h3>
+<p>You can load the extracted JSON files for custom analyses:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Load extracted data</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;output/bee_species_data.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">bee_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">bee_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bee_data</span><span class="p">)</span>
+
+<span class="c1"># Custom analysis</span>
+<span class="n">genus_counts</span> <span class="o">=</span> <span class="n">bee_df</span><span class="p">[</span><span class="s1">&#39;genus&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Most studied genus: </span><span class="si">{</span><span class="n">genus_counts</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="metabeeai-data-dir-not-set">
+<h3>“METABEEAI_DATA_DIR not set”<a class="headerlink" href="#metabeeai-data-dir-not-set" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Fix</strong>: Add to <code class="docutils literal notranslate"><span class="pre">.env</span></code> file: <code class="docutils literal notranslate"><span class="pre">METABEEAI_DATA_DIR=/path/to/data</span></code></p></li>
+</ul>
+</section>
+<section id="no-answers-json-files-found">
+<h3>“No answers.json files found”<a class="headerlink" href="#no-answers-json-files-found" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: LLM pipeline hasn’t been run yet</p></li>
+<li><p><strong>Fix</strong>: Run <code class="docutils literal notranslate"><span class="pre">metabeeai</span> <span class="pre">llm</span></code> first to generate <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> files</p></li>
+</ul>
+</section>
+<section id="empty-output-files">
+<h3>Empty output files<a class="headerlink" href="#empty-output-files" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: No data found for that question type</p></li>
+<li><p><strong>Check</strong>: Review sample <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> files to ensure questions were answered</p></li>
+</ul>
+</section>
+<section id="network-visualization-issues">
+<h3>Network visualization issues<a class="headerlink" href="#network-visualization-issues" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: Missing data files from extraction phase</p></li>
+<li><p><strong>Fix</strong>: Run all <code class="docutils literal notranslate"><span class="pre">investigate_*.py</span></code> scripts before <code class="docutils literal notranslate"><span class="pre">network_analysis.py</span></code></p></li>
+</ul>
+</section>
+<section id="species-not-specified-appears-frequently">
+<h3>“Species not specified” appears frequently<a class="headerlink" href="#species-not-specified-appears-frequently" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: LLM couldn’t extract species names from papers</p></li>
+<li><p><strong>Expected</strong>: These are automatically filtered out in trend and network analyses</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h2>
+<p>Core dependencies are included when installing the <code class="docutils literal notranslate"><span class="pre">metabeeai</span></code> package:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code> - Data manipulation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code> - Numerical operations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> - Plotting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seaborn</span></code> - Statistical visualization</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">networkx</span></code> - Network analysis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python-dotenv</span></code> - Environment variable management</p></li>
+</ul>
+<p>If installing from source, dependencies can be installed via:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="alternative-python-module-syntax">
+<span id="query-database-alternative-python-module-syntax"></span><h2>Alternative: Python Module Syntax<a class="headerlink" href="#alternative-python-module-syntax" title="Link to this heading">#</a></h2>
+<p>All scripts can be run directly as Python modules. The examples above use this syntax. For programmatic access:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import functions for custom scripts</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.query_database.investigate_bee_species</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_papers_dir</span><span class="p">,</span> <span class="n">extract_bee_species</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.query_database.investigate_pesticides</span><span class="w"> </span><span class="kn">import</span> <span class="n">extract_pesticides_from_file</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.query_database.trend_analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">analyze_co_occurrence</span>
+
+<span class="c1"># Use functions programmatically</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="related-documentation">
+<h2>Related Documentation<a class="headerlink" href="#related-documentation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>LLM Pipeline</strong>: See <code class="docutils literal notranslate"><span class="pre">../metabeeai_llm/README.md</span></code> for generating <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> files</p></li>
+<li><p><strong>Benchmarking</strong>: See <code class="docutils literal notranslate"><span class="pre">../llm_benchmarking/README.md</span></code> for evaluating LLM quality</p></li>
+<li><p><strong>PDF Processing</strong>: See <code class="docutils literal notranslate"><span class="pre">../process_pdfs/README.md</span></code> for preparing PDFs</p></li>
+<li><p><strong>Review Software</strong>: See <code class="docutils literal notranslate"><span class="pre">../llm_review_software/README.md</span></code> for creating golden answers</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Last Updated</strong>: November 21 2025</p>
+</section>
 </section>
 
 
@@ -432,6 +1101,75 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-database-structure">Understanding the Database Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-storage-format">Data Storage Format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#database-configuration">Database Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#querying-the-database">Querying the Database</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-extraction-scripts">Data Extraction Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#investigate-bee-species-py-extract-bee-species-data">1. <code class="docutils literal notranslate"><span class="pre">investigate_bee_species.py</span></code> - Extract Bee Species Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#investigate-pesticides-py-extract-pesticide-data">2. <code class="docutils literal notranslate"><span class="pre">investigate_pesticides.py</span></code> - Extract Pesticide Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#investigate-additional-stressors-py-extract-stressor-data">3. <code class="docutils literal notranslate"><span class="pre">investigate_additional_stressors.py</span></code> - Extract Stressor Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#investigate-significance-py-extract-findings-data">4. <code class="docutils literal notranslate"><span class="pre">investigate_significance.py</span></code> - Extract Findings Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-scripts">Analysis Scripts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-analysis-py-trend-and-co-occurrence-analysis">5. <code class="docutils literal notranslate"><span class="pre">trend_analysis.py</span></code> - Trend and Co-occurrence Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-analysis-py-network-visualization">6. <code class="docutils literal notranslate"><span class="pre">network_analysis.py</span></code> - Network Visualization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-workflow">Complete Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-configure-database-location">Step 1: Configure Database Location</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-extract-data-query-database">Step 2: Extract Data (Query Database)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-run-analyses">Step 3: Run Analyses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-review-outputs">Step 4: Review Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-file-structure">Output File Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-outputs">Understanding the Outputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend-analysis-report">Trend Analysis Report</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-statistics">Network Statistics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pesticide-stressor-summary">Pesticide-Stressor Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality-notes">Data Quality Notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bee-species-standardization">Bee Species Standardization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pesticide-name-cleaning">Pesticide Name Cleaning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stressor-categorization">Stressor Categorization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-usage">Advanced Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-database-queries">Custom Database Queries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-date-range">Filtering by Date Range</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-analysis">Custom Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metabeeai-data-dir-not-set">“METABEEAI_DATA_DIR not set”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-answers-json-files-found">“No answers.json files found”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empty-output-files">Empty output files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-visualization-issues">Network visualization issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#species-not-specified-appears-frequently">“Species not specified” appears frequently</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-python-module-syntax">Alternative: Python Module Syntax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-documentation">Related Documentation</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">

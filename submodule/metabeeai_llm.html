@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>MetaBeeAI LLM &#8212; MetaBeeAI 0.1.0 documentation</title>
+    <title>LLM Pipeline &#8212; MetaBeeAI 0.1.0 documentation</title>
   
   
   
@@ -336,10 +336,10 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="process_pdfs.html">PDF Processing Pipeline</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">MetaBeeAI LLM</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">LLM Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="llm_review_software.html">LLM Review Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="llm_benchmarking.html">LLM Benchmarking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="query_database.html">Query Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="query_database.html">Query Database - Data Extraction and Analysis</a></li>
 </ul>
 </div>
 </nav></div>
@@ -383,7 +383,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Submodules</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">MetaBeeAI LLM</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">LLM Pipeline</span></li>
   </ul>
 </nav>
 </div>
@@ -400,8 +400,672 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="metabeeai-llm">
-<h1>MetaBeeAI LLM<a class="headerlink" href="#metabeeai-llm" title="Link to this heading">#</a></h1>
+  <section id="llm-pipeline">
+<h1>LLM Pipeline<a class="headerlink" href="#llm-pipeline" title="Link to this heading">#</a></h1>
+<p>This submodule provides the LLM-powered question-answering pipeline for extracting structured information from scientific papers.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The pipeline processes PDF documents (already converted to JSON chunks) and answers a predefined set of questions about experimental design, study populations, methodologies, and findings. Users primarily interact with the system by modifying the <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code> file.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>This submodule is part of the <code class="docutils literal notranslate"><span class="pre">metabeeai</span></code> package. Install it via:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>metabeeai
+</pre></div>
+</div>
+<p>Or if installing from source:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>/path/to/MetaBeeAI
+</pre></div>
+</div>
+<p><strong>Required dependencies</strong>: litellm, pydantic, pyyaml, asyncio, tqdm</p>
+<section id="key-features">
+<h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h3>
+<p><strong>Intelligent Answer Merging</strong>: Add new questions to existing papers without losing previous results. The pipeline automatically merges new answers with existing <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> files.</p>
+<p><strong>Flexible Question Configuration</strong>: Customize questions, instructions, examples, and relevance thresholds via <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code> without touching code.</p>
+<p><strong>Alphanumeric Folder Support</strong>: Process papers in any folder naming format (e.g., <code class="docutils literal notranslate"><span class="pre">283C6B42</span></code>, <code class="docutils literal notranslate"><span class="pre">4KV2ZB36</span></code>) - no numeric constraints.</p>
+<p><strong>Parallel Processing</strong>: Configurable batch processing and concurrency for efficient large-scale analysis.</p>
+<p><strong>Quality Assessment</strong>: Each answer includes confidence metrics, source chunk IDs, and reasoning for transparency.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="core-files">
+<h2>Core Files<a class="headerlink" href="#core-files" title="Link to this heading">#</a></h2>
+<section id="questions-yml-main-user-interface">
+<h3>1. <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code> - <strong>Main User Interface</strong><a class="headerlink" href="#questions-yml-main-user-interface" title="Link to this heading">#</a></h3>
+<p><strong>This is the file you’ll interact with to customize the pipeline.</strong></p>
+<p>The YAML file defines all questions the pipeline will ask. Each question has the following fields:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">question_name</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">question</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Your</span><span class="nv"> </span><span class="s">question</span><span class="nv"> </span><span class="s">text</span><span class="nv"> </span><span class="s">here&quot;</span>
+<span class="w">  </span><span class="nt">instructions</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Specific</span><span class="nv"> </span><span class="s">instruction</span><span class="nv"> </span><span class="s">1&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Specific</span><span class="nv"> </span><span class="s">instruction</span><span class="nv"> </span><span class="s">2&quot;</span>
+<span class="w">  </span><span class="nt">output_format</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Description</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">expected</span><span class="nv"> </span><span class="s">output</span><span class="nv"> </span><span class="s">format&quot;</span>
+<span class="w">  </span><span class="nt">example_output</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Example</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">good</span><span class="nv"> </span><span class="s">answer&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Another</span><span class="nv"> </span><span class="s">good</span><span class="nv"> </span><span class="s">example&quot;</span>
+<span class="w">  </span><span class="nt">bad_example_output</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Example</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">avoid&quot;</span>
+<span class="w">  </span><span class="nt">no_info_response</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Response</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">information</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">found&quot;</span>
+<span class="w">  </span><span class="nt">max_chunks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span><span class="w">  </span><span class="c1"># Maximum number of text chunks to analyze</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Brief</span><span class="nv"> </span><span class="s">description</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">question&quot;</span>
+</pre></div>
+</div>
+<section id="field-explanations">
+<h4>Field Explanations:<a class="headerlink" href="#field-explanations" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">question</span></code></strong>: The actual question text sent to the LLM</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">instructions</span></code></strong>: List of specific guidelines for answering (e.g., “Extract species names only from methodology sections”)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">output_format</span></code></strong>: Describes how the answer should be structured (e.g., “Numbered list: ‘1. Species A; 2. Species B’”)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">example_output</span></code></strong>: Good examples that show the desired answer format - the LLM uses these as templates</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">bad_example_output</span></code></strong>: Examples to avoid - helps the LLM understand common mistakes</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">no_info_response</span></code></strong>: What to return when the paper doesn’t contain the requested information</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">max_chunks</span></code></strong>: Controls how many text chunks from the paper will be analyzed (higher = more comprehensive but slower)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">description</span></code></strong>: Internal note about the question’s purpose</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="llm-pipeline-py-main-pipeline-runner">
+<h3>2. <code class="docutils literal notranslate"><span class="pre">llm_pipeline.py</span></code> - Main Pipeline Runner<a class="headerlink" href="#llm-pipeline-py-main-pipeline-runner" title="Link to this heading">#</a></h3>
+<p><strong>Purpose</strong>: Orchestrates the entire question-answering process across multiple papers.</p>
+<p><strong>Key Functions</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_literature_answers(json_path)</span></code> - Processes a single paper with all questions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">process_papers(base_dir,</span> <span class="pre">paper_folders)</span></code> - Batch processes multiple papers</p></li>
+</ul>
+<p><strong>How to run</strong> (CLI - Recommended):</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">metabeeai</span></code> package is installed, use the CLI command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers in the default directory</span>
+metabeeai<span class="w"> </span>llm
+
+<span class="c1"># Process all papers in a specific directory</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
+
+<span class="c1"># Process specific paper folders by name</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--folders<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM<span class="w"> </span>4KV2ZB36
+
+<span class="c1"># Process specific folders in a custom directory</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--folders<span class="w"> </span>PAPER_ID1<span class="w"> </span>PAPER_ID2
+
+<span class="c1"># Use different models for chunk selection and answer generation</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+
+<span class="c1"># Use high-quality models for both stages</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+
+<span class="c1"># Use predefined configurations (easier!)</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>fast<span class="w">      </span><span class="c1"># Fast &amp; cheap processing</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>balanced<span class="w">  </span><span class="c1"># Balanced speed and quality (recommended)</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>quality<span class="w">   </span><span class="c1"># High quality for critical analysis</span>
+
+<span class="c1"># Overwrite existing answers.json files</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--overwrite
+</pre></div>
+</div>
+<p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#metabeeai-llm-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
+<p><strong>Input data format</strong>: Expects papers in folders with any alphanumeric names like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>papers/
+├── 283C6B42/
+│   └── pages/
+│       └── merged_v2.json  # Required file
+├── 3ZHNVADM/
+│   └── pages/
+│       └── merged_v2.json
+├── 4KV2ZB36/
+│   └── pages/
+│       └── merged_v2.json
+...
+</pre></div>
+</div>
+<p><strong>Output</strong>: Creates <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> in each paper folder with structured responses.</p>
+<p><strong>Important</strong>: The pipeline now <strong>merges</strong> new answers with existing ones. If <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> already exists:</p>
+<ul class="simple">
+<li><p>New questions (e.g., “welfare”) will be <strong>added</strong> to the file</p></li>
+<li><p>Existing questions (e.g., “design”, “population”) will be <strong>updated</strong> if they’re in the current run</p></li>
+<li><p>Questions not in the current run will be <strong>preserved</strong> as-is</p></li>
+<li><p>This allows you to add new question types incrementally without losing previous results</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="model-selection">
+<h2>Model Selection<a class="headerlink" href="#model-selection" title="Link to this heading">#</a></h2>
+<p>The pipeline uses two different LLM models for different stages:</p>
+<section id="chunk-selection-model-relevance-model">
+<h3><strong>Chunk Selection Model</strong> (<code class="docutils literal notranslate"><span class="pre">--relevance-model</span></code>)<a class="headerlink" href="#chunk-selection-model-relevance-model" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Purpose</strong>: Selects the most relevant text chunks for each question</p></li>
+<li><p><strong>Default</strong>: <code class="docutils literal notranslate"><span class="pre">openai/gpt-4o-mini</span></code> (fast and cost-effective)</p></li>
+<li><p><strong>Recommended</strong>: <code class="docutils literal notranslate"><span class="pre">openai/gpt-4o-mini</span></code> for speed, <code class="docutils literal notranslate"><span class="pre">openai/gpt-4o</span></code> for accuracy</p></li>
+</ul>
+</section>
+<section id="answer-generation-model-answer-model">
+<h3><strong>Answer Generation Model</strong> (<code class="docutils literal notranslate"><span class="pre">--answer-model</span></code>)<a class="headerlink" href="#answer-generation-model-answer-model" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Purpose</strong>: Generates answers from individual chunks and synthesizes final responses</p></li>
+<li><p><strong>Default</strong>: <code class="docutils literal notranslate"><span class="pre">openai/gpt-4o</span></code> (high quality)</p></li>
+<li><p><strong>Recommended</strong>: <code class="docutils literal notranslate"><span class="pre">openai/gpt-4o</span></code> for best results, <code class="docutils literal notranslate"><span class="pre">openai/gpt-4o-mini</span></code> for speed</p></li>
+</ul>
+</section>
+<section id="model-combinations">
+<h3><strong>Model Combinations</strong>:<a class="headerlink" href="#model-combinations" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Use Case</p></th>
+<th class="head"><p>Relevance Model</p></th>
+<th class="head"><p>Answer Model</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Fast &amp; Cheap</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o-mini</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o-mini</span></code></p></td>
+<td><p>Fastest processing, lowest cost</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Balanced</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o-mini</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code></p></td>
+<td><p>Good chunk selection, high-quality answers</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>High Quality</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code></p></td>
+<td><p>Best accuracy, slower processing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="command-line-examples">
+<h3><strong>Command Line Examples</strong>:<a class="headerlink" href="#command-line-examples" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use defaults (from pipeline_config.py)</span>
+metabeeai<span class="w"> </span>llm
+
+<span class="c1"># Use predefined configurations (recommended)</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>fast<span class="w">      </span><span class="c1"># Fast &amp; cheap processing</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>balanced<span class="w">  </span><span class="c1"># Balanced speed and quality</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>quality<span class="w">   </span><span class="c1"># High quality for critical analysis</span>
+
+<span class="c1"># Custom model combinations</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="predefined-configurations">
+<h3><strong>Predefined Configurations</strong>:<a class="headerlink" href="#predefined-configurations" title="Link to this heading">#</a></h3>
+<p>The easiest way to use different model combinations is with the <code class="docutils literal notranslate"><span class="pre">--config</span></code> option:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Configuration</p></th>
+<th class="head"><p>Command</p></th>
+<th class="head"><p>Relevance Model</p></th>
+<th class="head"><p>Answer Model</p></th>
+<th class="head"><p>Use Case</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Fast</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">fast</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o-mini</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o-mini</span></code></p></td>
+<td><p>High-volume processing, cost-sensitive</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Balanced</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">balanced</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o-mini</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code></p></td>
+<td><p><strong>Recommended for most use cases</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Quality</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">quality</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code></p></td>
+<td><p>Critical analysis, maximum accuracy</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="custom-model-selection">
+<h3><strong>Custom Model Selection</strong>:<a class="headerlink" href="#custom-model-selection" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fast processing with mini models</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span>
+
+<span class="c1"># Balanced approach (recommended)</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+
+<span class="c1"># High quality for critical analysis</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pipeline-config-py-configuration-settings">
+<h3>4. <code class="docutils literal notranslate"><span class="pre">pipeline_config.py</span></code> - Configuration Settings<a class="headerlink" href="#pipeline-config-py-configuration-settings" title="Link to this heading">#</a></h3>
+<p><strong>Purpose</strong>: Configure LLM models and parallel processing parameters.</p>
+<p><strong>Key Settings</strong>:</p>
+<ul class="simple">
+<li><p><strong>Model Selection</strong>: Choose between GPT-4o-mini (fast), GPT-4o (high quality), or hybrid</p></li>
+<li><p><strong>Parallel Processing</strong>: Batch sizes and concurrency limits</p></li>
+<li><p><strong>Performance Tuning</strong>: Enable/disable progress bars, logging, etc.</p></li>
+</ul>
+<p><strong>How to modify</strong>:
+Edit the file and change <code class="docutils literal notranslate"><span class="pre">CURRENT_CONFIG</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CURRENT_CONFIG</span> <span class="o">=</span> <span class="n">QUALITY_CONFIG</span>  <span class="c1"># High quality</span>
+<span class="c1"># CURRENT_CONFIG = FAST_CONFIG   # Fast &amp; cheap</span>
+<span class="c1"># CURRENT_CONFIG = BALANCED_CONFIG  # Balanced</span>
+</pre></div>
+</div>
+<p><strong>View current configuration</strong> (CLI):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.pipeline_config
+</pre></div>
+</div>
+<p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#metabeeai-llm-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
+</section>
+<hr class="docutils" />
+<section id="json-multistage-qa-py-core-q-a-engine-library">
+<h3>5. <code class="docutils literal notranslate"><span class="pre">json_multistage_qa.py</span></code> - Core Q&amp;A Engine (Library)<a class="headerlink" href="#json-multistage-qa-py-core-q-a-engine-library" title="Link to this heading">#</a></h3>
+<p><strong>Purpose</strong>: The underlying LLM question-answering engine (used by <code class="docutils literal notranslate"><span class="pre">llm_pipeline.py</span></code>).</p>
+<p><strong>Key Functions</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ask_json(question,</span> <span class="pre">json_path,</span> <span class="pre">relevance_model,</span> <span class="pre">answer_model)</span></code> - Answers a single question about a paper</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_answer(question,</span> <span class="pre">chunk,</span> <span class="pre">model)</span></code> - Generates answers from individual text chunks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filter_all_chunks(question,</span> <span class="pre">chunks,</span> <span class="pre">max_chunks,</span> <span class="pre">model)</span></code> - Selects most relevant chunks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reflect_answers(question,</span> <span class="pre">chunks,</span> <span class="pre">model)</span></code> - Synthesizes final answer from multiple chunks</p></li>
+</ul>
+<p><strong>Usage</strong>: This is primarily a library module. It can be imported and used programmatically:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.metabeeai_llm.json_multistage_qa</span><span class="w"> </span><span class="kn">import</span> <span class="n">ask_json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ask_json</span><span class="p">(</span>
+    <span class="n">question</span><span class="o">=</span><span class="s2">&quot;What methodology was used in this study?&quot;</span><span class="p">,</span>
+    <span class="n">json_path</span><span class="o">=</span><span class="s2">&quot;papers/001/pages/merged_v2.json&quot;</span><span class="p">,</span>
+    <span class="n">relevance_model</span><span class="o">=</span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="p">,</span>
+    <span class="n">answer_model</span><span class="o">=</span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+<span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;answer&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><strong>Note</strong>: For testing purposes, it can also be run directly as a script (see Python module syntax section below).</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="quick-start-guide">
+<h2>Quick Start Guide<a class="headerlink" href="#quick-start-guide" title="Link to this heading">#</a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Environment Setup</strong>:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate your virtual environment</span>
+<span class="nb">source</span><span class="w"> </span>../venv/bin/activate<span class="w">  </span><span class="c1"># On Mac/Linux</span>
+<span class="c1"># Or: ..\venv\Scripts\activate  # On Windows</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>API Keys</strong>: Configure your API keys in the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy the example environment file</span>
+cp<span class="w"> </span>../env.example<span class="w"> </span>../.env
+
+<span class="c1"># Edit the .env file and add your API key</span>
+<span class="c1"># OPENAI_API_KEY=your_openai_api_key_here</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.env</span></code> file is located in the project root directory and is hidden from git for security.</p>
+<ol class="arabic simple" start="3">
+<li><p><strong>Data Format</strong>: Your papers must be processed into the required JSON format:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+  &quot;data&quot;: {
+    &quot;chunks&quot;: [
+      {
+        &quot;chunk_id&quot;: &quot;unique_id&quot;,
+        &quot;text&quot;: &quot;The extracted text content...&quot;,
+        &quot;chunk_type&quot;: &quot;paragraph&quot;,
+        &quot;metadata&quot;: {...}
+      }
+    ]
+  }
+}
+</pre></div>
+</div>
+<p>This format is generated automatically by the PDF processing pipeline (see <code class="docutils literal notranslate"><span class="pre">../process_pdfs/</span></code>).</p>
+</section>
+<hr class="docutils" />
+<section id="basic-usage">
+<h3>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">#</a></h3>
+<p><strong>Step 1: Customize Questions</strong> (Optional)</p>
+<p>Edit <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code> to add/modify questions. See the examples in the file.</p>
+<p><strong>Step 2: Process Papers</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers in the default directory</span>
+metabeeai<span class="w"> </span>llm
+
+<span class="c1"># Process specific paper folders by name</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--folders<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM<span class="w"> </span>4KV2ZB36
+
+<span class="c1"># Process all papers in a custom directory</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
+
+<span class="c1"># Use predefined configuration (recommended)</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>balanced
+</pre></div>
+</div>
+<p><strong>Step 3: Review Results</strong></p>
+<p>Check the <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> file in each paper folder:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+  &quot;QUESTIONS&quot;: {
+    &quot;methodology&quot;: {
+      &quot;answer&quot;: &quot;Randomized controlled trial with 20 subjects per group&quot;,
+      &quot;reason&quot;: &quot;Methodology found in methods section&quot;,
+      &quot;chunk_ids&quot;: [&quot;chunk_001&quot;, &quot;chunk_003&quot;]
+    },
+    ...
+  }
+}
+</pre></div>
+</div>
+<p><strong>Step 4: Adding New Questions Later (Optional)</strong></p>
+<p>The pipeline intelligently merges results, so you can add new questions without losing existing work:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Add a new question to questions.yml (e.g., &quot;findings&quot;)</span>
+<span class="c1"># 2. Re-run the pipeline</span>
+metabeeai<span class="w"> </span>llm
+
+<span class="c1"># 3. Your answers.json now contains BOTH old and new questions:</span>
+<span class="c1"># {</span>
+<span class="c1">#   &quot;QUESTIONS&quot;: {</span>
+<span class="c1">#     &quot;design&quot;: {...},      ← Preserved from previous run</span>
+<span class="c1">#     &quot;population&quot;: {...},  ← Preserved from previous run</span>
+<span class="c1">#     &quot;findings&quot;: {...}     ← Newly added</span>
+<span class="c1">#   }</span>
+<span class="c1"># }</span>
+</pre></div>
+</div>
+<p><strong>How Merging Works:</strong></p>
+<ul class="simple">
+<li><p><strong>Existing questions not in current run</strong> → Preserved unchanged</p></li>
+<li><p><strong>New questions</strong> → Added to the file</p></li>
+<li><p><strong>Questions in both old file and current run</strong> → Updated with new results</p></li>
+</ul>
+<p><strong>Pro Tip</strong>: To add new questions without updating existing ones, comment out the existing questions in <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code> before running.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="advanced-configuration">
+<h2>Advanced Configuration<a class="headerlink" href="#advanced-configuration" title="Link to this heading">#</a></h2>
+<section id="adjusting-question-sensitivity">
+<h3>Adjusting Question Sensitivity<a class="headerlink" href="#adjusting-question-sensitivity" title="Link to this heading">#</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code>, tune these parameters:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">max_chunks</span></code></strong>: Increase for more comprehensive coverage (slower)</p>
+<ul>
+<li><p>Recommended: 3-7 chunks</p></li>
+<li><p>Higher values for complex questions requiring broad context</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="example-tuning">
+<h3>Example Tuning:<a class="headerlink" href="#example-tuning" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># For questions where information might be scattered</span>
+<span class="nt">pesticides</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">max_chunks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span><span class="w">  </span><span class="c1"># More chunks for comprehensive coverage</span>
+
+<span class="c1"># For questions requiring precise information</span>
+<span class="nt">bee_species</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">max_chunks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">  </span><span class="c1"># Fewer chunks for focused analysis</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="understanding-output-structure">
+<h2>Understanding Output Structure<a class="headerlink" href="#understanding-output-structure" title="Link to this heading">#</a></h2>
+<p>Each question returns:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+  &quot;answer&quot;: &quot;The synthesized answer&quot;,
+  &quot;reason&quot;: &quot;Explanation of how the answer was derived&quot;,
+  &quot;chunk_ids&quot;: [&quot;id1&quot;, &quot;id2&quot;],  // Source chunks used
+  &quot;relevance_info&quot;: {
+    &quot;total_chunks_processed&quot;: 50,
+    &quot;relevant_chunks_found&quot;: 3,
+    &quot;question_config&quot;: {...}
+  },
+  &quot;question_metadata&quot;: {
+    &quot;instructions&quot;: [...],
+    &quot;example_output&quot;: [...]
+  },
+  &quot;quality_assessment&quot;: {
+    &quot;confidence&quot;: &quot;high|medium|low&quot;,
+    &quot;issues&quot;: [],
+    &quot;recommendations&quot;: []
+  }
+}
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="no-relevant-chunks-found">
+<h3>“No relevant chunks found”<a class="headerlink" href="#no-relevant-chunks-found" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: Question is too specific or chunks don’t contain the information</p></li>
+<li><p><strong>Fix</strong>: Increase <code class="docutils literal notranslate"><span class="pre">max_chunks</span></code> in <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code> or rephrase the question</p></li>
+</ul>
+</section>
+<section id="rate-limit-exceeded">
+<h3>“Rate limit exceeded”<a class="headerlink" href="#rate-limit-exceeded" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: Too many parallel requests to OpenAI API</p></li>
+<li><p><strong>Fix</strong>: Adjust <code class="docutils literal notranslate"><span class="pre">pipeline_config.py</span></code> to reduce batch sizes and concurrent requests</p></li>
+</ul>
+</section>
+<section id="keyerror-or-missing-fields">
+<h3>“KeyError” or missing fields<a class="headerlink" href="#keyerror-or-missing-fields" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: Input JSON doesn’t match expected format</p></li>
+<li><p><strong>Fix</strong>: Verify your merged_v2.json files have the correct structure (see Data Format section)</p></li>
+</ul>
+</section>
+<section id="slow-processing">
+<h3>Slow processing<a class="headerlink" href="#slow-processing" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cause</strong>: Using high-quality models or large batch sizes</p></li>
+<li><p><strong>Fix</strong>: Switch to <code class="docutils literal notranslate"><span class="pre">FAST_CONFIG</span></code> in <code class="docutils literal notranslate"><span class="pre">pipeline_config.py</span></code> or reduce <code class="docutils literal notranslate"><span class="pre">max_chunks</span></code> in <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="adding-new-questions-incrementally">
+<h2>Adding New Questions Incrementally<a class="headerlink" href="#adding-new-questions-incrementally" title="Link to this heading">#</a></h2>
+<p>The pipeline supports adding new question types to existing papers without losing previous answers.</p>
+<section id="workflow-for-adding-new-questions">
+<h3>Workflow for Adding New Questions:<a class="headerlink" href="#workflow-for-adding-new-questions" title="Link to this heading">#</a></h3>
+<p><strong>Example Scenario</strong>: You already have “design” and “population” answers, and want to add “findings” questions.</p>
+<ol class="arabic simple">
+<li><p><strong>Edit <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code></strong> to add your new question:</p></li>
+</ol>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">QUESTIONS</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">design</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># ... existing question ...</span>
+
+<span class="w">  </span><span class="nt">population</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># ... existing question ...</span>
+
+<span class="w">  </span><span class="nt">welfare</span><span class="p">:</span><span class="w">  </span><span class="c1"># NEW QUESTION</span>
+<span class="w">    </span><span class="nt">question</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;What</span><span class="nv"> </span><span class="s">findings</span><span class="nv"> </span><span class="s">were</span><span class="nv"> </span><span class="s">reported?&quot;</span>
+<span class="w">    </span><span class="c1"># ... configuration ...</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Run the pipeline</strong> - it will automatically merge results:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers - adds &quot;findings&quot; answers while keeping &quot;design&quot; and &quot;population&quot;</span>
+metabeeai<span class="w"> </span>llm
+
+<span class="c1"># Or process specific papers</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--folders<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Result</strong>: Your <code class="docutils literal notranslate"><span class="pre">answers.json</span></code> will now contain all three question types:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{
+  &quot;QUESTIONS&quot;: {
+    &quot;design&quot;: { ... },      // Preserved from previous run
+    &quot;population&quot;: { ... },  // Preserved from previous run
+    &quot;findings&quot;: { ... }     // Newly added
+  }
+}
+</pre></div>
+</div>
+</section>
+<section id="important-notes">
+<h3>Important Notes:<a class="headerlink" href="#important-notes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Safe to re-run</strong>: Old answers are preserved if not in current <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code></p></li>
+<li><p><strong>Selective updates</strong>: Only run specific questions by temporarily removing others from <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code></p></li>
+<li><p><strong>Updates overwrite</strong>: If you re-run a question that already exists, it will be updated with new results</p></li>
+<li><p><strong>Tip</strong>: Comment out existing questions in <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code> if you only want to add new ones</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="adding-new-questions">
+<h2>Adding New Questions<a class="headerlink" href="#adding-new-questions" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code></p></li>
+<li><p>Add a new entry following this template:</p></li>
+</ol>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">your_question_name</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">question</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;What</span><span class="nv"> </span><span class="s">information</span><span class="nv"> </span><span class="s">do</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">want</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">extract?&quot;</span>
+<span class="w">  </span><span class="nt">instructions</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Be</span><span class="nv"> </span><span class="s">specific</span><span class="nv"> </span><span class="s">about</span><span class="nv"> </span><span class="s">what</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">include/exclude&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Mention</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">sections</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">look</span><span class="nv"> </span><span class="s">in&quot;</span>
+<span class="w">  </span><span class="nt">output_format</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Describe</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">expected</span><span class="nv"> </span><span class="s">format&quot;</span>
+<span class="w">  </span><span class="nt">example_output</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;1.</span><span class="nv"> </span><span class="s">Example</span><span class="nv"> </span><span class="s">answer</span><span class="nv"> </span><span class="s">following</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">format&quot;</span>
+<span class="w">  </span><span class="nt">bad_example_output</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Avoid</span><span class="nv"> </span><span class="s">answers</span><span class="nv"> </span><span class="s">like</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">too</span><span class="nv"> </span><span class="s">verbose&quot;</span>
+<span class="w">  </span><span class="nt">no_info_response</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Information</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">found&quot;</span>
+<span class="w">  </span><span class="nt">max_chunks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Brief</span><span class="nv"> </span><span class="s">note</span><span class="nv"> </span><span class="s">about</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">question&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>The pipeline will automatically detect and process your new question on the next run.</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="related-documentation">
+<h2>Related Documentation<a class="headerlink" href="#related-documentation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>PDF Processing</strong>: See <code class="docutils literal notranslate"><span class="pre">../process_pdfs/README.md</span></code> for converting PDFs to the required JSON format</p></li>
+<li><p><strong>Data Analysis</strong>: See <code class="docutils literal notranslate"><span class="pre">../query_database/</span></code> for analyzing extracted data</p></li>
+<li><p><strong>Benchmarking</strong>: See <code class="docutils literal notranslate"><span class="pre">../llm_benchmarking/</span></code> for quality evaluation</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h2>
+<p>Core dependencies are included when installing the <code class="docutils literal notranslate"><span class="pre">metabeeai</span></code> package:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">litellm</span></code> - Unified LLM API interface</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pydantic</span></code> - Data validation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pyyaml</span></code> - YAML parsing</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">asyncio</span></code> - Async processing (built-in)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tqdm</span></code> - Progress bars</p></li>
+</ul>
+<p>If installing from source, dependencies can be installed via:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tips-for-best-results">
+<h2>Tips for Best Results<a class="headerlink" href="#tips-for-best-results" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Write specific instructions</strong>: The more detailed your instructions in <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code>, the better the results</p></li>
+<li><p><strong>Provide good examples</strong>: The LLM learns from <code class="docutils literal notranslate"><span class="pre">example_output</span></code> - make them representative</p></li>
+<li><p><strong>Test on sample papers</strong>: Use <code class="docutils literal notranslate"><span class="pre">test_comprehensive_pipeline.py</span></code> before processing hundreds of papers</p></li>
+<li><p><strong>Monitor costs</strong>: GPT-4o is expensive - use FAST_CONFIG for initial testing</p></li>
+<li><p><strong>Iterate on questions</strong>: Review results and refine instructions based on what you see</p></li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="alternative-python-module-syntax">
+<span id="metabeeai-llm-alternative-python-module-syntax"></span><h2>Alternative: Python Module Syntax<a class="headerlink" href="#alternative-python-module-syntax" title="Link to this heading">#</a></h2>
+<p>Instead of using the CLI commands, you can also run the scripts directly as Python modules. This is useful if you need to integrate the functionality into other Python scripts or prefer direct module execution.</p>
+<section id="running-the-main-pipeline">
+<h3>Running the Main Pipeline<a class="headerlink" href="#running-the-main-pipeline" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers in the default directory</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.llm_pipeline
+
+<span class="c1"># Process all papers in a specific directory</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.llm_pipeline<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
+
+<span class="c1"># Process specific paper folders by name</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.llm_pipeline<span class="w"> </span>--folders<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM<span class="w"> </span>4KV2ZB36
+
+<span class="c1"># Use predefined configurations</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.llm_pipeline<span class="w"> </span>--config<span class="w"> </span>balanced
+
+<span class="c1"># Use custom models</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.llm_pipeline<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="viewing-configuration">
+<h3>Viewing Configuration<a class="headerlink" href="#viewing-configuration" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># View current pipeline configuration</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.pipeline_config
+</pre></div>
+</div>
+</section>
+<section id="using-the-q-a-engine-programmatically">
+<h3>Using the Q&amp;A Engine Programmatically<a class="headerlink" href="#using-the-q-a-engine-programmatically" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.metabeeai_llm.json_multistage_qa</span><span class="w"> </span><span class="kn">import</span> <span class="n">ask_json</span>
+
+<span class="c1"># Answer a single question about a paper</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ask_json</span><span class="p">(</span>
+    <span class="n">question</span><span class="o">=</span><span class="s2">&quot;What methodology was used in this study?&quot;</span><span class="p">,</span>
+    <span class="n">json_path</span><span class="o">=</span><span class="s2">&quot;papers/001/pages/merged_v2.json&quot;</span><span class="p">,</span>
+    <span class="n">relevance_model</span><span class="o">=</span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="p">,</span>
+    <span class="n">answer_model</span><span class="o">=</span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+<span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;answer&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="importing-functions-for-custom-scripts">
+<h3>Importing Functions for Custom Scripts<a class="headerlink" href="#importing-functions-for-custom-scripts" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.metabeeai_llm.llm_pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_literature_answers</span><span class="p">,</span> <span class="n">process_papers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.metabeeai_llm.json_multistage_qa</span><span class="w"> </span><span class="kn">import</span> <span class="n">ask_json</span><span class="p">,</span> <span class="n">filter_all_chunks</span>
+
+<span class="c1"># Use functions programmatically in your own scripts</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+<p>All command-line arguments are identical between CLI commands and Python module syntax. The only difference is the invocation method.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="support">
+<h2>Support<a class="headerlink" href="#support" title="Link to this heading">#</a></h2>
+<p>For issues or questions:</p>
+<ol class="arabic simple">
+<li><p>Check the Troubleshooting section above</p></li>
+<li><p>Review existing test scripts for usage examples</p></li>
+<li><p>Verify your data format matches the requirements</p></li>
+</ol>
+<hr class="docutils" />
+<p><strong>Last Updated</strong>: Nov 21 2025</p>
+</section>
 </section>
 
 
@@ -442,6 +1106,76 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-files">Core Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-yml-main-user-interface">1. <code class="docutils literal notranslate"><span class="pre">questions.yml</span></code> - <strong>Main User Interface</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#field-explanations">Field Explanations:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-pipeline-py-main-pipeline-runner">2. <code class="docutils literal notranslate"><span class="pre">llm_pipeline.py</span></code> - Main Pipeline Runner</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">Model Selection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chunk-selection-model-relevance-model"><strong>Chunk Selection Model</strong> (<code class="docutils literal notranslate"><span class="pre">--relevance-model</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#answer-generation-model-answer-model"><strong>Answer Generation Model</strong> (<code class="docutils literal notranslate"><span class="pre">--answer-model</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-combinations"><strong>Model Combinations</strong>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-examples"><strong>Command Line Examples</strong>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predefined-configurations"><strong>Predefined Configurations</strong>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-model-selection"><strong>Custom Model Selection</strong>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-config-py-configuration-settings">4. <code class="docutils literal notranslate"><span class="pre">pipeline_config.py</span></code> - Configuration Settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-multistage-qa-py-core-q-a-engine-library">5. <code class="docutils literal notranslate"><span class="pre">json_multistage_qa.py</span></code> - Core Q&amp;A Engine (Library)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start-guide">Quick Start Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-configuration">Advanced Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusting-question-sensitivity">Adjusting Question Sensitivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-tuning">Example Tuning:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-output-structure">Understanding Output Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-relevant-chunks-found">“No relevant chunks found”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rate-limit-exceeded">“Rate limit exceeded”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keyerror-or-missing-fields">“KeyError” or missing fields</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slow-processing">Slow processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-new-questions-incrementally">Adding New Questions Incrementally</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-for-adding-new-questions">Workflow for Adding New Questions:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#important-notes">Important Notes:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-new-questions">Adding New Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-documentation">Related Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-best-results">Tips for Best Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-python-module-syntax">Alternative: Python Module Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-main-pipeline">Running the Main Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-configuration">Viewing Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-q-a-engine-programmatically">Using the Q&amp;A Engine Programmatically</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-functions-for-custom-scripts">Importing Functions for Custom Scripts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support">Support</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">

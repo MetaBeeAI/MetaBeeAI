@@ -336,10 +336,10 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="process_pdfs.html">PDF Processing Pipeline</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metabeeai_llm.html">MetaBeeAI LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metabeeai_llm.html">LLM Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="llm_review_software.html">LLM Review Software</a></li>
 <li class="toctree-l1"><a class="reference internal" href="llm_benchmarking.html">LLM Benchmarking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="query_database.html">Query Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="query_database.html">Query Database - Data Extraction and Analysis</a></li>
 </ul>
 </div>
 </nav></div>
@@ -405,21 +405,98 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="process_pdfs.html">PDF Processing Pipeline</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#execution">Execution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#running-individual-steps">Running individual steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#core-files">Core Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#individual-script-usage">Individual Script Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#input-data-format">Input Data Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#output-data-format">Output Data Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#understanding-the-process-flow">Understanding the Process Flow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#troubleshooting-faq">Troubleshooting FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#advanced-usage">Advanced Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#performance-tips">Performance Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#dependencies">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#next-steps">Next Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#alternative-python-module-syntax">Alternative: Python Module Syntax</a></li>
 <li class="toctree-l2"><a class="reference internal" href="process_pdfs.html#related-documentation">Related Documentation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="metabeeai_llm.html">MetaBeeAI LLM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="llm_review_software.html">LLM Review Software</a></li>
-<li class="toctree-l1"><a class="reference internal" href="llm_benchmarking.html">LLM Benchmarking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="query_database.html">Query Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metabeeai_llm.html">LLM Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#core-files">Core Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#quick-start-guide">Quick Start Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#advanced-configuration">Advanced Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#understanding-output-structure">Understanding Output Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#adding-new-questions-incrementally">Adding New Questions Incrementally</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#adding-new-questions">Adding New Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#related-documentation">Related Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#tips-for-best-results">Tips for Best Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#alternative-python-module-syntax">Alternative: Python Module Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metabeeai_llm.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="llm_review_software.html">LLM Review Software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#beegui-review-interface">BeeGUI - Review Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#pdf-annotator">PDF Annotator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#file-structure">File Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#integration-with-benchmarking-pipeline">Integration with Benchmarking Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#tips-and-best-practices">Tips and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#future-enhancements">Future Enhancements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#alternative-python-module-syntax">Alternative: Python Module Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_review_software.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="llm_benchmarking.html">LLM Benchmarking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#usage-when-package-is-installed">Usage (When Package is Installed)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#submodule-components">Submodule Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#complete-workflow">Complete Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#pipeline-architecture">Pipeline Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#using-the-complete-pipeline">Using the Complete Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#data-format">Data Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#cost-breakdown">Cost Breakdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#output-directory-structure">Output Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#tips-and-best-practices">Tips and Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#metric-interpretation-guide">Metric Interpretation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#advanced-usage">Advanced Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#alternative-python-module-syntax">Alternative: Python Module Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="llm_benchmarking.html#support">Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="query_database.html">Query Database - Data Extraction and Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#understanding-the-database-structure">Understanding the Database Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#data-extraction-scripts">Data Extraction Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#analysis-scripts">Analysis Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#complete-workflow">Complete Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#output-file-structure">Output File Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#understanding-the-outputs">Understanding the Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#data-quality-notes">Data Quality Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#advanced-usage">Advanced Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#alternative-python-module-syntax">Alternative: Python Module Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_database.html#related-documentation">Related Documentation</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
