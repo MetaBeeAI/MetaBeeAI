@@ -131,8 +131,8 @@ metabeeai process-pdfs --start af20101 --end b2050e6 --skip-api
 metabeeai process-pdfs --dir /path/to/YOURDATABASE/papers
 ```
 
-**Purpose**: Split PDFs, send pages to Vision AI, merge/deduplicate chunks  
-**Output**: `YOURDATABASE/papers/{paper_id}/pages/merged_v2.json`  
+**Purpose**: Split PDFs, send pages to Vision AI, merge/deduplicate chunks
+**Output**: `YOURDATABASE/papers/{paper_id}/pages/merged_v2.json`
 **Key options**: `--dir`, `--start/--end`, `--merge-only`, `--skip-split`, `--skip-api`, `--skip-merge`, `--skip-deduplicate`, `--filter-chunk-type`, `--pages`
 
 ---
@@ -153,8 +153,8 @@ metabeeai llm --relevance-model openai/gpt-4o-mini --answer-model openai/gpt-4o
 metabeeai llm --dir /path/to/YOURDATABASE/papers
 ```
 
-**Purpose**: Run `questions.yml` against processed chunks and store answers  
-**Output**: `YOURDATABASE/papers/{paper_id}/answers.json`  
+**Purpose**: Run `questions.yml` against processed chunks and store answers
+**Output**: `YOURDATABASE/papers/{paper_id}/answers.json`
 **Key options**: `--dir`, `--folders`, `--overwrite`, `--relevance-model`, `--answer-model`, `--config`
 
 ---
@@ -166,8 +166,8 @@ metabeeai llm --dir /path/to/YOURDATABASE/papers
 metabeeai review
 ```
 
-**Purpose**: Inspect LLM answers alongside PDFs, capture reviewer edits/ratings  
-**Output**: `YOURDATABASE/papers/{paper_id}/answers_extended.json`  
+**Purpose**: Inspect LLM answers alongside PDFs, capture reviewer edits/ratings
+**Output**: `YOURDATABASE/papers/{paper_id}/answers_extended.json`
 **Notes**: GUI allows filtering, editing, rating, adding reviewer notes
 
 ---
@@ -188,8 +188,8 @@ metabeeai prep-benchmark --papers-dir /path/to/YOURDATABASE/papers \
                          --output /path/to/benchmark_data_gui.json
 ```
 
-**Purpose**: Collate GUI-reviewed answers + LLM answers + retrieval context  
-**Output**: `YOURDATABASE/benchmark_data_gui.json` (nested structure)  
+**Purpose**: Collate GUI-reviewed answers + LLM answers + retrieval context
+**Output**: `YOURDATABASE/benchmark_data_gui.json` (nested structure)
 **Key options**: `--papers-dir`, `--questions-yml`, `--output`
 
 #### 4.2 Run DeepEval benchmarking
@@ -208,8 +208,8 @@ metabeeai benchmark --use-retrieval-only
 metabeeai benchmark --model gpt-4o-mini --max-context-length 150000
 ```
 
-**Purpose**: Evaluate LLM answers vs reviewer answers using 5 metrics  
-**Output**: `YOURDATABASE/deepeval_results/combined_results_{question}_{timestamp}.json(.jsonl)`  
+**Purpose**: Evaluate LLM answers vs reviewer answers using 5 metrics
+**Output**: `YOURDATABASE/deepeval_results/combined_results_{question}_{timestamp}.json(.jsonl)`
 **Key options**: `--question`, `--input`, `--limit`, `--batch-size`, `--max-retries`, `--model`, `--max-context-length`, `--use-retrieval-only`, `--list-questions`
 
 #### 4.3 Visualize metrics
@@ -222,8 +222,8 @@ metabeeai plot-metrics
 metabeeai plot-metrics --results-dir /custom/results --output-dir /custom/results
 ```
 
-**Purpose**: Generate bar charts (mean ± standard error) per metric and a summary plot  
-**Output**: `YOURDATABASE/deepeval_results/plots/{metric}.png` and `summary_metrics.png`  
+**Purpose**: Generate bar charts (mean ± standard error) per metric and a summary plot
+**Output**: `YOURDATABASE/deepeval_results/plots/{metric}.png` and `summary_metrics.png`
 **Key options**: `--results-dir`, `--output-dir`
 
 #### 4.4 Identify edge cases
@@ -240,8 +240,8 @@ metabeeai edge-cases --contextual-only \
     --model gpt-4o-mini
 ```
 
-**Purpose**: Surface lowest-scoring papers, generate reports and optional LLM summaries  
-**Output**: `YOURDATABASE/edge_cases/` (combined JSON, markdown report, summaries)  
+**Purpose**: Surface lowest-scoring papers, generate reports and optional LLM summaries
+**Output**: `YOURDATABASE/edge_cases/` (combined JSON, markdown report, summaries)
 **Key options**: `--num-cases`, `--results-dir`, `--output-dir`, `--openai-api-key`, `--model`, `--generate-summaries-only`, `--contextual-only`, `--generate-contextual-summaries-only`
 
 #### 4.5 Run the entire benchmarking pipeline
@@ -378,7 +378,7 @@ metabeeai edge-cases --num-cases 5 \
   --output-dir /path/to/YOURDATABASE/edge_cases
 ```
 
-**Result**: 
+**Result**:
 - Performance metrics across 5 dimensions
 - Comparison plots
 - Edge case analysis
@@ -606,7 +606,7 @@ metabeeai edge-cases --num-cases 5 \
   --output-dir /path/to/YOURDATABASE/edge_cases
 ```
 
-**Expected time**: 
+**Expected time**:
 - PDF processing: ~1-5 min per paper
 - LLM extraction: ~2-3 min per paper
 - Evaluation: <1 min per question
@@ -690,7 +690,7 @@ python llm_pipeline.py --config fast
 
 ---
 
-**Project**: MetaBeeAI 
-**Last Updated**: November 14, 2025  
+**Project**: MetaBeeAI
+**Last Updated**: November 14, 2025
 **Written by**: Rachel Parkinson, Shuxiang Cao, Mikael Mieskolainen, Alasdair Wilson
 **Contact**: Rachel Parkinson r.parkinson@qmul.ac.uk

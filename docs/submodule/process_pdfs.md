@@ -210,6 +210,31 @@ python -m metabeeai.process_pdfs.split_pdf /path/to/papers --pages 2
 ---
 
 ### 3. `va_process_papers.py` - Vision API Processor
+#### Options
+
+- `--pages {1,2}`: Number of pages per split (default: 1)
+  - `1` = single-page documents (`main_p01.pdf`, `main_p02.pdf`, etc.)
+  - `2` = overlapping 2-page documents (`main_p01-02.pdf`, `main_p02-03.pdf`, etc.)
+
+- **Single-page mode**: A 10-page paper generates 10 split PDFs of 1 page each.
+- **2-page mode**: A 10-page paper generates 9 overlapping split PDFs of 2 pages each.
+
+#### `split_pdf` examples
+
+```bash
+# Split into single-page documents (default)
+python split_pdf.py /path/to/papers
+
+# Split into single-page documents (explicit)
+python split_pdf.py /path/to/papers --pages 1
+
+# Split into overlapping 2-page documents
+python split_pdf.py /path/to/papers --pages 2
+```
+
+---
+
+### `va_process_papers` - Vision API Processor
 
 **Purpose**: Processes each split PDF through Landing AI's Vision Agentic Document Analysis API to extract text and structure.
 
@@ -611,7 +636,7 @@ Raw PDF → Split PDF → Vision API → Individual JSONs → Merged JSON → De
 
 ### Out of API quota
 - **Cause**: Too many API calls
-- **Fix**: 
+- **Fix**:
   - The script automatically skips already-processed files
   - Use `--start` parameter to resume from a specific paper
   - Contact Landing AI to increase your quota
@@ -712,8 +737,8 @@ python -m metabeeai.process_pdfs.batch_deduplicate --dry-run --verbose
    ```bash
    # Terminal 1
    metabeeai process-pdfs --start 283C6B42 --end 76DQP2DC
-   
-   # Terminal 2  
+
+   # Terminal 2
    metabeeai process-pdfs --start 8BV8BLU8 --end ZTRRIKQ3
    ```
 

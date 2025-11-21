@@ -13,10 +13,10 @@ Provides multiple subcommands:
 - `metabeeai benchmark-all`: Run complete benchmarking pipeline (prep -> eval -> plot -> edge-cases)
 """
 
-import sys
 import argparse
 import importlib
-from pathlib import Path
+import sys
+
 from dotenv import load_dotenv
 
 
@@ -185,9 +185,7 @@ def main():
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     # --- metabee llm ---------------------------------------------------------
-    llm_parser = subparsers.add_parser(
-        "llm", help="Run the LLM pipeline to extract literature answers"
-    )
+    llm_parser = subparsers.add_parser("llm", help="Run the LLM pipeline to extract literature answers")
     llm_parser.add_argument(
         "--dir",
         type=str,
@@ -200,7 +198,7 @@ def main():
         nargs="+",
         default=None,
         help="Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM). "
-             "If not specified, all folders will be processed.",
+        "If not specified, all folders will be processed.",
     )
     llm_parser.add_argument(
         "--overwrite",
@@ -224,14 +222,12 @@ def main():
         type=str,
         choices=["fast", "balanced", "quality"],
         default=None,
-        help="Use predefined configuration: "
-             "'fast', 'balanced', or 'quality'",
+        help="Use predefined configuration: " "'fast', 'balanced', or 'quality'",
     )
 
     # --- metabee process-pdfs ------------------------------------------------
     process_parser = subparsers.add_parser(
-        "process-pdfs",
-        help="Process PDFs through the complete pipeline (split, API, merge, deduplicate)"
+        "process-pdfs", help="Process PDFs through the complete pipeline (split, API, merge, deduplicate)"
     )
     process_parser.add_argument(
         "--dir",
@@ -291,17 +287,11 @@ def main():
     )
 
     # --- metabee review ------------------------------------------------------
-    review_parser = subparsers.add_parser(
-        "review",
-        help="Launch GUI for reviewing and annotating LLM output"
-    )
+    review_parser = subparsers.add_parser("review", help="Launch GUI for reviewing and annotating LLM output")  # NOQA E501
     # No arguments needed - the GUI handles file selection
 
     # --- metabee prep-benchmark ----------------------------------------------
-    prep_benchmark_parser = subparsers.add_parser(
-        "prep-benchmark",
-        help="Prepare benchmarking data from GUI reviewer answers"
-    )
+    prep_benchmark_parser = subparsers.add_parser("prep-benchmark", help="Prepare benchmarking data from GUI reviewer answers")
     prep_benchmark_parser.add_argument(
         "--papers-dir",
         type=str,
@@ -322,40 +312,43 @@ def main():
     )
 
     # --- metabee benchmark ---------------------------------------------------
-    benchmark_parser = subparsers.add_parser(
-        "benchmark",
-        help="Run DeepEval benchmarking on LLM outputs"
-    )
+    benchmark_parser = subparsers.add_parser("benchmark", help="Run DeepEval benchmarking on LLM outputs")
     benchmark_parser.add_argument(
-        "--question", "-q",
+        "--question",
+        "-q",
         type=str,
         help="Question key to filter by (optional - if not specified, processes all questions)",
     )
     benchmark_parser.add_argument(
-        "--input", "-i",
+        "--input",
+        "-i",
         type=str,
         default=None,
         help="Input benchmark data file (default: auto-detect from config)",
     )
     benchmark_parser.add_argument(
-        "--limit", "-l",
+        "--limit",
+        "-l",
         type=int,
         help="Maximum number of test cases to process (optional)",
     )
     benchmark_parser.add_argument(
-        "--batch-size", "-b",
+        "--batch-size",
+        "-b",
         type=int,
         default=25,
         help="Number of test cases to process per batch (default: 25)",
     )
     benchmark_parser.add_argument(
-        "--max-retries", "-r",
+        "--max-retries",
+        "-r",
         type=int,
         default=5,
         help="Maximum retries per batch (default: 5)",
     )
     benchmark_parser.add_argument(
-        "--model", "-m",
+        "--model",
+        "-m",
         type=str,
         default="gpt-4o",
         choices=["gpt-4o-mini", "gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo"],
@@ -380,8 +373,7 @@ def main():
 
     # --- metabee edge-cases --------------------------------------------------
     edge_cases_parser = subparsers.add_parser(
-        "edge-cases",
-        help="Identify edge cases (low-scoring examples) from benchmarking results"
+        "edge-cases", help="Identify edge cases (low-scoring examples) from benchmarking results"
     )
     edge_cases_parser.add_argument(
         "--num-cases",
@@ -436,10 +428,7 @@ def main():
     )
 
     # --- metabee plot-metrics ------------------------------------------------
-    plot_metrics_parser = subparsers.add_parser(
-        "plot-metrics",
-        help="Create visualization plots from benchmarking results"
-    )
+    plot_metrics_parser = subparsers.add_parser("plot-metrics", help="Create visualization plots from benchmarking results")
     plot_metrics_parser.add_argument(
         "--results-dir",
         type=str,
@@ -455,8 +444,7 @@ def main():
 
     # --- metabee benchmark-all -----------------------------------------------
     benchmark_all_parser = subparsers.add_parser(
-        "benchmark-all",
-        help="Run complete benchmarking pipeline (prep -> eval -> plot -> edge-cases)"
+        "benchmark-all", help="Run complete benchmarking pipeline (prep -> eval -> plot -> edge-cases)"
     )
     benchmark_all_parser.add_argument(
         "--skip-prep",
@@ -479,12 +467,14 @@ def main():
         help="Skip edge case analysis step",
     )
     benchmark_all_parser.add_argument(
-        "--question", "-q",
+        "--question",
+        "-q",
         type=str,
         help="Question key to filter by (applies to evaluation and edge-cases steps)",
     )
     benchmark_all_parser.add_argument(
-        "--limit", "-l",
+        "--limit",
+        "-l",
         type=int,
         help="Maximum number of test cases to process (applies to evaluation step)",
     )

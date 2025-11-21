@@ -19,7 +19,7 @@ jobs:
 
       - name: Install build dependencies
         run: pip install build twine
-      
+
       - name: Upgrade packaging
         run: pip install --upgrade packaging
 
@@ -80,7 +80,7 @@ jobs:
           name: dist
           path: dist
           # Single artifact from build job
-      
+
       - name: Upgrade packaging
         run: pip install --upgrade packaging
 
