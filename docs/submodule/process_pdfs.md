@@ -265,7 +265,7 @@ python -m metabeeai.process_pdfs.va_process_papers --dir data/papers --start 95U
 6. Logs all processing activity with timestamps
 
 **Output**: Creates JSON files with this structure:
-```json
+```json:force:
 {
   "data": {
     "chunks": [
@@ -330,7 +330,7 @@ python -m metabeeai.process_pdfs.merger --basepath /path/to/data --filter-chunk-
 - File 3 (pages 3-4): Page 3 maps to global page 3, page 4 becomes global page 4
 
 **Output format**:
-```json
+```json:force:
 {
   "data": {
     "chunks": [
@@ -426,7 +426,7 @@ python -m metabeeai.process_pdfs.batch_deduplicate --verbose
 4. Generates a summary report
 
 **Output**: Creates a summary JSON file with:
-```json
+```json:force:
 {
   "status": "completed",
   "total_papers": 10,
@@ -504,7 +504,7 @@ papers/
 
 The pipeline produces a `merged_v2.json` file for each paper with the following structure:
 
-```json
+```json:force:
 {
   "data": {
     "chunks": [
