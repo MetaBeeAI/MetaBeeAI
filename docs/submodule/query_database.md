@@ -118,7 +118,7 @@ These scripts query the database and extract structured information from specifi
 python -m metabeeai.query_database.investigate_bee_species
 ```
 
-**Output**: 
+**Output**:
 - `output/bee_species_data.json` - Structured bee species data
 
 **Data structure**:
@@ -156,7 +156,7 @@ python -m metabeeai.query_database.investigate_bee_species
 python -m metabeeai.query_database.investigate_pesticides
 ```
 
-**Output**: 
+**Output**:
 - `output/pesticides_data.json` - Structured pesticide data
 
 **Data structure**:
@@ -193,7 +193,7 @@ python -m metabeeai.query_database.investigate_pesticides
 python -m metabeeai.query_database.investigate_additional_stressors
 ```
 
-**Output**: 
+**Output**:
 - `output/additional_stressors_data.json` - Structured stressor data
 
 **Data structure**:
@@ -228,7 +228,7 @@ python -m metabeeai.query_database.investigate_additional_stressors
 python -m metabeeai.query_database.investigate_significance
 ```
 
-**Output**: 
+**Output**:
 - `output/significance_data.json` - Structured findings data
 
 **Data structure**:
@@ -266,18 +266,18 @@ These scripts analyze the extracted data and generate visualizations:
 python -m metabeeai.query_database.trend_analysis
 ```
 
-**Input**: 
+**Input**:
 - `output/bee_species_data.json` - From `investigate_bee_species.py`
 - `output/pesticides_data.json` - From `investigate_pesticides.py`
 
-**Output**: 
+**Output**:
 - `output/trend_analysis_plots/top_bee_pesticide_combinations.png` - Most common bee-pesticide pairs
 - `output/trend_analysis_plots/most_studied_bee_species.png` - Most frequently studied species
 - `output/trend_analysis_plots/most_tested_nicotinic_pesticides.png` - Most tested neonicotinoids
 - `output/trend_analysis_report.txt` - Statistical summary report
 
 **What it does**:
-1. **Filters data**: 
+1. **Filters data**:
    - Focuses on nicotinic cholinergic pesticides (neonicotinoids, sulfoximines, butenolides, spinosyns)
    - Standardizes bee species names (uses genus + species when available)
    - Excludes papers without proper species identification
@@ -318,12 +318,12 @@ python -m metabeeai.query_database.trend_analysis
 python -m metabeeai.query_database.network_analysis
 ```
 
-**Input**: 
+**Input**:
 - `output/bee_species_data.json` - From `investigate_bee_species.py`
 - `output/pesticides_data.json` - From `investigate_pesticides.py`
 - `output/additional_stressors_data.json` - From `investigate_additional_stressors.py`
 
-**Output**: 
+**Output**:
 - `output/network_plots/tripartite_network.png` - 3-way network: bees, pesticides, stressors
 - `output/network_statistics.txt` - Network connectivity statistics
 - `output/pesticide_stressor_summary.txt` - Co-occurrence analysis
@@ -373,7 +373,7 @@ Run all extraction scripts to query the database and extract structured data:
 # Extract bee species data
 python -m metabeeai.query_database.investigate_bee_species
 
-# Extract pesticide data  
+# Extract pesticide data
 python -m metabeeai.query_database.investigate_pesticides
 
 # Extract additional stressors data
@@ -530,11 +530,11 @@ papers_dir = get_papers_dir()
 # Query all answers.json files
 for paper_folder in os.listdir(papers_dir):
     answers_path = Path(papers_dir) / paper_folder / "answers.json"
-    
+
     if answers_path.exists():
         with open(answers_path, 'r') as f:
             answers = json.load(f)
-            
+
         # Extract specific question
         bee_species = answers.get("QUESTIONS", {}).get("bee_species", {})
         print(f"Paper {paper_folder}: {bee_species.get('answer', 'N/A')}")

@@ -264,7 +264,7 @@ print(result['answer'])
 
 ### Prerequisites
 
-1. **Environment Setup**: 
+1. **Environment Setup**:
 ```bash
 # Activate your virtual environment
 source ../venv/bin/activate  # On Mac/Linux
@@ -353,7 +353,7 @@ metabeeai llm
 # {
 #   "QUESTIONS": {
 #     "design": {...},      ← Preserved from previous run
-#     "population": {...},  ← Preserved from previous run  
+#     "population": {...},  ← Preserved from previous run
 #     "findings": {...}     ← Newly added
 #   }
 # }
@@ -453,10 +453,10 @@ The pipeline supports adding new question types to existing papers without losin
 QUESTIONS:
   design:
     # ... existing question ...
-  
+
   population:
     # ... existing question ...
-  
+
   welfare:  # NEW QUESTION
     question: "What findings were reported?"
     # ... configuration ...

@@ -190,13 +190,13 @@ python -m metabeeai.process_pdfs.split_pdf /path/to/papers --pages 2
 1. Finds all `{folder_name}_main.pdf` files in paper folders
 2. Creates a `pages/` subdirectory in each paper folder
 3. Generates split PDFs based on `--pages` option:
-   
+
    **Single-page mode (--pages 1)**:
    - `main_p01.pdf` (page 1)
    - `main_p02.pdf` (page 2)
    - `main_p03.pdf` (page 3)
    - etc.
-   
+
    **Overlapping 2-page mode (--pages 2)**:
    - `main_p01-02.pdf` (pages 1-2)
    - `main_p02-03.pdf` (pages 2-3)
@@ -573,7 +573,7 @@ Raw PDF → Split PDF → Vision API → Individual JSONs → Merged JSON → De
    ...
    pages/main_p09-10.pdf
    ```
-   
+
    **Or with single-page mode** (`--pages 1`, default):
    ```
    pages/main_p01.pdf
@@ -607,7 +607,7 @@ Raw PDF → Split PDF → Vision API → Individual JSONs → Merged JSON → De
 
 ### "LANDING_AI_API_KEY not found"
 - **Cause**: API key not configured in `.env` file
-- **Fix**: 
+- **Fix**:
   ```bash
   cp ../env.example ../.env
   # Edit .env and add your LANDING_AI_API_KEY
