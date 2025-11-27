@@ -18,10 +18,7 @@ from metabeeai.process_pdfs.deduplicate_chunks import analyze_chunk_uniqueness, 
 
 def get_papers_dir():
     """Get papers directory via centralized config with env/yaml/default precedence."""
-    try:
-        return get_config_param("papers_dir")
-    except Exception:
-        return os.getenv("METABEEAI_PAPERS_DIR", "data/papers")
+    return get_config_param("papers_dir")
 
 
 # Import the deduplication module

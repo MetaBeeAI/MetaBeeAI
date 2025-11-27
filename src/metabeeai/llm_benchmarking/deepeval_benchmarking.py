@@ -144,10 +144,10 @@ def main():
         sys.exit(0)
 
     # Only check API key and load deepeval if we're actually running evaluation
-    # Set API key with precedence: env > YAML config; require one
-    openai_api_key = os.getenv("OPENAI_API_KEY") or get_config_param("openai_api_key")
+    # Get API key from config (checks env var, YAML, and defaults)
+    openai_api_key = get_config_param("openai_api_key")
     if not openai_api_key:
-        raise ValueError("OPENAI_API_KEY not set and openai_api_key not found in config")
+        raise ValueError("OpenAI API key not found. Set OPENAI_API_KEY env var or add to config YAML")
     os.environ["OPENAI_API_KEY"] = openai_api_key
     print("[OK] OpenAI API key available for evaluation")
 

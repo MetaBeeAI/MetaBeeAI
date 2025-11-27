@@ -16,6 +16,8 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
+from metabeeai.config import get_config_param
+
 warnings.filterwarnings("ignore")
 
 # Set up plotting style
@@ -56,24 +58,8 @@ def load_data_files(output_dir: str) -> Tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def get_papers_dir():
-    """Get the papers directory path."""
-    # Try to load from .env file first
-    env_file = ".env"
-    if not os.path.exists(env_file):
-        env_file = os.path.join(os.path.dirname(__file__), "..", ".env")
-
-    if os.path.exists(env_file):
-        with open(env_file, "r") as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith("#") and "=" in line:
-                    key, value = line.split("=", 1)
-                    os.environ[key] = value
-
-    # Default fallback
-    default_path = "/Users/user/Documents/MetaBeeAI_dataset_final"
-    papers_dir = os.path.join(os.getenv("METABEEAI_DATA_DIR", default_path), "papers")
-    return papers_dir
+    """Get the papers directory path from config."""
+    return get_config_param("papers_dir")
 
 
 def analyze_co_occurrence(bee_df: pd.DataFrame, pesticides_df: pd.DataFrame) -> Dict:

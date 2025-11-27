@@ -19,50 +19,14 @@ import os
 import re
 from typing import List, Tuple
 
-
-# Load environment variables from .env file
-def load_env_file():
-    """Load environment variables from .env file if it exists."""
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    parent_dir = os.path.dirname(script_dir)
-    env_file = os.path.join(parent_dir, ".env")
-
-    if os.path.exists(env_file):
-        with open(env_file, "r") as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith("#") and "=" in line:
-                    key, value = line.split("=", 1)
-                    os.environ[key.strip()] = value.strip()
+from metabeeai.config import get_config_param
 
 
-# Get papers directory with proper .env loading
 def get_papers_dir():
     """
-    Get the papers directory path from METABEEAI_DATA_DIR environment variable.
+    Get the papers directory path from config.
     """
-    # Load .env file first
-    load_env_file()
-
-    # Get data directory from environment variable
-    data_dir = os.getenv("METABEEAI_DATA_DIR")
-    if data_dir:
-        papers_dir = os.path.join(data_dir, "papers")
-        if os.path.exists(papers_dir):
-            return papers_dir
-        else:
-            print(f"Warning: Papers directory not found at {papers_dir}")
-
-    # Fallback to default relative path
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    parent_dir = os.path.dirname(script_dir)
-    default_papers_dir = os.path.join(parent_dir, "data", "papers")
-
-    if os.path.exists(default_papers_dir):
-        return default_papers_dir
-
-    # Final fallback
-    return "/Users/user/Documents/MetaBeeAI/pipeline/data/papers"
+    return get_config_param("papers_dir")
 
 
 def clean_species_name(species_text: str) -> str:

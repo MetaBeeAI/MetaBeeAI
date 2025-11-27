@@ -38,26 +38,19 @@ except ImportError:
 
 
 def get_papers_dir():
-    """Get the papers directory from config or environment (legacy helper)."""
-    # Prefer configured common param; fallback to env var then default
-    try:
-        return get_config_param("papers_dir")
-    except Exception:
-        return os.getenv("METABEEAI_PAPERS_DIR", "data/papers")
+    """Get the papers directory from config."""
+    return get_config_param("papers_dir")
 
 
 def validate_environment():
-    """Check that required environment variables are set."""
+    """Check that required API keys are set."""
     load_dotenv()
 
-    required_vars = ["LANDING_AI_API_KEY"]
-    missing_vars = [var for var in required_vars if not os.getenv(var)]
-
-    if missing_vars:
-        print("ERROR: Missing required environment variables:")
-        for var in missing_vars:
-            print(f"  - {var}")
-        print("\nPlease set these in your .env file (see ../env.example)")
+    # Check for Landing AI API key
+    landing_api_key = get_config_param("landing_api_key")
+    if not landing_api_key:
+        print("ERROR: Missing required API key: LANDING_AI_API_KEY")
+        print("Please set it in your .env file or config YAML (see ../env.example)")
         return False
 
     return True

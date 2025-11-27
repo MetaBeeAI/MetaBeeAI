@@ -74,13 +74,13 @@ class EdgeCaseIdentifier:
             self.openai_client = openai.OpenAI(api_key=openai_api_key)
             print(f"OpenAI client initialized with provided API key. Model: {self.model}")
         else:
-            # Try to get from environment variable
-            api_key = os.getenv("OPENAI_API_KEY")
+            # Try to get from config (checks env var, YAML, defaults)
+            api_key = get_config_param("openai_api_key")
             if api_key:
                 if api_key.strip() and api_key != "your_openai_api_key_here":
                     openai.api_key = api_key
                     self.openai_client = openai.OpenAI(api_key=api_key)
-                    print(f"OpenAI client initialized with environment variable. Model: {self.model}")
+                    print(f"OpenAI client initialized from config. Model: {self.model}")
                 else:
                     self.openai_client = None
                     print("Warning: OPENAI_API_KEY in .env file appears to be a placeholder. Please set a valid API key.")

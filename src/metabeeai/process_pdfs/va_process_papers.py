@@ -91,7 +91,8 @@ def process_papers(papers_dir=None, start_folder=None):
             try:
                 with open(file_path, "rb") as f:
                     files = {"pdf": f}
-                    headers = {"Authorization": f"Basic {os.getenv('LANDING_AI_API_KEY')}"}
+                    landing_api_key = get_config_param("landing_api_key")
+                    headers = {"Authorization": f"Basic {landing_api_key}"}
 
                     response = requests.post(url, files=files, headers=headers)
                     response.raise_for_status()

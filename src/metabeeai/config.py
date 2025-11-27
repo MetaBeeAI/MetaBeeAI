@@ -124,6 +124,16 @@ COMMON_PARAMS = {
         "yaml_key": "results_dir",
         "default": "data/results",
     },
+    "logs_dir": {
+        "env_var": "METABEEAI_LOGS_DIR",
+        "yaml_key": "logs_dir",
+        "default": None,  # Will default to data_dir/logs if not set
+    },
+    "log_level": {
+        "env_var": "METABEEAI_LOG_LEVEL",
+        "yaml_key": "log_level",
+        "default": "INFO",
+    },
     "openai_api_key": {
         "env_var": "OPENAI_API_KEY",
         "yaml_key": "openai_api_key",
