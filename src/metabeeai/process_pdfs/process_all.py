@@ -23,22 +23,14 @@ from dotenv import load_dotenv
 from metabeeai.config import get_config_param
 
 # Import processing modules
-try:
-    # Try relative imports first (when used as module)
-    from .batch_deduplicate import batch_deduplicate
-    from .merger import process_all_papers
-    from .split_pdf import split_pdfs
-    from .va_process_papers import process_papers
-except ImportError:
-    # Fall back to direct imports (when run as script)
-    from batch_deduplicate import batch_deduplicate
-    from merger import process_all_papers
-    from split_pdf import split_pdfs
-    from va_process_papers import process_papers
+from .batch_deduplicate import run_batch_deduplicate
+from .merger import process_all_papers
+from .split_pdf import split_pdfs
+from .va_process_papers import process_papers
 
 
 def get_papers_dir():
-    """Get the papers directory from config."""
+    """Return the papers directory from centralized config."""
     return get_config_param("papers_dir")
 
 
@@ -197,7 +189,7 @@ def run_full_pipeline(
         print("-" * 60)
         try:
             # Process only the folders in our range
-            summary = batch_deduplicate(base_dir=Path(papers_dir), dry_run=False, folder_list=paper_folders)
+            summary = run_batch_deduplicate(base_dir=Path(papers_dir), dry_run=False, folder_list=paper_folders)
             print("✓ Deduplication completed")
             print(f"  - Processed: {summary.get('processed_papers', 0)} papers")
             print(f"  - Duplicates removed: {summary.get('total_duplicates_removed', 0)}")

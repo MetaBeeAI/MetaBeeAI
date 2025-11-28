@@ -223,3 +223,6 @@ llm_benchmarking/deepeval-results/*
 
 # Windows Alternate Data Streams artifacts copied into repo
 *:Zone.Identifier
+
+# Metabee AI log files
+metabeeai.log*

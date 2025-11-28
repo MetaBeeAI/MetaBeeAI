@@ -25,7 +25,7 @@ except ImportError:
 
 
 def get_papers_dir():
-    """Get the papers directory path from config."""
+    """Return the papers directory from centralized config."""
     return get_config_param("papers_dir")
 
 

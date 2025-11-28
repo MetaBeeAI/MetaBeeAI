@@ -4,8 +4,6 @@ import sys
 from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 
-from metabeeai.config import get_config_param
-
 
 def setup_logger(name: str = None):
     """
@@ -19,10 +17,10 @@ def setup_logger(name: str = None):
     """
     logger = logging.getLogger(name)
     if not logger.handlers:  # Prevent duplicate handlers in multi-import scenarios
-        # Determine logs directory from config (with fallback to data_dir/logs)
-        logs_dir = get_config_param("logs_dir")
-        if logs_dir is None:
-            data_dir = get_config_param("data_dir")
+        # Determine logs directory from environment (fallback to data_dir/logs)
+        logs_dir = os.environ.get("METABEEAI_LOGS_DIR")
+        if not logs_dir:
+            data_dir = os.environ.get("METABEEAI_DATA_DIR", "data")
             logs_dir = os.path.join(data_dir, "logs")
         Path(logs_dir).mkdir(parents=True, exist_ok=True)
 
@@ -32,6 +30,7 @@ def setup_logger(name: str = None):
         for handler in handlers:
             handler.setFormatter(formatter)
             logger.addHandler(handler)
-        # Set log level from config
-        logger.setLevel(get_config_param("log_level").upper())
+        # Set log level from environment (default INFO)
+        level = os.environ.get("METABEEAI_LOG_LEVEL", "INFO").upper()
+        logger.setLevel(level)
     return logger

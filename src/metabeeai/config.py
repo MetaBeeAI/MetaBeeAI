@@ -1,13 +1,13 @@
 # Centralized configuration loader for MetaBeeAI
 # Hierarchy: CLI arg > env var > YAML > hardcoded default
+import logging
 import os
 
 import yaml
 from dotenv import load_dotenv
 
-from metabeeai.logging import setup_logger
-
-logger = setup_logger(__name__)
+# Use standard logging to avoid circular import with metabeeai.logging
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
@@ -53,16 +53,23 @@ def load_config(config_path=None):
 def get_config_value(key, config_path=None, env_var=None, default=None):
     """
     Get a config parameter value using the hierarchy:
-    1. Environment variable (if env_var provided)
-    2. YAML config file (supports dot notation, e.g., 'llm.model')
+    1. YAML config file (explicit config_path or METABEEAI_CONFIG_FILE env var)
+    2. Environment variable (if env_var provided)
     3. Default value
 
     Note: Check CLI args BEFORE calling this function.
 
+    Full hierarchy (handled by caller + this function):
+    - CLI arg (caller checks this first)
+    - Config file from CLI arg (config_path parameter)
+    - Config file from METABEEAI_CONFIG_FILE env var (load_config checks this)
+    - Direct env var for the parameter (METABEEAI_PAPERS_DIR, etc)
+    - Default value
+
     Args:
         key: Config key (use dots for nested keys: 'llm.model')
-        config_path: Path to config file (if None, uses default locations)
-        env_var: Environment variable name to check
+        config_path: Path to config file (if None, uses METABEEAI_CONFIG_FILE env or defaults)
+        env_var: Environment variable name to check as fallback
         default: Default value if not found elsewhere
 
     Returns:
@@ -77,11 +84,7 @@ def get_config_value(key, config_path=None, env_var=None, default=None):
             default='data'
         )
     """
-    # Check environment variable
-    if env_var and os.environ.get(env_var) is not None:
-        return os.environ[env_var]
-
-    # Check YAML config (load and cache)
+    # Check YAML config first (load and cache)
     config = load_config(config_path)
     if config:
         # Support dot notation: 'llm.model' -> config['llm']['model']
@@ -98,6 +101,10 @@ def get_config_value(key, config_path=None, env_var=None, default=None):
         # Direct key lookup
         if key in config:
             return config[key]
+
+    # Check environment variable as fallback
+    if env_var and os.environ.get(env_var) is not None:
+        return os.environ[env_var]
 
     return default
 

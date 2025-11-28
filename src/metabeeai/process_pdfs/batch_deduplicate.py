@@ -17,7 +17,9 @@ from metabeeai.process_pdfs.deduplicate_chunks import analyze_chunk_uniqueness, 
 
 
 def get_papers_dir():
-    """Get papers directory via centralized config with env/yaml/default precedence."""
+    """Return the papers directory from centralized config."""
+    # This function retrieves the papers directory from the configuration.
+    # It uses the centralized configuration management to ensure consistency.
     return get_config_param("papers_dir")
 
 
@@ -60,7 +62,9 @@ def find_paper_folders(base_dir: Path) -> List[Path]:
 
 def find_merged_json_files(paper_folders: List[Path]) -> List[Dict[str, Any]]:
     """
-    Find all merged_v2.json files in paper folders.
+    Find merged JSON files in paper folders.
+
+    Looks under each folder's `pages/` for one of: merged_v2.json, merged.json, _merged.json.
 
     Args:
         paper_folders (List[Path]): List of paper folder paths.
@@ -68,38 +72,32 @@ def find_merged_json_files(paper_folders: List[Path]) -> List[Dict[str, Any]]:
     Returns:
         List[Dict[str, Any]]: List of file information dictionaries.
     """
-    merged_files = []
-
+    merged_files: List[Dict[str, Any]] = []
+    filename_options = ["merged_v2.json", "merged.json", "_merged.json"]
     for paper_folder in paper_folders:
         pages_dir = paper_folder / "pages"
-        merged_json_path = pages_dir / "merged_v2.json"
-
-        if merged_json_path.exists():
+        found_path = None
+        for fname in filename_options:
+            candidate = pages_dir / fname
+            if candidate.exists():
+                found_path = candidate
+                break
+        if found_path:
             merged_files.append(
                 {
                     "paper_id": paper_folder.name,
                     "paper_path": paper_folder,
-                    "json_path": merged_json_path,
+                    "json_path": found_path,
                     "pages_dir": pages_dir,
                 }
             )
         else:
-            logger.warning(f"No merged_v2.json found in {paper_folder}")
-
+            logger.warning(f"No merged JSON found for {paper_folder}")
     return merged_files
 
 
-def process_single_paper(file_info: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """
-    Process a single paper's merged_v2.json file.
-
-    Args:
-        file_info (Dict[str, Any]): Information about the file to process.
-        dry_run (bool): If True, only analyze without making changes.
-
-    Returns:
-        Dict[str, Any]: Processing results.
-    """
+def process_single_paper(file_info: Dict[str, Any], dry_run: bool) -> Dict[str, Any]:
+    """Process a single paper's merged JSON file."""
     paper_id = file_info["paper_id"]
     json_path = file_info["json_path"]
 
@@ -107,13 +105,10 @@ def process_single_paper(file_info: Dict[str, Any], dry_run: bool = False) -> Di
 
     try:
         if dry_run:
-            # Just analyze without deduplicating
             with open(json_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-
             chunks = data.get("data", {}).get("chunks", [])
             analysis = analyze_chunk_uniqueness(chunks)
-
             return {
                 "paper_id": paper_id,
                 "status": "analyzed",
@@ -122,21 +117,16 @@ def process_single_paper(file_info: Dict[str, Any], dry_run: bool = False) -> Di
                 "message": "Dry run - no changes made",
             }
         else:
-            # Actually process the file
             result = process_merged_json_file(json_path)
             result["paper_id"] = paper_id
-
-            # Debug: log what we got back
             logger.warning(f"Paper {paper_id} result: {result}")
-
             return result
-
     except Exception as e:
         logger.error(f"Error processing paper {paper_id}: {e}")
         return {"paper_id": paper_id, "status": "error", "file_path": str(json_path), "error": str(e)}
 
 
-def batch_deduplicate(
+def run_batch_deduplicate(
     base_dir: Path = None, dry_run: bool = False, start_paper: int = None, end_paper: int = None, folder_list: list = None
 ) -> Dict[str, Any]:
     """
@@ -278,15 +268,10 @@ def main():
 
     parser.add_argument("--config", type=str, default=None, help="Path to config YAML file")
     parser.add_argument("--base-dir", type=str, help="Base directory containing paper folders (defaults to config)")
-
     parser.add_argument("--dry-run", action="store_true", help="Analyze files without making changes")
-
     parser.add_argument("--start-paper", type=int, help="First paper number to process (inclusive)")
-
     parser.add_argument("--end-paper", type=int, help="Last paper number to process (inclusive)")
-
     parser.add_argument("--output", type=str, help="Output file for results summary (defaults to timestamped file)")
-
     parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose logging")
 
     args = parser.parse_args()
@@ -307,7 +292,7 @@ def main():
 
     # Run batch processing
     try:
-        summary = batch_deduplicate(
+        summary = run_batch_deduplicate(
             base_dir=base_dir, dry_run=args.dry_run, start_paper=args.start_paper, end_paper=args.end_paper
         )
 

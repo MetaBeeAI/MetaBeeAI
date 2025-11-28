@@ -6,6 +6,8 @@ from datetime import datetime
 import requests
 from dotenv import load_dotenv
 
+from metabeeai.config import get_config_param
+
 
 def process_papers(papers_dir=None, start_folder=None):
     """
@@ -17,8 +19,6 @@ def process_papers(papers_dir=None, start_folder=None):
     """
     # Resolve papers_dir from config if not provided
     if papers_dir is None:
-        from metabeeai.config import get_config_param
-
         papers_dir = get_config_param("papers_dir")
 
     # Load environment variables
