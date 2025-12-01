@@ -123,21 +123,30 @@ We use pytest for testing. Tests are located in the ``tests/`` directory.
 Documentation
 -------------
 
-Documentation is built with Sphinx and uses reStructuredText format.
+Documentation is built with Sphinx and hosted on Read the Docs.
 
-**Build Documentation Locally**:
+**Quick Start**:
 
 .. code-block:: bash
 
+   # Install dependencies
    pip install -e .[docs]
-   sphinx-build -b html docs/ docs/_build/html
+   
+   # Build documentation
+   sphinx-build -b html docs/ docs/_build/html -q
+   
+   # Open in browser
+   xdg-open docs/_build/html/index.html  # Linux/WSL
 
-**Documentation Guidelines**:
+**Guidelines**:
 
-- Update docs when adding new features
-- Include code examples
+- Update docs when adding features
+- Include working code examples
 - Keep language clear and concise
 - No emojis in documentation
+- Test builds before submitting PRs
+
+For complete documentation on building docs, Sphinx usage, Read the Docs integration, and troubleshooting, see :doc:`documentation`
 
 Developer Guides
 ----------------
@@ -146,6 +155,7 @@ Developer Guides
    :maxdepth: 1
 
    config_development
+   documentation
 
 Configuration System
 ~~~~~~~~~~~~~~~~~~~~
