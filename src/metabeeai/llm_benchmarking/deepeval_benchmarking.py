@@ -14,7 +14,7 @@ import sys
 
 from dotenv import load_dotenv
 
-from metabeeai.config import get_data_dir
+from metabeeai.config import get_config_param
 
 # Add parent directory to path to access config
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -29,6 +29,12 @@ def main():
 
     # Set up command line argument parsing
     parser = argparse.ArgumentParser(description="Evaluate benchmark dataset with DeepEval (Standard + G-Eval)")
+    parser.add_argument(
+        "--config",
+        type=str,
+        default=None,
+        help="Path to config YAML file (overrides METABEEAI_CONFIG_FILE and defaults)",
+    )
     parser.add_argument(
         "--question",
         "-q",
@@ -69,9 +75,14 @@ def main():
 
     args = parser.parse_args()
 
+    # Respect a provided config file for subsequent lookups
+    if args.config:
+        os.environ["METABEEAI_CONFIG_FILE"] = args.config
+
     # Set default input path if not provided (use same logic as prep_benchmark_data.py)
     if args.input is None:
-        args.input = os.path.join(get_data_dir(), "benchmark_data_gui.json")
+        data_dir = get_config_param("data_dir")
+        args.input = os.path.join(data_dir, "benchmark_data_gui.json")
 
     # Load benchmark dataset first (needed for --list-questions)
     # This is done before API key check so we can list questions without API key
@@ -133,15 +144,12 @@ def main():
         sys.exit(0)
 
     # Only check API key and load deepeval if we're actually running evaluation
-    # Set API keys from environment
-    # TODO: So this shouldnt be in the base level script, all of this needs to be moved to a function
-    openai_api_key = os.getenv("OPENAI_API_KEY")
-
+    # Get API key from config (checks env var, YAML, and defaults)
+    openai_api_key = get_config_param("openai_api_key")
     if not openai_api_key:
-        raise ValueError("OPENAI_API_KEY not found in .env file")
-
+        raise ValueError("OpenAI API key not found. Set OPENAI_API_KEY env var or add to config YAML")
     os.environ["OPENAI_API_KEY"] = openai_api_key
-    print("[OK] OpenAI API key loaded from .env file")
+    print("[OK] OpenAI API key available for evaluation")
 
     from deepeval import evaluate
     from deepeval.dataset import EvaluationDataset

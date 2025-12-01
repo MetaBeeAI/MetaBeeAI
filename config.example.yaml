@@ -1,0 +1,143 @@
+# MetaBeeAI Configuration File
+# =============================
+#
+# This file defines persistent configuration for MetaBeeAI.
+#
+# CONFIGURATION HIERARCHY (highest priority first):
+# 1. CLI arguments: --papers-dir, --data-dir, etc.
+# 2. Config file specified via --config flag
+# 3. Config file from METABEEAI_CONFIG_FILE env var
+# 4. This config file (if placed in ./config.yaml or ~/.metabeeai/config.yaml)
+# 5. Environment variables: METABEEAI_PAPERS_DIR, METABEEAI_DATA_DIR, etc.
+# 6. Hardcoded defaults
+#
+# USAGE:
+#   1. Copy this file to config.yaml in your project directory
+#   2. Customize the values below
+#   3. Run any metabeeai command: it will automatically load ./config.yaml
+#   4. Or use --config for alternate locations: metabeeai --config /path/to/config.yaml <command>
+#
+# ENVIRONMENT VARIABLES:
+#   You can set environment variables for any parameter below.
+#   However, values in this config file will OVERRIDE env vars if both are set.
+#   Use env vars for temporary overrides or secrets that shouldn't be committed.
+#
+# Example:
+#   export METABEEAI_PAPERS_DIR=/tmp/papers  # Temporary override
+#   But if papers_dir is set below, the config file value will be used instead.
+#
+
+# ==============================================================================
+# COMMON PARAMETERS (shared across all commands)
+# ==============================================================================
+
+# Base data directory for all MetaBeeAI operations
+# Default: ./data
+# Env var: METABEEAI_DATA_DIR
+data_dir: ./data
+
+# Directory containing research papers to process
+# Default: ./data/papers
+# Env var: METABEEAI_PAPERS_DIR
+papers_dir: ./data/papers
+
+# Directory for command results and outputs
+# Default: ./data/results
+# Env var: METABEEAI_RESULTS_DIR
+results_dir: ./data/results
+
+# General output directory (for intermediate files)
+# Default: ./data/output
+# Env var: METABEEAI_OUTPUT_DIR
+output_dir: ./data/output
+
+# Directory for log files (if not set, uses data_dir/logs)
+# Default: None (will use data_dir/logs)
+# Env var: METABEEAI_LOGS_DIR
+# logs_dir: ./data/logs
+
+# Logging level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+# Default: INFO
+# Env var: METABEEAI_LOG_LEVEL
+log_level: INFO
+
+# OpenAI API key for GPT models
+# IMPORTANT: Don't commit your actual key! Use env var instead:
+#   export OPENAI_API_KEY=sk-your-key-here
+# Or uncomment below for local development only:
+# openai_api_key: "sk-your-key-here"
+# Env var: OPENAI_API_KEY
+
+# Landing AI API key for Vision Agentic API
+# IMPORTANT: Don't commit your actual key! Use env var instead:
+#   export LANDING_API_KEY=your-key-here
+# Or uncomment below for local development only:
+# landing_api_key: "your-key-here"
+# Env var: LANDING_API_KEY
+
+# ==============================================================================
+# LLM PIPELINE SETTINGS
+# ==============================================================================
+llm:
+  # Model for relevance scoring and chunk selection
+  relevance_model: "gpt-4o-mini"
+
+  # Model for final answer generation
+  answer_model: "gpt-4o"
+
+  # Quality preset: "fast", "balanced", or "quality"
+  # - fast: Quick responses, lower quality
+  # - balanced: Good balance of speed and quality
+  # - quality: Best quality, slower
+  preset: "balanced"
+
+  # Temperature for LLM generation (0.0 = deterministic, 1.0 = creative)
+  # temperature: 0.7
+
+  # Maximum tokens in LLM response
+  # max_tokens: 2000
+
+# ==============================================================================
+# PDF PROCESSING SETTINGS
+# ==============================================================================
+process_pdfs:
+  # Number of PDFs to process in parallel
+  batch_size: 10
+
+  # Skip PDF splitting step (if PDFs already split)
+  # skip_split: false
+
+  # Skip API processing step (if JSON files already exist)
+  # skip_api: false
+
+  # Skip JSON merging step
+  # skip_merge: false
+
+  # Skip deduplication step
+  # skip_deduplicate: false
+
+# ==============================================================================
+# BENCHMARKING SETTINGS
+# ==============================================================================
+benchmark:
+  # Model to use for evaluation and grading
+  model: "gpt-4o"
+
+  # Number of test cases to process per batch
+  batch_size: 25
+
+  # Maximum retries per batch on failure
+  max_retries: 5
+
+  # Timeout per test case (seconds)
+  # timeout: 120
+
+# ==============================================================================
+# DATABASE QUERY SETTINGS
+# ==============================================================================
+query_database:
+  # Output format: "json", "csv", "markdown"
+  # output_format: "json"
+
+  # Include metadata in query results
+  # include_metadata: true

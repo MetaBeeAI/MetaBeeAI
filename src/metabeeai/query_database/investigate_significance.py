@@ -14,6 +14,8 @@ import os
 import re
 from typing import Dict, List, Tuple
 
+from metabeeai.config import get_config_param
+
 try:
     import openai
 
@@ -22,37 +24,9 @@ except ImportError:
     OPENAI_AVAILABLE = False
 
 
-def load_env_file():
-    """Load environment variables from .env file if it exists."""
-    # Try current directory first
-    env_file = ".env"
-    if not os.path.exists(env_file):
-        # Fallback to parent directory
-        env_file = os.path.join(os.path.dirname(__file__), "..", ".env")
-
-    if os.path.exists(env_file):
-        with open(env_file, "r") as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith("#") and "=" in line:
-                    key, value = line.split("=", 1)
-                    os.environ[key] = value
-
-
 def get_papers_dir():
-    """Get the papers directory path from environment variable or use default."""
-    # Load environment variables
-    load_env_file()
-
-    # Try to get from environment variable first
-    data_dir = os.getenv("METABEEAI_DATA_DIR")
-    if data_dir:
-        papers_dir = os.path.join(data_dir, "papers")
-    else:
-        # Fallback to default path
-        papers_dir = os.path.join(os.path.dirname(__file__), "..", "data", "papers")
-
-    return papers_dir
+    """Return the papers directory from centralized config."""
+    return get_config_param("papers_dir")
 
 
 def find_answers_files(papers_dir: str) -> List[Tuple[str, str]]:
@@ -114,12 +88,10 @@ def extract_significance_with_llm(
         return []
 
     try:
-        # Load environment variables (including OpenAI API key)
-        load_env_file()
-
-        # Check if API key is available
-        if not os.getenv("OPENAI_API_KEY"):
-            print(f"  Warning: OPENAI_API_KEY not found in environment for paper {paper_id}")
+        # Get OpenAI API key from config
+        api_key = get_config_param("openai_api_key")
+        if not api_key:
+            print(f"  Warning: OpenAI API key not found in config for paper {paper_id}")
             return []
 
         # Initialize OpenAI client

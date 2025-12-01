@@ -156,22 +156,25 @@ class TestLLMCommand:
         assert args.relevance_model == "openai/gpt-4o-mini"
         assert args.answer_model == "openai/gpt-4o"
 
-    @pytest.mark.parametrize("config_value", ["fast", "balanced", "quality"])
+    @pytest.mark.parametrize("preset_value", ["fast", "balanced", "quality"])
     @patch("metabeeai.cli.handle_llm_command")
-    def test_llm_with_config(self, mock_handler, config_value):
-        """Test 'llm' command with --config argument."""
+    def test_llm_with_preset(self, mock_handler, preset_value):
+        """Test 'llm' command with --preset argument."""
         mock_handler.side_effect = SystemExit(0)
 
-        with patch("sys.argv", ["metabee", "llm", "--config", config_value]):
+        with patch("sys.argv", ["metabee", "llm", "--preset", preset_value]):
             with pytest.raises(SystemExit):
                 cli.main()
 
         args = mock_handler.call_args[0][0]
-        assert args.config == config_value
+        assert args.preset == preset_value
 
 
 class TestProcessPDFsCommand:
-    """Test the 'process-pdfs' subcommand arguments and defaults."""
+    """Test the 'process-pdfs' subcommand arguments and defaults.
+
+    Note: --config flag tests are in test_config.py (TestCLIConfigIntegration).
+    """
 
     @patch("metabeeai.cli.handle_process_pdfs_command")
     def test_process_pdfs_defaults(self, mock_handler):
@@ -940,7 +943,7 @@ class TestInstalledCLI:
         assert "--overwrite" in result.stdout
         assert "--relevance-model" in result.stdout
         assert "--answer-model" in result.stdout
-        assert "--config" in result.stdout
+        assert "--preset" in result.stdout
 
     def test_installed_cli_process_pdfs_help(self):
         """Test that the installed CLI 'process-pdfs' subcommand shows help."""

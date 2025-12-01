@@ -17,7 +17,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-from metabeeai.config import get_data_dir
+from metabeeai.config import get_config_param
 
 # Add parent directory to path to access config
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -281,6 +281,12 @@ def print_statistics_table(metrics_data, question_types):
 def main():
     parser = argparse.ArgumentParser(description="Plot metrics comparison across question types")
     parser.add_argument(
+        "--config",
+        type=str,
+        default=None,
+        help="Path to config YAML file (overrides METABEEAI_CONFIG_FILE and defaults)",
+    )
+    parser.add_argument(
         "--results-dir",
         type=str,
         default=None,
@@ -292,8 +298,11 @@ def main():
 
     args = parser.parse_args()
 
+    if args.config:
+        os.environ["METABEEAI_CONFIG_FILE"] = args.config
+
     # Use config-based defaults if not provided
-    data_dir = get_data_dir()
+    data_dir = get_config_param("data_dir")
     if args.results_dir is None:
         args.results_dir = os.path.join(data_dir, "deepeval_results")
     if args.output_dir is None:

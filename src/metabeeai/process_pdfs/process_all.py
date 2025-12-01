@@ -20,45 +20,29 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from metabeeai.config import get_config_param
+
 # Import processing modules
-try:
-    # Try relative imports first (when used as module)
-    from .batch_deduplicate import batch_deduplicate
-    from .merger import process_all_papers
-    from .split_pdf import split_pdfs
-    from .va_process_papers import process_papers
-except ImportError:
-    # Fall back to direct imports (when run as script)
-    from batch_deduplicate import batch_deduplicate
-    from merger import process_all_papers
-    from split_pdf import split_pdfs
-    from va_process_papers import process_papers
+from .batch_deduplicate import run_batch_deduplicate
+from .merger import process_all_papers
+from .split_pdf import split_pdfs
+from .va_process_papers import process_papers
 
 
 def get_papers_dir():
-    """Get the papers directory from config or environment."""
-    try:
-        sys.path.append("..")
-        from metabeeai.config import get_papers_dir as config_get_papers_dir
-
-        return config_get_papers_dir()
-    except ImportError:
-        # Fallback to common path
-        return os.getenv("METABEEAI_DATA_DIR", "data/papers")
+    """Return the papers directory from centralized config."""
+    return get_config_param("papers_dir")
 
 
 def validate_environment():
-    """Check that required environment variables are set."""
+    """Check that required API keys are set."""
     load_dotenv()
 
-    required_vars = ["LANDING_AI_API_KEY"]
-    missing_vars = [var for var in required_vars if not os.getenv(var)]
-
-    if missing_vars:
-        print("ERROR: Missing required environment variables:")
-        for var in missing_vars:
-            print(f"  - {var}")
-        print("\nPlease set these in your .env file (see ../env.example)")
+    # Check for Landing AI API key
+    landing_api_key = get_config_param("landing_api_key")
+    if not landing_api_key:
+        print("ERROR: Missing required API key: LANDING_AI_API_KEY")
+        print("Please set it in your .env file or config YAML (see ../env.example)")
         return False
 
     return True
@@ -205,7 +189,7 @@ def run_full_pipeline(
         print("-" * 60)
         try:
             # Process only the folders in our range
-            summary = batch_deduplicate(base_dir=Path(papers_dir), dry_run=False, folder_list=paper_folders)
+            summary = run_batch_deduplicate(base_dir=Path(papers_dir), dry_run=False, folder_list=paper_folders)
             print("✓ Deduplication completed")
             print(f"  - Processed: {summary.get('processed_papers', 0)} papers")
             print(f"  - Duplicates removed: {summary.get('total_duplicates_removed', 0)}")
@@ -268,6 +252,7 @@ Examples:
         """,
     )
 
+    parser.add_argument("--config", type=str, default=None, help="Path to config YAML file")
     parser.add_argument("--dir", type=str, default=None, help="Directory containing paper subfolders (defaults to config/env)")
 
     parser.add_argument(
@@ -312,8 +297,12 @@ Examples:
 
     args = parser.parse_args()
 
-    # Get papers directory
-    papers_dir = args.dir if args.dir else get_papers_dir()
+    # If a config file was provided, make it visible to all downstream lookups
+    if args.config:
+        os.environ["METABEEAI_CONFIG_FILE"] = args.config
+
+    # Get papers directory: CLI > config/common-param
+    papers_dir = args.dir if args.dir else get_config_param("papers_dir")
 
     # If merge-only is specified, automatically skip split and API steps
     if args.merge_only:
