@@ -131,10 +131,10 @@ Documentation is built with Sphinx and hosted on Read the Docs.
 
    # Install dependencies
    pip install -e .[docs]
-   
+
    # Build documentation
    sphinx-build -b html docs/ docs/_build/html -q
-   
+
    # Open in browser
    xdg-open docs/_build/html/index.html  # Linux/WSL
 

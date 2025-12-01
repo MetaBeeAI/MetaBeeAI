@@ -75,10 +75,10 @@ After building, open the HTML files in your browser:
 
    # Linux/WSL
    xdg-open docs/_build/html/index.html
-   
+
    # macOS
    open docs/_build/html/index.html
-   
+
    # Windows (PowerShell)
    start docs/_build/html/index.html
 
@@ -98,10 +98,10 @@ Documentation uses reStructuredText (reST) format. Key syntax:
 
    Page Title
    ==========
-   
+
    Section
    -------
-   
+
    Subsection
    ~~~~~~~~~~
 
@@ -110,7 +110,7 @@ Documentation uses reStructuredText (reST) format. Key syntax:
 .. code-block:: rst
 
    .. code-block:: python
-   
+
       def example():
           return "hello"
 
@@ -128,7 +128,7 @@ Documentation uses reStructuredText (reST) format. Key syntax:
 
    - Bullet item
    - Another item
-   
+
    1. Numbered item
    2. Another item
 
@@ -161,20 +161,20 @@ Use Google-style docstrings for Python code:
    def example_function(param1, param2):
        """
        Brief one-line description.
-       
+
        More detailed description if needed. Can span
        multiple lines.
-       
+
        Args:
            param1: Description of first parameter
            param2: Description of second parameter
-           
+
        Returns:
            Description of return value
-           
+
        Raises:
            ValueError: When something goes wrong
-           
+
        Example:
            >>> result = example_function("a", "b")
            >>> print(result)
@@ -203,15 +203,15 @@ RTD configuration is in ``.readthedocs.yaml`` at the repository root:
 .. code-block:: yaml
 
    version: 2
-   
+
    build:
      os: ubuntu-22.04
      tools:
        python: "3.11"
-   
+
    sphinx:
      configuration: docs/conf.py
-   
+
    python:
      install:
        - method: pip
@@ -286,7 +286,7 @@ If docs fail to build:
 2. **Build locally** to reproduce the error:
 
    .. code-block:: bash
-   
+
       sphinx-build -b html docs/ docs/_build/html
 
 3. **Common issues**:
@@ -346,7 +346,7 @@ Before submitting a PR with documentation changes:
 1. **Build locally**:
 
    .. code-block:: bash
-   
+
       sphinx-build -b html docs/ docs/_build/html -q
 
 2. **Check for warnings** in the build output
@@ -358,7 +358,7 @@ Before submitting a PR with documentation changes:
 5. **Run pre-commit**:
 
    .. code-block:: bash
-   
+
       pre-commit run -a
 
 6. **Push to branch** and check RTD build status

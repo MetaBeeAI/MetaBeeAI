@@ -56,5 +56,3 @@ To install MetaBeeAI for development, clone the repository and install the packa
    git clone https://github.com/MetaBeeAI/MetaBeeAI
    cd MetaBeeAI
    pip install -e .[dev]
-
-

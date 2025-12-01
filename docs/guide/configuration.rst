@@ -48,20 +48,20 @@ MetaBeeAI uses YAML format for configuration files:
     papers_dir: ./data/papers
     results_dir: ./data/results
     log_level: INFO
-    
+
     # API keys (better to use env vars for these!)
     openai_api_key: "sk-..."
     landing_api_key: "..."
-    
+
     # Nested settings for specific commands
     llm:
       relevance_model: "gpt-4o-mini"
       answer_model: "gpt-4o"
       preset: "balanced"
-    
+
     process_pdfs:
       batch_size: 10
-    
+
     benchmark:
       model: "gpt-4o"
       batch_size: 25
@@ -187,7 +187,7 @@ Use config file for stable settings, env vars for secrets::
     data_dir: ./data
     papers_dir: ./data/papers
     log_level: DEBUG
-    
+
     llm:
       relevance_model: "gpt-4o-mini"
       answer_model: "gpt-4o"
@@ -207,7 +207,7 @@ Override specific settings for production::
     data_dir: /data/metabeeai
     papers_dir: /data/metabeeai/papers
     log_level: WARNING
-    
+
     llm:
       config: "quality"
 
@@ -305,11 +305,11 @@ Use ``--verbose`` or ``--debug`` to see which config values are being used::
 Or programmatically check from Python::
 
     from metabeeai.config import get_config_param, load_config
-    
+
     # Check what config file is loaded
     config = load_config()
     print(config)
-    
+
     # Check specific parameter
     papers_dir = get_config_param("papers_dir")
     print(f"Papers directory: {papers_dir}")

@@ -10,7 +10,7 @@ The configuration system (``metabeeai.config``) provides:
 
 1. **Hierarchical config resolution**: CLI args > config file > env vars > defaults
 2. **Two APIs**:
-   
+
    - ``get_config_param(name)``: For common parameters (registered in ``COMMON_PARAMS``)
    - ``get_config_value(key, ...)``: For arbitrary/custom parameters
 
@@ -48,13 +48,13 @@ Function Signature
         1. YAML config file (explicit config_path or METABEEAI_CONFIG_FILE)
         2. Environment variable (if env_var provided)
         3. Default value
-        
+
         Args:
             key: Config key (use dots for nested: 'llm.model')
             config_path: Path to config file (optional)
             env_var: Environment variable name (optional)
             default: Default value (optional)
-        
+
         Returns:
             The config value from highest priority source
         """
@@ -65,21 +65,21 @@ Basic Usage
 .. code-block:: python
 
     from metabeeai.config import get_config_value
-    
+
     # Simple parameter with default
     batch_size = get_config_value(
         'batch_size',
         env_var='MY_BATCH_SIZE',
         default=10
     )
-    
+
     # Nested parameter (uses dot notation)
     llm_model = get_config_value(
         'llm.relevance_model',
         env_var='MY_LLM_MODEL',
         default='gpt-4o-mini'
     )
-    
+
     # With explicit config file
     api_key = get_config_value(
         'my_api_key',
@@ -97,14 +97,14 @@ In your CLI entrypoint, check CLI args first, then fall back to config:
 
     import argparse
     from metabeeai.config import get_config_value
-    
+
     def main():
         parser = argparse.ArgumentParser()
         parser.add_argument('--config', help='Config file path')
         parser.add_argument('--batch-size', type=int, help='Batch size')
         parser.add_argument('--model', help='Model name')
         args = parser.parse_args()
-        
+
         # Hierarchy: CLI arg > config file > env var > default
         batch_size = (
             args.batch_size  # CLI arg wins
@@ -116,7 +116,7 @@ In your CLI entrypoint, check CLI args first, then fall back to config:
                 default=10
             )
         )
-        
+
         model = (
             args.model
             if args.model is not None
@@ -127,7 +127,7 @@ In your CLI entrypoint, check CLI args first, then fall back to config:
                 default='gpt-4o-mini'
             )
         )
-        
+
         print(f"Batch size: {batch_size}, Model: {model}")
 
 Config File Format
@@ -140,12 +140,12 @@ For ``get_config_value()`` to work, users need to structure their YAML:
     # Top-level keys
     batch_size: 25
     my_api_key: "key-123"
-    
+
     # Nested keys (accessed with dot notation)
     llm:
       model: "gpt-4o"
       temperature: 0.7
-      
+
     custom_settings:
       threshold: 0.95
       max_iterations: 100
@@ -186,10 +186,10 @@ How to Add a Common Parameter
 .. code-block:: python
 
     # src/metabeeai/config.py
-    
+
     COMMON_PARAMS = {
         # ... existing params ...
-        
+
         "my_new_param": {
             "env_var": "METABEEAI_MY_NEW_PARAM",  # Environment variable name
             "yaml_key": "my_new_param",            # YAML config key
@@ -202,11 +202,11 @@ How to Add a Common Parameter
 .. code-block:: python
 
     from metabeeai.config import get_config_param
-    
+
     def my_function():
         # Simple one-liner
         my_value = get_config_param("my_new_param")
-        
+
         # Or with CLI arg support
         my_value = (
             args.my_param
@@ -247,7 +247,7 @@ Step 2: Use in your code:
 .. code-block:: python
 
     from metabeeai.config import get_config_param
-    
+
     def process_with_timeout():
         timeout = get_config_param("timeout")
         # Use timeout...
@@ -284,17 +284,17 @@ Function Signature
     def get_config_param(name, config_path=None):
         """
         Get a common config parameter by name.
-        
+
         Convenience wrapper around get_config_value() for parameters
         registered in COMMON_PARAMS.
-        
+
         Args:
             name: Parameter name (must be in COMMON_PARAMS)
             config_path: Optional path to config file
-        
+
         Returns:
             The config value
-        
+
         Raises:
             ValueError: If parameter name not in COMMON_PARAMS
         """
@@ -305,18 +305,18 @@ Examples
 .. code-block:: python
 
     from metabeeai.config import get_config_param
-    
+
     # Get data directory
     data_dir = get_config_param("data_dir")
-    
+
     # Get papers directory with custom config
     papers_dir = get_config_param("papers_dir", config_path="/path/to/config.yaml")
-    
+
     # Get API key
     api_key = get_config_param("openai_api_key")
     if not api_key:
         raise ValueError("OpenAI API key not configured")
-    
+
     # With CLI arg support
     papers_dir = (
         args.papers_dir
@@ -330,7 +330,7 @@ Error Handling
 .. code-block:: python
 
     from metabeeai.config import get_config_param
-    
+
     try:
         value = get_config_param("typo_param")
     except ValueError as e:
@@ -346,12 +346,12 @@ The config system caches loaded YAML files to avoid re-reading:
 
     # src/metabeeai/config.py
     _config_cache = {}
-    
+
     def load_config(config_path=None):
         # Checks cache first
         if path and path in _config_cache:
             return _config_cache[path]
-        
+
         # Loads and caches
         with open(path) as f:
             config = yaml.safe_load(f)
@@ -369,7 +369,7 @@ In tests, clear the cache between test cases:
 
     import pytest
     from metabeeai import config
-    
+
     @pytest.fixture(autouse=True)
     def clear_config_cache():
         """Clear config cache before each test."""
@@ -408,35 +408,35 @@ Pattern for CLI entrypoints:
 
     import argparse
     from metabeeai.config import get_config_param, get_config_value
-    
+
     def main():
         parser = argparse.ArgumentParser()
-        
+
         # Global config flag
         parser.add_argument('--config', help='Config file')
-        
+
         # Common parameters (optional CLI overrides)
         parser.add_argument('--papers-dir', help='Papers directory')
         parser.add_argument('--data-dir', help='Data directory')
-        
+
         # Command-specific parameters
         parser.add_argument('--batch-size', type=int, help='Batch size')
-        
+
         args = parser.parse_args()
-        
+
         # Resolve common parameters (CLI > config > env > default)
         papers_dir = (
             args.papers_dir
             if args.papers_dir is not None
             else get_config_param("papers_dir", config_path=args.config)
         )
-        
+
         data_dir = (
             args.data_dir
             if args.data_dir is not None
             else get_config_param("data_dir", config_path=args.config)
         )
-        
+
         # Resolve custom parameters
         batch_size = (
             args.batch_size
@@ -448,7 +448,7 @@ Pattern for CLI entrypoints:
                 default=10
             )
         )
-        
+
         # Use the resolved values
         run_command(papers_dir, data_dir, batch_size)
 
