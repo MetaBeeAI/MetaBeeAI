@@ -13,7 +13,6 @@ load_dotenv()
 
 DEFAULT_CONFIG_PATHS = [
     os.path.join(os.getcwd(), "config.yaml"),
-    os.path.expanduser("~/.metabeeai/config.yaml"),
 ]
 
 # Cache for loaded config to avoid re-reading files
@@ -25,7 +24,7 @@ def load_config(config_path=None):
     Load config from YAML file. Path is determined by:
     1. config_path arg (if provided)
     2. METABEEAI_CONFIG_FILE env var
-    3. Default locations (./config.yaml, ~/.metabeeai/config.yaml)
+    3. Default location (./config.yaml in current directory)
 
     Results are cached. Returns dict (empty if no file found).
     """
