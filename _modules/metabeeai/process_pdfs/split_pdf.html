@@ -404,14 +404,11 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: pages_per_split must be 1 or 2, got </span><span class="si">{</span><span class="n">pages_per_split</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span>
 
-    <span class="c1"># Import centralized configuration if papers_dir not provided</span>
+    <span class="c1"># Resolve from config if not provided</span>
     <span class="k">if</span> <span class="n">papers_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_config_param</span>
 
-        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_papers_dir</span>
-
-        <span class="n">papers_dir</span> <span class="o">=</span> <span class="n">get_papers_dir</span><span class="p">()</span>
+        <span class="n">papers_dir</span> <span class="o">=</span> <span class="n">get_config_param</span><span class="p">(</span><span class="s2">&quot;papers_dir&quot;</span><span class="p">)</span>
 
     <span class="c1"># Validate papers directory</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">papers_dir</span><span class="p">):</span>
@@ -502,7 +499,7 @@
 <span class="s2">  </span><span class="si">%(prog)s</span><span class="s2"> /path/to/papers --pages 2</span>
 <span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;directory&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Directory containing paper subfolders&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;directory&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;?&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Directory containing paper subfolders (defaults to config)&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--pages&quot;</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
@@ -510,9 +507,13 @@
         <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Number of pages per split: 1 for single-page (default), 2 for overlapping 2-page&quot;</span><span class="p">,</span>
     <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--config&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to config YAML file&quot;</span><span class="p">)</span>
 
     <span class="c1"># Parse arguments</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;METABEEAI_CONFIG_FILE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span>
 
     <span class="c1"># Run the main function</span>
     <span class="n">split_pdfs</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span> <span class="n">pages_per_split</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span>

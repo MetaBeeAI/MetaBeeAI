@@ -1,6 +1,0 @@
-batch_deduplicate
-=================
-
-.. currentmodule:: metabeeai.process_pdfs
-
-.. autofunction:: batch_deduplicate

@@ -608,12 +608,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Import centralized configuration if base_dir not provided</span>
     <span class="k">if</span> <span class="n">base_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_config_param</span>
 
-        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_papers_dir</span>
-
-        <span class="n">base_dir</span> <span class="o">=</span> <span class="n">get_papers_dir</span><span class="p">()</span>
+        <span class="n">base_dir</span> <span class="o">=</span> <span class="n">get_config_param</span><span class="p">(</span><span class="s2">&quot;papers_dir&quot;</span><span class="p">)</span>
 
     <span class="c1"># Validate base directory</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">base_dir</span><span class="p">):</span>
@@ -764,6 +761,16 @@
         <span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Process paper folders to extract literature answers&quot;</span><span class="p">)</span>
+    <span class="c1"># YAML config file path (sets METABEEAI_CONFIG_FILE for downstream lookups)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--config&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--config-file&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to config YAML file (overrides METABEEAI_CONFIG_FILE and defaults)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># Base directory and selection of folders</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--dir&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Base directory containing paper folders (default: auto-detect from config)&quot;</span>
     <span class="p">)</span>
@@ -772,10 +779,13 @@
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
         <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM).&quot;</span>
-        <span class="s2">&quot; If not specified, all folders will be processed.&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM). &quot;</span>
+            <span class="s2">&quot;If not specified, all folders will be processed.&quot;</span>
+        <span class="p">),</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--overwrite&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Overwrite existing merged.json files&quot;</span><span class="p">)</span>
+    <span class="c1"># Models</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--relevance-model&quot;</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
@@ -786,25 +796,32 @@
         <span class="s2">&quot;--answer-model&quot;</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Model to use for answer generation and reflection&quot;</span>
-        <span class="s2">&quot;(e.g., &#39;openai/gpt-4o-mini&#39;, &#39;openai/gpt-4o&#39;). Default: from config&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Model to use for answer generation and reflection (e.g., &#39;openai/gpt-4o-mini&#39;, &#39;openai/gpt-4o&#39;). &quot;</span>
+            <span class="s2">&quot;Default: from config&quot;</span>
+        <span class="p">),</span>
     <span class="p">)</span>
+    <span class="c1"># Preset selector (fast/balanced/quality)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;--config&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--preset&quot;</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
         <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="s2">&quot;balanced&quot;</span><span class="p">,</span> <span class="s2">&quot;quality&quot;</span><span class="p">],</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Use predefined configuration: &#39;fast&#39;, &#39;balanced&#39;, or &#39;quality&#39;&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Use predefined configuration preset: &#39;fast&#39;, &#39;balanced&#39;, or &#39;quality&#39;&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
 
-    <span class="c1"># Handle predefined configurations</span>
+    <span class="c1"># Respect provided config file for downstream lookups</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;METABEEAI_CONFIG_FILE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span>
+
+    <span class="c1"># Handle predefined configurations</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">preset</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.metabeeai_llm.pipeline_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">BALANCED_CONFIG</span><span class="p">,</span> <span class="n">FAST_CONFIG</span><span class="p">,</span> <span class="n">QUALITY_CONFIG</span>
 
         <span class="n">config_map</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;fast&quot;</span><span class="p">:</span> <span class="n">FAST_CONFIG</span><span class="p">,</span> <span class="s2">&quot;balanced&quot;</span><span class="p">:</span> <span class="n">BALANCED_CONFIG</span><span class="p">,</span> <span class="s2">&quot;quality&quot;</span><span class="p">:</span> <span class="n">QUALITY_CONFIG</span><span class="p">}</span>
-        <span class="n">selected_config</span> <span class="o">=</span> <span class="n">config_map</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">]</span>
+        <span class="n">selected_config</span> <span class="o">=</span> <span class="n">config_map</span><span class="p">[</span><span class="n">args</span><span class="o">.</span><span class="n">preset</span><span class="p">]</span>
 
         <span class="c1"># Override model arguments with config values if not explicitly provided</span>
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">relevance_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -812,7 +829,7 @@
         <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">answer_model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">args</span><span class="o">.</span><span class="n">answer_model</span> <span class="o">=</span> <span class="n">selected_config</span><span class="p">[</span><span class="s2">&quot;answer_model&quot;</span><span class="p">]</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔧 Using </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> configuration:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔧 Using </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">preset</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> configuration:&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Relevance Model: </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">relevance_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Answer Model: </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">answer_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Description: </span><span class="si">{</span><span class="n">selected_config</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>

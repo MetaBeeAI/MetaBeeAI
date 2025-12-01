@@ -394,52 +394,15 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_config_param</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.process_pdfs.deduplicate_chunks</span><span class="w"> </span><span class="kn">import</span> <span class="n">analyze_chunk_uniqueness</span><span class="p">,</span> <span class="n">process_merged_json_file</span>
 
 
-<span class="c1"># Try to get the papers directory from config, with fallbacks</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_papers_dir</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the papers directory path with multiple fallback options.&quot;&quot;&quot;</span>
-    <span class="c1"># Try to load from config.py if available</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">script_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
-        <span class="n">parent_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">script_dir</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">)</span>
-
-        <span class="c1"># Try to import config without dotenv dependency</span>
-        <span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_dir</span><span class="p">,</span> <span class="s2">&quot;config.py&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_path</span><span class="p">):</span>
-            <span class="c1"># Read config file manually to avoid dotenv dependency</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">config_content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-
-            <span class="c1"># Extract METABEEAI_DATA_DIR from config content</span>
-            <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
-
-            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;METABEEAI_DATA_DIR[&quot;</span><span class="se">\&#39;</span><span class="s1">]?\s*,\s*[&quot;</span><span class="se">\&#39;</span><span class="s1">]?([^&quot;</span><span class="se">\&#39;</span><span class="s1">]+)[&quot;</span><span class="se">\&#39;</span><span class="s1">]?&#39;</span><span class="p">,</span> <span class="n">config_content</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
-                <span class="n">base_dir</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">papers_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s2">&quot;papers&quot;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">papers_dir</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="n">papers_dir</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="k">pass</span>
-
-    <span class="c1"># Fallback 1: Check common locations</span>
-    <span class="n">common_paths</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">),</span> <span class="s2">&quot;Documents&quot;</span><span class="p">,</span> <span class="s2">&quot;MetaBeeAI_dataset2&quot;</span><span class="p">,</span> <span class="s2">&quot;papers&quot;</span><span class="p">),</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">),</span> <span class="s2">&quot;Documents&quot;</span><span class="p">,</span> <span class="s2">&quot;MetaBeeAI_dataset2&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;data/papers&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;papers&quot;</span><span class="p">,</span>
-    <span class="p">]</span>
-
-    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">common_paths</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">path</span>
-
-    <span class="c1"># Fallback 2: Use current working directory</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;papers&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the papers directory from centralized config.&quot;&quot;&quot;</span>
+    <span class="c1"># This function retrieves the papers directory from the configuration.</span>
+    <span class="c1"># It uses the centralized configuration management to ensure consistency.</span>
+    <span class="k">return</span> <span class="n">get_config_param</span><span class="p">(</span><span class="s2">&quot;papers_dir&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># Import the deduplication module</span>
@@ -481,7 +444,9 @@
 
 <span class="k">def</span><span class="w"> </span><span class="nf">find_merged_json_files</span><span class="p">(</span><span class="n">paper_folders</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Find all merged_v2.json files in paper folders.</span>
+<span class="sd">    Find merged JSON files in paper folders.</span>
+
+<span class="sd">    Looks under each folder&#39;s `pages/` for one of: merged_v2.json, merged.json, _merged.json.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        paper_folders (List[Path]): List of paper folder paths.</span>
@@ -489,38 +454,32 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        List[Dict[str, Any]]: List of file information dictionaries.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">merged_files</span> <span class="o">=</span> <span class="p">[]</span>
-
+    <span class="n">merged_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">filename_options</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;merged_v2.json&quot;</span><span class="p">,</span> <span class="s2">&quot;merged.json&quot;</span><span class="p">,</span> <span class="s2">&quot;_merged.json&quot;</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">paper_folder</span> <span class="ow">in</span> <span class="n">paper_folders</span><span class="p">:</span>
         <span class="n">pages_dir</span> <span class="o">=</span> <span class="n">paper_folder</span> <span class="o">/</span> <span class="s2">&quot;pages&quot;</span>
-        <span class="n">merged_json_path</span> <span class="o">=</span> <span class="n">pages_dir</span> <span class="o">/</span> <span class="s2">&quot;merged_v2.json&quot;</span>
-
-        <span class="k">if</span> <span class="n">merged_json_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">found_path</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">filename_options</span><span class="p">:</span>
+            <span class="n">candidate</span> <span class="o">=</span> <span class="n">pages_dir</span> <span class="o">/</span> <span class="n">fname</span>
+            <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="n">found_path</span> <span class="o">=</span> <span class="n">candidate</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">found_path</span><span class="p">:</span>
             <span class="n">merged_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="p">{</span>
                     <span class="s2">&quot;paper_id&quot;</span><span class="p">:</span> <span class="n">paper_folder</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                     <span class="s2">&quot;paper_path&quot;</span><span class="p">:</span> <span class="n">paper_folder</span><span class="p">,</span>
-                    <span class="s2">&quot;json_path&quot;</span><span class="p">:</span> <span class="n">merged_json_path</span><span class="p">,</span>
+                    <span class="s2">&quot;json_path&quot;</span><span class="p">:</span> <span class="n">found_path</span><span class="p">,</span>
                     <span class="s2">&quot;pages_dir&quot;</span><span class="p">:</span> <span class="n">pages_dir</span><span class="p">,</span>
                 <span class="p">}</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No merged_v2.json found in </span><span class="si">{</span><span class="n">paper_folder</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No merged JSON found for </span><span class="si">{</span><span class="n">paper_folder</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">merged_files</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">process_single_paper</span><span class="p">(</span><span class="n">file_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">dry_run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Process a single paper&#39;s merged_v2.json file.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        file_info (Dict[str, Any]): Information about the file to process.</span>
-<span class="sd">        dry_run (bool): If True, only analyze without making changes.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Dict[str, Any]: Processing results.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_single_paper</span><span class="p">(</span><span class="n">file_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">dry_run</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process a single paper&#39;s merged JSON file.&quot;&quot;&quot;</span>
     <span class="n">paper_id</span> <span class="o">=</span> <span class="n">file_info</span><span class="p">[</span><span class="s2">&quot;paper_id&quot;</span><span class="p">]</span>
     <span class="n">json_path</span> <span class="o">=</span> <span class="n">file_info</span><span class="p">[</span><span class="s2">&quot;json_path&quot;</span><span class="p">]</span>
 
@@ -528,13 +487,10 @@
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">dry_run</span><span class="p">:</span>
-            <span class="c1"># Just analyze without deduplicating</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-
             <span class="n">chunks</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;chunks&quot;</span><span class="p">,</span> <span class="p">[])</span>
             <span class="n">analysis</span> <span class="o">=</span> <span class="n">analyze_chunk_uniqueness</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
-
             <span class="k">return</span> <span class="p">{</span>
                 <span class="s2">&quot;paper_id&quot;</span><span class="p">:</span> <span class="n">paper_id</span><span class="p">,</span>
                 <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;analyzed&quot;</span><span class="p">,</span>
@@ -543,23 +499,18 @@
                 <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Dry run - no changes made&quot;</span><span class="p">,</span>
             <span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Actually process the file</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">process_merged_json_file</span><span class="p">(</span><span class="n">json_path</span><span class="p">)</span>
             <span class="n">result</span><span class="p">[</span><span class="s2">&quot;paper_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">paper_id</span>
-
-            <span class="c1"># Debug: log what we got back</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Paper </span><span class="si">{</span><span class="n">paper_id</span><span class="si">}</span><span class="s2"> result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
             <span class="k">return</span> <span class="n">result</span>
-
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing paper </span><span class="si">{</span><span class="n">paper_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;paper_id&quot;</span><span class="p">:</span> <span class="n">paper_id</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;file_path&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">json_path</span><span class="p">),</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
 
 
-<div class="viewcode-block" id="batch_deduplicate">
-<a class="viewcode-back" href="../../../generated/api/metabeeai.process_pdfs.batch_deduplicate.html#metabeeai.process_pdfs.batch_deduplicate">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">batch_deduplicate</span><span class="p">(</span>
+<div class="viewcode-block" id="run_batch_deduplicate">
+<a class="viewcode-back" href="../../../generated/api/metabeeai.process_pdfs.run_batch_deduplicate.html#metabeeai.process_pdfs.run_batch_deduplicate">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_batch_deduplicate</span><span class="p">(</span>
     <span class="n">base_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dry_run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">start_paper</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_paper</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">folder_list</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -700,19 +651,19 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Main entry point for the batch deduplication script.&quot;&quot;&quot;</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Batch deduplicate merged_v2.json files in paper folders&quot;</span><span class="p">)</span>
 
-    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--base-dir&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Base directory containing paper folders (defaults to METABEEAI_DATA_DIR)&quot;</span><span class="p">)</span>
-
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--config&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to config YAML file&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--base-dir&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Base directory containing paper folders (defaults to config)&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--dry-run&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Analyze files without making changes&quot;</span><span class="p">)</span>
-
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--start-paper&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;First paper number to process (inclusive)&quot;</span><span class="p">)</span>
-
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--end-paper&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Last paper number to process (inclusive)&quot;</span><span class="p">)</span>
-
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output file for results summary (defaults to timestamped file)&quot;</span><span class="p">)</span>
-
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--verbose&quot;</span><span class="p">,</span> <span class="s2">&quot;-v&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Enable verbose logging&quot;</span><span class="p">)</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="c1"># Forward config to centralized loader if provided</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;METABEEAI_CONFIG_FILE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">config</span>
 
     <span class="c1"># Set logging level</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
@@ -726,7 +677,7 @@
 
     <span class="c1"># Run batch processing</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">summary</span> <span class="o">=</span> <span class="n">batch_deduplicate</span><span class="p">(</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">run_batch_deduplicate</span><span class="p">(</span>
             <span class="n">base_dir</span><span class="o">=</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">dry_run</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">dry_run</span><span class="p">,</span> <span class="n">start_paper</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">start_paper</span><span class="p">,</span> <span class="n">end_paper</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">end_paper</span>
         <span class="p">)</span>
 
