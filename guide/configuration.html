@@ -1,0 +1,900 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Configuration Guide &#8212; MetaBeeAI 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/bee.css?v=c7d4ab96" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guide/configuration';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pipeline Overview" href="pipeline_overview.html" />
+    <link rel="prev" title="Setup Guide" href="setup.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/metabeeai.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/metabeeai_dark.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">MetaBeeAI</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quick Start Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    App Pipeline
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../submodule/index.html">
+    Submodules
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MetaBeeAI/MetaBeeAI" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quick Start Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    App Pipeline
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../submodule/index.html">
+    Submodules
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MetaBeeAI/MetaBeeAI" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_overview.html">Pipeline Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Complete Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarking.html">Benchmarking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing.html">Contributing to MetaBeeAI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="config_development.html">Configuration System - Developer Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html">Building Documentation</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">App Pipeline</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Configuration Guide</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="configuration-guide">
+<h1>Configuration Guide<a class="headerlink" href="#configuration-guide" title="Link to this heading">#</a></h1>
+<p>MetaBeeAI uses a flexible configuration system that allows you to set parameters through multiple sources, with a clear hierarchy of precedence.</p>
+<section id="configuration-hierarchy">
+<h2>Configuration Hierarchy<a class="headerlink" href="#configuration-hierarchy" title="Link to this heading">#</a></h2>
+<p>When MetaBeeAI looks for a configuration parameter, it checks sources in this order (highest priority first):</p>
+<ol class="arabic simple">
+<li><p><strong>CLI Arguments</strong>: Command-line flags like <code class="docutils literal notranslate"><span class="pre">--papers-dir</span></code> or <code class="docutils literal notranslate"><span class="pre">--data-dir</span></code></p></li>
+<li><p><strong>Config File (CLI)</strong>: YAML file specified via <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">/path/to/config.yaml</span></code></p></li>
+<li><p><strong>Config File (Environment)</strong>: YAML file specified via <code class="docutils literal notranslate"><span class="pre">METABEEAI_CONFIG_FILE</span></code> env var</p></li>
+<li><p><strong>Config File (Default)</strong>: <code class="docutils literal notranslate"><span class="pre">./config.yaml</span></code> in current directory</p></li>
+<li><p><strong>Environment Variables</strong>: <code class="docutils literal notranslate"><span class="pre">METABEEAI_PAPERS_DIR</span></code>, <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code>, etc.</p></li>
+<li><p><strong>Hardcoded Defaults</strong>: Built-in default values</p></li>
+</ol>
+<p><strong>Key Point</strong>: Values in config files <strong>override</strong> environment variables. Use env vars for temporary overrides or secrets that shouldn’t be in config files.</p>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Copy the example config:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">config</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">yaml</span> <span class="n">config</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+</li>
+<li><p>Edit <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> to customize your settings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml</span>
+<span class="n">data_dir</span><span class="p">:</span> <span class="o">./</span><span class="n">data</span>
+<span class="n">papers_dir</span><span class="p">:</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">papers</span>
+<span class="n">log_level</span><span class="p">:</span> <span class="n">DEBUG</span>
+</pre></div>
+</div>
+</li>
+<li><p>Run any command - it will automatically load <code class="docutils literal notranslate"><span class="pre">./config.yaml</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">metabeeai</span> <span class="n">llm</span>
+<span class="n">metabeeai</span> <span class="n">process_pdfs</span> <span class="o">--</span><span class="n">start</span> <span class="mi">1</span> <span class="o">--</span><span class="n">end</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="configuration-file-format">
+<h2>Configuration File Format<a class="headerlink" href="#configuration-file-format" title="Link to this heading">#</a></h2>
+<p>MetaBeeAI uses YAML format for configuration files:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Common parameters</span>
+<span class="nt">data_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data</span>
+<span class="nt">papers_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data/papers</span>
+<span class="nt">results_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data/results</span>
+<span class="nt">log_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INFO</span>
+
+<span class="c1"># API keys (better to use env vars for these!)</span>
+<span class="nt">openai_api_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sk-...&quot;</span>
+<span class="nt">landing_api_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;...&quot;</span>
+
+<span class="c1"># Nested settings for specific commands</span>
+<span class="nt">llm</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">relevance_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gpt-4o-mini&quot;</span>
+<span class="w">  </span><span class="nt">answer_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gpt-4o&quot;</span>
+<span class="w">  </span><span class="nt">preset</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;balanced&quot;</span>
+
+<span class="nt">process_pdfs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+
+<span class="nt">benchmark</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gpt-4o&quot;</span>
+<span class="w">  </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span>
+<span class="w">  </span><span class="nt">max_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+</pre></div>
+</div>
+</section>
+<section id="common-parameters">
+<h2>Common Parameters<a class="headerlink" href="#common-parameters" title="Link to this heading">#</a></h2>
+<p>These parameters are available across all MetaBeeAI commands:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 30.0%" />
+<col style="width: 30.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>YAML Key</p></th>
+<th class="head"><p>Environment Variable</p></th>
+<th class="head"><p>Default</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Data directory</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data_dir</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">METABEEAI_DATA_DIR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">./data</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Papers directory</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">papers_dir</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">METABEEAI_PAPERS_DIR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">./data/papers</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Results directory</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">results_dir</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">METABEEAI_RESULTS_DIR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">./data/results</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Output directory</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">output_dir</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">METABEEAI_OUTPUT_DIR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">./data/output</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Logs directory</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">logs_dir</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">METABEEAI_LOGS_DIR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">{data_dir}/logs</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Log level</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">log_level</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">METABEEAI_LOG_LEVEL</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>OpenAI API key</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">openai_api_key</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p>Landing AI API key</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">landing_api_key</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LANDING_API_KEY</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="using-environment-variables">
+<h2>Using Environment Variables<a class="headerlink" href="#using-environment-variables" title="Link to this heading">#</a></h2>
+<p>Environment variables are useful for:</p>
+<ul class="simple">
+<li><p>Temporary overrides during development</p></li>
+<li><p>Secrets that shouldn’t be committed to version control</p></li>
+<li><p>CI/CD environments</p></li>
+</ul>
+<p>Set environment variables in your shell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">METABEEAI_PAPERS_DIR</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">papers</span>
+<span class="n">export</span> <span class="n">OPENAI_API_KEY</span><span class="o">=</span><span class="n">sk</span><span class="o">-</span><span class="n">your</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">here</span>
+<span class="n">export</span> <span class="n">METABEEAI_LOG_LEVEL</span><span class="o">=</span><span class="n">DEBUG</span>
+</pre></div>
+</div>
+<p>Or use a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># .env</span>
+<span class="n">METABEEAI_PAPERS_DIR</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">papers</span>
+<span class="n">OPENAI_API_KEY</span><span class="o">=</span><span class="n">sk</span><span class="o">-</span><span class="n">your</span><span class="o">-</span><span class="n">key</span><span class="o">-</span><span class="n">here</span>
+<span class="n">METABEEAI_LOG_LEVEL</span><span class="o">=</span><span class="n">DEBUG</span>
+</pre></div>
+</div>
+<p><strong>Important</strong>: If a parameter is set in both a config file and an environment variable, <strong>the config file wins</strong>. This ensures config files provide stable, explicit configuration.</p>
+</section>
+<section id="using-config-files">
+<h2>Using Config Files<a class="headerlink" href="#using-config-files" title="Link to this heading">#</a></h2>
+<section id="specifying-config-file-location">
+<h3>Specifying Config File Location<a class="headerlink" href="#specifying-config-file-location" title="Link to this heading">#</a></h3>
+<p>Three ways to specify which config file to use:</p>
+<ol class="arabic">
+<li><p><strong>Automatic</strong>: Place <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> in your current directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># MetaBeeAI will automatically find and load it</span>
+<span class="n">metabeeai</span> <span class="n">llm</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>CLI flag</strong>: Use <code class="docutils literal notranslate"><span class="pre">--config</span></code> before the command name:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">metabeeai</span> <span class="o">--</span><span class="n">config</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">custom</span><span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="n">llm</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Environment variable</strong>: Set <code class="docutils literal notranslate"><span class="pre">METABEEAI_CONFIG_FILE</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">METABEEAI_CONFIG_FILE</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span>
+<span class="n">metabeeai</span> <span class="n">llm</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="config-file-best-practices">
+<h3>Config File Best Practices<a class="headerlink" href="#config-file-best-practices" title="Link to this heading">#</a></h3>
+<p><strong>DO</strong>:</p>
+<ul class="simple">
+<li><p>Keep <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> in your project directory for project-specific settings</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">--config</span></code> or <code class="docutils literal notranslate"><span class="pre">METABEEAI_CONFIG_FILE</span></code> to specify alternate config locations</p></li>
+<li><p>Commit <code class="docutils literal notranslate"><span class="pre">config.example.yaml</span></code> to version control as a template</p></li>
+<li><p>Use environment variables for API keys and secrets</p></li>
+</ul>
+<p><strong>DON’T</strong>:</p>
+<ul class="simple">
+<li><p>Don’t commit <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> with real API keys to version control</p></li>
+<li><p>Don’t rely on environment variables for persistent settings (use config files)</p></li>
+<li><p>Don’t mix personal settings into project config files</p></li>
+</ul>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<section id="example-1-development-setup">
+<h3>Example 1: Development Setup<a class="headerlink" href="#example-1-development-setup" title="Link to this heading">#</a></h3>
+<p>Use config file for stable settings, env vars for secrets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.yaml (committed to git)</span>
+<span class="n">data_dir</span><span class="p">:</span> <span class="o">./</span><span class="n">data</span>
+<span class="n">papers_dir</span><span class="p">:</span> <span class="o">./</span><span class="n">data</span><span class="o">/</span><span class="n">papers</span>
+<span class="n">log_level</span><span class="p">:</span> <span class="n">DEBUG</span>
+
+<span class="n">llm</span><span class="p">:</span>
+  <span class="n">relevance_model</span><span class="p">:</span> <span class="s2">&quot;gpt-4o-mini&quot;</span>
+  <span class="n">answer_model</span><span class="p">:</span> <span class="s2">&quot;gpt-4o&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># .env (NOT committed to git)</span>
+<span class="n">OPENAI_API_KEY</span><span class="o">=</span><span class="n">sk</span><span class="o">-</span><span class="n">your</span><span class="o">-</span><span class="n">actual</span><span class="o">-</span><span class="n">key</span>
+<span class="n">LANDING_API_KEY</span><span class="o">=</span><span class="n">your</span><span class="o">-</span><span class="n">landing</span><span class="o">-</span><span class="n">key</span>
+</pre></div>
+</div>
+</section>
+<section id="example-2-production-setup">
+<h3>Example 2: Production Setup<a class="headerlink" href="#example-2-production-setup" title="Link to this heading">#</a></h3>
+<p>Override specific settings for production:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.production.yaml</span>
+<span class="n">data_dir</span><span class="p">:</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">metabeeai</span>
+<span class="n">papers_dir</span><span class="p">:</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">metabeeai</span><span class="o">/</span><span class="n">papers</span>
+<span class="n">log_level</span><span class="p">:</span> <span class="n">WARNING</span>
+
+<span class="n">llm</span><span class="p">:</span>
+  <span class="n">config</span><span class="p">:</span> <span class="s2">&quot;quality&quot;</span>
+</pre></div>
+</div>
+<p>Run with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">metabeeai</span> <span class="o">--</span><span class="n">config</span> <span class="n">config</span><span class="o">.</span><span class="n">production</span><span class="o">.</span><span class="n">yaml</span> <span class="n">llm</span>
+</pre></div>
+</div>
+</section>
+<section id="example-3-temporary-override">
+<h3>Example 3: Temporary Override<a class="headerlink" href="#example-3-temporary-override" title="Link to this heading">#</a></h3>
+<p>Use CLI args for one-off changes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Override papers directory just for this run</span>
+<span class="n">metabeeai</span> <span class="n">process_pdfs</span> <span class="o">--</span><span class="n">papers</span><span class="o">-</span><span class="nb">dir</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">papers</span> <span class="o">--</span><span class="n">start</span> <span class="mi">1</span> <span class="o">--</span><span class="n">end</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</section>
+<section id="example-4-ci-cd-environment">
+<h3>Example 4: CI/CD Environment<a class="headerlink" href="#example-4-ci-cd-environment" title="Link to this heading">#</a></h3>
+<p>Use environment variables in CI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># .github/workflows/test.yml
+env:
+  METABEEAI_DATA_DIR: /tmp/ci-data
+  METABEEAI_LOG_LEVEL: DEBUG
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+</pre></div>
+</div>
+</section>
+</section>
+<section id="command-specific-settings">
+<h2>Command-Specific Settings<a class="headerlink" href="#command-specific-settings" title="Link to this heading">#</a></h2>
+<section id="llm-pipeline">
+<h3>LLM Pipeline<a class="headerlink" href="#llm-pipeline" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">llm</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">relevance_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gpt-4o-mini&quot;</span><span class="w">  </span><span class="c1"># Model for chunk selection</span>
+<span class="w">  </span><span class="nt">answer_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gpt-4o&quot;</span><span class="w">          </span><span class="c1"># Model for answer generation</span>
+<span class="w">  </span><span class="nt">preset</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;balanced&quot;</span><span class="w">              </span><span class="c1"># fast/balanced/quality</span>
+<span class="w">  </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7</span><span class="w">                </span><span class="c1"># LLM temperature (optional)</span>
+<span class="w">  </span><span class="nt">max_tokens</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000</span><span class="w">                </span><span class="c1"># Max response tokens (optional)</span>
+</pre></div>
+</div>
+</section>
+<section id="pdf-processing">
+<h3>PDF Processing<a class="headerlink" href="#pdf-processing" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">process_pdfs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">        </span><span class="c1"># Parallel processing batch size</span>
+<span class="w">  </span><span class="nt">skip_split</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">     </span><span class="c1"># Skip PDF splitting</span>
+<span class="w">  </span><span class="nt">skip_api</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">       </span><span class="c1"># Skip API processing</span>
+<span class="w">  </span><span class="nt">skip_merge</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">     </span><span class="c1"># Skip JSON merging</span>
+<span class="w">  </span><span class="nt">skip_deduplicate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">  </span><span class="c1"># Skip deduplication</span>
+</pre></div>
+</div>
+</section>
+<section id="benchmarking">
+<h3>Benchmarking<a class="headerlink" href="#benchmarking" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">benchmark</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gpt-4o&quot;</span><span class="w">       </span><span class="c1"># Evaluation model</span>
+<span class="w">  </span><span class="nt">batch_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span><span class="w">        </span><span class="c1"># Test cases per batch</span>
+<span class="w">  </span><span class="nt">max_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span><span class="w">        </span><span class="c1"># Max retries per batch</span>
+<span class="w">  </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120</span><span class="w">          </span><span class="c1"># Timeout per test (seconds)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="config-not-loading">
+<h3>Config Not Loading<a class="headerlink" href="#config-not-loading" title="Link to this heading">#</a></h3>
+<p>Check these in order:</p>
+<ol class="arabic simple">
+<li><p>Verify file exists: <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-la</span> <span class="pre">config.yaml</span></code></p></li>
+<li><p>Check YAML syntax: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-c</span> <span class="pre">&quot;import</span> <span class="pre">yaml;</span> <span class="pre">yaml.safe_load(open('config.yaml'))</span></code></p></li>
+<li><p>Check you’re in the correct directory (config.yaml must be in current directory)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">--config</span></code> to explicitly specify the path</p></li>
+</ol>
+</section>
+<section id="environment-variable-not-working">
+<h3>Environment Variable Not Working<a class="headerlink" href="#environment-variable-not-working" title="Link to this heading">#</a></h3>
+<p>Remember: <strong>Config files override environment variables</strong></p>
+<p>If you have <code class="docutils literal notranslate"><span class="pre">papers_dir:</span> <span class="pre">./data/papers</span></code> in your config file, setting <code class="docutils literal notranslate"><span class="pre">METABEEAI_PAPERS_DIR=/tmp/papers</span></code> won’t work. Either:</p>
+<ol class="arabic simple">
+<li><p>Remove the parameter from the config file, OR</p></li>
+<li><p>Use a CLI argument: <code class="docutils literal notranslate"><span class="pre">--papers-dir</span> <span class="pre">/tmp/papers</span></code></p></li>
+</ol>
+</section>
+<section id="checking-current-configuration">
+<h3>Checking Current Configuration<a class="headerlink" href="#checking-current-configuration" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> or <code class="docutils literal notranslate"><span class="pre">--debug</span></code> to see which config values are being used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">metabeeai</span> <span class="o">--</span><span class="n">verbose</span> <span class="n">llm</span>
+</pre></div>
+</div>
+<p>Or programmatically check from Python:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">metabeeai.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_config_param</span><span class="p">,</span> <span class="n">load_config</span>
+
+<span class="c1"># Check what config file is loaded</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Check specific parameter</span>
+<span class="n">papers_dir</span> <span class="o">=</span> <span class="n">get_config_param</span><span class="p">(</span><span class="s2">&quot;papers_dir&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Papers directory: </span><span class="si">{</span><span class="n">papers_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../quickstart.html"><span class="doc">Quick Start Guide</span></a> - Getting started with MetaBeeAI</p></li>
+<li><p><a class="reference internal" href="troubleshooting.html"><span class="doc">Troubleshooting Guide</span></a> - Common issues and solutions</p></li>
+<li><p><a class="reference internal" href="config_development.html"><span class="doc">Configuration System - Developer Guide</span></a> - Developer guide for config system</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="setup.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Setup Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pipeline_overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Pipeline Overview</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-hierarchy">Configuration Hierarchy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-file-format">Configuration File Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-parameters">Common Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-environment-variables">Using Environment Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-config-files">Using Config Files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-config-file-location">Specifying Config File Location</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#config-file-best-practices">Config File Best Practices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-development-setup">Example 1: Development Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-production-setup">Example 2: Production Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-temporary-override">Example 3: Temporary Override</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-ci-cd-environment">Example 4: CI/CD Environment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-specific-settings">Command-Specific Settings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-pipeline">LLM Pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pdf-processing">PDF Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#benchmarking">Benchmarking</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#config-not-loading">Config Not Loading</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-variable-not-working">Environment Variable Not Working</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-current-configuration">Checking Current Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#see-also">See Also</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/guide/configuration.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, MetaBeeAI Contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

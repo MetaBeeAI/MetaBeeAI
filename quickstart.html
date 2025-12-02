@@ -401,6 +401,37 @@
 </div>
 <p>For further options, including development installation, please refer to the <a class="reference internal" href="installation.html"><span class="doc">Installation Guide</span></a></p>
 </section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h2>
+<p>MetaBeeAI uses a flexible configuration system. Before running commands, set up your configuration:</p>
+<ol class="arabic">
+<li><p><strong>Copy the example config</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>config.example.yaml<span class="w"> </span>config.yaml
+</pre></div>
+</div>
+</li>
+<li><p><strong>Add your API keys</strong> (required for most operations):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set as environment variables</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>sk-your-key-here
+<span class="nb">export</span><span class="w"> </span><span class="nv">LANDING_API_KEY</span><span class="o">=</span>your-landing-key
+</pre></div>
+</div>
+<p>Or add them to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> (but don’t commit this file!):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">openai_api_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sk-your-key-here&quot;</span>
+<span class="nt">landing_api_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your-landing-key&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Customize paths</strong> (optional):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">data_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data</span>
+<span class="nt">papers_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data/papers</span>
+<span class="nt">log_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INFO</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>For detailed configuration options and hierarchy, see the <a class="reference internal" href="guide/configuration.html"><span class="doc">Configuration Guide</span></a>.</p>
+</section>
 <section id="basic-usage">
 <h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">#</a></h2>
 <section id="prepare-your-pdfs">
@@ -476,6 +507,7 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">Basic Usage</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-your-pdfs">Prepare Your PDFs</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-pipeline">Run the Pipeline</a></li>

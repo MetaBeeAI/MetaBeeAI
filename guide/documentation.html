@@ -1,0 +1,897 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Building Documentation &#8212; MetaBeeAI 0.1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/bee.css?v=c7d4ab96" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'guide/documentation';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Submodules" href="../submodule/index.html" />
+    <link rel="prev" title="Configuration System - Developer Guide" href="config_development.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/metabeeai.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/metabeeai_dark.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">MetaBeeAI</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quick Start Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    App Pipeline
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../submodule/index.html">
+    Submodules
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MetaBeeAI/MetaBeeAI" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quick Start Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API Reference
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    App Pipeline
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../submodule/index.html">
+    Submodules
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/MetaBeeAI/MetaBeeAI" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline_overview.html">Pipeline Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">Complete Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarking.html">Benchmarking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="contributing.html">Contributing to MetaBeeAI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="config_development.html">Configuration System - Developer Guide</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Building Documentation</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">App Pipeline</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="contributing.html" class="nav-link">Contributing to MetaBeeAI</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Building Documentation</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="building-documentation">
+<h1>Building Documentation<a class="headerlink" href="#building-documentation" title="Link to this heading">#</a></h1>
+<p>MetaBeeAI’s documentation is built with Sphinx and hosted on Read the Docs. This guide covers how to build documentation locally and how the automated deployment works.</p>
+<section id="documentation-structure">
+<h2>Documentation Structure<a class="headerlink" href="#documentation-structure" title="Link to this heading">#</a></h2>
+<p>The documentation is organized as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>docs/
+├── index.rst              # Main documentation landing page
+├── installation.rst       # Installation guide
+├── quickstart.rst         # Quick start guide
+├── guide/                 # User and developer guides
+│   ├── configuration.rst  # Configuration system guide
+│   ├── contributing.rst   # Contribution guidelines
+│   ├── config_development.rst  # Config developer guide
+│   └── ...
+├── api/                   # API reference documentation
+├── generated/             # Auto-generated API docs
+├── _static/               # Static files (CSS, images)
+├── _build/                # Build output (not in git)
+└── conf.py                # Sphinx configuration
+</pre></div>
+</div>
+</section>
+<section id="building-locally">
+<h2>Building Locally<a class="headerlink" href="#building-locally" title="Link to this heading">#</a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
+<p>Install documentation dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>docs<span class="o">]</span>
+</pre></div>
+</div>
+<p>This installs:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx</span></code> - Documentation builder</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx-automodapi</span></code> - API documentation generator</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sphinx_rtd_theme</span></code> - Read the Docs theme</p></li>
+<li><p>Other documentation-related packages</p></li>
+</ul>
+</section>
+<section id="build-commands">
+<h3>Build Commands<a class="headerlink" href="#build-commands" title="Link to this heading">#</a></h3>
+<p><strong>Standard build</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>docs/<span class="w"> </span>docs/_build/html
+</pre></div>
+</div>
+<p><strong>Quiet build</strong> (shows only warnings and errors):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>docs/<span class="w"> </span>docs/_build/html<span class="w"> </span>-q
+</pre></div>
+</div>
+<p><strong>Clean build</strong> (remove old build artifacts first):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>docs/_build
+sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>docs/<span class="w"> </span>docs/_build/html
+</pre></div>
+</div>
+</section>
+<section id="viewing-built-documentation">
+<h3>Viewing Built Documentation<a class="headerlink" href="#viewing-built-documentation" title="Link to this heading">#</a></h3>
+<p>After building, open the HTML files in your browser:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Linux/WSL</span>
+xdg-open<span class="w"> </span>docs/_build/html/index.html
+
+<span class="c1"># macOS</span>
+open<span class="w"> </span>docs/_build/html/index.html
+
+<span class="c1"># Windows (PowerShell)</span>
+start<span class="w"> </span>docs/_build/html/index.html
+</pre></div>
+</div>
+<p>Or navigate directly to <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> in your file browser.</p>
+</section>
+</section>
+<section id="writing-documentation">
+<h2>Writing Documentation<a class="headerlink" href="#writing-documentation" title="Link to this heading">#</a></h2>
+<section id="format">
+<h3>Format<a class="headerlink" href="#format" title="Link to this heading">#</a></h3>
+<p>Documentation uses reStructuredText (reST) format. Key syntax:</p>
+<p><strong>Headings</strong>:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="gh">Page Title</span>
+<span class="gh">==========</span>
+
+<span class="gh">Section</span>
+<span class="gh">-------</span>
+
+<span class="gh">Subsection</span>
+<span class="gh">~~~~~~~~~~</span>
+</pre></div>
+</div>
+<p><strong>Code blocks</strong>:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">code-block</span><span class="p">::</span> <span class="k">python</span>
+
+   <span class="k">def</span><span class="w"> </span><span class="nf">example</span><span class="p">():</span>
+       <span class="k">return</span> <span class="s2">&quot;hello&quot;</span>
+</pre></div>
+</div>
+<p><strong>Links</strong>:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="na">:doc:</span><span class="nv">`other_page`</span>           # Link to another doc page
+<span class="na">:doc:</span><span class="nv">`../api/config`</span>        # Relative path
+<span class="s">``code_reference``</span>          # Inline code
+</pre></div>
+</div>
+<p><strong>Lists</strong>:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="m">-</span> Bullet item
+<span class="m">-</span> Another item
+
+<span class="m">1.</span> Numbered item
+<span class="m">2.</span> Another item
+</pre></div>
+</div>
+</section>
+<section id="documentation-guidelines">
+<h3>Documentation Guidelines<a class="headerlink" href="#documentation-guidelines" title="Link to this heading">#</a></h3>
+<p><strong>DO</strong>:</p>
+<ul class="simple">
+<li><p>Update documentation when adding features</p></li>
+<li><p>Include working code examples</p></li>
+<li><p>Use clear, concise language</p></li>
+<li><p>Add docstrings to all public functions</p></li>
+<li><p>Test code examples actually work</p></li>
+<li><p>Build docs locally before submitting PRs</p></li>
+</ul>
+<p><strong>DON’T</strong>:</p>
+<ul class="simple">
+<li><p>Use emojis in documentation</p></li>
+<li><p>Leave broken links or references</p></li>
+<li><p>Include outdated information</p></li>
+<li><p>Write overly technical language without explanation</p></li>
+</ul>
+</section>
+<section id="docstrings">
+<h3>Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h3>
+<p>Use Google-style docstrings for Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">example_function</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Brief one-line description.</span>
+
+<span class="sd">    More detailed description if needed. Can span</span>
+<span class="sd">    multiple lines.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        param1: Description of first parameter</span>
+<span class="sd">        param2: Description of second parameter</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Description of return value</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: When something goes wrong</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; result = example_function(&quot;a&quot;, &quot;b&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; print(result)</span>
+<span class="sd">        &#39;ab&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">param1</span> <span class="o">+</span> <span class="n">param2</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="read-the-docs-integration">
+<h2>Read the Docs Integration<a class="headerlink" href="#read-the-docs-integration" title="Link to this heading">#</a></h2>
+<section id="how-it-works">
+<h3>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h3>
+<p>MetaBeeAI documentation is automatically built and deployed to Read the Docs (RTD):</p>
+<ol class="arabic simple">
+<li><p><strong>On every commit</strong>: RTD monitors the GitHub repository</p></li>
+<li><p><strong>Automatic builds</strong>: When changes are pushed, RTD triggers a build</p></li>
+<li><p><strong>Branch builds</strong>: Each branch gets its own documentation version</p></li>
+<li><p><strong>Deployment</strong>: Successful builds are deployed to <a class="reference external" href="https://metabeeai.readthedocs.io">https://metabeeai.readthedocs.io</a></p></li>
+</ol>
+</section>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
+<p>RTD configuration is in <code class="docutils literal notranslate"><span class="pre">.readthedocs.yaml</span></code> at the repository root:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+
+<span class="nt">build</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-22.04</span>
+<span class="w">  </span><span class="nt">tools</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">python</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3.11&quot;</span>
+
+<span class="nt">sphinx</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">configuration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/conf.py</span>
+
+<span class="nt">python</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">install</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">      </span><span class="nt">extra_requirements</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs</span>
+</pre></div>
+</div>
+<p>This tells RTD:</p>
+<ul class="simple">
+<li><p>Use Ubuntu 22.04 with Python 3.11</p></li>
+<li><p>Build with Sphinx using <code class="docutils literal notranslate"><span class="pre">docs/conf.py</span></code></p></li>
+<li><p>Install package with <code class="docutils literal notranslate"><span class="pre">[docs]</span></code> extras</p></li>
+</ul>
+</section>
+<section id="build-process">
+<h3>Build Process<a class="headerlink" href="#build-process" title="Link to this heading">#</a></h3>
+<p>When RTD builds documentation:</p>
+<ol class="arabic simple">
+<li><p>Clones the repository</p></li>
+<li><p>Installs dependencies: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.[docs]</span></code></p></li>
+<li><p>Runs: <code class="docutils literal notranslate"><span class="pre">sphinx-build</span> <span class="pre">-b</span> <span class="pre">html</span> <span class="pre">docs/</span> <span class="pre">_build/html</span></code></p></li>
+<li><p>Deploys HTML to RTD servers</p></li>
+<li><p>Makes it available at <a class="reference external" href="https://metabeeai.readthedocs.io">https://metabeeai.readthedocs.io</a></p></li>
+</ol>
+</section>
+<section id="viewing-build-status">
+<h3>Viewing Build Status<a class="headerlink" href="#viewing-build-status" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Build dashboard</strong>: <a class="reference external" href="https://readthedocs.org/projects/metabeeai/builds/">https://readthedocs.org/projects/metabeeai/builds/</a></p></li>
+<li><p><strong>Latest version</strong>: <a class="reference external" href="https://metabeeai.readthedocs.io/en/latest/">https://metabeeai.readthedocs.io/en/latest/</a></p></li>
+<li><p><strong>Stable version</strong>: <a class="reference external" href="https://metabeeai.readthedocs.io/en/stable/">https://metabeeai.readthedocs.io/en/stable/</a></p></li>
+</ul>
+</section>
+<section id="versioning">
+<h3>Versioning<a class="headerlink" href="#versioning" title="Link to this heading">#</a></h3>
+<p>RTD automatically creates documentation for:</p>
+<ul class="simple">
+<li><p><strong>latest</strong>: Documentation from the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch</p></li>
+<li><p><strong>stable</strong>: Documentation from the latest release tag</p></li>
+<li><p><strong>Branch versions</strong>: Each branch gets a version (e.g., <code class="docutils literal notranslate"><span class="pre">config-changes</span></code>)</p></li>
+<li><p><strong>Tag versions</strong>: Each git tag gets a version (e.g., <code class="docutils literal notranslate"><span class="pre">v1.0.0</span></code>)</p></li>
+</ul>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="build-warnings">
+<h3>Build Warnings<a class="headerlink" href="#build-warnings" title="Link to this heading">#</a></h3>
+<p>Common warnings and how to fix them:</p>
+<p><strong>“document isn’t included in any toctree”</strong>:</p>
+<p>Add the document to a <code class="docutils literal notranslate"><span class="pre">toctree</span></code> directive or delete it if unused.</p>
+<p><strong>“unknown document”</strong>:</p>
+<p>Check that the referenced document exists and the path is correct.</p>
+<p><strong>“Enumerated list ends without a blank line”</strong>:</p>
+<p>Add a blank line after numbered lists before continuing text.</p>
+<p><strong>“WARNING: Failed to get a function signature”</strong>:</p>
+<p>The documented function/module doesn’t exist or has import errors. Check imports.</p>
+</section>
+<section id="build-failures">
+<h3>Build Failures<a class="headerlink" href="#build-failures" title="Link to this heading">#</a></h3>
+<p>If docs fail to build:</p>
+<ol class="arabic">
+<li><p><strong>Check build logs</strong> on Read the Docs dashboard</p></li>
+<li><p><strong>Build locally</strong> to reproduce the error:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>docs/<span class="w"> </span>docs/_build/html
+</pre></div>
+</div>
+</li>
+<li><p><strong>Common issues</strong>:</p>
+<ul class="simple">
+<li><p>Missing dependencies in <code class="docutils literal notranslate"><span class="pre">[docs]</span></code> extras</p></li>
+<li><p>Import errors in documented modules</p></li>
+<li><p>Syntax errors in reST files</p></li>
+<li><p>Broken internal references</p></li>
+</ul>
+</li>
+<li><p><strong>Fix and test</strong> locally before pushing</p></li>
+</ol>
+</section>
+<section id="import-errors">
+<h3>Import Errors<a class="headerlink" href="#import-errors" title="Link to this heading">#</a></h3>
+<p>If Sphinx can’t import modules:</p>
+<ul class="simple">
+<li><p>Ensure package installs correctly: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">.[docs]</span></code></p></li>
+<li><p>Check for circular imports</p></li>
+<li><p>Verify all dependencies are in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code></p></li>
+<li><p>Test in a clean environment</p></li>
+</ul>
+</section>
+<section id="links-not-working">
+<h3>Links Not Working<a class="headerlink" href="#links-not-working" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">:doc:</span></code> for internal documentation links</p></li>
+<li><p>Use relative paths from current file location</p></li>
+<li><p>Don’t include <code class="docutils literal notranslate"><span class="pre">.rst</span></code> extension in <code class="docutils literal notranslate"><span class="pre">:doc:</span></code> links</p></li>
+<li><p>Check paths are correct (case-sensitive on Linux)</p></li>
+</ul>
+</section>
+</section>
+<section id="continuous-integration">
+<h2>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Link to this heading">#</a></h2>
+<p>Documentation is checked in CI/CD:</p>
+<p><strong>Pre-commit</strong> (local):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>-a
+</pre></div>
+</div>
+<p><strong>GitHub Actions</strong> (on push):</p>
+<ul class="simple">
+<li><p>Runs tests</p></li>
+<li><p>Checks code formatting</p></li>
+<li><p>Validates documentation builds</p></li>
+</ul>
+<p><strong>Read the Docs</strong> (on push):</p>
+<ul class="simple">
+<li><p>Builds documentation</p></li>
+<li><p>Deploys to RTD hosting</p></li>
+</ul>
+</section>
+<section id="testing-documentation-changes">
+<h2>Testing Documentation Changes<a class="headerlink" href="#testing-documentation-changes" title="Link to this heading">#</a></h2>
+<p>Before submitting a PR with documentation changes:</p>
+<ol class="arabic">
+<li><p><strong>Build locally</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>docs/<span class="w"> </span>docs/_build/html<span class="w"> </span>-q
+</pre></div>
+</div>
+</li>
+<li><p><strong>Check for warnings</strong> in the build output</p></li>
+<li><p><strong>View in browser</strong> to verify formatting</p></li>
+<li><p><strong>Test all links</strong> work correctly</p></li>
+<li><p><strong>Run pre-commit</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>-a
+</pre></div>
+</div>
+</li>
+<li><p><strong>Push to branch</strong> and check RTD build status</p></li>
+</ol>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/">Sphinx Documentation</a></p></li>
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html">reStructuredText Primer</a></p></li>
+<li><p><a class="reference external" href="https://docs.readthedocs.io/">Read the Docs Documentation</a></p></li>
+<li><p><a class="reference external" href="https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings">Google Python Style Guide</a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="config_development.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Configuration System - Developer Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../submodule/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Submodules</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-structure">Documentation Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-locally">Building Locally</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-commands">Build Commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-built-documentation">Viewing Built Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-documentation">Writing Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#format">Format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-guidelines">Documentation Guidelines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-docs-integration">Read the Docs Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How It Works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-process">Build Process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#viewing-build-status">Viewing Build Status</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning">Versioning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-warnings">Build Warnings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-failures">Build Failures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-errors">Import Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#links-not-working">Links Not Working</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-integration">Continuous Integration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-documentation-changes">Testing Documentation Changes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/guide/documentation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, MetaBeeAI Contributors.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

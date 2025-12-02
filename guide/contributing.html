@@ -46,7 +46,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'guide/contributing';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Submodules" href="../submodule/index.html" />
+    <link rel="next" title="Configuration System - Developer Guide" href="config_development.html" />
     <link rel="prev" title="Troubleshooting Guide" href="troubleshooting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -334,15 +334,23 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul class="current nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline_overview.html">Pipeline Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Complete Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarking.html">Benchmarking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Contributing to MetaBeeAI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Contributing to MetaBeeAI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="config_development.html">Configuration System - Developer Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html">Building Documentation</a></li>
+</ul>
+</details></li>
 </ul>
 </div>
 </nav></div>
@@ -405,6 +413,201 @@
                   
   <section id="contributing-to-metabeeai">
 <h1>Contributing to MetaBeeAI<a class="headerlink" href="#contributing-to-metabeeai" title="Link to this heading">#</a></h1>
+<p>Thank you for your interest in contributing to MetaBeeAI! This guide will help you get started with development and understand our processes.</p>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Fork and Clone</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/YOUR_USERNAME/MetaBeeAI.git
+<span class="nb">cd</span><span class="w"> </span>MetaBeeAI
+</pre></div>
+</div>
+</li>
+<li><p><strong>Install for Development</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>dev<span class="o">]</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Install Pre-commit Hooks</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="development-workflow">
+<h2>Development Workflow<a class="headerlink" href="#development-workflow" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Create a Branch</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/your-feature-name
+</pre></div>
+</div>
+</li>
+<li><p><strong>Make Changes</strong>: Write your code following our style guidelines</p></li>
+<li><p><strong>Run Tests</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>-q
+</pre></div>
+</div>
+</li>
+<li><p><strong>Run Pre-commit Checks</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>-a
+</pre></div>
+</div>
+</li>
+<li><p><strong>Commit and Push</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Description of changes&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>feature/your-feature-name
+</pre></div>
+</div>
+</li>
+<li><p><strong>Open a Pull Request</strong> on GitHub</p></li>
+</ol>
+</section>
+<section id="code-style">
+<h2>Code Style<a class="headerlink" href="#code-style" title="Link to this heading">#</a></h2>
+<p>Code style is enforced automatically using pre-commit hooks. When you commit changes, pre-commit will:</p>
+<ul class="simple">
+<li><p>Format code and sort imports with Ruff</p></li>
+<li><p>Run linting checks with Ruff</p></li>
+<li><p>Ensure newlines at end of files</p></li>
+<li><p>Remove trailing whitespace</p></li>
+<li><p>Check YAML syntax</p></li>
+<li><p>Block large files</p></li>
+</ul>
+<p>Install pre-commit hooks after cloning:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+<p>Run manually on all files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>-a
+</pre></div>
+</div>
+<p><strong>Style Guidelines</strong>:</p>
+<ul class="simple">
+<li><p>Use descriptive variable and function names</p></li>
+<li><p>Add docstrings to all public functions and classes</p></li>
+<li><p>Keep functions focused and small</p></li>
+<li><p>Write tests for new functionality</p></li>
+</ul>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h2>
+<p>We use pytest for testing. Tests are located in the <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory.</p>
+<p><strong>Run all tests</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+<p><strong>Run specific test file</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>tests/test_config.py
+</pre></div>
+</div>
+<p><strong>Run with coverage</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>--cov<span class="o">=</span>metabeeai
+</pre></div>
+</div>
+<p><strong>Test Guidelines</strong>:</p>
+<ul class="simple">
+<li><p>Write tests for all new features</p></li>
+<li><p>Test real behavior, not mocks (avoid mocking the functions you’re testing)</p></li>
+<li><p>Use fixtures for setup/teardown</p></li>
+<li><p>Clear any caches or state between tests</p></li>
+<li><p>Use descriptive test names that explain what’s being tested</p></li>
+</ul>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
+<p>Documentation is built with Sphinx and hosted on Read the Docs.</p>
+<p><strong>Quick Start</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.<span class="o">[</span>docs<span class="o">]</span>
+
+<span class="c1"># Build documentation</span>
+sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>docs/<span class="w"> </span>docs/_build/html<span class="w"> </span>-q
+
+<span class="c1"># Open in browser</span>
+xdg-open<span class="w"> </span>docs/_build/html/index.html<span class="w">  </span><span class="c1"># Linux/WSL</span>
+</pre></div>
+</div>
+<p><strong>Guidelines</strong>:</p>
+<ul class="simple">
+<li><p>Update docs when adding features</p></li>
+<li><p>Include working code examples</p></li>
+<li><p>Keep language clear and concise</p></li>
+<li><p>No emojis in documentation</p></li>
+<li><p>Test builds before submitting PRs</p></li>
+</ul>
+<p>For complete documentation on building docs, Sphinx usage, Read the Docs integration, and troubleshooting, see <a class="reference internal" href="documentation.html"><span class="doc">Building Documentation</span></a></p>
+</section>
+<section id="developer-guides">
+<h2>Developer Guides<a class="headerlink" href="#developer-guides" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="config_development.html">Configuration System - Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation.html">Building Documentation</a></li>
+</ul>
+</div>
+<section id="configuration-system">
+<h3>Configuration System<a class="headerlink" href="#configuration-system" title="Link to this heading">#</a></h3>
+<p>If you’re adding new configuration parameters or working with the config system, see the <a class="reference internal" href="config_development.html"><span class="doc">Configuration System - Developer Guide</span></a> guide for detailed information on:</p>
+<ul class="simple">
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">get_config_value()</span></code> for arbitrary parameters</p></li>
+<li><p>Adding parameters to <code class="docutils literal notranslate"><span class="pre">COMMON_PARAMS</span></code></p></li>
+<li><p>Naming conventions</p></li>
+<li><p>Integration with argparse</p></li>
+<li><p>Testing configuration</p></li>
+</ul>
+</section>
+</section>
+<section id="pull-request-process">
+<h2>Pull Request Process<a class="headerlink" href="#pull-request-process" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Ensure all tests pass</strong></p></li>
+<li><p><strong>Update documentation</strong> if needed</p></li>
+<li><p><strong>Add tests</strong> for new functionality</p></li>
+<li><p><strong>Follow commit message conventions</strong>:</p>
+<ul class="simple">
+<li><p>Use present tense (“Add feature” not “Added feature”)</p></li>
+<li><p>Keep first line under 50 characters</p></li>
+<li><p>Provide detailed description in commit body if needed</p></li>
+</ul>
+</li>
+<li><p><strong>Link related issues</strong> in PR description</p></li>
+<li><p><strong>Wait for review</strong> - maintainers will review your PR</p></li>
+</ol>
+</section>
+<section id="common-development-tasks">
+<h2>Common Development Tasks<a class="headerlink" href="#common-development-tasks" title="Link to this heading">#</a></h2>
+<section id="adding-a-new-command">
+<h3>Adding a New Command<a class="headerlink" href="#adding-a-new-command" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Create module in <code class="docutils literal notranslate"><span class="pre">src/metabeeai/</span></code></p></li>
+<li><p>Add CLI entrypoint in <code class="docutils literal notranslate"><span class="pre">src/metabeeai/cli.py</span></code></p></li>
+<li><p>Add configuration parameters if needed (see <a class="reference internal" href="config_development.html"><span class="doc">Configuration System - Developer Guide</span></a>)</p></li>
+<li><p>Write tests in <code class="docutils literal notranslate"><span class="pre">tests/</span></code></p></li>
+<li><p>Update documentation</p></li>
+</ol>
+</section>
+<section id="adding-configuration-parameters">
+<h3>Adding Configuration Parameters<a class="headerlink" href="#adding-configuration-parameters" title="Link to this heading">#</a></h3>
+<p>See <a class="reference internal" href="config_development.html"><span class="doc">Configuration System - Developer Guide</span></a> for complete guide. Quick checklist:</p>
+<ul class="simple">
+<li><p>Add to <code class="docutils literal notranslate"><span class="pre">COMMON_PARAMS</span></code> if used by multiple commands</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">get_config_value()</span></code> for command-specific params</p></li>
+<li><p>Follow naming conventions (<code class="docutils literal notranslate"><span class="pre">snake_case</span></code>, <code class="docutils literal notranslate"><span class="pre">METABEEAI_UPPER_CASE</span></code>)</p></li>
+<li><p>Document in <code class="docutils literal notranslate"><span class="pre">config.example.yaml</span></code></p></li>
+<li><p>Add tests for hierarchy</p></li>
+</ul>
+</section>
+</section>
+<section id="questions">
+<h2>Questions?<a class="headerlink" href="#questions" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Open an issue on GitHub</p></li>
+<li><p>Check existing documentation</p></li>
+</ul>
+<p>Thank you for contributing!</p>
+</section>
 </section>
 
 
@@ -427,11 +630,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="../submodule/index.html"
+       href="config_development.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Submodules</p>
+        <p class="prev-next-title">Configuration System - Developer Guide</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -445,6 +648,33 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-workflow">Development Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-style">Code Style</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developer-guides">Developer Guides</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-system">Configuration System</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pull-request-process">Pull Request Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-development-tasks">Common Development Tasks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-new-command">Adding a New Command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-configuration-parameters">Adding Configuration Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions?</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">

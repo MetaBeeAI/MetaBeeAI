@@ -334,15 +334,23 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents</span></p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline_overview.html">Pipeline Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workflow.html">Complete Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="benchmarking.html">Benchmarking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to MetaBeeAI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="contributing.html">Contributing to MetaBeeAI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="config_development.html">Configuration System - Developer Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation.html">Building Documentation</a></li>
+</ul>
+</details></li>
 </ul>
 </div>
 </nav></div>
@@ -407,11 +415,24 @@
 If you haven’t done so, please refer to the <a class="reference internal" href="../installation.html"><span class="doc">Installation Guide</span></a>.</p>
 <p>For the Quick Start Guide, please refer to the <a class="reference internal" href="../quickstart.html"><span class="doc">Quick Start Guide</span></a>.</p>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="setup.html#required-api-accounts">Required API Accounts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="setup.html#setting-up-api-keys">Setting Up API Keys</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#configuration-hierarchy">Configuration Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#configuration-file-format">Configuration File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#common-parameters">Common Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#using-environment-variables">Using Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#using-config-files">Using Config Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#command-specific-settings">Command-Specific Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#see-also">See Also</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline_overview.html">Pipeline Overview</a><ul>
@@ -429,7 +450,23 @@ If you haven’t done so, please refer to the <a class="reference internal" href
 <li class="toctree-l1"><a class="reference internal" href="benchmarking.html">Benchmarking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to MetaBeeAI</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to MetaBeeAI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#development-workflow">Development Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#code-style">Code Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#documentation">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#developer-guides">Developer Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#pull-request-process">Pull Request Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#common-development-tasks">Common Development Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#questions">Questions?</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
