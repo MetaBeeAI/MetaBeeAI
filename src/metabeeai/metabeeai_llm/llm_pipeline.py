@@ -392,11 +392,7 @@ def main(argv=None):
         nargs="+",
         default=None,
         help=(
-<<<<<<< Updated upstream
-            "Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM). "
-=======
             "Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). "
->>>>>>> Stashed changes
             "If not specified, all folders will be processed."
         ),
     )
