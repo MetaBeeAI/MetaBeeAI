@@ -10,12 +10,18 @@ For the Quick Start Guide, please refer to the :doc:`Quick Start Guide <../quick
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents
+   :caption: User Guide
 
    setup
+   configuration
    pipeline_overview
    workflow
    benchmarking
    analysis
    troubleshooting
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Developer Guide
+
    contributing
