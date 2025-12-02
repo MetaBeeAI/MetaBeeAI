@@ -389,10 +389,10 @@ Analyze the extracted data and create visualizations:
 
 ```bash
 # Analyze trends and co-occurrences
-python -m metabeeai.query_database.trend_analysis
+metabeeai trend-analysis
 
 # Create network visualizations
-python -m metabeeai.query_database.network_analysis
+metabeeai network-analysis
 ```
 
 ### Step 4: Review Outputs

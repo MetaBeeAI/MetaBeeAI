@@ -99,7 +99,7 @@ class TestLLMCommand:
 
         # Check defaults
         assert args.dir is None
-        assert args.folders is None
+        assert args.papers is None
         assert args.overwrite is False
         assert args.relevance_model is None
         assert args.answer_model is None
@@ -118,16 +118,16 @@ class TestLLMCommand:
         assert args.dir == "/test/path"
 
     @patch("metabeeai.cli.handle_llm_command")
-    def test_llm_with_folders(self, mock_handler):
-        """Test 'llm' command with --folders argument."""
+    def test_llm_with_papers(self, mock_handler):
+        """Test 'llm' command with --papers argument."""
         mock_handler.side_effect = SystemExit(0)
 
-        with patch("sys.argv", ["metabee", "llm", "--folders", "002", "003", "004"]):
+        with patch("sys.argv", ["metabee", "llm", "--papers", "002", "003", "004"]):
             with pytest.raises(SystemExit):
                 cli.main()
 
         args = mock_handler.call_args[0][0]
-        assert args.folders == ["002", "003", "004"]
+        assert args.papers == ["002", "003", "004"]
 
     @patch("metabeeai.cli.handle_llm_command")
     def test_llm_with_overwrite(self, mock_handler):
@@ -939,7 +939,7 @@ class TestInstalledCLI:
         result = subprocess.run(["metabeeai", "llm", "--help"], capture_output=True, text=True)
         assert result.returncode == 0
         assert "--dir" in result.stdout
-        assert "--folders" in result.stdout
+        assert "--papers" in result.stdout
         assert "--overwrite" in result.stdout
         assert "--relevance-model" in result.stdout
         assert "--answer-model" in result.stdout

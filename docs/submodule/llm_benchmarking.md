@@ -694,37 +694,37 @@ Instead of using the CLI commands, you can also run the scripts directly as Pyth
 ### Complete Pipeline
 
 ```bash
-python -m metabeeai.llm_benchmarking.run_benchmarking
+metabeeai benchmark-all
 ```
 
 ### Individual Steps
 
 ```bash
 # Step 1: Prepare benchmark data
-python -m metabeeai.llm_benchmarking.prep_benchmark_data
+metabeeai prep-benchmark
 
 # Step 2: Run evaluation
-python -m metabeeai.llm_benchmarking.deepeval_benchmarking --question bee_species
+metabeeai benchmark --question bee_species
 
 # Step 3: Create visualizations
-python -m metabeeai.llm_benchmarking.plot_metrics_comparison
+metabeeai plot-metrics
 
 # Step 4: Identify edge cases
-python -m metabeeai.llm_benchmarking.edge_cases --num-cases 3
+metabeeai edge-cases --num-cases 3
 ```
 
 ### Example with Custom Options
 
 ```bash
 # Run evaluation with custom settings
-python -m metabeeai.llm_benchmarking.deepeval_benchmarking \
+metabeeai benchmark \
   --question bee_species \
   --model gpt-4o \
   --batch-size 10 \
   --max-context-length 200000
 
 # Run complete pipeline with options
-python -m metabeeai.llm_benchmarking.run_benchmarking \
+metabeeai benchmark-all \
   --question bee_species \
   --skip-prep
 ```

@@ -155,7 +155,7 @@ The `annotator.py` script creates annotated PDFs with bounding boxes for visuali
 ### Usage
 
 ```bash
-metabeeai annotate-pdfs --basepath /path/to/data
+python -m metabeeai.llm_review_software.annotator --basepath /path/to/data
 ```
 
 **Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](llm-review-software-alternative-python-module-syntax) section below.
@@ -332,7 +332,7 @@ Instead of using the CLI commands, you can also run the scripts directly as Pyth
 ### Launching the Review GUI
 
 ```bash
-python -m metabeeai.llm_review_software.beegui
+metabeeai review
 ```
 
 ### Running the PDF Annotator
