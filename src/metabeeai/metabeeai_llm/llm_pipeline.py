@@ -391,10 +391,7 @@ def main(argv=None):
         type=str,
         nargs="+",
         default=None,
-        help=(
-            "Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). "
-            "If not specified, all folders will be processed."
-        ),
+        help=("Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). " "If not specified, all folders will be processed."),
     )
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing merged.json files")
     # Models
