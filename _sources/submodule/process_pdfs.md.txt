@@ -166,17 +166,17 @@ metabeeai process-pdfs --skip-split --skip-api
 
 **Usage**:
 
-This script can be run directly as a Python module:
+Run via the CLI with the main pipeline command (skip later steps):
 
 ```bash
 # Split into single-page documents (default)
-python -m metabeeai.process_pdfs.split_pdf /path/to/papers
+metabeeai process-pdfs --skip-api --skip-merge --skip-deduplicate --dir /path/to/papers
 
 # Split into single-page documents (explicit)
-python -m metabeeai.process_pdfs.split_pdf /path/to/papers --pages 1
+metabeeai process-pdfs --pages 1 --skip-api --skip-merge --skip-deduplicate --dir /path/to/papers
 
 # Split into overlapping 2-page documents
-python -m metabeeai.process_pdfs.split_pdf /path/to/papers --pages 2
+metabeeai process-pdfs --pages 2 --skip-api --skip-merge --skip-deduplicate --dir /path/to/papers
 ```
 
 **Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
@@ -223,13 +223,13 @@ python -m metabeeai.process_pdfs.split_pdf /path/to/papers --pages 2
 
 ```bash
 # Split into single-page documents (default)
-python split_pdf.py /path/to/papers
+metabeeai process-pdfs --skip-api --skip-merge --skip-deduplicate --dir /path/to/papers
 
 # Split into single-page documents (explicit)
-python split_pdf.py /path/to/papers --pages 1
+metabeeai process-pdfs --pages 1 --skip-api --skip-merge --skip-deduplicate --dir /path/to/papers
 
 # Split into overlapping 2-page documents
-python split_pdf.py /path/to/papers --pages 2
+metabeeai process-pdfs --pages 2 --skip-api --skip-merge --skip-deduplicate --dir /path/to/papers
 ```
 
 ---
@@ -240,14 +240,14 @@ python split_pdf.py /path/to/papers --pages 2
 
 **Usage**:
 
-This script can be run directly as a Python module:
+Run via the CLI with the main pipeline command (assumes PDFs already split):
 
 ```bash
 # Process all papers
-python -m metabeeai.process_pdfs.va_process_papers --dir data/papers
+metabeeai process-pdfs --skip-split --skip-merge --skip-deduplicate --dir data/papers
 
 # Start from a specific folder (useful for resuming - alphanumeric order)
-python -m metabeeai.process_pdfs.va_process_papers --dir data/papers --start 95UKMIEY
+metabeeai process-pdfs --skip-split --skip-merge --skip-deduplicate --dir data/papers --start 95UKMIEY
 ```
 
 **Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
@@ -296,17 +296,17 @@ python -m metabeeai.process_pdfs.va_process_papers --dir data/papers --start 95U
 
 **Usage**:
 
-This script can be run directly as a Python module:
+Run via the CLI:
 
 ```bash
 # Merge all papers
-python -m metabeeai.process_pdfs.merger --basepath /path/to/data
+metabeeai process-pdfs --merge-only
 
 # Filter out marginalia chunks
-python -m metabeeai.process_pdfs.merger --basepath /path/to/data --filter-chunk-type marginalia
+metabeeai process-pdfs --merge-only --filter-chunk-type marginalia
 
 # Filter multiple chunk types
-python -m metabeeai.process_pdfs.merger --basepath /path/to/data --filter-chunk-type marginalia figure
+metabeeai process-pdfs --merge-only --filter-chunk-type marginalia figure
 ```
 
 **Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
@@ -388,23 +388,11 @@ deduplicated_chunks = deduplicate_chunks(chunks)
 
 **Usage**:
 
-This script can be run directly as a Python module:
+Run via the CLI as part of merge-only mode (dedup runs after merge):
 
 ```bash
-# Deduplicate all papers
-python -m metabeeai.process_pdfs.batch_deduplicate
-
-# Deduplicate papers in a range (for numeric folders, backward compatibility)
-python -m metabeeai.process_pdfs.batch_deduplicate --start-paper 1 --end-paper 10
-
-# Dry run (analyze without modifying files)
-python -m metabeeai.process_pdfs.batch_deduplicate --dry-run
-
-# Custom directory
-python -m metabeeai.process_pdfs.batch_deduplicate --base-dir /path/to/papers
-
-# Verbose output
-python -m metabeeai.process_pdfs.batch_deduplicate --verbose
+# Deduplicate all papers (merge-only already runs dedup)
+metabeeai process-pdfs --merge-only
 ```
 
 **Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
@@ -446,22 +434,22 @@ If you need to run individual steps (useful for debugging or resuming):
 
 #### Step 1: Split PDFs
 ```bash
-python -m metabeeai.process_pdfs.split_pdf /path/to/papers
+metabeeai process-pdfs --skip-api --skip-merge --skip-deduplicate --dir /path/to/papers
 ```
 
 #### Step 2: Process with Vision API
 ```bash
-python -m metabeeai.process_pdfs.va_process_papers --dir /path/to/papers
+metabeeai process-pdfs --skip-split --skip-merge --skip-deduplicate --dir /path/to/papers
 ```
 
 #### Step 3: Merge JSON files
 ```bash
-python -m metabeeai.process_pdfs.merger --basepath /path/to/data
+metabeeai process-pdfs --merge-only --dir /path/to/data/papers
 ```
 
 #### Step 4: Deduplicate chunks
 ```bash
-python -m metabeeai.process_pdfs.batch_deduplicate --base-dir /path/to/papers
+metabeeai process-pdfs --merge-only --dir /path/to/data/papers
 ```
 
 **Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](process-pdfs-alternative-python-module-syntax) section below.
@@ -619,7 +607,7 @@ Raw PDF → Split PDF → Vision API → Individual JSONs → Merged JSON → De
 
 ### "No merged_v2.json files found"
 - **Cause**: Merger step hasn't been run yet or failed
-- **Fix**: Run `python -m metabeeai.process_pdfs.merger --basepath /path/to/data` first, or use `metabeeai process-pdfs --skip-split --skip-api` to run merge and deduplication steps
+- **Fix**: Run `metabeeai process-pdfs --merge-only --dir /path/to/data/papers` first, or use `metabeeai process-pdfs --skip-split --skip-api` to run merge and deduplication steps
 
 ### API processing is slow
 - **Cause**: Vision API processes each page individually
@@ -694,7 +682,7 @@ metabeeai process-pdfs --start 95UKMIEY --end CX9M8HCM --filter-chunk-type margi
 metabeeai process-pdfs --start 95UKMIEY --end CX9M8HCM --filter-chunk-type marginalia figure
 
 # When running merger separately
-python -m metabeeai.process_pdfs.merger --basepath /path/to/data --filter-chunk-type marginalia
+metabeeai process-pdfs --merge-only --dir /path/to/data/papers --filter-chunk-type marginalia
 ```
 
 Common chunk types to filter:
@@ -708,13 +696,13 @@ If processing is interrupted, the pipeline is resume-friendly:
 
 ```bash
 # API processing automatically skips existing JSON files
-python -m metabeeai.process_pdfs.va_process_papers --dir /path/to/papers --start 95UKMIEY
+metabeeai process-pdfs --skip-split --skip-merge --skip-deduplicate --dir /path/to/papers --start 95UKMIEY
 
 # Process all with resumption from a specific folder
 metabeeai process-pdfs --start 95UKMIEY
 
 # Deduplication can be re-run on specific papers (numeric folders)
-python -m metabeeai.process_pdfs.batch_deduplicate --start-paper 50 --end-paper 100
+metabeeai process-pdfs --merge-only --start 50 --end 100
 ```
 
 ### Dry Run Mode
@@ -723,10 +711,10 @@ Test the pipeline without making changes:
 
 ```bash
 # Analyze duplication without modifying files
-python -m metabeeai.process_pdfs.batch_deduplicate --dry-run
+metabeeai process-pdfs --merge-only
 
 # See what would happen
-python -m metabeeai.process_pdfs.batch_deduplicate --dry-run --verbose
+metabeeai process-pdfs --merge-only
 ```
 
 ---
@@ -783,7 +771,7 @@ After processing your PDFs:
 
 3. Proceed to the LLM pipeline:
    ```bash
-   metabeeai llm --folders 95UKMIEY CX9M8HCM
+   metabeeai llm --papers 95UKMIEY CX9M8HCM
    ```
 
 ---
@@ -797,38 +785,38 @@ Instead of using the CLI commands, you can also run the scripts directly as Pyth
 
 ```bash
 # Process all papers (all steps)
-python -m metabeeai.process_pdfs.process_all
+metabeeai process-pdfs
 
 # Process papers in a specific range (alphanumeric order)
-python -m metabeeai.process_pdfs.process_all --start 95UKMIEY --end CX9M8HCM
+metabeeai process-pdfs --start 95UKMIEY --end CX9M8HCM
 
 # Process papers from a starting folder to the end
-python -m metabeeai.process_pdfs.process_all --start 95UKMIEY
+metabeeai process-pdfs --start 95UKMIEY
 
 # Merge-only mode (skip expensive PDF splitting and API processing)
-python -m metabeeai.process_pdfs.process_all --merge-only
+metabeeai process-pdfs --merge-only
 
 # Filter out marginalia chunks during merging
-python -m metabeeai.process_pdfs.process_all --start 95UKMIEY --end CX9M8HCM --filter-chunk-type marginalia
+metabeeai process-pdfs --start 95UKMIEY --end CX9M8HCM --filter-chunk-type marginalia
 
 # Split into overlapping 2-page documents
-python -m metabeeai.process_pdfs.process_all --pages 2
+metabeeai process-pdfs --pages 2
 ```
 
 ### Running Individual Steps
 
 ```bash
 # Step 1: Split PDFs
-python -m metabeeai.process_pdfs.split_pdf /path/to/papers --pages 2
+metabeeai process-pdfs --pages 2 --skip-api --skip-merge --skip-deduplicate --dir /path/to/papers
 
 # Step 2: Process with Vision API
-python -m metabeeai.process_pdfs.va_process_papers --dir /path/to/papers --start 95UKMIEY
+metabeeai process-pdfs --skip-split --skip-merge --skip-deduplicate --dir /path/to/papers --start 95UKMIEY
 
 # Step 3: Merge JSON files
-python -m metabeeai.process_pdfs.merger --basepath /path/to/data --filter-chunk-type marginalia
+metabeeai process-pdfs --merge-only --dir /path/to/data/papers --filter-chunk-type marginalia
 
 # Step 4: Deduplicate chunks
-python -m metabeeai.process_pdfs.batch_deduplicate --base-dir /path/to/papers --dry-run
+metabeeai process-pdfs --merge-only --dir /path/to/papers
 ```
 
 ### Using Functions Programmatically

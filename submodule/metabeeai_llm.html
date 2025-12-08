@@ -482,10 +482,10 @@ metabeeai<span class="w"> </span>llm
 metabeeai<span class="w"> </span>llm<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 
 <span class="c1"># Process specific paper folders by name</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--folders<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM<span class="w"> </span>4KV2ZB36
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--papers<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM<span class="w"> </span>4KV2ZB36
 
 <span class="c1"># Process specific folders in a custom directory</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--folders<span class="w"> </span>PAPER_ID1<span class="w"> </span>PAPER_ID2
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--papers<span class="w"> </span>PAPER_ID1<span class="w"> </span>PAPER_ID2
 
 <span class="c1"># Use different models for chunk selection and answer generation</span>
 metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
@@ -494,9 +494,9 @@ metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<sp
 metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
 
 <span class="c1"># Use predefined configurations (easier!)</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>fast<span class="w">      </span><span class="c1"># Fast &amp; cheap processing</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>balanced<span class="w">  </span><span class="c1"># Balanced speed and quality (recommended)</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>quality<span class="w">   </span><span class="c1"># High quality for critical analysis</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>fast<span class="w">      </span><span class="c1"># Fast &amp; cheap processing</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>balanced<span class="w">  </span><span class="c1"># Balanced speed and quality (recommended)</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>quality<span class="w">   </span><span class="c1"># High quality for critical analysis</span>
 
 <span class="c1"># Overwrite existing answers.json files</span>
 metabeeai<span class="w"> </span>llm<span class="w"> </span>--overwrite
@@ -583,9 +583,9 @@ metabeeai<span class="w"> </span>llm<span class="w"> </span>--overwrite
 metabeeai<span class="w"> </span>llm
 
 <span class="c1"># Use predefined configurations (recommended)</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>fast<span class="w">      </span><span class="c1"># Fast &amp; cheap processing</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>balanced<span class="w">  </span><span class="c1"># Balanced speed and quality</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>quality<span class="w">   </span><span class="c1"># High quality for critical analysis</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>fast<span class="w">      </span><span class="c1"># Fast &amp; cheap processing</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>balanced<span class="w">  </span><span class="c1"># Balanced speed and quality</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>quality<span class="w">   </span><span class="c1"># High quality for critical analysis</span>
 
 <span class="c1"># Custom model combinations</span>
 metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span>
@@ -596,7 +596,7 @@ metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<sp
 </section>
 <section id="predefined-configurations">
 <h3><strong>Predefined Configurations</strong>:<a class="headerlink" href="#predefined-configurations" title="Link to this heading">#</a></h3>
-<p>The easiest way to use different model combinations is with the <code class="docutils literal notranslate"><span class="pre">--config</span></code> option:</p>
+<p>The easiest way to use different model combinations is with the <code class="docutils literal notranslate"><span class="pre">--preset</span></code> option:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Configuration</p></th>
@@ -608,19 +608,19 @@ metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<sp
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Fast</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">fast</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--preset</span> <span class="pre">fast</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o-mini</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o-mini</span></code></p></td>
 <td><p>High-volume processing, cost-sensitive</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Balanced</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">balanced</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--preset</span> <span class="pre">balanced</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o-mini</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code></p></td>
 <td><p><strong>Recommended for most use cases</strong></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Quality</strong></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">quality</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--preset</span> <span class="pre">quality</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">gpt-4o</span></code></p></td>
 <td><p>Critical analysis, maximum accuracy</p></td>
@@ -660,7 +660,7 @@ Edit the file and change <code class="docutils literal notranslate"><span class=
 </pre></div>
 </div>
 <p><strong>View current configuration</strong> (CLI):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.pipeline_config
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>view/edit<span class="o">)</span><span class="w"> </span>src/metabeeai/metabeeai_llm/pipeline_config.py
 </pre></div>
 </div>
 <p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#metabeeai-llm-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
@@ -745,13 +745,13 @@ cp<span class="w"> </span>../env.example<span class="w"> </span>../.env
 metabeeai<span class="w"> </span>llm
 
 <span class="c1"># Process specific paper folders by name</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--folders<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM<span class="w"> </span>4KV2ZB36
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--papers<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM<span class="w"> </span>4KV2ZB36
 
 <span class="c1"># Process all papers in a custom directory</span>
 metabeeai<span class="w"> </span>llm<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 
 <span class="c1"># Use predefined configuration (recommended)</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--config<span class="w"> </span>balanced
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>balanced
 </pre></div>
 </div>
 <p><strong>Step 3: Review Results</strong></p>
@@ -908,7 +908,7 @@ metabeeai<span class="w"> </span>llm
 metabeeai<span class="w"> </span>llm
 
 <span class="c1"># Or process specific papers</span>
-metabeeai<span class="w"> </span>llm<span class="w"> </span>--folders<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--papers<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
@@ -1003,26 +1003,26 @@ metabeeai<span class="w"> </span>llm<span class="w"> </span>--folders<span class
 <section id="running-the-main-pipeline">
 <h3>Running the Main Pipeline<a class="headerlink" href="#running-the-main-pipeline" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers in the default directory</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.llm_pipeline
+metabeeai<span class="w"> </span>llm
 
 <span class="c1"># Process all papers in a specific directory</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.llm_pipeline<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 
 <span class="c1"># Process specific paper folders by name</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.llm_pipeline<span class="w"> </span>--folders<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM<span class="w"> </span>4KV2ZB36
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--papers<span class="w"> </span>283C6B42<span class="w"> </span>3ZHNVADM<span class="w"> </span>4KV2ZB36
 
 <span class="c1"># Use predefined configurations</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.llm_pipeline<span class="w"> </span>--config<span class="w"> </span>balanced
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>balanced
 
 <span class="c1"># Use custom models</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.llm_pipeline<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="viewing-configuration">
 <h3>Viewing Configuration<a class="headerlink" href="#viewing-configuration" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># View current pipeline configuration</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.metabeeai_llm.pipeline_config
+<span class="o">(</span>view/edit<span class="o">)</span><span class="w"> </span>src/metabeeai/metabeeai_llm/pipeline_config.py
 </pre></div>
 </div>
 </section>

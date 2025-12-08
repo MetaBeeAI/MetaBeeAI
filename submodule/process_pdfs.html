@@ -555,15 +555,15 @@ metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--skip-spli
 <p><strong>Purpose</strong>: Splits multi-page PDFs into either single-page documents or overlapping 2-page segments.</p>
 <p><strong>Why overlapping pages?</strong>: Scientific papers often have content that spans across pages (tables, paragraphs). Overlapping 2-page segments ensure we don’t lose information at page boundaries.</p>
 <p><strong>Usage</strong>:</p>
-<p>This script can be run directly as a Python module:</p>
+<p>Run via the CLI with the main pipeline command (skip later steps):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split into single-page documents (default)</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.split_pdf<span class="w"> </span>/path/to/papers
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--skip-api<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 
 <span class="c1"># Split into single-page documents (explicit)</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.split_pdf<span class="w"> </span>/path/to/papers<span class="w"> </span>--pages<span class="w"> </span><span class="m">1</span>
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--pages<span class="w"> </span><span class="m">1</span><span class="w"> </span>--skip-api<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 
 <span class="c1"># Split into overlapping 2-page documents</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.split_pdf<span class="w"> </span>/path/to/papers<span class="w"> </span>--pages<span class="w"> </span><span class="m">2</span>
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--pages<span class="w"> </span><span class="m">2</span><span class="w"> </span>--skip-api<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 </pre></div>
 </div>
 <p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#process-pdfs-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
@@ -622,13 +622,13 @@ python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.s
 <section id="split-pdf-examples">
 <h4><code class="docutils literal notranslate"><span class="pre">split_pdf</span></code> examples<a class="headerlink" href="#split-pdf-examples" title="Link to this heading">#</a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split into single-page documents (default)</span>
-python<span class="w"> </span>split_pdf.py<span class="w"> </span>/path/to/papers
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--skip-api<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 
 <span class="c1"># Split into single-page documents (explicit)</span>
-python<span class="w"> </span>split_pdf.py<span class="w"> </span>/path/to/papers<span class="w"> </span>--pages<span class="w"> </span><span class="m">1</span>
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--pages<span class="w"> </span><span class="m">1</span><span class="w"> </span>--skip-api<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 
 <span class="c1"># Split into overlapping 2-page documents</span>
-python<span class="w"> </span>split_pdf.py<span class="w"> </span>/path/to/papers<span class="w"> </span>--pages<span class="w"> </span><span class="m">2</span>
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--pages<span class="w"> </span><span class="m">2</span><span class="w"> </span>--skip-api<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 </pre></div>
 </div>
 </section>
@@ -638,12 +638,12 @@ python<span class="w"> </span>split_pdf.py<span class="w"> </span>/path/to/paper
 <h3><code class="docutils literal notranslate"><span class="pre">va_process_papers</span></code> - Vision API Processor<a class="headerlink" href="#va-process-papers-vision-api-processor" title="Link to this heading">#</a></h3>
 <p><strong>Purpose</strong>: Processes each split PDF through Landing AI’s Vision Agentic Document Analysis API to extract text and structure.</p>
 <p><strong>Usage</strong>:</p>
-<p>This script can be run directly as a Python module:</p>
+<p>Run via the CLI with the main pipeline command (assumes PDFs already split):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.va_process_papers<span class="w"> </span>--dir<span class="w"> </span>data/papers
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--skip-split<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>data/papers
 
 <span class="c1"># Start from a specific folder (useful for resuming - alphanumeric order)</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.va_process_papers<span class="w"> </span>--dir<span class="w"> </span>data/papers<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--skip-split<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>data/papers<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
 </pre></div>
 </div>
 <p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#process-pdfs-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
@@ -689,15 +689,15 @@ python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.v
 <h3>4. <code class="docutils literal notranslate"><span class="pre">merger.py</span></code> - JSON Merger<a class="headerlink" href="#merger-py-json-merger" title="Link to this heading">#</a></h3>
 <p><strong>Purpose</strong>: Combines individual page JSON files into a single <code class="docutils literal notranslate"><span class="pre">merged_v2.json</span></code> file per paper, handling overlapping pages correctly.</p>
 <p><strong>Usage</strong>:</p>
-<p>This script can be run directly as a Python module:</p>
+<p>Run via the CLI:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Merge all papers</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.merger<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only
 
 <span class="c1"># Filter out marginalia chunks</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.merger<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
 
 <span class="c1"># Filter multiple chunk types</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.merger<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia<span class="w"> </span>figure
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia<span class="w"> </span>figure
 </pre></div>
 </div>
 <p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#process-pdfs-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
@@ -778,21 +778,9 @@ python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.m
 <h3>6. <code class="docutils literal notranslate"><span class="pre">batch_deduplicate.py</span></code> - Batch Deduplication Runner<a class="headerlink" href="#batch-deduplicate-py-batch-deduplication-runner" title="Link to this heading">#</a></h3>
 <p><strong>Purpose</strong>: Processes all <code class="docutils literal notranslate"><span class="pre">merged_v2.json</span></code> files in a directory to remove duplicates.</p>
 <p><strong>Usage</strong>:</p>
-<p>This script can be run directly as a Python module:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Deduplicate all papers</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.batch_deduplicate
-
-<span class="c1"># Deduplicate papers in a range (for numeric folders, backward compatibility)</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.batch_deduplicate<span class="w"> </span>--start-paper<span class="w"> </span><span class="m">1</span><span class="w"> </span>--end-paper<span class="w"> </span><span class="m">10</span>
-
-<span class="c1"># Dry run (analyze without modifying files)</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.batch_deduplicate<span class="w"> </span>--dry-run
-
-<span class="c1"># Custom directory</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.batch_deduplicate<span class="w"> </span>--base-dir<span class="w"> </span>/path/to/papers
-
-<span class="c1"># Verbose output</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.batch_deduplicate<span class="w"> </span>--verbose
+<p>Run via the CLI as part of merge-only mode (dedup runs after merge):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Deduplicate all papers (merge-only already runs dedup)</span>
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only
 </pre></div>
 </div>
 <p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#process-pdfs-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
@@ -833,25 +821,25 @@ python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.b
 <p>If you need to run individual steps (useful for debugging or resuming):</p>
 <section id="step-1-split-pdfs">
 <h4>Step 1: Split PDFs<a class="headerlink" href="#step-1-split-pdfs" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.split_pdf<span class="w"> </span>/path/to/papers
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--skip-api<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 </pre></div>
 </div>
 </section>
 <section id="step-2-process-with-vision-api">
 <h4>Step 2: Process with Vision API<a class="headerlink" href="#step-2-process-with-vision-api" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.va_process_papers<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--skip-split<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 </pre></div>
 </div>
 </section>
 <section id="step-3-merge-json-files">
 <h4>Step 3: Merge JSON files<a class="headerlink" href="#step-3-merge-json-files" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.merger<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only<span class="w"> </span>--dir<span class="w"> </span>/path/to/data/papers
 </pre></div>
 </div>
 </section>
 <section id="step-4-deduplicate-chunks">
 <h4>Step 4: Deduplicate chunks<a class="headerlink" href="#step-4-deduplicate-chunks" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.batch_deduplicate<span class="w"> </span>--base-dir<span class="w"> </span>/path/to/papers
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only<span class="w"> </span>--dir<span class="w"> </span>/path/to/data/papers
 </pre></div>
 </div>
 <p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#process-pdfs-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
@@ -1024,7 +1012,7 @@ python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.b
 <h3>“No merged_v2.json files found”<a class="headerlink" href="#no-merged-v2-json-files-found" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Cause</strong>: Merger step hasn’t been run yet or failed</p></li>
-<li><p><strong>Fix</strong>: Run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">metabeeai.process_pdfs.merger</span> <span class="pre">--basepath</span> <span class="pre">/path/to/data</span></code> first, or use <code class="docutils literal notranslate"><span class="pre">metabeeai</span> <span class="pre">process-pdfs</span> <span class="pre">--skip-split</span> <span class="pre">--skip-api</span></code> to run merge and deduplication steps</p></li>
+<li><p><strong>Fix</strong>: Run <code class="docutils literal notranslate"><span class="pre">metabeeai</span> <span class="pre">process-pdfs</span> <span class="pre">--merge-only</span> <span class="pre">--dir</span> <span class="pre">/path/to/data/papers</span></code> first, or use <code class="docutils literal notranslate"><span class="pre">metabeeai</span> <span class="pre">process-pdfs</span> <span class="pre">--skip-split</span> <span class="pre">--skip-api</span></code> to run merge and deduplication steps</p></li>
 </ul>
 </section>
 <section id="api-processing-is-slow">
@@ -1112,7 +1100,7 @@ metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--start<spa
 metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia<span class="w"> </span>figure
 
 <span class="c1"># When running merger separately</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.merger<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only<span class="w"> </span>--dir<span class="w"> </span>/path/to/data/papers<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
 </pre></div>
 </div>
 <p>Common chunk types to filter:</p>
@@ -1126,13 +1114,13 @@ python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.m
 <h3>Resuming Processing<a class="headerlink" href="#resuming-processing" title="Link to this heading">#</a></h3>
 <p>If processing is interrupted, the pipeline is resume-friendly:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># API processing automatically skips existing JSON files</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.va_process_papers<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--skip-split<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
 
 <span class="c1"># Process all with resumption from a specific folder</span>
 metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
 
 <span class="c1"># Deduplication can be re-run on specific papers (numeric folders)</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.batch_deduplicate<span class="w"> </span>--start-paper<span class="w"> </span><span class="m">50</span><span class="w"> </span>--end-paper<span class="w"> </span><span class="m">100</span>
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only<span class="w"> </span>--start<span class="w"> </span><span class="m">50</span><span class="w"> </span>--end<span class="w"> </span><span class="m">100</span>
 </pre></div>
 </div>
 </section>
@@ -1140,10 +1128,10 @@ python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.b
 <h3>Dry Run Mode<a class="headerlink" href="#dry-run-mode" title="Link to this heading">#</a></h3>
 <p>Test the pipeline without making changes:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyze duplication without modifying files</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.batch_deduplicate<span class="w"> </span>--dry-run
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only
 
 <span class="c1"># See what would happen</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.batch_deduplicate<span class="w"> </span>--dry-run<span class="w"> </span>--verbose
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only
 </pre></div>
 </div>
 </section>
@@ -1201,7 +1189,7 @@ metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--start<spa
 </li>
 <li><p>Check deduplication statistics in the JSON file</p></li>
 <li><p>Proceed to the LLM pipeline:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>llm<span class="w"> </span>--folders<span class="w"> </span>95UKMIEY<span class="w"> </span>CX9M8HCM
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>llm<span class="w"> </span>--papers<span class="w"> </span>95UKMIEY<span class="w"> </span>CX9M8HCM
 </pre></div>
 </div>
 </li>
@@ -1214,38 +1202,38 @@ metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--start<spa
 <section id="running-the-complete-pipeline">
 <h3>Running the Complete Pipeline<a class="headerlink" href="#running-the-complete-pipeline" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers (all steps)</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.process_all
+metabeeai<span class="w"> </span>process-pdfs
 
 <span class="c1"># Process papers in a specific range (alphanumeric order)</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.process_all<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM
 
 <span class="c1"># Process papers from a starting folder to the end</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.process_all<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
 
 <span class="c1"># Merge-only mode (skip expensive PDF splitting and API processing)</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.process_all<span class="w"> </span>--merge-only
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only
 
 <span class="c1"># Filter out marginalia chunks during merging</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.process_all<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--start<span class="w"> </span>95UKMIEY<span class="w"> </span>--end<span class="w"> </span>CX9M8HCM<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
 
 <span class="c1"># Split into overlapping 2-page documents</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.process_all<span class="w"> </span>--pages<span class="w"> </span><span class="m">2</span>
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--pages<span class="w"> </span><span class="m">2</span>
 </pre></div>
 </div>
 </section>
 <section id="running-individual-steps">
 <h3>Running Individual Steps<a class="headerlink" href="#running-individual-steps" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Split PDFs</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.split_pdf<span class="w"> </span>/path/to/papers<span class="w"> </span>--pages<span class="w"> </span><span class="m">2</span>
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--pages<span class="w"> </span><span class="m">2</span><span class="w"> </span>--skip-api<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 
 <span class="c1"># Step 2: Process with Vision API</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.va_process_papers<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--skip-split<span class="w"> </span>--skip-merge<span class="w"> </span>--skip-deduplicate<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--start<span class="w"> </span>95UKMIEY
 
 <span class="c1"># Step 3: Merge JSON files</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.merger<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only<span class="w"> </span>--dir<span class="w"> </span>/path/to/data/papers<span class="w"> </span>--filter-chunk-type<span class="w"> </span>marginalia
 
 <span class="c1"># Step 4: Deduplicate chunks</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.process_pdfs.batch_deduplicate<span class="w"> </span>--base-dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--dry-run
+metabeeai<span class="w"> </span>process-pdfs<span class="w"> </span>--merge-only<span class="w"> </span>--dir<span class="w"> </span>/path/to/papers
 </pre></div>
 </div>
 </section>

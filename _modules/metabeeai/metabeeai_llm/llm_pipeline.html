@@ -775,14 +775,11 @@
         <span class="s2">&quot;--dir&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Base directory containing paper folders (default: auto-detect from config)&quot;</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;--folders&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--papers&quot;</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
         <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
-            <span class="s2">&quot;Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM). &quot;</span>
-            <span class="s2">&quot;If not specified, all folders will be processed.&quot;</span>
-        <span class="p">),</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). &quot;</span> <span class="s2">&quot;If not specified, all folders will be processed.&quot;</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--overwrite&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Overwrite existing merged.json files&quot;</span><span class="p">)</span>
     <span class="c1"># Models</span>
@@ -839,7 +836,7 @@
     <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
         <span class="n">process_papers</span><span class="p">(</span>
             <span class="n">base_dir</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span>
-            <span class="n">paper_folders</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">folders</span><span class="p">,</span>
+            <span class="n">paper_folders</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">papers</span><span class="p">,</span>
             <span class="n">overwrite_merged</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">overwrite</span><span class="p">,</span>
             <span class="n">relevance_model</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">relevance_model</span><span class="p">,</span>
             <span class="n">answer_model</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">answer_model</span><span class="p">,</span>

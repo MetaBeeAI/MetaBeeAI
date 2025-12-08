@@ -421,8 +421,7 @@ Each stage corresponds to one of the core submodules introduced in the <a class=
 </div>
 <section id="step-1-process-pdfs-to-json">
 <h2>Step 1 — Process PDFs to JSON<a class="headerlink" href="#step-1-process-pdfs-to-json" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>process_pdfs
-python<span class="w"> </span>process_all.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>process-pdfs
 </pre></div>
 </div>
 <p><strong>Purpose:</strong> Convert PDFs into structured JSON chunks using the <a class="reference external" href="api/process_pdfs">process_pdfs</a> submodule.
@@ -430,21 +429,19 @@ python<span class="w"> </span>process_all.py
 </section>
 <section id="step-2-extract-information-with-llm">
 <h2>Step 2 — Extract Information with LLM<a class="headerlink" href="#step-2-extract-information-with-llm" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>metabeeai_llm
-
-<span class="c1"># Process all papers (default configuration)</span>
-python<span class="w"> </span>llm_pipeline.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers (default configuration)</span>
+metabeeai<span class="w"> </span>llm
 
 <span class="c1"># Predefined configurations</span>
-python<span class="w"> </span>llm_pipeline.py<span class="w"> </span>--config<span class="w"> </span>balanced<span class="w">   </span><span class="c1"># Fast relevance + high-quality answers</span>
-python<span class="w"> </span>llm_pipeline.py<span class="w"> </span>--config<span class="w"> </span>fast<span class="w">       </span><span class="c1"># Fast &amp; cheap</span>
-python<span class="w"> </span>llm_pipeline.py<span class="w"> </span>--config<span class="w"> </span>quality<span class="w">    </span><span class="c1"># High quality for critical analysis</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>balanced<span class="w">   </span><span class="c1"># Fast relevance + high-quality answers</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>fast<span class="w">       </span><span class="c1"># Fast &amp; cheap</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>quality<span class="w">    </span><span class="c1"># High quality for critical analysis</span>
 
 <span class="c1"># Process specific papers</span>
-python<span class="w"> </span>llm_pipeline.py<span class="w"> </span>--folders<span class="w"> </span>4YD2Y4J8<span class="w"> </span>76DQP2DC
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--papers<span class="w"> </span>4YD2Y4J8<span class="w"> </span>76DQP2DC
 
 <span class="c1"># Custom model selection</span>
-python<span class="w"> </span>llm_pipeline.py<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
+metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o-mini&quot;</span><span class="w"> </span>--answer-model<span class="w"> </span><span class="s2">&quot;openai/gpt-4o&quot;</span>
 </pre></div>
 </div>
 <p><strong>Purpose:</strong> Run LLM-based extraction using the <a class="reference external" href="api/metabeeai_llm">metabeeai_llm</a> submodule.
@@ -454,8 +451,7 @@ python<span class="w"> </span>llm_pipeline.py<span class="w"> </span>--relevance
 </section>
 <section id="step-3-human-review-optional">
 <h2>Step 3 — Human Review (Optional)<a class="headerlink" href="#step-3-human-review-optional" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>llm_review_software
-python<span class="w"> </span>beegui.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>review
 </pre></div>
 </div>
 <p><strong>Purpose:</strong> Launch the graphical review interface provided by the <a class="reference external" href="api/llm_review_software">llm_review_software</a> submodule.
@@ -466,54 +462,44 @@ python<span class="w"> </span>beegui.py
 <h2>Step 4 — Benchmarking and Evaluation<a class="headerlink" href="#step-4-benchmarking-and-evaluation" title="Link to this heading">#</a></h2>
 <p>4a. <strong>Prepare Reviewer Data</strong></p>
 <p>If you have CSV golden answers:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>metabeeai_llm
-python<span class="w"> </span>convert_goldens.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>prep-benchmark<span class="w"> </span>--papers-dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--output<span class="w"> </span>data/benchmark_data_gui.json
+<span class="c1"># If you already ran the review GUI, reviewer data is read automatically from ``answers_extended.json``.</span>
 </pre></div>
 </div>
-<p><strong>Output:</strong> <code class="docutils literal notranslate"><span class="pre">data/papers/{paper_id}/rev1_answers.json</span></code></p>
-<p>If you used the GUI review tool, reviewer data is already available in <code class="docutils literal notranslate"><span class="pre">answers_extended.json</span></code>.</p>
 <p>4b. <strong>Create Benchmark Dataset</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>llm_benchmarking
-python<span class="w"> </span>prep_benchmark_data.py
-
-<span class="c1"># For GUI reviewer answers</span>
-python<span class="w"> </span>prep_benchmark_data_from_GUI_answers.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>prep-benchmark
 </pre></div>
 </div>
 <p><strong>Purpose:</strong> Generate benchmarking datasets using the <a class="reference external" href="api/llm_benchmarking">llm_benchmarking</a> submodule.
 <strong>Output:</strong> <code class="docutils literal notranslate"><span class="pre">data/benchmark_data.json</span></code> or <code class="docutils literal notranslate"><span class="pre">data/benchmark_data_gui.json</span></code></p>
 <p>4c. <strong>Run Evaluation</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>deepeval_benchmarking.py<span class="w"> </span>--question<span class="w"> </span>design
-python<span class="w"> </span>deepeval_benchmarking.py<span class="w"> </span>--question<span class="w"> </span>population
-python<span class="w"> </span>deepeval_benchmarking.py<span class="w"> </span>--question<span class="w"> </span>welfare
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>benchmark<span class="w"> </span>--question<span class="w"> </span>design
+metabeeai<span class="w"> </span>benchmark<span class="w"> </span>--question<span class="w"> </span>population
+metabeeai<span class="w"> </span>benchmark<span class="w"> </span>--question<span class="w"> </span>welfare
 
 <span class="c1"># Evaluate all at once</span>
-python<span class="w"> </span>deepeval_benchmarking.py
+metabeeai<span class="w"> </span>benchmark
 </pre></div>
 </div>
 <p><strong>Output:</strong> <code class="docutils literal notranslate"><span class="pre">deepeval_results/combined_results_{question}_{timestamp}.json</span></code></p>
 <p>4d. <strong>Visualize Results</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>plot_metrics_comparison.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>plot-metrics
 </pre></div>
 </div>
 <p><strong>Output:</strong> <code class="docutils literal notranslate"><span class="pre">deepeval_results/plots/metrics_comparison.png</span></code></p>
 <p>4e. <strong>Identify Problem Papers (Optional)</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>edge_cases.py<span class="w"> </span>--num-cases<span class="w"> </span><span class="m">3</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>edge-cases<span class="w"> </span>--num-cases<span class="w"> </span><span class="m">3</span>
 </pre></div>
 </div>
 <p><strong>Output:</strong> <code class="docutils literal notranslate"><span class="pre">edge_cases/edge-case-report.md</span></code></p>
 </section>
 <section id="step-5-data-analysis">
 <h2>Step 5 — Data Analysis<a class="headerlink" href="#step-5-data-analysis" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>query_database
-
-python<span class="w"> </span>trend_analysis.py
-
-python<span class="w"> </span>network_analysis.py
-
-python<span class="w"> </span>investigate_bee_species.py
-
-python<span class="w"> </span>investigate_pesticides.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data analysis scripts (run as modules)</span>
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.trend_analysis
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.network_analysis
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.investigate_bee_species
+python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database.investigate_pesticides
 </pre></div>
 </div>
 <p><strong>Purpose:</strong> Perform large-scale data aggregation and analysis using the <a class="reference external" href="api/query_database">query_database</a> submodule.

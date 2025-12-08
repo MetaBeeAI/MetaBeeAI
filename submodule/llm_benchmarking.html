@@ -1184,37 +1184,37 @@ metabeeai<span class="w"> </span>plot-metrics<span class="w"> </span>--output-di
 <p>Instead of using the CLI commands, you can also run the scripts directly as Python modules. This is useful if you need to integrate the functionality into other Python scripts or prefer direct module execution.</p>
 <section id="complete-pipeline">
 <h3>Complete Pipeline<a class="headerlink" href="#complete-pipeline" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_benchmarking.run_benchmarking
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>benchmark-all
 </pre></div>
 </div>
 </section>
 <section id="id1">
 <h3>Individual Steps<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Prepare benchmark data</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_benchmarking.prep_benchmark_data
+metabeeai<span class="w"> </span>prep-benchmark
 
 <span class="c1"># Step 2: Run evaluation</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_benchmarking.deepeval_benchmarking<span class="w"> </span>--question<span class="w"> </span>bee_species
+metabeeai<span class="w"> </span>benchmark<span class="w"> </span>--question<span class="w"> </span>bee_species
 
 <span class="c1"># Step 3: Create visualizations</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_benchmarking.plot_metrics_comparison
+metabeeai<span class="w"> </span>plot-metrics
 
 <span class="c1"># Step 4: Identify edge cases</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_benchmarking.edge_cases<span class="w"> </span>--num-cases<span class="w"> </span><span class="m">3</span>
+metabeeai<span class="w"> </span>edge-cases<span class="w"> </span>--num-cases<span class="w"> </span><span class="m">3</span>
 </pre></div>
 </div>
 </section>
 <section id="example-with-custom-options">
 <h3>Example with Custom Options<a class="headerlink" href="#example-with-custom-options" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run evaluation with custom settings</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_benchmarking.deepeval_benchmarking<span class="w"> </span><span class="se">\</span>
+metabeeai<span class="w"> </span>benchmark<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--question<span class="w"> </span>bee_species<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--model<span class="w"> </span>gpt-4o<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--batch-size<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--max-context-length<span class="w"> </span><span class="m">200000</span>
 
 <span class="c1"># Run complete pipeline with options</span>
-python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_benchmarking.run_benchmarking<span class="w"> </span><span class="se">\</span>
+metabeeai<span class="w"> </span>benchmark-all<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--question<span class="w"> </span>bee_species<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--skip-prep
 </pre></div>

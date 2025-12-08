@@ -576,7 +576,7 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">annotator.py</span></code> script creates annotated PDFs with bounding boxes for visualization purposes.</p>
 <section id="id1">
 <h3>Usage<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>annotate-pdfs<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_review_software.annotator<span class="w"> </span>--basepath<span class="w"> </span>/path/to/data
 </pre></div>
 </div>
 <p><strong>Note</strong>: For Python module syntax alternatives, see the <a class="reference internal" href="#llm-review-software-alternative-python-module-syntax"><span class="std std-ref">Alternative: Python Module Syntax</span></a> section below.</p>
@@ -768,7 +768,7 @@
 <p>Instead of using the CLI commands, you can also run the scripts directly as Python modules. This is useful if you need to integrate the functionality into other Python scripts or prefer direct module execution.</p>
 <section id="id2">
 <h3>Launching the Review GUI<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>metabeeai.llm_review_software.beegui
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>review
 </pre></div>
 </div>
 </section>
