@@ -94,10 +94,10 @@ metabeeai llm
 metabeeai llm --dir /path/to/papers
 
 # Process specific paper folders by name
-metabeeai llm --folders 283C6B42 3ZHNVADM 4KV2ZB36
+metabeeai llm --papers 283C6B42 3ZHNVADM 4KV2ZB36
 
 # Process specific folders in a custom directory
-metabeeai llm --dir /path/to/papers --folders PAPER_ID1 PAPER_ID2
+metabeeai llm --dir /path/to/papers --papers PAPER_ID1 PAPER_ID2
 
 # Use different models for chunk selection and answer generation
 metabeeai llm --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o"
@@ -106,9 +106,9 @@ metabeeai llm --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-
 metabeeai llm --relevance-model "openai/gpt-4o" --answer-model "openai/gpt-4o"
 
 # Use predefined configurations (easier!)
-metabeeai llm --config fast      # Fast & cheap processing
-metabeeai llm --config balanced  # Balanced speed and quality (recommended)
-metabeeai llm --config quality   # High quality for critical analysis
+metabeeai llm --preset fast      # Fast & cheap processing
+metabeeai llm --preset balanced  # Balanced speed and quality (recommended)
+metabeeai llm --preset quality   # High quality for critical analysis
 
 # Overwrite existing answers.json files
 metabeeai llm --overwrite
@@ -169,9 +169,9 @@ The pipeline uses two different LLM models for different stages:
 metabeeai llm
 
 # Use predefined configurations (recommended)
-metabeeai llm --config fast      # Fast & cheap processing
-metabeeai llm --config balanced  # Balanced speed and quality
-metabeeai llm --config quality   # High quality for critical analysis
+metabeeai llm --preset fast      # Fast & cheap processing
+metabeeai llm --preset balanced  # Balanced speed and quality
+metabeeai llm --preset quality   # High quality for critical analysis
 
 # Custom model combinations
 metabeeai llm --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o-mini"
@@ -181,13 +181,13 @@ metabeeai llm --relevance-model "openai/gpt-4o" --answer-model "openai/gpt-4o"
 
 ### **Predefined Configurations**:
 
-The easiest way to use different model combinations is with the `--config` option:
+The easiest way to use different model combinations is with the `--preset` option:
 
 | Configuration | Command | Relevance Model | Answer Model | Use Case |
 |---------------|---------|----------------|--------------|----------|
-| **Fast** | `--config fast` | `gpt-4o-mini` | `gpt-4o-mini` | High-volume processing, cost-sensitive |
-| **Balanced** | `--config balanced` | `gpt-4o-mini` | `gpt-4o` | **Recommended for most use cases** |
-| **Quality** | `--config quality` | `gpt-4o` | `gpt-4o` | Critical analysis, maximum accuracy |
+| **Fast** | `--preset fast` | `gpt-4o-mini` | `gpt-4o-mini` | High-volume processing, cost-sensitive |
+| **Balanced** | `--preset balanced` | `gpt-4o-mini` | `gpt-4o` | **Recommended for most use cases** |
+| **Quality** | `--preset quality` | `gpt-4o` | `gpt-4o` | Critical analysis, maximum accuracy |
 
 ### **Custom Model Selection**:
 ```bash
@@ -222,7 +222,7 @@ CURRENT_CONFIG = QUALITY_CONFIG  # High quality
 
 **View current configuration** (CLI):
 ```bash
-python -m metabeeai.metabeeai_llm.pipeline_config
+(view/edit) src/metabeeai/metabeeai_llm/pipeline_config.py
 ```
 
 **Note**: For Python module syntax alternatives, see the [Alternative: Python Module Syntax](metabeeai-llm-alternative-python-module-syntax) section below.
@@ -313,13 +313,13 @@ Edit `questions.yml` to add/modify questions. See the examples in the file.
 metabeeai llm
 
 # Process specific paper folders by name
-metabeeai llm --folders 283C6B42 3ZHNVADM 4KV2ZB36
+metabeeai llm --papers 283C6B42 3ZHNVADM 4KV2ZB36
 
 # Process all papers in a custom directory
 metabeeai llm --dir /path/to/papers
 
 # Use predefined configuration (recommended)
-metabeeai llm --config balanced
+metabeeai llm --preset balanced
 ```
 
 **Step 3: Review Results**
@@ -466,7 +466,7 @@ QUESTIONS:
 metabeeai llm
 
 # Or process specific papers
-metabeeai llm --folders 283C6B42 3ZHNVADM
+metabeeai llm --papers 283C6B42 3ZHNVADM
 ```
 
 3. **Result**: Your `answers.json` will now contain all three question types:
@@ -556,26 +556,26 @@ Instead of using the CLI commands, you can also run the scripts directly as Pyth
 
 ```bash
 # Process all papers in the default directory
-python -m metabeeai.metabeeai_llm.llm_pipeline
+metabeeai llm
 
 # Process all papers in a specific directory
-python -m metabeeai.metabeeai_llm.llm_pipeline --dir /path/to/papers
+metabeeai llm --dir /path/to/papers
 
 # Process specific paper folders by name
-python -m metabeeai.metabeeai_llm.llm_pipeline --folders 283C6B42 3ZHNVADM 4KV2ZB36
+metabeeai llm --papers 283C6B42 3ZHNVADM 4KV2ZB36
 
 # Use predefined configurations
-python -m metabeeai.metabeeai_llm.llm_pipeline --config balanced
+metabeeai llm --preset balanced
 
 # Use custom models
-python -m metabeeai.metabeeai_llm.llm_pipeline --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o"
+metabeeai llm --relevance-model "openai/gpt-4o-mini" --answer-model "openai/gpt-4o"
 ```
 
 ### Viewing Configuration
 
 ```bash
 # View current pipeline configuration
-python -m metabeeai.metabeeai_llm.pipeline_config
+(view/edit) src/metabeeai/metabeeai_llm/pipeline_config.py
 ```
 
 ### Using the Q&A Engine Programmatically

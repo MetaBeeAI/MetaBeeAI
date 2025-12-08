@@ -387,14 +387,11 @@ def main(argv=None):
         "--dir", type=str, default=None, help="Base directory containing paper folders (default: auto-detect from config)"
     )
     parser.add_argument(
-        "--folders",
+        "--papers",
         type=str,
         nargs="+",
         default=None,
-        help=(
-            "Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM). "
-            "If not specified, all folders will be processed."
-        ),
+        help=("Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). " "If not specified, all folders will be processed."),
     )
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing merged.json files")
     # Models
@@ -451,7 +448,7 @@ def main(argv=None):
     asyncio.run(
         process_papers(
             base_dir=args.dir,
-            paper_folders=args.folders,
+            paper_folders=args.papers,
             overwrite_merged=args.overwrite,
             relevance_model=args.relevance_model,
             answer_model=args.answer_model,

@@ -144,7 +144,7 @@ metabeeai process-pdfs --dir /path/to/YOURDATABASE/papers
 metabeeai llm
 
 # Process specific paper folders
-metabeeai llm --folders 4YD2Y4J8 76DQP2DC
+metabeeai llm --papers 4YD2Y4J8 76DQP2DC
 
 # Override model choices
 metabeeai llm --relevance-model openai/gpt-4o-mini --answer-model openai/gpt-4o
@@ -155,7 +155,7 @@ metabeeai llm --dir /path/to/YOURDATABASE/papers
 
 **Purpose**: Run `questions.yml` against processed chunks and store answers
 **Output**: `YOURDATABASE/papers/{paper_id}/answers.json`
-**Key options**: `--dir`, `--folders`, `--overwrite`, `--relevance-model`, `--answer-model`, `--config`
+**Key options**: `--dir`, `--papers`, `--overwrite`, `--relevance-model`, `--answer-model`, `--config`
 
 ---
 
@@ -666,7 +666,7 @@ python llm_pipeline.py --config fast
 ### 3. Cost Management
 - Use `--config fast` for initial testing
 - Use `--config balanced` for production runs
-- Test with specific papers using `--folders` before full runs
+- Test with specific papers using `--papers` before full runs
 
 ### 4. Quality Assurance
 - Review edge cases to identify patterns

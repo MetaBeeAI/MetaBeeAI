@@ -28,8 +28,8 @@ def handle_llm_command(args):
     sys.argv = ["llm_pipeline.py"]
     if args.dir:
         sys.argv.extend(["--dir", args.dir])
-    if args.folders:
-        sys.argv.extend(["--folders"] + args.folders)
+    if args.papers:
+        sys.argv.extend(["--papers"] + args.papers)
     if args.overwrite:
         sys.argv.append("--overwrite")
     if args.relevance_model:
@@ -214,11 +214,11 @@ def main():
         help="Base directory containing paper folders (default: auto-detect from config)",
     )
     llm_parser.add_argument(
-        "--folders",
+        "--papers",
         type=str,
         nargs="+",
         default=None,
-        help="Specific paper folder names to process (e.g., 283C6B42 3ZHNVADM). "
+        help="Specific paper IDs/folders to process (e.g., 283C6B42 3ZHNVADM). "
         "If not specified, all folders will be processed.",
     )
     llm_parser.add_argument(
