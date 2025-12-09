@@ -207,13 +207,23 @@ def merge_json_in_the_folder(folder_path, overwrite=False):
         json.dump(json_obj, f, indent=2)
 
 
-async def process_papers(base_dir=None, paper_folders=None, overwrite_merged=False, relevance_model=None, answer_model=None):
+async def process_papers(
+    base_dir=None,
+    paper_folders=None,
+    overwrite_merged=False,
+    relevance_model=None,
+    answer_model=None,
+    start_folder=None,
+    end_folder=None,
+):
     """
     Processes papers in the specified directory.
 
     Args:
         base_dir: Base directory containing paper folders (defaults to config)
         paper_folders: List of specific paper folder names to process (defaults to all folders)
+        start_folder: Optional start folder (inclusive, alphanumeric)
+        end_folder: Optional end folder (inclusive, alphanumeric)
         overwrite_merged: Whether to overwrite existing merged.json files
         relevance_model: Model to use for chunk selection (defaults to config)
         answer_model: Model to use for answer generation and reflection (defaults to config)
@@ -242,6 +252,15 @@ async def process_papers(base_dir=None, paper_folders=None, overwrite_merged=Fal
             if os.path.isdir(item_path) and not item.startswith("."):
                 paper_folders.append(item)
         paper_folders.sort()  # Sort for consistent processing order
+        if start_folder or end_folder:
+            filtered = []
+            for folder in paper_folders:
+                if start_folder and folder < start_folder:
+                    continue
+                if end_folder and folder > end_folder:
+                    continue
+                filtered.append(folder)
+            paper_folders = filtered
 
     total_papers = len(paper_folders)
     completed_papers = 0
@@ -393,6 +412,18 @@ def main(argv=None):
         default=None,
         help=("Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). " "If not specified, all folders will be processed."),
     )
+    parser.add_argument(
+        "--start",
+        type=str,
+        default=None,
+        help="Start processing from this paper ID (alphanumeric, optional; only applies when --papers is not set)",
+    )
+    parser.add_argument(
+        "--end",
+        type=str,
+        default=None,
+        help="End processing at this paper ID (alphanumeric, optional; only applies when --papers is not set)",
+    )
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing merged.json files")
     # Models
     parser.add_argument(
@@ -452,6 +483,8 @@ def main(argv=None):
             overwrite_merged=args.overwrite,
             relevance_model=args.relevance_model,
             answer_model=args.answer_model,
+            start_folder=args.start,
+            end_folder=args.end,
         )
     )
 
