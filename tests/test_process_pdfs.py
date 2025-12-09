@@ -22,7 +22,7 @@ def clear_config_cache(monkeypatch):
     # Clear any lingering config-related env vars from previous tests
     monkeypatch.delenv("METABEEAI_CONFIG_FILE", raising=False)
     monkeypatch.delenv("METABEEAI_PAPERS_DIR", raising=False)
-    monkeypatch.delenv("LANDING_API_KEY", raising=False)
+    monkeypatch.delenv("LANDING_AI_API_KEY", raising=False)
     yield
     config._config_cache.clear()
 
@@ -168,14 +168,14 @@ class TestProcessAllConfig:
     def test_validate_environment_no_api_key(self, monkeypatch):
         """Test that validate_environment returns False when API key missing."""
         monkeypatch.delenv("METABEEAI_CONFIG_FILE", raising=False)
-        monkeypatch.delenv("LANDING_API_KEY", raising=False)
+        monkeypatch.delenv("LANDING_AI_API_KEY", raising=False)
 
         assert process_all.validate_environment() is False
 
     def test_validate_environment_with_env_api_key(self, monkeypatch):
         """Test that validate_environment passes with env var API key."""
         monkeypatch.delenv("METABEEAI_CONFIG_FILE", raising=False)
-        monkeypatch.setenv("LANDING_API_KEY", "test-api-key-123")
+        monkeypatch.setenv("LANDING_AI_API_KEY", "test-api-key-123")
 
         assert process_all.validate_environment() is True
 
@@ -185,7 +185,7 @@ class TestProcessAllConfig:
         config_file.write_text("landing_api_key: config-key-456\n")
 
         monkeypatch.setenv("METABEEAI_CONFIG_FILE", str(config_file))
-        monkeypatch.delenv("LANDING_API_KEY", raising=False)
+        monkeypatch.delenv("LANDING_AI_API_KEY", raising=False)
 
         assert process_all.validate_environment() is True
 
@@ -235,9 +235,9 @@ class TestVAProcessPapersConfig:
 
     @patch("metabeeai.process_pdfs.va_process_papers.requests.post")
     def test_process_papers_uses_env_api_key(self, mock_post, monkeypatch, tmp_path):
-        """Test that process_papers uses LANDING_API_KEY env var."""
+        """Test that process_papers uses LANDING_AI_API_KEY env var."""
         monkeypatch.delenv("METABEEAI_CONFIG_FILE", raising=False)
-        monkeypatch.setenv("LANDING_API_KEY", "env-api-key-123")
+        monkeypatch.setenv("LANDING_AI_API_KEY", "env-api-key-123")
 
         mock_response = MagicMock()
         mock_response.text = "{}"
@@ -269,7 +269,7 @@ class TestVAProcessPapersConfig:
         config_file.write_text("landing_api_key: config-api-key-456\n")
 
         monkeypatch.setenv("METABEEAI_CONFIG_FILE", str(config_file))
-        # Don't set LANDING_API_KEY env var - let config file be used
+        # Don't set LANDING_AI_API_KEY env var - let config file be used
 
         mock_response = MagicMock()
         mock_response.text = "{}"
@@ -301,7 +301,7 @@ class TestVAProcessPapersConfig:
         config_file.write_text("landing_api_key: config-api-key-456\n")
 
         monkeypatch.setenv("METABEEAI_CONFIG_FILE", str(config_file))
-        monkeypatch.setenv("LANDING_API_KEY", "env-api-key-123")
+        monkeypatch.setenv("LANDING_AI_API_KEY", "env-api-key-123")
 
         mock_response = MagicMock()
         mock_response.text = "{}"
