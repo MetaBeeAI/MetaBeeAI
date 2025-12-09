@@ -110,7 +110,7 @@ These parameters are available across all MetaBeeAI commands:
      - None
    * - Landing AI API key
      - ``landing_api_key``
-     - ``LANDING_API_KEY``
+     - ``LANDING_AI_API_KEY``
      - None
 
 Using Environment Variables
@@ -196,7 +196,7 @@ Use config file for stable settings, env vars for secrets::
 
     # .env (NOT committed to git)
     OPENAI_API_KEY=sk-your-actual-key
-    LANDING_API_KEY=your-landing-key
+    LANDING_AI_API_KEY=your-landing-key
 
 Example 2: Production Setup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

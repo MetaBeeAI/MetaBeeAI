@@ -146,7 +146,7 @@ COMMON_PARAMS = {
         "default": None,
     },
     "landing_api_key": {
-        "env_var": "LANDING_API_KEY",
+        "env_var": "LANDING_AI_API_KEY",
         "yaml_key": "landing_api_key",
         "default": None,
     },
