@@ -146,7 +146,7 @@ COMMON_PARAMS = {
         "default": None,
     },
     "landing_api_key": {
-        "env_var": "LANDING_API_KEY",
+        "env_var": "LANDING_AI_API_KEY",
         "yaml_key": "landing_api_key",
         "default": None,
     },
@@ -178,3 +178,13 @@ def get_config_param(name, config_path=None):
 
     p = COMMON_PARAMS[name]
     return get_config_value(p["yaml_key"], config_path=config_path, env_var=p["env_var"], default=p["default"])
+
+
+def get_papers_dir(config_path=None):
+    """Return the papers directory from config/env/defaults."""
+    return get_config_param("papers_dir", config_path=config_path)
+
+
+def get_data_dir(config_path=None):
+    """Return the base data directory from config/env/defaults."""
+    return get_config_param("data_dir", config_path=config_path)

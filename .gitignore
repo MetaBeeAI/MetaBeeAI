@@ -226,3 +226,5 @@ llm_benchmarking/deepeval-results/*
 
 # Metabee AI log files
 metabeeai.log*
+
+data/

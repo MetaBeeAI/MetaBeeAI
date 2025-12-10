@@ -38,6 +38,10 @@ def handle_llm_command(args):
         sys.argv.extend(["--answer-model", args.answer_model])
     if getattr(args, "preset", None):
         sys.argv.extend(["--preset", args.preset])
+    if getattr(args, "start", None):
+        sys.argv.extend(["--start", args.start])
+    if getattr(args, "end", None):
+        sys.argv.extend(["--end", args.end])
     if getattr(args, "config", None):
         sys.argv.extend(["--config", args.config])
     sys.exit(pipeline.main() if hasattr(pipeline, "main") else pipeline.__main__())
@@ -220,6 +224,18 @@ def main():
         default=None,
         help="Specific paper IDs/folders to process (e.g., 283C6B42 3ZHNVADM). "
         "If not specified, all folders will be processed.",
+    )
+    llm_parser.add_argument(
+        "--start",
+        type=str,
+        default=None,
+        help="Start processing from this paper ID (alphanumeric, optional; requires --dir or config)",
+    )
+    llm_parser.add_argument(
+        "--end",
+        type=str,
+        default=None,
+        help="End processing at this paper ID (alphanumeric, optional; requires --dir or config)",
     )
     llm_parser.add_argument(
         "--overwrite",

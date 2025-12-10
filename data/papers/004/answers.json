@@ -1,5 +1,56 @@
 {
   "QUESTIONS": {
+    "QUESTIONS": {
+      "bee_species": {
+        "answer": "1. Bombus impatiens; 2. Osmia spp.; 3. Bombus terrestris",
+        "reason": "The text provided includes the scientific names of the bee species tested in the study.",
+        "chunk_ids": [
+          "3f4b8281-228b-41a1-a5c8-9af598642279",
+          "ca5c028c-e3a5-4514-ade8-d57b40d15d5d"
+        ]
+      },
+      "pesticides": {
+        "answer": "1. Acetamiprid: \n   - Pollen study: 0.452, 4.52, 45.2, 452, or 4520 ppb, oral exposure, 6 weeks\n   - Syrup study: 1.13, 11.3, 113, 1,130, or 11,300 ppb, oral exposure, 6 weeks",
+        "reason": "The study provides detailed information on the pesticide acetamiprid, including doses, exposure methods, and durations across different studies.",
+        "chunk_ids": [
+          "ea1ee5ad-b851-4582-9311-eda826ab0445"
+        ]
+      },
+      "additional_stressors": {
+        "answer": "No additional stressors were tested.",
+        "reason": "The provided text does not mention any additional stressors such as temperature, parasites, pathogens, other chemicals, or diet and nutrition stress being tested in the study.",
+        "chunk_ids": [
+          "8f82fe61-35c3-46e3-aae9-cab82ed04f64"
+        ]
+      },
+      "experimental_methodology": {
+        "answer": "1. **Pollen and Syrup Exposure (Lab):**\n   - **Study Design:** Randomized controlled trial with microcolonies.\n   - **Sample Size:** 30 microcolonies of *Bombus impatiens*, each consisting of 10 worker bees.\n   - **Variables Measured:** Mortality rates, foraging behavior, brood development, pollen and syrup consumption, drone emergence, drone count and weight, number of unhatched eggs, larvae, dead larvae, pupae, total ejected larvae, and average number of full nectar pots.\n   - **Treatment:** Acetamiprid-containing pollen at concentrations of 0.452, 4.52, 45.2, 452, or 4520 ppb and syrup at concentrations of 1.13, 11.3, 113, 1,130, or 11,300 ppb.\n   - **Duration:** 6 weeks for syrup and 7 weeks for pollen.",
+        "reason": "The paper provides detailed empirical methodologies used to study bees, focusing on different exposure routes and their implications for pesticide risk assessment.",
+        "chunk_ids": [
+          "3f4b8281-228b-41a1-a5c8-9af598642279",
+          "ea1ee5ad-b851-4582-9311-eda826ab0445"
+        ]
+      },
+      "significance": {
+        "answer": "- Acetamiprid delivered via pollen significantly reduced drone weight at doses of 4.52 and 452 ppb.\n- No dose-dependent effect on drone weight was observed when acetamiprid was delivered via syrup.\n- Significant reduction in the number of emerged drones was observed only via syrup exposure at 1,130 ppb.\n- No significant reduction in emerged drones was noted in the pollen delivery study at 452 ppb, suggesting dose-dependent effects rather than differences due to the exposure vehicle.\n- Microcolonies consuming more pollen at week 5, thus receiving a higher dose, produced smaller drones, supporting the direct larval toxicity hypothesis.",
+        "reason": "The study provides detailed findings on the effects of acetamiprid on bee physiology, particularly focusing on drone weight and the method of pesticide delivery.",
+        "chunk_ids": [
+          "bfb0b175-5695-4fa2-817a-91857e038971",
+          "681851d0-9d2f-4fa9-930b-db58544c8574",
+          "d73e386e-4013-4e32-89a1-a9b4da581e14",
+          "b35eadf9-3f06-4d05-b1a2-a0a0919c1c4b",
+          "91f47a38-ff02-4c39-a693-ec1bd2d769ba"
+        ]
+      },
+      "future_research": {
+        "answer": "- Investigate whether the route of acetamiprid exposure affects associations between measured microcolony endpoints.\n- Examine exposure route differences on drone production.\n- Conduct experiments to compare exposure route differences across various pesticide classes.\n- Assess the extent to which exposure route differences apply to different castes and pollinator species.\n- Investigate the effects of providing test articles in both pollen and syrup simultaneously to mimic environmental exposures.\n- Focus on drone weight or size, the number of emerged drones, and time to drone emergence as apical endpoints in microcolony analyses.\n- Disentangle treatment effects on foraging and colony food needs from brood production to gain insights into mechanisms of toxicity.\n- Track food consumption over time to estimate exposure at the microcolony level and improve standardization across studies.",
+        "reason": "The authors provide specific future research directions to enhance understanding of pesticide exposure effects on bees.",
+        "chunk_ids": [
+          "53790c22-3031-460a-8f07-ec31e1ac217e",
+          "f801c8e2-d02e-485c-b4ce-a0efb77d598a"
+        ]
+      }
+    },
     "bee_species": {
       "answer": "1. Bombus impatiens",
       "reason": "The methodology sections of the study specify the bee species used in the experiments.",

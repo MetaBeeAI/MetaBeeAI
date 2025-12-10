@@ -1,5 +1,60 @@
 {
   "QUESTIONS": {
+    "QUESTIONS": {
+      "bee_species": {
+        "answer": "1. Bombus terrestris audax",
+        "reason": "The text specifies the species of bumblebee colonies used in the study.",
+        "chunk_ids": [
+          "05ef9004-461f-46aa-a601-db477eca0e4a"
+        ]
+      },
+      "pesticides": {
+        "answer": "1. Thiamethoxam: oral exposure, 96 hours",
+        "reason": "The text provided across multiple chunks gives information about the pesticide thiamethoxam, including its exposure method and duration, but lacks specific dose details.",
+        "chunk_ids": [
+          "2531bd0c-5820-4212-bec4-d64ab8739f8b",
+          "d4ce896d-935c-43e1-bf03-5e8965fa6052",
+          "5341ecd1-2d6c-4368-8fc4-bf02de5ebbe0",
+          "ebc032c6-1253-4882-aa69-605a64618f4c"
+        ]
+      },
+      "additional_stressors": {
+        "answer": "1. Parasite stress: *C. bombi* inoculation, 10,000 cells per bee, oral inoculation, 7 days",
+        "reason": "The study focused on the interaction between thiamethoxam and the parasite *C. bombi* on bumblebees, specifically testing how this combination affects the LD$_{50}$ values. No other stressors such as temperature, diet, or additional chemicals were mentioned as being tested.",
+        "chunk_ids": [
+          "2531bd0c-5820-4212-bec4-d64ab8739f8b",
+          "b6424779-2eec-44ed-8e2f-8c96b28185a4",
+          "ad80106b-61c6-41b1-80a1-03ac6081c642",
+          "ec25e4a6-0d1b-40a4-86f4-c369e7b575ed"
+        ]
+      },
+      "experimental_methodology": {
+        "answer": "1. Parasite examination (lab): Observational study of 6 bumblebee colonies (_Bombus terrestris audax_) maintained in a controlled laboratory environment. Faeces from 15 workers per colony were examined for common bumblebee parasites (_Apicystis bombi_, _Crithidia spp._, and _Nosema spp._) using phase contrast microscopy at 400x magnification. No parasites were found in any of the colonies.\n\n2. Parasite Inoculation (lab): Randomized controlled design with 21 treatment groups, including 2 control groups, 1 *C. bombi* group, 9 thiamethoxam groups, and 9 groups exposed to both thiamethoxam & *C. bombi*. Each treatment group consisted of 40 bumblebees, individually housed in Nicot cages. The primary variable measured was the LD$_{50}$ of thiamethoxam on bumblebees.",
+        "reason": "The text provides details on two empirical methodologies involving bumblebees, focusing on parasite examination and the effects of parasite inoculation and pesticide exposure.",
+        "chunk_ids": [
+          "05ef9004-461f-46aa-a601-db477eca0e4a",
+          "b6424779-2eec-44ed-8e2f-8c96b28185a4"
+        ]
+      },
+      "significance": {
+        "answer": "- The LD$_{50}$ value for thiamethoxam was 6.63 ng per bumblebee when used alone and 6.82 ng when combined with the parasite *C. bombi*, indicating no significant difference in mortality between infected and uninfected bumblebees.\n- Bumblebee size influenced mortality risk, with both smaller and larger bees experiencing increased mortality, though the relationship was not linear.\n- No effect of thiamethoxam or *C. bombi* inoculation on sucrose consumption was observed.\n- Increased thiamethoxam dosage correlated with higher intensity of *C. bombi* infection in bumblebees, but this effect was only observed at lethal dosages, with no effect at sub-lethal levels.\n- Bumblebees exposed to high dosages of thiamethoxam showed significantly higher *C. bombi* intensity, particularly in those that died, suggesting that field-realistic levels may not impact *C. bombi* intensity.",
+        "reason": "The study provides detailed findings on the effects of thiamethoxam on bumblebees, focusing on mortality, parasite interaction, and sucrose consumption.",
+        "chunk_ids": [
+          "a647694b-d6a9-4136-a2d2-1454dfdca5a7",
+          "0fd94102-13b0-4252-8f26-f47669c7bdd0",
+          "37849991-dadf-4356-bcc6-0389a74ad471",
+          "18ec27de-57d8-417a-8503-aaa8c4a0fa22"
+        ]
+      },
+      "future_research": {
+        "answer": "- Develop methodologies that assess the potential sub-lethal interactions between agrochemicals and parasites on bees.\n- Modify toxicity tests, such as LD$_{50}$ experiments, to consider interactions between agrochemicals and various bee parasites.\n- Implement post-authorisation monitoring observations to better understand the interactions between agrochemicals and bee parasites.",
+        "reason": "The authors explicitly suggest future research directions in the discussion section of the text.",
+        "chunk_ids": [
+          "07bd5e45-c632-4b4a-9fc7-aa706cdd6cd6",
+          "1f9830a7-3f38-48f5-9a24-f159653e1c54"
+        ]
+      }
+    },
     "bee_species": {
       "answer": "1. Bombus terrestris audax",
       "reason": "The methodology section specifies the bee species used in the study.",

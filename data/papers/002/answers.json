@@ -1,5 +1,56 @@
 {
   "QUESTIONS": {
+    "QUESTIONS": {
+      "bee_species": {
+        "answer": "1. Bombus terrestris dalmatinus",
+        "reason": "The text specifies the bee species used in the study within the 'Materials and Methods' section, under 'Test species'.",
+        "chunk_ids": [
+          "e9cf0e5c-828b-4682-8c48-1d10d1bbdaf0"
+        ]
+      },
+      "pesticides": {
+        "answer": "1. Clothianidin: field exposure via Elado\u00ae-dressed winter oilseed rape at 10 g per kg of seed\n2. Beta-cyfluthrin: field exposure via Elado\u00ae-dressed winter oilseed rape at 2 g per kg of seed",
+        "reason": "The study provides specific information about the pesticides used, their application rates, and the exposure method, but does not detail the duration of exposure beyond the general field exposure period.",
+        "chunk_ids": [
+          "b4fb2c88-cab1-4eb2-be64-f1959f7d0137",
+          "33ece76b-879c-45ca-825b-d649357d1be0"
+        ]
+      },
+      "additional_stressors": {
+        "answer": "No additional stressors were tested.",
+        "reason": "The provided text chunks consistently indicate that no additional stressors, such as temperature, parasites, pathogens, other chemicals, or diet and nutrition stress, were specifically tested and controlled for in the study. The focus was on recording weather conditions, which were not applied as stressors.",
+        "chunk_ids": [
+          "4843f343-e2a4-42d9-96ca-4c5318aff26f",
+          "3f976e2a-f8a5-4410-9e60-61b02f1c5aee",
+          "98c194ad-84a6-4918-ae21-c79427eb495d",
+          "cfcf9fa7-0eec-426e-bd59-e9dab0e6ed18"
+        ]
+      },
+      "experimental_methodology": {
+        "answer": "1. **Colony Development and Reproduction (field study):**\n   - **Study Design:** Large-scale monitoring field study.\n   - **Sample Size:** 6 study locations per site, with 10 bumble bee hives placed at each location.\n   - **Variables Measured:** Hive weight, number of workers, reproductive output, pollen composition.\n   - **Details:** The study was conducted across two sites, each covering 65 km\u00b2. Three locations were adjacent to OSR fields, and three were 400 m away. Colony development was monitored from April to June 2014, with hives later moved to a nature reserve. Pollen loads were analyzed to determine OSR pollen presence.",
+        "reason": "The text provides a detailed description of the empirical methodologies used in the study, including sample sizes, study design, and variables measured.",
+        "chunk_ids": [
+          "b4fb2c88-cab1-4eb2-be64-f1959f7d0137"
+        ]
+      },
+      "significance": {
+        "answer": "- Hives at the test site produced significantly more queen brood cells ($p = 0.035$).\n- Significantly fewer young queens were found at study locations 400 m distant ($p = 0.021$).\n- No adverse effect of clothianidin-treated OSR on bumble bee colony development was observed in terms of hive weight.\n- No effect on the number of worker bumble bees was detected.\n- At the end of the experiment, the mean number of young queens ranged from 95 (test site distant) to 128 (reference site edge).\n- Reproductive success, measured by the sum of young queens and queen brood cells, ranged from 182 (reference site distant) to 216 (reference site edge).\n- The sum of queen brood cells and young queens, as an indicator of reproductive success, was not significantly affected by pesticide treatment or the proximity of hives to OSR fields.",
+        "reason": "The study provides specific experimental findings on the effects of pesticides on bees, focusing on quantifiable outcomes related to reproduction and colony dynamics.",
+        "chunk_ids": [
+          "81626a4b-9eec-4ec2-ac47-7465c54317b2",
+          "7514bf38-1c67-41f6-b65a-0fcaab6ec279",
+          "6164d8cb-bec3-4f6c-b6ed-ce7cf3bcb946",
+          "d47fb853-8f81-4060-b486-56aa7ab4f2df"
+        ]
+      },
+      "future_research": {
+        "answer": "- Conduct specially designed lower tier studies to address certain aspects of the research that were not feasible in the large-scale landscape study.",
+        "reason": "The authors suggest specific future research directions in the discussion section, focusing on methodological improvements and alternative approaches to address the challenges faced in their study.",
+        "chunk_ids": [
+          "f495a3a8-85a1-4467-a660-9507e4ecaf3a"
+        ]
+      }
+    },
     "bee_species": {
       "answer": "1. Bombus terrestris dalmatinus",
       "reason": "The methodology section specifies the bee species used in the study.",

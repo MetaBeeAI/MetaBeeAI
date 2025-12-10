@@ -100,6 +100,9 @@ class _ConfigProxy:
     def __contains__(self, key):
         return key in get_questions_config()
 
+    def items(self):
+        return get_questions_config().items()
+
 
 QUESTIONS_CONFIG = _ConfigProxy()
 

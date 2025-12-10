@@ -212,8 +212,7 @@ def run_full_pipeline(
     print(f"  - {papers_dir}/FOLDER/pages/merged_v2.json (merged and deduplicated)")
     print()
     print("Next step: Run the LLM pipeline to extract information from papers")
-    print("  cd ../metabeeai_llm")
-    print(f"  python llm_pipeline.py --start {start_folder} --end {end_folder}")
+    print(f"  metabeeai llm --start {start_folder} --end {end_folder}")
     print()
 
     return True
