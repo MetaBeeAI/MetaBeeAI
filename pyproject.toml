@@ -35,7 +35,7 @@ dependencies = [
     "matplotlib>=3.6.0",
     "seaborn>=0.13.0",
     "networkx>=3.0",
-    "deepeval>=0.21.0",
+    "deepeval>=3.1.0",
     "requests>=2.31.0"
 ]
 
@@ -44,6 +44,7 @@ dev = [
     "pytest>=7.4.0",
     "ruff>=0.1.0",
     "mypy>=1.8.0",
+    "minimum-dependencies>=1.0.0",
 ]
 
 docs = [
