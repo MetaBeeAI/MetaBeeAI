@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install minimum-dependencies tool
-        run: pip install "minimum-dependencies>=1.0.0"
+        run: pip install "minimum-dependencies"
       - name: Generate minimum requirements lockfile
         run: python -m minimum_dependencies metabeeai --filename requirements-min.txt --extras dev docs
       - name: Install minimum dependencies
