@@ -7,6 +7,25 @@ on:
     branches: [ main ]
 
 jobs:
+  min-deps:
+    name: Minimum dependencies (Python 3.11)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install minimum-dependencies tool
+        run: pip install "minimum-dependencies>=1.0.0"
+      - name: Generate minimum requirements lockfile
+        run: python -m minimum_dependencies metabeeai --filename requirements-min.txt --extras dev docs
+      - name: Install minimum dependencies
+        run: |
+          pip install -r requirements-min.txt
+          pip install -e .
+      - name: Run tests against minimums
+        run: pytest .
+
   test:
     name: Test on Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest

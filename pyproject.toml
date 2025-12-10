@@ -20,43 +20,40 @@ authors = [
 keywords = ["pdf", "llm", "nlp", "data extraction", "fastapi", "openai"]
 
 dependencies = [
-    "python-dotenv",
-    "openai",
-    "litellm",
-    "pandas",
-    "numpy",
-    "PyPDF2",
-    "pymupdf",
-    "fastapi",
-    "uvicorn",
-    "python-multipart",
-    "pydantic",
-    "PyYAML",
-    "PyQt5",
-    "unidecode",
-    "termcolor",
-    "tqdm",
-    "matplotlib",
-    "seaborn",
-    "networkx",
-    "deepeval",
-    "requests"
+    "python-dotenv>=1.0.1",
+    "openai>=1.0.0",
+    "litellm>=1.40.0",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "PyPDF2>=3.0.1",
+    "pymupdf>=1.22.0",
+    "pydantic>=1.10.0",
+    "PyYAML>=6.0.1",
+    "PyQt5>=5.15.9",
+    "termcolor>=2.3.0",
+    "tqdm>=4.64.0",
+    "matplotlib>=3.6.0",
+    "seaborn>=0.13.0",
+    "networkx>=3.0",
+    "deepeval>=0.21.0",
+    "requests>=2.31.0"
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest",
-    "ruff",
-    "mypy"
+    "pytest>=7.4.0",
+    "ruff>=0.1.0",
+    "mypy>=1.8.0",
+    "minimum-dependencies>=1.0.0"
 ]
 
 docs = [
-    "sphinx>=7.0",
-    "pydata-sphinx-theme>=0.15",
-    "sphinx-autodoc-typehints",
-    "sphinx-gallery",
-    "sphinx-automodapi",
-    "myst-parser"
+    "sphinx>=7.0.0",
+    "pydata-sphinx-theme>=0.15.2",
+    "sphinx-autodoc-typehints>=1.24.0",
+    "sphinx-gallery>=0.15.0",
+    "sphinx-automodapi>=0.16.0",
+    "myst-parser>=2.0.0"
 ]
 
 [project.urls]
