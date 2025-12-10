@@ -413,7 +413,7 @@
 <li><p><strong>Add your API keys</strong> (required for most operations):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set as environment variables</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>sk-your-key-here
-<span class="nb">export</span><span class="w"> </span><span class="nv">LANDING_API_KEY</span><span class="o">=</span>your-landing-key
+<span class="nb">export</span><span class="w"> </span><span class="nv">LANDING_AI_API_KEY</span><span class="o">=</span>your-landing-key
 </pre></div>
 </div>
 <p>Or add them to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> (but don’t commit this file!):</p>
@@ -449,8 +449,8 @@
 </section>
 <section id="run-the-pipeline">
 <h3>Run the Pipeline<a class="headerlink" href="#run-the-pipeline" title="Link to this heading">#</a></h3>
-<p>The full pipeline can be ran, using the CLI command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>run
+<p>The full pipeline can be ran, using CLI commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>process-pdfs
 </pre></div>
 </div>
 <p>For a detailed breakdown of the usage and options, please refer to the  <a class="reference internal" href="guide/index.html"><span class="doc">User Guide</span></a>.</p>

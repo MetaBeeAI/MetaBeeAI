@@ -31,7 +31,7 @@ MetaBeeAI uses a flexible configuration system. Before running commands, set up 
 
       # Set as environment variables
       export OPENAI_API_KEY=sk-your-key-here
-      export LANDING_API_KEY=your-landing-key
+      export LANDING_AI_API_KEY=your-landing-key
 
    Or add them to ``config.yaml`` (but don't commit this file!):
 
@@ -72,11 +72,11 @@ Each paper should be in its own folder with a unique alphanumeric ID.
 Run the Pipeline
 ~~~~~~~~~~~~~~~~
 
-The full pipeline can be ran, using the CLI command:
+The full pipeline can be ran, using CLI commands:
 
 .. code-block:: bash
 
-   metabeeai run
+   metabeeai process-pdfs
 
 For a detailed breakdown of the usage and options, please refer to the  :doc:`User Guide <guide/index>`.
 

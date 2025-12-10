@@ -595,13 +595,23 @@
 
 
 
-<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">process_papers</span><span class="p">(</span><span class="n">base_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">paper_folders</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overwrite_merged</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">relevance_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">answer_model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">process_papers</span><span class="p">(</span>
+    <span class="n">base_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">paper_folders</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">overwrite_merged</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">relevance_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">answer_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">start_folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">end_folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Processes papers in the specified directory.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        base_dir: Base directory containing paper folders (defaults to config)</span>
 <span class="sd">        paper_folders: List of specific paper folder names to process (defaults to all folders)</span>
+<span class="sd">        start_folder: Optional start folder (inclusive, alphanumeric)</span>
+<span class="sd">        end_folder: Optional end folder (inclusive, alphanumeric)</span>
 <span class="sd">        overwrite_merged: Whether to overwrite existing merged.json files</span>
 <span class="sd">        relevance_model: Model to use for chunk selection (defaults to config)</span>
 <span class="sd">        answer_model: Model to use for answer generation and reflection (defaults to config)</span>
@@ -630,6 +640,15 @@
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">item_path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">item</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
                 <span class="n">paper_folders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
         <span class="n">paper_folders</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>  <span class="c1"># Sort for consistent processing order</span>
+        <span class="k">if</span> <span class="n">start_folder</span> <span class="ow">or</span> <span class="n">end_folder</span><span class="p">:</span>
+            <span class="n">filtered</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">folder</span> <span class="ow">in</span> <span class="n">paper_folders</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">start_folder</span> <span class="ow">and</span> <span class="n">folder</span> <span class="o">&lt;</span> <span class="n">start_folder</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="n">end_folder</span> <span class="ow">and</span> <span class="n">folder</span> <span class="o">&gt;</span> <span class="n">end_folder</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">filtered</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+            <span class="n">paper_folders</span> <span class="o">=</span> <span class="n">filtered</span>
 
     <span class="n">total_papers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">paper_folders</span><span class="p">)</span>
     <span class="n">completed_papers</span> <span class="o">=</span> <span class="mi">0</span>
@@ -781,6 +800,18 @@
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). &quot;</span> <span class="s2">&quot;If not specified, all folders will be processed.&quot;</span><span class="p">),</span>
     <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--start&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Start processing from this paper ID (alphanumeric, optional; only applies when --papers is not set)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--end&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;End processing at this paper ID (alphanumeric, optional; only applies when --papers is not set)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--overwrite&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Overwrite existing merged.json files&quot;</span><span class="p">)</span>
     <span class="c1"># Models</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
@@ -840,6 +871,8 @@
             <span class="n">overwrite_merged</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">overwrite</span><span class="p">,</span>
             <span class="n">relevance_model</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">relevance_model</span><span class="p">,</span>
             <span class="n">answer_model</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">answer_model</span><span class="p">,</span>
+            <span class="n">start_folder</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">start</span><span class="p">,</span>
+            <span class="n">end_folder</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">end</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="p">)</span>
 

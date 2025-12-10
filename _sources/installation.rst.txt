@@ -26,7 +26,7 @@ After installation, set up your configuration:
    .. code-block:: bash
 
       export OPENAI_API_KEY=sk-your-openai-key
-      export LANDING_API_KEY=your-landing-ai-key
+      export LANDING_AI_API_KEY=your-landing-ai-key
 
    Or add them to a ``.env`` file in your project directory:
 
@@ -34,7 +34,7 @@ After installation, set up your configuration:
 
       # .env
       OPENAI_API_KEY=sk-your-openai-key
-      LANDING_API_KEY=your-landing-ai-key
+      LANDING_AI_API_KEY=your-landing-ai-key
 
    **Note**: The configuration file takes precedence over environment variables. See the :doc:`Configuration Guide <guide/configuration>` for details on the hierarchy.
 
