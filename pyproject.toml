@@ -44,7 +44,6 @@ dev = [
     "pytest>=7.4.0",
     "ruff>=0.1.0",
     "mypy>=1.8.0",
-    "minimum-dependencies>=1.0.0",
 ]
 
 docs = [
