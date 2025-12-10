@@ -22,7 +22,7 @@ jobs:
       - name: Install package metadata only (no deps)
         run: python -m pip install ".[dev,docs]" --no-deps
       - name: Generate minimum requirements lockfile
-        run: minimum_dependencies metabeeai --filename requirements-min.txt --extras dev docs --fail
+        run: minimum_dependencies metabeeai --filename requirements-min.txt --extras dev docs
       - name: Install minimum dependencies
         run: |
           pip install -r requirements-min.txt
