@@ -281,7 +281,7 @@ Config Not Loading
 Check these in order:
 
 1. Verify file exists: ``ls -la config.yaml``
-2. Check YAML syntax: ``python -c "import yaml; yaml.safe_load(open('config.yaml'))``
+2. Check YAML syntax: ``python -c "import yaml; yaml.safe_load(open('config.yaml'))"``
 3. Check you're in the correct directory (config.yaml must be in current directory)
 4. Use ``--config`` to explicitly specify the path
 
