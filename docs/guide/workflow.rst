@@ -77,11 +77,17 @@ If you have CSV golden answers:
 
 4c. **Run Evaluation**
 
-.. code-block:: bash
+Please be noted that you can either run specified one or multiple topics listed in ``MetaBeeAI/src/metabeeai/metabeeai_llm
+/questions.yml`` (as shown in below separately), or evaluate all these topics together. If you try to run a topic not listed in the ``questions.yml`` file (such as metabeeai benchmark --question popuation), the program will not produce nothing as outcome. In addition, if you see some errors reported when you are running any of the following command, please be assured the program will retry the computing and it is totally fine as long as it can finish at the end and report results.
 
-   metabeeai benchmark --question design
-   metabeeai benchmark --question population
-   metabeeai benchmark --question welfare
+.. code-block:: bash
+   # Evaluate a specific topic
+   metabeeai benchmark --question bee_species
+   metabeeai benchmark --question pesticides
+   metabeeai benchmark --question additional_stressors
+   metabeeai benchmark --question experimental_methodology
+   metabeeai benchmark --question significance
+   metabeeai benchmark --question future_research
 
    # Evaluate all at once
    metabeeai benchmark
