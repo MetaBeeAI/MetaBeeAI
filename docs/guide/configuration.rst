@@ -172,7 +172,7 @@ Config File Best Practices
 **DON'T**:
 
 - Don't commit ``config.yaml`` with real API keys to version control
-- Don't rely on environment variables for persistent settings (use config files)
+- Don't rely on environment variables for persistent settings (use config files). It is flexible that you use either .env (env.example) or config.yamal (config.example.yamal). The principle is that, as stated somewhere else in this documentation as well, Config files always override environment variables. Please double check before you run your program to ensure you are using the parameter values you want to test. 
 - Don't mix personal settings into project config files
 
 Examples
