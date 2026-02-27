@@ -31,7 +31,7 @@ Quick Start
     papers_dir: ./data/papers
     log_level: DEBUG
 
-3. Run any command - it will automatically load ``./config.yaml``::
+3. Run any command - it will automatically load ``./config.yaml`` (Set your API keys before you run the second command. Relevant details will be found at :doc:`../quickstart`)::
 
     metabeeai llm
     metabeeai process_pdfs --start 1 --end 10
