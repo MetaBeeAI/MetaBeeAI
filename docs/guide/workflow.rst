@@ -25,7 +25,7 @@ Step 2 — Extract Information with LLM
    # Process all papers (default configuration)
    metabeeai llm
 
-   # Predefined configurations
+   # Predefined configurations (you can choose any ofthe following three to preset the answer quality level you expect)
    metabeeai llm --preset balanced   # Fast relevance + high-quality answers
    metabeeai llm --preset fast       # Fast & cheap
    metabeeai llm --preset quality    # High quality for critical analysis
