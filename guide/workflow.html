@@ -432,7 +432,7 @@ Each stage corresponds to one of the core submodules introduced in the <a class=
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process all papers (default configuration)</span>
 metabeeai<span class="w"> </span>llm
 
-<span class="c1"># Predefined configurations (you can choose any ofthe following three to preset the answer quality level you expect)</span>
+<span class="c1"># Predefined configurations</span>
 metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>balanced<span class="w">   </span><span class="c1"># Fast relevance + high-quality answers</span>
 metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>fast<span class="w">       </span><span class="c1"># Fast &amp; cheap</span>
 metabeeai<span class="w"> </span>llm<span class="w"> </span>--preset<span class="w"> </span>quality<span class="w">    </span><span class="c1"># High quality for critical analysis</span>
@@ -460,7 +460,6 @@ metabeeai<span class="w"> </span>llm<span class="w"> </span>--relevance-model<sp
 </section>
 <section id="step-4-benchmarking-and-evaluation">
 <h2>Step 4 — Benchmarking and Evaluation<a class="headerlink" href="#step-4-benchmarking-and-evaluation" title="Link to this heading">#</a></h2>
-<p>Outputs generated in this section will be saved under the <strong>data/</strong> folder on the main page.</p>
 <p>4a. <strong>Prepare Reviewer Data</strong></p>
 <p>If you have CSV golden answers:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>prep-benchmark<span class="w"> </span>--papers-dir<span class="w"> </span>/path/to/papers<span class="w"> </span>--output<span class="w"> </span>data/benchmark_data_gui.json
@@ -487,7 +486,7 @@ metabeeai<span class="w"> </span>benchmark
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>plot-metrics
 </pre></div>
 </div>
-<p><strong>Output:</strong> <code class="docutils literal notranslate"><span class="pre">deepeval_results/plots/accuracy_geval.png</span></code>, <code class="docutils literal notranslate"><span class="pre">deepeval_results/plots/completeness_geval.png</span></code>, <code class="docutils literal notranslate"><span class="pre">deepeval_results/plots/contextual_precision.png</span></code>, <code class="docutils literal notranslate"><span class="pre">deepeval_results/plots/contextual_recall.png</span></code>, <code class="docutils literal notranslate"><span class="pre">deepeval_results/plots/faithfulness.png</span></code>, <code class="docutils literal notranslate"><span class="pre">deepeval_results/plots/summary_metrics.png</span></code>.</p>
+<p><strong>Output:</strong> <code class="docutils literal notranslate"><span class="pre">deepeval_results/plots/metrics_comparison.png</span></code></p>
 <p>4e. <strong>Identify Problem Papers (Optional)</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>metabeeai<span class="w"> </span>edge-cases<span class="w"> </span>--num-cases<span class="w"> </span><span class="m">3</span>
 </pre></div>
@@ -504,7 +503,7 @@ python<span class="w"> </span>-m<span class="w"> </span>metabeeai.query_database
 </pre></div>
 </div>
 <p><strong>Purpose:</strong> Perform large-scale data aggregation and analysis using the <a class="reference external" href="api/query_database">query_database</a> submodule.
-<strong>Output:</strong> Analytical reports, plots, and datasets in <code class="docutils literal notranslate"><span class="pre">src/metabeeai/query_database/output/</span></code>.</p>
+<strong>Output:</strong> Analytical reports, plots, and datasets in <code class="docutils literal notranslate"><span class="pre">query_database/output/</span></code>.</p>
 </section>
 </section>
 
