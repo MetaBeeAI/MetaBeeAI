@@ -8,9 +8,9 @@ MetaBeeAI
 
    installation
    quickstart
-   api/index
    guide/index
-   submodule/index
+   reference/index
+   developer/index
 
 .. card::
    :class-card: landing-hero
@@ -24,13 +24,13 @@ MetaBeeAI
 
    Start with :doc:`Installation <installation>` and :doc:`Quick Start <quickstart>`.
    If you already have the package running, jump straight to
-   :doc:`Configuration <guide/configuration>`, :doc:`Workflow <guide/workflow>`, or the
-   :doc:`API Reference <api/index>`.
+   :doc:`Configuration <guide/configuration>`, :doc:`Workflow <guide/workflow>`, or
+   :doc:`Reference <reference/index>`.
 
 Explore The Docs
 ----------------
 
-.. grid:: 1 1 2 2
+.. grid:: 1 1 2 3
    :gutter: 3
 
    .. grid-item-card:: Install MetaBeeAI
@@ -47,19 +47,26 @@ Explore The Docs
 
       Follow the shortest path from installation to processing a set of PDFs.
 
-   .. grid-item-card:: App Pipeline
+   .. grid-item-card:: User Guide
       :link: guide/index
       :link-type: doc
       :class-card: landing-card
 
       Read the end-to-end guides for setup, configuration, workflow, benchmarking, and troubleshooting.
 
-   .. grid-item-card:: API Reference
-      :link: api/index
+   .. grid-item-card:: Reference
+      :link: reference/index
       :link-type: doc
       :class-card: landing-card
 
-      Browse the Python package interfaces, generated function docs, and module-level reference.
+      Find API docs, submodule overviews, and lower-level reference material in one place.
+
+   .. grid-item-card:: Developer Guide
+      :link: developer/index
+      :link-type: doc
+      :class-card: landing-card
+
+      Find contribution, configuration-development, and documentation-maintenance guides for working on MetaBeeAI itself.
 
 Pipeline Guides
 ---------------
@@ -149,12 +156,12 @@ Development
 .. grid:: 1 1 2 3
    :gutter: 3
 
-   .. grid-item-card:: Contributing
-      :link: guide/contributing
+   .. grid-item-card:: Developer Guide
+      :link: developer/index
       :link-type: doc
       :class-card: landing-card landing-card--warm
 
-      Set up a development environment, run checks, and follow the project workflow.
+      Set up a development environment, run checks, and navigate the project’s developer documentation.
 
    .. grid-item-card:: Config Development
       :link: guide/config_development

@@ -1,5 +1,5 @@
-App Pipeline
-============
+User Guide
+==========
 
 A comprehensive pipeline for extracting, analyzing, and benchmarking structured information from scientific literature using Large Language Models and Vision AI.
 
@@ -20,8 +20,5 @@ For the Quick Start Guide, please refer to the :doc:`Quick Start Guide <../quick
    analysis
    troubleshooting
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Developer Guide
-
-   contributing
+For development workflows, contribution guidance, and documentation maintenance, see the
+:doc:`Developer Guide <../developer/index>`.
