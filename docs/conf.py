@@ -45,6 +45,7 @@ sphinx_gallery_conf = {
 
 
 html_static_path = ["_static"]
+templates_path = ["_templates"]
 html_css_files = ["bee.css"]
 html_theme_options = {
     "logo": {
