@@ -25,7 +25,7 @@ Step 2 — Extract Information with LLM
    # Process all papers (default configuration)
    metabeeai llm
 
-   # Predefined configurations
+   # Predefined configurations (you can choose any ofthe following three to preset the answer quality level you expect)
    metabeeai llm --preset balanced   # Fast relevance + high-quality answers
    metabeeai llm --preset fast       # Fast & cheap
    metabeeai llm --preset quality    # High quality for critical analysis
@@ -56,6 +56,7 @@ Features include PDF viewing, answer editing, and quality ratings.
 
 Step 4 — Benchmarking and Evaluation
 ------------------------------------
+Outputs generated in this section will be saved under the **data/** folder on the main page.
 
 4a. **Prepare Reviewer Data**
 
@@ -94,7 +95,7 @@ If you have CSV golden answers:
 
    metabeeai plot-metrics
 
-**Output:** ``deepeval_results/plots/metrics_comparison.png``
+**Output:** ``deepeval_results/plots/accuracy_geval.png``, ``deepeval_results/plots/completeness_geval.png``, ``deepeval_results/plots/contextual_precision.png``, ``deepeval_results/plots/contextual_recall.png``, ``deepeval_results/plots/faithfulness.png``, ``deepeval_results/plots/summary_metrics.png``.
 
 4e. **Identify Problem Papers (Optional)**
 
@@ -116,4 +117,4 @@ Step 5 — Data Analysis
    python -m metabeeai.query_database.investigate_pesticides
 
 **Purpose:** Perform large-scale data aggregation and analysis using the `query_database <api/query_database>`_ submodule.
-**Output:** Analytical reports, plots, and datasets in ``query_database/output/``.
+**Output:** Analytical reports, plots, and datasets in ``src/metabeeai/query_database/output/``.
