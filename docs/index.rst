@@ -3,14 +3,6 @@
 MetaBeeAI
 =========
 
-MetaBeeAI is a literature-processing pipeline for extracting, reviewing, benchmarking,
-and analyzing structured information from scientific PDFs using LLM and Vision AI
-workflows.
-
-If you are new to the project, start with installation and the quick start. If you are
-already running the pipeline, jump directly to configuration, workflow, or the API
-reference.
-
 .. toctree::
    :hidden:
 
@@ -20,75 +12,160 @@ reference.
    guide/index
    submodule/index
 
-Start Here
-----------
+.. card::
+   :class-card: landing-hero
 
-:doc:`Installation Guide <installation>`
-   Install MetaBeeAI, set up your environment, and configure required API keys.
+   MetaBeeAI is an open-source, modular pipeline for extracting structured information
+   from scientific papers for systematic review and meta-analysis in biology.
 
-:doc:`Quick Start Guide <quickstart>`
-   Run the shortest path from install to processing a set of PDFs.
+   Use these docs to install MetaBeeAI, configure reproducible processing runs,
+   understand the major modules, and navigate the full workflow from raw papers to
+   structured outputs.
 
-:doc:`Setup Guide <guide/setup>`
-   Prepare local directories, project structure, and expected inputs.
+   Start with :doc:`Installation <installation>` and :doc:`Quick Start <quickstart>`.
+   If you already have the package running, jump straight to
+   :doc:`Configuration <guide/configuration>`, :doc:`Workflow <guide/workflow>`, or the
+   :doc:`API Reference <api/index>`.
 
-:doc:`Configuration Guide <guide/configuration>`
-   Understand configuration files, environment variables, and parameter precedence.
-
-Use The Pipeline
+Explore The Docs
 ----------------
 
-:doc:`Pipeline Overview <guide/pipeline_overview>`
-   Understand the major stages of the MetaBeeAI workflow and how data moves through it.
+.. grid:: 1 1 2 2
+   :gutter: 3
 
-:doc:`Complete Workflow <guide/workflow>`
-   Follow the end-to-end process from raw PDFs to structured outputs.
+   .. grid-item-card:: Install MetaBeeAI
+      :link: installation
+      :link-type: doc
+      :class-card: landing-card landing-card--warm
 
-:doc:`Benchmarking <guide/benchmarking>`
-   Evaluate extraction quality and compare LLM behaviour across runs.
+      Set up the package, configure required keys, and verify that the CLI is available.
 
-:doc:`Data Analysis <guide/analysis>`
-   Work with processed outputs and downstream analysis steps.
+   .. grid-item-card:: Quick Start
+      :link: quickstart
+      :link-type: doc
+      :class-card: landing-card landing-card--warm
 
-:doc:`Troubleshooting Guide <guide/troubleshooting>`
-   Diagnose common installation, configuration, and runtime issues.
+      Follow the shortest path from installation to processing a set of PDFs.
 
-Reference
----------
+   .. grid-item-card:: App Pipeline
+      :link: guide/index
+      :link-type: doc
+      :class-card: landing-card
 
-:doc:`API Reference <api/index>`
-   Browse module, class, and function documentation for the Python package.
+      Read the end-to-end guides for setup, configuration, workflow, benchmarking, and troubleshooting.
 
-:doc:`Submodules <submodule/index>`
-   Read higher-level descriptions of the major pipeline components and their roles.
+   .. grid-item-card:: API Reference
+      :link: api/index
+      :link-type: doc
+      :class-card: landing-card
 
-Key module guides:
+      Browse the Python package interfaces, generated function docs, and module-level reference.
 
-- :doc:`PDF Processing Pipeline <submodule/process_pdfs>`
-- :doc:`LLM Pipeline <submodule/metabeeai_llm>`
-- :doc:`LLM Review Software <submodule/llm_review_software>`
-- :doc:`LLM Benchmarking <submodule/llm_benchmarking>`
-- :doc:`Query Database - Data Extraction and Analysis <submodule/query_database>`
+Pipeline Guides
+---------------
+
+.. grid:: 1 1 2 3
+   :gutter: 3
+
+   .. grid-item-card:: Setup
+      :link: guide/setup
+      :link-type: doc
+      :class-card: landing-card
+
+      Prepare local directories, expected file layout, and the project structure used by the pipeline.
+
+   .. grid-item-card:: Configuration
+      :link: guide/configuration
+      :link-type: doc
+      :class-card: landing-card
+
+      Understand configuration files, environment variables, defaults, and precedence.
+
+   .. grid-item-card:: Workflow
+      :link: guide/workflow
+      :link-type: doc
+      :class-card: landing-card
+
+      Follow the end-to-end processing flow from raw PDFs to structured outputs.
+
+   .. grid-item-card:: Benchmarking
+      :link: guide/benchmarking
+      :link-type: doc
+      :class-card: landing-card
+
+      Compare model behaviour and evaluate extraction quality across runs.
+
+   .. grid-item-card:: Data Analysis
+      :link: guide/analysis
+      :link-type: doc
+      :class-card: landing-card
+
+      Work with processed outputs and downstream analysis steps after extraction is complete.
+
+   .. grid-item-card:: Troubleshooting
+      :link: guide/troubleshooting
+      :link-type: doc
+      :class-card: landing-card
+
+      Diagnose installation issues, pipeline failures, and common runtime problems.
+
+Reference And Internals
+-----------------------
+
+.. grid:: 1 1 2 2
+   :gutter: 3
+
+   .. grid-item-card:: Submodules
+      :link: submodule/index
+      :link-type: doc
+      :class-card: landing-card
+
+      Read higher-level descriptions of the major pipeline components and what each one is responsible for.
+
+   .. grid-item-card:: PDF Processing Pipeline
+      :link: submodule/process_pdfs
+      :link-type: doc
+      :class-card: landing-card
+
+      Understand how PDFs are split, merged, deduplicated, and prepared for downstream extraction.
+
+   .. grid-item-card:: LLM Pipeline
+      :link: submodule/metabeeai_llm
+      :link-type: doc
+      :class-card: landing-card
+
+      Review the prompts, extraction flow, and higher-level orchestration behind the LLM stage.
+
+   .. grid-item-card:: Query And Analysis Tools
+      :link: submodule/query_database
+      :link-type: doc
+      :class-card: landing-card
+
+      Find the query and analysis layer used for working with processed outputs.
 
 Development
 -----------
 
-:doc:`Contributing to MetaBeeAI <guide/contributing>`
-   Set up a development environment, run checks, and follow the project workflow.
+.. grid:: 1 1 2 3
+   :gutter: 3
 
-:doc:`Configuration System - Developer Guide <guide/config_development>`
-   Extend the configuration layer safely and consistently.
+   .. grid-item-card:: Contributing
+      :link: guide/contributing
+      :link-type: doc
+      :class-card: landing-card landing-card--warm
 
-:doc:`Building Documentation <guide/documentation>`
-   Build, debug, and maintain the Sphinx documentation stack.
+      Set up a development environment, run checks, and follow the project workflow.
 
-Common Paths
-------------
+   .. grid-item-card:: Config Development
+      :link: guide/config_development
+      :link-type: doc
+      :class-card: landing-card
 
-If you want to...
+      Extend the configuration layer safely and consistently.
 
-- install the package and verify your environment, go to :doc:`Installation Guide <installation>`
-- configure keys, paths, and runtime options, go to :doc:`Configuration Guide <guide/configuration>`
-- understand the full processing sequence, go to :doc:`Complete Workflow <guide/workflow>`
-- inspect code-level interfaces, go to :doc:`API Reference <api/index>`
-- work on the codebase itself, go to :doc:`Contributing to MetaBeeAI <guide/contributing>`
+   .. grid-item-card:: Documentation
+      :link: guide/documentation
+      :link-type: doc
+      :class-card: landing-card
+
+      Build, debug, and maintain the Sphinx documentation stack.

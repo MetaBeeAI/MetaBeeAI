@@ -16,6 +16,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
     "sphinx.ext.autosummary",
+    "sphinx_design",
     "sphinx_autodoc_typehints",
     "sphinx_automodapi.automodapi",
     # Gallery disabled due to zero examples; avoids needless processing and warnings

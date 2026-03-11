@@ -515,3 +515,89 @@ code.literal { border: none; background-color: inherit; }
 div.math { flex-direction: row; justify-content: center; }
 .modal { --bs-modal-bg: var(--pst-color-background); }
 html[data-theme="dark"] div.graphviz > object.inheritance { filter: invert(0.9); }
+
+/* ================================================================== */
+/* Landing Page                                                       */
+/* ================================================================== */
+.landing-hero {
+  border: 1px solid var(--pst-color-border);
+  border-radius: 1rem;
+  box-shadow: 0 1.25rem 2.5rem -2rem var(--pst-color-shadow);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+html[data-theme="light"] .landing-hero {
+  background:
+    radial-gradient(circle at top right, rgba(254, 121, 0, 0.16), transparent 28%),
+    linear-gradient(135deg, #fffaf1 0%, #fff7d8 52%, #ffffff 100%);
+}
+
+html[data-theme="dark"] .landing-hero {
+  background:
+    radial-gradient(circle at top right, rgba(254, 210, 11, 0.18), transparent 24%),
+    linear-gradient(135deg, #2a2411 0%, #232323 55%, #1a1d22 100%);
+}
+
+.landing-hero .sd-card-body {
+  padding: 1.6rem 1.7rem;
+}
+
+.landing-hero p:first-child {
+  color: var(--sst-accent-color-muted);
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+  max-width: 30rem;
+}
+
+html[data-theme="dark"] .landing-hero p:first-child {
+  color: var(--bee-yellow);
+}
+
+.landing-hero p {
+  font-size: 1.02rem;
+  margin-bottom: 0.8rem;
+  max-width: 44rem;
+}
+
+.landing-card {
+  border: 1px solid var(--pst-color-border);
+  border-radius: 0.95rem;
+  box-shadow: 0 1rem 2rem -2rem var(--pst-color-shadow);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.landing-card:hover {
+  border-color: var(--sst-accent-color-bright);
+  box-shadow: 0 1.4rem 2.4rem -1.8rem var(--pst-color-shadow);
+  transform: translateY(-2px);
+}
+
+.landing-card .sd-card-body {
+  padding: 1.1rem 1.15rem;
+}
+
+.landing-card.sd-card .sd-card-title {
+  color: var(--pst-color-text-base);
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 0.45rem;
+}
+
+.landing-card p:last-child {
+  margin-bottom: 0;
+}
+
+html[data-theme="light"] .landing-card--warm {
+  background: linear-gradient(180deg, #fffaf0 0%, #fffdf8 100%);
+}
+
+html[data-theme="dark"] .landing-card--warm {
+  background: linear-gradient(180deg, rgba(254, 121, 0, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+}
