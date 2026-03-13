@@ -151,11 +151,10 @@ For complete documentation on building docs, Sphinx usage, Read the Docs integra
 Developer Guides
 ----------------
 
-.. toctree::
-   :maxdepth: 1
+Further developer documentation:
 
-   config_development
-   documentation
+- :doc:`Configuration System - Developer Guide <config_development>`
+- :doc:`Building Documentation <documentation>`
 
 Configuration System
 ~~~~~~~~~~~~~~~~~~~~

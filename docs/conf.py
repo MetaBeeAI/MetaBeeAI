@@ -16,6 +16,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
     "sphinx.ext.autosummary",
+    "sphinx_design",
     "sphinx_autodoc_typehints",
     "sphinx_automodapi.automodapi",
     # Gallery disabled due to zero examples; avoids needless processing and warnings
@@ -45,6 +46,7 @@ sphinx_gallery_conf = {
 
 
 html_static_path = ["_static"]
+templates_path = ["_templates"]
 html_css_files = ["bee.css"]
 html_theme_options = {
     "logo": {
