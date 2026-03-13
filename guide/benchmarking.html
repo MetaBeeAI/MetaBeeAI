@@ -32,7 +32,8 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/bee.css?v=c7d4ab96" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/bee.css?v=84a0a986" />
   
   <!-- So that users can add custom icons -->
   <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -43,6 +44,7 @@
     <script src="../_static/documentation_options.js?v=01f34227"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'guide/benchmarking';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -148,23 +150,23 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../api/index.html">
-    API Reference
-  </a>
-</li>
-
-
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    App Pipeline
+    User Guide
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../submodule/index.html">
-    Submodules
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer/index.html">
+    Developer Guide
   </a>
 </li>
 
@@ -271,23 +273,23 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../api/index.html">
-    API Reference
-  </a>
-</li>
-
-
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    App Pipeline
+    User Guide
   </a>
 </li>
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../submodule/index.html">
-    Submodules
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../developer/index.html">
+    Developer Guide
   </a>
 </li>
 
@@ -332,21 +334,62 @@
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
 <nav class="bd-docs-nav bd-links"
-     aria-label="Section Navigation">
-  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline_overview.html">Pipeline Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="workflow.html">Complete Workflow</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Benchmarking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="analysis.html">Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
+     aria-label="Documentation Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Documentation Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start Guide</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">User Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Configuration Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline_overview.html">Pipeline Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflow.html">Complete Workflow</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis.html">Data Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting Guide</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Developer Guide</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="contributing.html">Contributing to MetaBeeAI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reference/index.html">Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/metabeeai_llm.html">metabeeai.metabeeai_llm</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.metabeeai_llm.split_pdfs.html">split_pdfs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.metabeeai_llm.process_papers.html">process_papers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.metabeeai_llm.get_literature_answers.html">get_literature_answers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.metabeeai_llm.merge_json_in_the_folder.html">merge_json_in_the_folder</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/process_pdfs.html">metabeeai.process_pdfs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.process_pdfs.split_pdfs.html">split_pdfs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.process_pdfs.process_papers.html">process_papers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.process_pdfs.process_all_papers.html">process_all_papers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.process_pdfs.adjust_and_merge_json.html">adjust_and_merge_json</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.process_pdfs.run_batch_deduplicate.html">run_batch_deduplicate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.process_pdfs.analyze_chunk_uniqueness.html">analyze_chunk_uniqueness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.process_pdfs.deduplicate_chunks.html">deduplicate_chunks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.process_pdfs.process_merged_json_file.html">process_merged_json_file</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/query_database.html">metabeeai.query_database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/llm_benchmarking.html">metabeeai.llm_benchmarking</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../api/llm_review_software.html">metabeeai.llm_review_software</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.llm_review_software.annotate_pdf.html">annotate_pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/api/metabeeai.llm_review_software.MainWindow.html">MainWindow</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../submodule/index.html">Submodules</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../submodule/process_pdfs.html">PDF Processing Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../submodule/metabeeai_llm.html">LLM Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../submodule/llm_review_software.html">LLM Review Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../submodule/llm_benchmarking.html">LLM Benchmarking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../submodule/query_database.html">Query Database - Data Extraction and Analysis</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../developer/index.html">Developer Guide</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html">Contributing to MetaBeeAI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config_development.html">Configuration System - Developer Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="documentation.html">Building Documentation</a></li>
 </ul>
@@ -392,7 +435,7 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">App Pipeline</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
     
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Benchmarking</span></li>
   </ul>

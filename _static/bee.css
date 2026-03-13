@@ -7,110 +7,125 @@
 /* Root tokens and base palette                                       */
 /* ================================================================== */
 :root {
+  /* A lot of these colors we have inherited from pst however, I have copied them all */
+  /* in here to make it obvious which colors are in use, and to shield us from any */
+  /* upstream changes. */
   --pst-color-danger: #d72d47;
   --pst-color-info: #276be9;
   --pst-color-success: #00843f;
+  --pst-color-text-base: #222832;
   --pst-color-warning: #f66a0a;
-  --pst-foundation-black: #000;
+  --pst-foundation-black: #14181e;
   --pst-foundation-white: #fff;
 
+  /* SunPy Variables */
+  /* Override the default font config */
   --pst-font-family-base: "Source Sans Pro", var(--pst-font-family-base-system);
   --pst-font-size-base: 17px;
   --pst-header-height: 3.5rem;
   --pst-sidebar-font-size: 1em;
 
-  /* Bee palette */
-  --bee-yellow: #f7c600;
-  --bee-honey:  #ffeb99;
-  --bee-black:  #000000;
-  --bee-light:  #fffbe6;
-  --bee-gray:   #444444;
+  /* SunPy Colors */
+  /* These should not be directly used */
+  --sst-sunpy-logo-gray: #444444;
+  --sst-sunpy-logo-primary-color: #fe7900;
+  --sst-sunpy-logo-secondary-color: #fed20b;
+  --sst-sunpy-theme-orange: #bd5b00; /* A more accessible version of logo colour */
 
-  /* Default light-mode header/footer/sidebar mapping */
-  --pst-color-background-header: var(--bee-light);
-  --pst-color-text-on-header: var(--bee-black);
-  --pst-color-background-footer: var(--bee-light);
-  --pst-color-background-sidebar: var(--bee-light);
+  /* SunPy Theme Colors */
+  /* If you add or change the names of these please update the docs */
+  --sst-accent-color-bright: var(--sst-sunpy-logo-primary-color);
+  --sst-accent-color-muted: var(--sst-sunpy-theme-orange);
+  --sst-dark-color: var(--sst-sunpy-logo-gray);
+  --sst-darker-color: #333333;
+  --sst-darkest-color: #222222;
+  --sst-light-color: rgb(206, 206, 206);
+  --sst-lighter-color: rgb(231, 231, 231);
+  --sst-lightest-color: rgb(251, 251, 251);
+
+  /* Component Colors */
+  /* If you add or change the names of these please update the docs */
+  --sst-footer-background-color: var(--sst-lightest-color);
+  --sst-header-background: var(--sst-dark-color);
+  --sst-header-text: var(--sst-lighter-color);
+  --sst-sidebar-background-color: var(--pst-color-background);
+
+  /* sphinx-design theming */
+  --sd-color-card-border-hover: var(--sst-accent-color-bright);
+
+  /* sphinx hover-ref theming */
+  /* Until https://github.com/readthedocs/sphinx-hoverxref/issues/231 is fixed */
+  --hoverxref-bg-color-dark: dimgray;
+  --hoverxref-bg-color-light: rgb(100, 99, 99);
+  /* dark means light-on-dark so fg-color-dark is a light color */
+  --hoverxref-fg-color-dark: white;
+  --hoverxref-fg-color-light: black;
 }
 
-/* ================================================================== */
-/* Light mode                                                         */
-/* ================================================================== */
 html[data-theme="light"] {
-  --pst-color-accent-bg: #fff9d6;
-  --pst-color-accent: var(--bee-yellow);
-  --pst-color-attention-bg: var(--bee-honey);
-  --pst-color-attention: var(--bee-yellow);
-  --pst-color-background: var(--bee-light);
+  --sst-header-background: var(--pst-foundation-white);
+  --sst-header-text: var(--sst-darkest-color);
+  --pst-color-accent-bg: #f8dff5;
+  --pst-color-accent: var(--sst-accent-color-bright);
+  --pst-color-attention-bg: var(--pst-color-warning-bg);
+  --pst-color-attention: var(--pst-color-warning);
+  --pst-color-background: #fff;
   --pst-color-border-muted: rgba(23, 23, 26, 0.2);
   --pst-color-border: #d1d5da;
   --pst-color-danger-bg: #f9e1e4;
-  --pst-color-heading-color: var(--bee-black);
+  --pst-color-heading-color: #fff;
   --pst-color-info-bg: #dce7fc;
-  --pst-color-inline-code-links: var(--bee-black);
-  --pst-color-inline-code: var(--bee-black);
-  --pst-color-link-hover: var(--bee-yellow);
-  --pst-color-link: var(--bee-black);
-  --pst-color-link-active: var(--bee-yellow);
-  --pst-color-on-background: var(--bee-black);
-  --pst-color-on-surface: var(--bee-black);
-  --pst-color-primary-bg: var(--bee-honey);
-  --pst-color-primary: var(--bee-yellow);
-  --pst-color-secondary-bg: #fef9e1;
-  --pst-color-secondary: var(--bee-yellow);
+  --pst-color-inline-code-links: #085d6c;
+  --pst-color-inline-code: #912583;
+  --pst-color-link-hover: var(--sst-accent-color-muted);
+  --pst-color-link: var(--sst-accent-color-bright);
+  --pst-color-on-background: #fff;
+  --pst-color-on-surface: #222832;
+  --pst-color-primary-bg: #d0ecf1;
+  --pst-color-primary: var(--sst-accent-color-bright);
+  --pst-color-secondary-bg: #e0c7ff;
+  --pst-color-secondary: var(--sst-accent-color-bright);
   --pst-color-shadow: rgba(0, 0, 0, 0.1);
-  --pst-color-success-bg: #eaf5e5;
-  --pst-color-surface: var(--bee-light);
-  --pst-color-target: var(--bee-honey);
-  --pst-color-text-muted: #555;
-  --pst-color-warning-bg: #fff4b0;
-  --pst-color-table-row-hover-bg: var(--bee-honey);
+  --pst-color-success-bg: #d6ece1;
+  --pst-color-surface: var(--sst-lightest-color);
+  --pst-color-target: #f3cf95;
+  --pst-color-text-muted: #48566b;
+  --pst-color-warning-bg: #f8e3d0;
+  --pst-color-table-row-hover-bg: var(--pst-color-attention-bg);
 
-  /* Header/Sidebar in light mode */
-  --pst-color-background-header: var(--bee-light);
-  --pst-color-text-on-header: var(--bee-black);
-  --pst-color-background-sidebar: var(--bee-light);
-  --pst-color-background-footer: var(--bee-light);
+  --sst-footer-background-color: var(--sst-lightest-color);
 }
 
-/* ================================================================== */
-/* Dark mode                                                          */
-/* ================================================================== */
 html[data-theme="dark"] {
-  --pst-color-accent-bg: #222000;
-  --pst-color-accent: var(--bee-yellow);
-  --pst-color-attention-bg: #333000;
-  --pst-color-attention: var(--bee-yellow);
-  --pst-color-background: #1b1b1b;   /* softer dark background */
-  --pst-color-surface: #222222;
-  --pst-color-border-muted: #444;
-  --pst-color-border: #666;
+  --pst-color-accent-bg: #46123f;
+  --pst-color-accent: var(--sst-accent-color-bright);
+  --pst-color-attention-bg: var(--pst-color-warning-bg);
+  --pst-color-attention: var(--pst-color-warning);
+  --pst-color-background: var(--sst-darkest-color);
+  --pst-color-border-muted: #29313d;
+  --pst-color-border: #48566b;
   --pst-color-danger-bg: #4e111b;
-  --pst-color-heading-color: var(--bee-yellow);
-  --pst-color-info-bg: #333;
-  --pst-color-inline-code-links: var(--bee-yellow);
-  --pst-color-inline-code: var(--bee-yellow);
-  --pst-color-link-hover: #ffeb99;
-  --pst-color-link: #f7c600;
-  --pst-color-link-active: #ffeb99;
-  --pst-color-on-background: var(--bee-yellow);
-  --pst-color-on-surface: var(--bee-yellow);
-  --pst-color-primary-bg: #333000;
-  --pst-color-primary: var(--bee-yellow);
-  --pst-color-secondary-bg: #222;
-  --pst-color-secondary: var(--bee-yellow);
-  --pst-color-shadow: rgba(0, 0, 0, 0.3);
+  --pst-color-heading-color: #14181e;
+  --pst-color-info-bg: #06245d;
+  --pst-color-inline-code-links: var(--sst-accent-color-bright);
+  --pst-color-inline-code: #f3c7ee;
+  --pst-color-link-hover: var(--pst-color-secondary);
+  --pst-color-link: var(--sst-accent-color-bright);
+  --pst-color-on-background: #222832;
+  --pst-color-on-surface: #f3f4f5;
+  --pst-color-primary-bg: #042c33;
+  --pst-color-primary: var(--sst-accent-color-bright);
+  --pst-color-secondary-bg: #341a61;
+  --pst-color-secondary: var(--sst-accent-color-bright);
+  --pst-color-shadow: rgba(0, 0, 0, 0.2);
   --pst-color-success-bg: #002f17;
-  --pst-color-target: #ffeb99;
-  --pst-color-text-muted: #ccc;
-  --pst-color-warning-bg: #332a00;
-  --pst-color-table-row-hover-bg: #222;
+  --pst-color-surface: var(--sst-darker-color);
+  --pst-color-target: #675c04;
+  --pst-color-text-muted: #9ca4af;
+  --pst-color-warning-bg: #652a02;
+  --pst-color-table-row-hover-bg: var(--pst-color-attention-bg);
 
-  /* Header/Footer/Sidebar for dark mode */
-  --pst-color-background-header: #2a2a2a;   /* dark grey header */
-  --pst-color-text-on-header: var(--bee-yellow);
-  --pst-color-background-sidebar: #1b1b1b;
-  --pst-color-background-footer: #1b1b1b;
+  --sst-footer-background-color: var(--sst-darker-color);
 }
 
 /* ================================================================== */
@@ -131,92 +146,366 @@ body {
   --sg-thumb-hover-border: var(--bee-yellow);
 }
 .sphx-glr-download a > code { color: var(--sg-download-a-color); }
+/* sphinx hover-ref theming */
+/* Until https://github.com/readthedocs/sphinx-hoverxref/issues/231 is fixed */
+html[data-theme="dark"] .tooltipster-content {
+  background-color: var(--pst-color-background);
+}
 
-/* ================================================================== */
-/* Header / Navbar                                                    */
-/* ================================================================== */
+.hxr-hoverxref {
+  border-bottom: none;
+}
+
+/* sphinx-gallery Styling */
+:root,
+html,
+body {
+  --sg-download-a-background-color: var(--sst-footer-background-color);
+  --sg-download-a-background-image: none;
+  --sg-download-a-border-color: none;
+  --sg-download-a-color: var(--pst-color-link);
+  --sg-download-a-hover-background-color: var(--sg-download-a-background-color);
+  --sg-download-a-hover-box-shadow-1: none;
+  --sg-download-a-hover-box-shadow-2: none;
+  --sg-thumb-hover-border: var(--sst-accent-color-bright);
+}
+
+.sphx-glr-download a > code {
+  color: var(--sg-download-a-color);
+}
+
+/* Global Styling */
+a:visited {
+  color: var(--pst-color-link);
+}
+
+code.literal {
+  border: none;
+  background-color: inherit;
+}
+
+.always-light-theme {
+  color: var(--sst-darker-color) !important;
+}
+
+div.math {
+  flex-direction: row;
+  justify-content: center;
+}
+
+.modal {
+  --bs-modal-bg: var(--pst-color-background);
+}
+
+/* Top Nav */
 .bd-header {
-  background-color: var(--pst-color-background-header) !important;
-  border-bottom: 3px solid var(--bee-yellow);
+  background-color: var(--sst-header-background) !important;
+  border-bottom: 3px;
+  border-bottom-color: var(--sst-accent-color-bright);
+  border-bottom-style: solid;
   box-shadow: none;
   margin-bottom: -3px;
 }
-.bd-header .navbar-nav li.nav-item { padding-left: 0.6rem; }
+
+.bd-header .navbar-nav li.nav-item {
+  padding-left: 0.6rem;
+}
+
+.bd-header ul.navbar-nav > li.nav-item.dropdown > .dropdown-toggle {
+  color: var(--sst-header-text);
+}
+
+.bd-header ul.navbar-nav > li.nav-item.dropdown > .dropdown-toggle:hover {
+  color: var(--sst-accent-color-bright);
+  box-shadow: none;
+}
+
+.bd-header ul.navbar-nav > li.nav-item > .nav-link {
+  color: var(--sst-header-text);
+}
 
 .bd-header .navbar-nav li a.nav-link {
-  color: var(--pst-color-text-on-header);
-  text-decoration: none;
-  transition: color 0.2s ease;
+  color: var(--sst-header-text);
 }
-.bd-header .navbar-nav li a.nav-link:hover,
-.bd-header .navbar-nav li a.nav-link:focus {
-  color: var(--bee-yellow);
-  border-bottom: 2px solid var(--bee-yellow);
-  padding-bottom: 0.2rem;
+
+.bd-header .navbar-nav li a.nav-link:focus,
+.bd-header .navbar-nav li a.nav-link:hover {
+  color: var(--sst-accent-color-bright);
 }
+
 .bd-header a.navbar-brand {
   font-weight: bold;
-  color: var(--bee-yellow);
+  color: var(--sst-accent-color-bright);
 }
 
-/* Icons and toggles */
-html .pst-navbar-icon,
-.search-button,
-.theme-switch-button span,
+/* Change the top navbar toggles and icons in the header to be light */
+.bd-header button.sidebar-toggle,
+html .navbar-header-items__end .pst-navbar-icon,
+html .navbar-header-items__end .pst-navbar-icon:visited {
+  color: var(--sst-header-text);
+}
+
+/* Don't style sidebar links as visited color */
+html .pst-navbar-icon:visited {
+  color: var(--pst-color-text-muted);
+}
+
+html .pst-navbar-icon:hover {
+  color: var(--pst-color-secondary);
+}
+
+/* Don't put an underline on the icons when hovering */
+html .pst-navbar-icon:hover::before {
+  border-bottom: none;
+}
+
+.search-button {
+  color: var(--sst-header-text);
+}
+
+.search-button:hover {
+  color: var(--sst-accent-color-bright);
+}
+
+html[data-theme="light"] .bd-sidebar-primary .theme-switch-button span {
+  color: var(--pst-color-muted);
+}
+
+.theme-switch-button span {
+  color: var(--sst-header-text);
+}
+
 .bd-header label.sidebar-toggle {
-  color: var(--pst-color-text-on-header);
+  padding-bottom: 0;
+  color: var(--sst-header-text);
 }
-.search-button:hover { color: var(--bee-yellow); }
 
-/* Dropdown menus */
+/* Style the dropdown from the top nav */
 .bd-header .navbar-nav .dropdown .dropdown-menu {
-  background-color: var(--pst-color-background-header);
-  border: none;
+  --bs-dropdown-border-radius: 0rem;
+  background-color: var(--sst-header-background);
+  box-shadow: none;
   margin-top: 0.86rem;
+  border: 0;
+  border-color: var(--sst-accent-color-bright);
 }
 
-/* ================================================================== */
-/* Sidebar                                                            */
-/* ================================================================== */
+.bd-header ul.navbar-nav .dropdown .dropdown-menu {
+  background-color: var(--sst-header-background);
+  border: none;
+}
+
+/* Required to center the items in the bottom bar */
+.bd-header .navbar-header-items__start {
+  width: auto;
+}
+
+/* Sidebar */
+/* Left hand sidebar */
 .bd-sidebar-primary {
-  background-color: var(--pst-color-background-sidebar);
-  border-right: 3px solid var(--bee-yellow);
+  background-color: var(--sst-sidebar-background-color);
   max-height: calc(100vh - var(--pst-header-height));
   flex-basis: 22%;
+  border-right-width: 3px;
+  border-right-color: var(--sst-accent-color-bright);
 }
+
+/* Both left and right sidebars */
 .bd-sidebar-primary,
 .bd-sidebar-secondary {
+  /* Reduce the top padding */
   padding-top: 1rem;
+  /* Because we have a fixed header, we make the sidebar(s) a dynamic height with a */
+  /* fixed top and bottom. */
+  height: auto;
   top: var(--pst-header-height);
   bottom: 0;
 }
-img.logo__image { height: var(--pst-header-height); }
 
-/* ================================================================== */
-/* Footer                                                             */
-/* ================================================================== */
+.bd-sidebar a.navbar-brand {
+  height: fit-content;
+  margin: 0;
+  max-height: none;
+  padding: 0;
+}
+
+.bd-sidebar a.navbar-brand > p {
+  white-space: normal;
+  text-align: center;
+}
+
+.bd-navbar-elements .ms-2 {
+  margin-left: 0 !important;
+}
+
+img.logo__image {
+  height: var(--pst-header-height);
+}
+
+.bd-sidebar-primary .sidebar-primary-items__end {
+  /* Disable the bottom margin in the end sidebar Section */
+  margin-bottom: 0;
+}
+
+/* RTD Flyout tweaks */
+.bd-sidebar-primary div#rtd-footer-container .rst-other-versions input {
+  color: var(--pst-color-primary);
+}
+
+/* Hide the search bar in the flyout */
+.rst-other-versions dl:has(form#flyout-search-form) {
+  display: none;
+}
+
+/* Reduce the margin at the end */
+.rst-versions .rst-other-versions hr {
+  margin: 5px 0;
+  border-top-color: var(--pst-color-border);
+}
+
+/* Revert the flyout footer to the RTD font size */
+.rst-versions small {
+  font-size: 90%;
+}
+
+/* Search Box */
+.search-button__wrapper.show input {
+  border: none;
+}
+.form-control {
+  border: none;
+}
+
+.form-control:focus,
+.form-control:focus-visible {
+  outline: none;
+}
+
+form.bd-search:focus-within {
+  border: 2px solid var(--pst-color-accent);
+}
+
+.search-button-field {
+  border: 2px solid rgba(0, 0, 0, 0);
+}
+
+html[data-theme="light"] .search-button-field:hover {
+  background-color: var(--sst-light-color);
+}
+
+html[data-theme="dark"] .search-button-field:hover {
+  background-color: var(--sst-darkest-color);
+}
+
+/* Footers */
+
 .bd-footer {
   color: var(--pst-color-text-base);
-  background-color: var(--pst-color-background-footer);
+  background-color: var(--sst-footer-background-color);
   width: 100%;
   border-top: none;
 }
-.bd-footer a { color: var(--pst-color-link); }
 
-/* ================================================================== */
-/* Headings / accents                                                 */
-/* ================================================================== */
-h1, h2, h3, h4, h5, h6 { color: var(--bee-yellow) !important; }
-.bd-article h1::after {
-  content: "";
-  display: block;
-  height: 4px;
-  width: 80px;
-  margin-top: 0.5em;
-  background: linear-gradient(90deg, var(--bee-black), var(--bee-yellow), var(--bee-black));
-  border-radius: 2px;
+/* Override the default start and end from pst here so we make it the same as our new center */
+.bd-footer .footer-items__end,
+.bd-footer .footer-items__start,
+.bd-footer .footer-items__center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
 }
 
+.bd-footer .footer-items__center {
+  text-align: center;
+}
+
+.bd-footer .footer-items__end {
+  margin-left: 0;
+}
+
+.bd-footer a {
+  color: var(--pst-color-link);
+}
+
+.footer-links a {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+/* This width is hard coded, ideally it should be when then content gets wider than */
+/* the viewport, I just don't know how to do that. */
+@media only screen and (max-width: 800px) {
+  .bd-footer .footer-items__end,
+  .bd-footer .footer-items__start {
+    display: none;
+  }
+  .bd-footer .footer-items__center {
+    align-items: center;
+  }
+}
+
+.concertina-icon {
+  left: 0;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+  text-decoration: none !important; /* otherwise couldn't get the icon to not be underlined */
+}
+
+.concertina-toggle[aria-expanded="true"] .concertina-icon {
+  transform: rotate(90deg);
+}
+
+.concertina-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none; /* Controlled via the concertina toggle JS */
+}
+
+.concertina-submenu.show {
+  display: block;
+}
+.concertina-submenu.collapse {
+  width: 100%;
+}
+
+.concertina-subitem {
+  padding-left: 2rem;
+}
+
+/* Have to restore some pst styling since we have removed some bs classes in the navbar_center template */
+.navbar-nav .concertina-toggle {
+  color: var(--pst-color-text-muted);
+}
+.bd-header .dropdown-item,
+.bd-header .concertina-toggle {
+  color: var(--sst-header-text);
+}
+
+/* Hover and focus styles */
+.concertina-toggle.dropdown-item:hover,
+.navbar-nav .concertina-toggle:hover,
+.bd-header .dropdown-item:hover,
+.bd-header .concertina-toggle:hover {
+  color: var(--pst-color-link-hover);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.navbar-nav .concertina-toggle:hover {
+  text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
+  text-underline-offset: 0.1578em;
+}
+.bd-header .concertina-toggle .concertina-icon {
+  left: 0.4rem !important;
+}
+/* Limit the height of dropdown menu to keep on screen */
+.bd-header .dropdown-menu {
+  max-height: 80vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
 /* ================================================================== */
 /* Utilities                                                          */
 /* ================================================================== */
@@ -226,3 +515,89 @@ code.literal { border: none; background-color: inherit; }
 div.math { flex-direction: row; justify-content: center; }
 .modal { --bs-modal-bg: var(--pst-color-background); }
 html[data-theme="dark"] div.graphviz > object.inheritance { filter: invert(0.9); }
+
+/* ================================================================== */
+/* Landing Page                                                       */
+/* ================================================================== */
+.landing-hero {
+  border: 1px solid var(--pst-color-border);
+  border-radius: 1rem;
+  box-shadow: 0 1.25rem 2.5rem -2rem var(--pst-color-shadow);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+html[data-theme="light"] .landing-hero {
+  background:
+    radial-gradient(circle at top right, rgba(254, 121, 0, 0.16), transparent 28%),
+    linear-gradient(135deg, #fffaf1 0%, #fff7d8 52%, #ffffff 100%);
+}
+
+html[data-theme="dark"] .landing-hero {
+  background:
+    radial-gradient(circle at top right, rgba(254, 210, 11, 0.18), transparent 24%),
+    linear-gradient(135deg, #2a2411 0%, #232323 55%, #1a1d22 100%);
+}
+
+.landing-hero .sd-card-body {
+  padding: 1.6rem 1.7rem;
+}
+
+.landing-hero p:first-child {
+  color: var(--sst-accent-color-muted);
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+  max-width: 30rem;
+}
+
+html[data-theme="dark"] .landing-hero p:first-child {
+  color: var(--bee-yellow);
+}
+
+.landing-hero p {
+  font-size: 1.02rem;
+  margin-bottom: 0.8rem;
+  max-width: 44rem;
+}
+
+.landing-card {
+  border: 1px solid var(--pst-color-border);
+  border-radius: 0.95rem;
+  box-shadow: 0 1rem 2rem -2rem var(--pst-color-shadow);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.landing-card:hover {
+  border-color: var(--sst-accent-color-bright);
+  box-shadow: 0 1.4rem 2.4rem -1.8rem var(--pst-color-shadow);
+  transform: translateY(-2px);
+}
+
+.landing-card .sd-card-body {
+  padding: 1.1rem 1.15rem;
+}
+
+.landing-card.sd-card .sd-card-title {
+  color: var(--pst-color-text-base);
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 0.45rem;
+}
+
+.landing-card p:last-child {
+  margin-bottom: 0;
+}
+
+html[data-theme="light"] .landing-card--warm {
+  background: linear-gradient(180deg, #fffaf0 0%, #fffdf8 100%);
+}
+
+html[data-theme="dark"] .landing-card--warm {
+  background: linear-gradient(180deg, rgba(254, 121, 0, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+}
