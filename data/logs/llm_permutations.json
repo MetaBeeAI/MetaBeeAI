@@ -1,0 +1,1446 @@
+{
+  "0": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "1": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/openai/gpt-4o"
+  ],
+  "2": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "3": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "4": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "5": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/openai/o3"
+  ],
+  "6": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "7": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "8": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "9": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "10": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "11": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "12": [
+    "openrouter/openai/gpt-4o-mini",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "13": [
+    "openrouter/openai/gpt-4o-mini",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "14": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "15": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "16": [
+    "openrouter/openai/gpt-4o-mini",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "17": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "18": [
+    "openrouter/openai/gpt-4o-mini",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "19": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "20": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/openai/gpt-4o"
+  ],
+  "21": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "22": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "23": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "24": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/openai/o3"
+  ],
+  "25": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "26": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "27": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "28": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "29": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "30": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "31": [
+    "openrouter/openai/gpt-4o",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "32": [
+    "openrouter/openai/gpt-4o",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "33": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "34": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "35": [
+    "openrouter/openai/gpt-4o",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "36": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "37": [
+    "openrouter/openai/gpt-4o",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "38": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "39": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/openai/gpt-4o"
+  ],
+  "40": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "41": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "42": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "43": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/openai/o3"
+  ],
+  "44": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "45": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "46": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "47": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "48": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "49": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "50": [
+    "openrouter/openai/gpt-oss-20b",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "51": [
+    "openrouter/openai/gpt-oss-20b",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "52": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "53": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "54": [
+    "openrouter/openai/gpt-oss-20b",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "55": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "56": [
+    "openrouter/openai/gpt-oss-20b",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "57": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "58": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/openai/gpt-4o"
+  ],
+  "59": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "60": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "61": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "62": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/openai/o3"
+  ],
+  "63": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "64": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "65": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "66": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "67": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "68": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "69": [
+    "openrouter/openai/gpt-oss-120b",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "70": [
+    "openrouter/openai/gpt-oss-120b",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "71": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "72": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "73": [
+    "openrouter/openai/gpt-oss-120b",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "74": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "75": [
+    "openrouter/openai/gpt-oss-120b",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "76": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "77": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/openai/gpt-4o"
+  ],
+  "78": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "79": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "80": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "81": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/openai/o3"
+  ],
+  "82": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "83": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "84": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "85": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "86": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "87": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "88": [
+    "openrouter/openai/gpt-5-nano",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "89": [
+    "openrouter/openai/gpt-5-nano",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "90": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "91": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "92": [
+    "openrouter/openai/gpt-5-nano",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "93": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "94": [
+    "openrouter/openai/gpt-5-nano",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "95": [
+    "openrouter/openai/o3",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "96": [
+    "openrouter/openai/o3",
+    "openrouter/openai/gpt-4o"
+  ],
+  "97": [
+    "openrouter/openai/o3",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "98": [
+    "openrouter/openai/o3",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "99": [
+    "openrouter/openai/o3",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "100": [
+    "openrouter/openai/o3",
+    "openrouter/openai/o3"
+  ],
+  "101": [
+    "openrouter/openai/o3",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "102": [
+    "openrouter/openai/o3",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "103": [
+    "openrouter/openai/o3",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "104": [
+    "openrouter/openai/o3",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "105": [
+    "openrouter/openai/o3",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "106": [
+    "openrouter/openai/o3",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "107": [
+    "openrouter/openai/o3",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "108": [
+    "openrouter/openai/o3",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "109": [
+    "openrouter/openai/o3",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "110": [
+    "openrouter/openai/o3",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "111": [
+    "openrouter/openai/o3",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "112": [
+    "openrouter/openai/o3",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "113": [
+    "openrouter/openai/o3",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "114": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "115": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/openai/gpt-4o"
+  ],
+  "116": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "117": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "118": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "119": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/openai/o3"
+  ],
+  "120": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "121": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "122": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "123": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "124": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "125": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "126": [
+    "openrouter/qwen/qwen3.5-9b",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "127": [
+    "openrouter/qwen/qwen3.5-9b",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "128": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "129": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "130": [
+    "openrouter/qwen/qwen3.5-9b",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "131": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "132": [
+    "openrouter/qwen/qwen3.5-9b",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "133": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "134": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/openai/gpt-4o"
+  ],
+  "135": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "136": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "137": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "138": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/openai/o3"
+  ],
+  "139": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "140": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "141": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "142": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "143": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "144": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "145": [
+    "openrouter/qwen/qwen3.5-27b",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "146": [
+    "openrouter/qwen/qwen3.5-27b",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "147": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "148": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "149": [
+    "openrouter/qwen/qwen3.5-27b",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "150": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "151": [
+    "openrouter/qwen/qwen3.5-27b",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "152": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "153": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/openai/gpt-4o"
+  ],
+  "154": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "155": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "156": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "157": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/openai/o3"
+  ],
+  "158": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "159": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "160": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "161": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "162": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "163": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "164": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "165": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "166": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "167": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "168": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "169": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "170": [
+    "openrouter/qwen/qwen3.5-35b-a3b",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "171": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "172": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/openai/gpt-4o"
+  ],
+  "173": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "174": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "175": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "176": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/openai/o3"
+  ],
+  "177": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "178": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "179": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "180": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "181": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "182": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "183": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "184": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "185": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "186": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "187": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "188": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "189": [
+    "openrouter/mistralai/mistral-medium-3.1",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "190": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "191": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/openai/gpt-4o"
+  ],
+  "192": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "193": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "194": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "195": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/openai/o3"
+  ],
+  "196": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "197": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "198": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "199": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "200": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "201": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "202": [
+    "openrouter/mistralai/mistral-large-2512",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "203": [
+    "openrouter/mistralai/mistral-large-2512",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "204": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "205": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "206": [
+    "openrouter/mistralai/mistral-large-2512",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "207": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "208": [
+    "openrouter/mistralai/mistral-large-2512",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "209": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "210": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/openai/gpt-4o"
+  ],
+  "211": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "212": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "213": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "214": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/openai/o3"
+  ],
+  "215": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "216": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "217": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "218": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "219": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "220": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "221": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "222": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "223": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "224": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "225": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "226": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "227": [
+    "openrouter/meta-llama/llama-3.3-70b-instruct",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "228": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "229": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/openai/gpt-4o"
+  ],
+  "230": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "231": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "232": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "233": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/openai/o3"
+  ],
+  "234": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "235": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "236": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "237": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "238": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "239": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "240": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "241": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "242": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "243": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "244": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "245": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "246": [
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "247": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "248": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/openai/gpt-4o"
+  ],
+  "249": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "250": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "251": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "252": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/openai/o3"
+  ],
+  "253": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "254": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "255": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "256": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "257": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "258": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "259": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "260": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "261": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "262": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "263": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "264": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "265": [
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "266": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "267": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/openai/gpt-4o"
+  ],
+  "268": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "269": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "270": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "271": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/openai/o3"
+  ],
+  "272": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "273": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "274": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "275": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "276": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "277": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "278": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "279": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "280": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "281": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "282": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "283": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "284": [
+    "openrouter/google/gemini-3.1-flash-lite-preview",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "285": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "286": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/openai/gpt-4o"
+  ],
+  "287": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "288": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "289": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "290": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/openai/o3"
+  ],
+  "291": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "292": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "293": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "294": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "295": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "296": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "297": [
+    "openrouter/google/gemma-3-4b-it",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "298": [
+    "openrouter/google/gemma-3-4b-it",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "299": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "300": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "301": [
+    "openrouter/google/gemma-3-4b-it",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "302": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "303": [
+    "openrouter/google/gemma-3-4b-it",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "304": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "305": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/openai/gpt-4o"
+  ],
+  "306": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "307": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "308": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "309": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/openai/o3"
+  ],
+  "310": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "311": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "312": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "313": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "314": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "315": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "316": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "317": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "318": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "319": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "320": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "321": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "322": [
+    "huggingface/scaleway/google/gemma-3-27b-it",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "323": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "324": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/openai/gpt-4o"
+  ],
+  "325": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "326": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "327": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "328": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/openai/o3"
+  ],
+  "329": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "330": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "331": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "332": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "333": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "334": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "335": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "336": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "337": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "338": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "339": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "340": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "341": [
+    "openrouter/anthropic/claude-3.5-haiku",
+    "openrouter/anthropic/claude-3-haiku"
+  ],
+  "342": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/openai/gpt-4o-mini"
+  ],
+  "343": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/openai/gpt-4o"
+  ],
+  "344": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/openai/gpt-oss-20b"
+  ],
+  "345": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/openai/gpt-oss-120b"
+  ],
+  "346": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/openai/gpt-5-nano"
+  ],
+  "347": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/openai/o3"
+  ],
+  "348": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/qwen/qwen3.5-9b"
+  ],
+  "349": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/qwen/qwen3.5-27b"
+  ],
+  "350": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/qwen/qwen3.5-35b-a3b"
+  ],
+  "351": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/mistralai/mistral-medium-3.1"
+  ],
+  "352": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/mistralai/mistral-large-2512"
+  ],
+  "353": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/meta-llama/llama-3.3-70b-instruct"
+  ],
+  "354": [
+    "openrouter/anthropic/claude-3-haiku",
+    "huggingface/sambanova/meta-llama/Llama-4-Maverick-17B-128E-Instruct"
+  ],
+  "355": [
+    "openrouter/anthropic/claude-3-haiku",
+    "huggingface/nscale/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+  ],
+  "356": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/google/gemini-3.1-flash-lite-preview"
+  ],
+  "357": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/google/gemma-3-4b-it"
+  ],
+  "358": [
+    "openrouter/anthropic/claude-3-haiku",
+    "huggingface/scaleway/google/gemma-3-27b-it"
+  ],
+  "359": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/anthropic/claude-3.5-haiku"
+  ],
+  "360": [
+    "openrouter/anthropic/claude-3-haiku",
+    "openrouter/anthropic/claude-3-haiku"
+  ]
+}
