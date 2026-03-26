@@ -156,7 +156,7 @@ metabeeai llm --dir /path/to/YOURDATABASE/papers
 **Purpose**: Run `questions.yml` against processed chunks and store answers
 **Output**: `YOURDATABASE/papers/{paper_id}/answers.json`
 **Key options**: `--dir`, `--papers`, `--overwrite`, `--relevance-model`, `--answer-model`, `--config`
-
+**Attention**: Before you run any LLM relevance-answer combination, please make sure this combination is contained in /data/logs/llm_permutations.json so the simulation information can be recorded accordingly.
 ---
 
 ### 3. Human Review
