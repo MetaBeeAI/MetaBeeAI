@@ -8,6 +8,8 @@ from typing import Any, Callable, Dict, List
 
 import yaml
 from litellm import acompletion
+import litellm
+litellm.drop_params=True
 from pydantic import BaseModel
 from tqdm import tqdm  # progress bar for loops
 
@@ -15,7 +17,7 @@ from tqdm import tqdm  # progress bar for loops
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-RETRY = 100
+RETRY = 10
 
 # Model configuration for hybrid approach
 try:
@@ -181,13 +183,24 @@ def get_question_config(question_text: str) -> dict:
     Returns:
         dict: Configuration with max_chunks, description, and no_info_response.
     """
+    if isinstance(question_text, list):
+        question_text = ' '.join(question_text)
     question_lower = question_text.lower()
 
     # Try to find a matching question in the YAML configuration
     for question_key, question_config in QUESTIONS_CONFIG.items():
-        config_question = question_config.get("question", "").lower()
+
+        config_question = question_config.get("question", "")
+        if isinstance(config_question, list):
+            config_question = " ".join(config_question)
+        config_question = config_question.lower()
+
+        if isinstance(question_key, list):
+            question_key = ' '.join(question_key)
+            question_key = question_key.lower()
+
         # Check if questions match (either contains the other)
-        if question_lower in config_question or config_question in question_lower or question_key.lower() in question_lower:
+        if question_lower in config_question or config_question in question_lower or question_key in question_lower:
             # Extract configuration from YAML
             config = {
                 "max_chunks": question_config.get("max_chunks", 5),
@@ -235,6 +248,8 @@ def get_question_metadata(question_text: str) -> dict:
     Returns:
         dict: Question metadata including instructions, output_format, examples, etc.
     """
+    if isinstance(question_text, list):
+        question_text = " ".join(question_text)
     question_lower = question_text.lower()
 
     # First, try exact question matching
@@ -242,7 +257,16 @@ def get_question_metadata(question_text: str) -> dict:
         if question_key == "GLOBAL_CONFIG":
             continue  # Skip global config
 
-        if question_config.get("question", "").lower() in question_lower or question_key.lower() in question_lower:
+        config_question = question_config.get("question", "")
+        if isinstance(config_question, list):
+            config_question = " ".join(config_question)
+        config_question = config_question.lower()
+
+        if isinstance(question_key, list):
+            question_key = " ".join(question_key)
+        question_key = question_key.lower()
+
+        if config_question in question_lower or question_key in question_lower:
             return {
                 "question_key": question_key,
                 "question": question_config.get("question", ""),
@@ -409,20 +433,33 @@ Return the entities in a list format.
 
     messages = [{"content": prompt, "role": "user"}]
 
-    result = None
+    result = {}
+    answer_prompt_tokens = 0
+    answer_completion_tokens = 0
     for i in range(RETRY):
         try:
             # Call the API asynchronously expecting a response conforming to the Answer model.
             response = await acompletion(model=model, messages=messages, response_format=AnswerList, temperature=0)
             # Parse the JSON string from the API response.
             result = json.loads(response.choices[0].message.content)
+            answer_prompt_tokens = response['usage'].prompt_tokens
+            answer_completion_tokens = response['usage'].completion_tokens
             logger.info("Answer restructured", result)
             break
         except Exception as e:
             logger.error("Error obtaining answer restructuring", e)
-            time.sleep(1)
+            try:
+                answer_prompt_tokens = response['usage'].prompt_tokens
+            except:
+                answer_prompt_tokens = 0
+            
+            try:
+                answer_completion_tokens = response['usage'].completion_tokens
+            except:
+                answer_completion_tokens = 0
+            time.sleep(2)
             continue
-    return result
+    return result, answer_prompt_tokens, answer_completion_tokens
 
 
 async def get_answer(question: str, chunk: Dict[str, Any], model: str = ANSWER_MODEL) -> Dict[str, Any]:
@@ -492,12 +529,16 @@ async def get_answer(question: str, chunk: Dict[str, Any], model: str = ANSWER_M
             response = await acompletion(model=model, messages=messages, response_format=Answer, temperature=0)
             # Parse the JSON string from the API response.
             chunk["answer"] = json.loads(response.choices[0].message.content)
+            chunk["answer_prompt_tokens"] = response['usage'].prompt_tokens
+            chunk["answer_completion_tokens"] = response['usage'].completion_tokens
             logger.info("Answer obtained for chunk %s: %s", chunk.get("chunk_id"), chunk["answer"])
             break
         except Exception as e:
-            logger.error("Error obtaining answer for chunk %s: %s", chunk.get("chunk_id"), e)
+            logger.error("Error obtaining answer for chunk %s: %s", chunk.get("chunk_id"), e, '\n')#, response.choices[0].message.content)
             chunk["answer"] = None  # In case of error, mark answer as None.
-            time.sleep(1)
+            chunk["answer_prompt_tokens"] = 0
+            chunk["answer_completion_tokens"] = 0
+            time.sleep(2)
             continue
     return chunk
 
@@ -638,21 +679,46 @@ async def get_top_relevant_chunks(
                         )
 
                 logger.info(f"Selected {len(selected_chunks)} chunks from {len(filtered_chunks)} total chunks")
+                selected_chunks.append(response['usage'].prompt_tokens)
+                selected_chunks.append(response['usage'].completion_tokens)
                 return selected_chunks
 
             except Exception as e:
                 logger.error(f"Error parsing chunk selection response: {e}")
                 # Fallback: return first few chunks
-                return filtered_chunks[:max_chunks]
+                to_return = filtered_chunks[:max_chunks].copy()
+                to_return.append(response['usage'].prompt_tokens)
+                to_return.append(response['usage'].completion_tokens)
+                return to_return
         else:
             logger.error("No valid response from LLM for chunk selection")
             # Fallback: return first few chunks
-            return filtered_chunks[:max_chunks]
+            to_return = filtered_chunks[:max_chunks].copy()
+            try:
+                to_return.append(response['usage'].prompt_tokens)
+            except:
+                to_return.append(0)
+            
+            try:
+                to_return.append(response['usage'].completion_tokens)
+            except:
+                to_return.append(0)
+            return to_return
 
     except Exception as e:
         logger.error(f"Error selecting top chunks: {e}")
         # Fallback: return first few chunks
-        return chunks[:max_chunks]
+        to_return = chunks[:max_chunks].copy()
+        try:
+            to_return.append(response['usage'].prompt_tokens)
+        except:
+            to_return.append(0)
+        
+        try:
+            to_return.append(response['usage'].completion_tokens)
+        except:
+            to_return.append(0)
+        return to_return
 
 
 async def filter_all_chunks(
@@ -816,11 +882,24 @@ async def reflect_answers(question: str, chunks: List[Dict[str, Any]], model: st
         try:
             response = await acompletion(model=model, messages=messages, response_format=AnswerWithChunkId, temperature=0)
             result = json.loads(response.choices[0].message.content)
+            answer_prompt_tokens = response['usage'].prompt_tokens
+            answer_completion_tokens = response['usage'].completion_tokens
             logger.info("Reflected answer: %s", result)
-            return result
+            return result, answer_prompt_tokens, answer_completion_tokens
         except Exception as e:
             logger.error("Error reflecting answers: %s", e)
-            time.sleep(1)
+            time.sleep(2)
+    try:
+        answer_prompt_tokens = response['usage'].prompt_tokens
+    except:
+        answer_prompt_tokens = 0
+    
+    try:
+        answer_completion_tokens = response['usage'].completion_tokens
+    except:
+        answer_completion_tokens = 0
+    
+    return {}, answer_prompt_tokens, answer_completion_tokens
 
 
 # --------------------------------------------------------------------------
@@ -952,6 +1031,11 @@ async def ask_json(
         question, chunks, question_config["max_chunks"], batch_size=relevance_batch_size, model=selected_relevance_model
     )
 
+    relevance_prompt_tokens = relevant_chunks[-2]
+    relevance_completion_tokens = relevant_chunks[-1]
+    answer_prompt_tokens = 0
+    answer_completion_tokens = 0
+
     if len(relevant_chunks) == 0:
         logger.info("No relevant chunks found for the question: %s", question)
         return {
@@ -970,7 +1054,13 @@ async def ask_json(
                 "issues": ["No relevant chunks found"],
                 "recommendations": ["Review question formulation or chunk selection criteria"],
             },
+            'relevance_prompt_tokens': relevance_prompt_tokens,
+            'relevance_completion_tokens': relevance_completion_tokens,
+            'answer_prompt_tokens': answer_prompt_tokens,
+            'answer_completion_tokens': answer_completion_tokens,
         }
+
+    relevant_chunks = relevant_chunks[:-2].copy()
 
     # Log selected chunks for debugging
     logger.info(f"Found {len(relevant_chunks)} relevant chunks:")
@@ -984,11 +1074,19 @@ async def ask_json(
     answered_chunks: List[Dict[str, Any]] = await query_all_chunks(
         question, relevant_chunks, batch_size=answer_batch_size, model=selected_answer_model
     )
+    for a in answered_chunks:
+        answer_prompt_tokens += a['answer_prompt_tokens']
+        answer_completion_tokens += a['answer_completion_tokens']
+        # del a['answer_prompt_tokens']
+        # del a['answer_completion_tokens']
+
     # Step 3: Reflect on all collected answers to produce the final answer.
-    final_result: Any = await reflect_answers(question, answered_chunks, selected_answer_model)
+    final_result, answer_prompt_tokens_reflect, answer_completion_tokens_reflect = await reflect_answers(question, answered_chunks, selected_answer_model)
     # final_result: Any = await process_batches_async(
     #     question, answered_chunks, BATCH_SIZE, reflect_answers, desc="Reflecting answers"
     # )
+    answer_prompt_tokens += answer_prompt_tokens_reflect
+    answer_completion_tokens += answer_completion_tokens_reflect
 
     logger.info("Final result: %s", final_result)
 
@@ -1043,6 +1141,10 @@ async def ask_json(
         },
         "question_metadata": question_metadata,
         "quality_assessment": answer_quality,
+        'relevance_prompt_tokens': relevance_prompt_tokens,
+        'relevance_completion_tokens': relevance_completion_tokens,
+        'answer_prompt_tokens': answer_prompt_tokens,
+        'answer_completion_tokens': answer_completion_tokens,
     }
 
     pprint(enhanced_result)
