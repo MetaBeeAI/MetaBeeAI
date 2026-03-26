@@ -17,7 +17,7 @@ from tqdm import tqdm  # progress bar for loops
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-RETRY = 10
+RETRY = 100
 
 # Model configuration for hybrid approach
 try:
