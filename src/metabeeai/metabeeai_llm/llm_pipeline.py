@@ -74,6 +74,10 @@ async def get_answer(question_text, json_path, relevance_model=None, answer_mode
             "answer": result.get("answer", ""),
             "reason": result.get("reason", ""),
             "chunk_ids": result.get("chunk_ids", []),
+            'relevance_prompt_tokens': result.get("relevance_prompt_tokens", 0),
+            'relevance_completion_tokens': result.get("relevance_completion_tokens", 0),
+            'answer_prompt_tokens': result.get("answer_prompt_tokens", 0),
+            'answer_completion_tokens': result.get("answer_completion_tokens", 0),
         }
     else:
         # Fallback if result is not a dict
@@ -81,6 +85,10 @@ async def get_answer(question_text, json_path, relevance_model=None, answer_mode
             "answer": str(result) if result else "",
             "reason": "Answer generated from available information",
             "chunk_ids": [],
+            'relevance_prompt_tokens': 0,
+            'relevance_completion_tokens': 0,
+            'answer_prompt_tokens': 0,
+            'answer_completion_tokens': 0,
         }
 
 
@@ -207,6 +215,9 @@ def merge_json_in_the_folder(folder_path, overwrite=False):
         json.dump(json_obj, f, indent=2)
 
 
+with open("./data/logs/llm_permutations.json", "r") as f:
+    LLM_PERMUTATION_DICT = json.load(f)
+
 async def process_papers(
     base_dir=None,
     paper_folders=None,
@@ -267,7 +278,11 @@ async def process_papers(
     failed_papers = []
 
     # Create progress log file
-    log_file = os.path.join(base_dir, "processing_log.txt")
+    llm_pair_index = next((k for k, v in LLM_PERMUTATION_DICT.items() if v == [relevance_model, answer_model]), None)
+
+    log_file_folder = "./data/logs/processing_text"
+    os.makedirs(log_file_folder, exist_ok=True)
+    log_file = os.path.join(log_file_folder, f"processing_log_{llm_pair_index}.txt")
 
     print(f"🚀 Starting pipeline: {total_papers} papers to process")
     print(f"📁 Papers directory: {base_dir}")
@@ -276,7 +291,7 @@ async def process_papers(
 
     for paper_folder in paper_folders:
         paper_path = os.path.join(base_dir, paper_folder)
-
+            
         # Show overall progress
         remaining = total_papers - completed_papers
         print(f"\n📊 Progress: {completed_papers}/{total_papers} completed, {remaining} remaining")
@@ -302,6 +317,34 @@ async def process_papers(
             # Process the paper with progress tracking
             questions = _get_questions()
             print(f"  📖 Processing {len(questions)} questions...")
+            
+            os.makedirs(os.path.join(paper_path, "answers"), exist_ok=True)
+            answers_path = os.path.join(paper_path, "answers", f"{llm_pair_index}_answers.json")
+            
+            if os.path.exists(answers_path):
+                with open(answers_path, "r") as f:
+                    saved_answer_data_all = json.load(f)['QUESTIONS']['QUESTIONS']
+                
+                if_skip_this_paper = True
+
+                for k in saved_answer_data_all.keys():
+                    saved_answer_data = saved_answer_data_all[k]
+
+                    if saved_answer_data['relevance_prompt_tokens'] == 0 or saved_answer_data[
+                        'relevance_completion_tokens'] == 0 or saved_answer_data[
+                            'answer_prompt_tokens'] == 0 or saved_answer_data[
+                                'answer_completion_tokens'] == 0:
+                                if_skip_this_paper = False
+                                break
+                
+                if if_skip_this_paper:
+                    completed_papers += 1
+                    print(f"  ✅ Paper {paper_folder} completed successfully")
+
+                    # Log completion
+                    with open(log_file, "a") as f:
+                        f.write(f"{paper_folder}: COMPLETED at {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+                    continue
 
             # Temporarily reduce logging verbosity and suppress all output during processing
             import logging
@@ -329,8 +372,10 @@ async def process_papers(
                 logging.getLogger().setLevel(original_log_level)
 
             # Merge with existing answers.json if it exists
-            answers_path = os.path.join(paper_path, "answers.json")
+            # os.makedirs(os.path.join(paper_path, "answers"), exist_ok=True)
+            # answers_path = os.path.join(paper_path, "answers", f"{llm_pair_index}_answers.json")
 
+            '''
             # Load existing answers if the file exists
             existing_answers = {}
             if os.path.exists(answers_path):
@@ -354,7 +399,7 @@ async def process_papers(
                     if key not in literature_answers:
                         literature_answers[key] = existing_answers[key]
                 print(f"  🔄 Merged answers: {len(literature_answers)} total question(s)")
-
+            '''
             # Save the merged results in QUESTIONS format
             output_data = {"QUESTIONS": literature_answers}
 
@@ -384,6 +429,7 @@ async def process_papers(
     if failed_papers:
         print(f"❌ Failed papers: {', '.join(failed_papers)}")
     print(f"📝 Detailed log: {log_file}")
+    time.sleep(2)
 
 
 def main(argv=None):
