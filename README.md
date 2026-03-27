@@ -156,7 +156,7 @@ metabeeai llm --dir /path/to/YOURDATABASE/papers
 **Purpose**: Run `questions.yml` against processed chunks and store answers
 **Output**: `YOURDATABASE/papers/{paper_id}/answers.json`
 **Key options**: `--dir`, `--papers`, `--overwrite`, `--relevance-model`, `--answer-model`, `--config`
-**Attention**: Before you run any LLM relevance-answer combination, please make sure this combination is contained in /data/logs/llm_permutations.json so the simulation information can be recorded accordingly.
+**Attention if you run multiple LLM pairs**: Please remember to use json_multistage_qa_multiple_llm_pairs.py (instead of json_multistage_qa.py) and llm_pipeline_multiple_llm_pairs.py (instead of llm_pipeline.py). Before you run any LLM relevance-answer combination, please make sure this combination is contained in /data/logs/llm_permutations.json so the simulation information can be recorded accordingly. You will also need to adjust code in review and visualization as they require 'answer.json' and 'answer_extended.json' files directly under each paper's folder.
 
 ---
 
