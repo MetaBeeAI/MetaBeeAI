@@ -458,12 +458,15 @@ def get_api_usage(response, model: str) -> dict:
         logger.info("LiteLLM not installed, falling back to manual pricing for cost calculation.")
     
     except Exception as e:
-        # Catch unexpected errors from LiteLLM (eg. catalogue structure changes, model not found in catalogue etc.), log the info and pass to the manual fallback
+        # Catch unexpected errors from LiteLLM (eg. catalogue structure 
+        # changes, model not found in catalogue etc.), log the info
+        # Pass to the manual fallback
         # Note: This log is suppressed during runs with llm_pipeline.py. The pass will be silent
         logger.warning(f"Error pulling costs from LiteLLM: {e}. Falling back to manual pricing for cost calculation.")
 
     # Second Pricing Attempt: Manual fallback pricing for specific models
-    # Used when LiteLLM doesn't have the model in its pricing catalogue, or if there was an error pulling the costs (eg. LiteLLM not installed or crashed)
+    # Used when LiteLLM doesn't have the model in its pricing catalogue
+    # #or if there was an error pulling the costs (eg. LiteLLM not installed or crashed)
     # Add models manually as needed. Rates divided by 1,000,000 since prices are typically listed as 'per 1M tokens'
     # GPT-4 models
     if model_name == "gpt-4o-mini":
@@ -906,7 +909,13 @@ async def query_all_chunks(
                 # Mark chunk as failed on error
                 batch[i]["answer"] = {"answer": "Error occurred during answer generation", "reason": f"Error: {str(result)}"}
                 # Attach an empty receipt so the token aggregation doesn't have issues with a missing key
-                batch[i]["usage_details"] = {"cost": 0.0, "input_tokens": 0, "cached_tokens": 0, "output_tokens": 0, "model": selected_model}
+                batch[i]["usage_details"] = {
+                    "cost": 0.0, 
+                    "input_tokens": 0, 
+                    "cached_tokens": 0, 
+                    "output_tokens": 0, 
+                    "model": selected_model
+                    }
                 # Add the failed chunk to the array so costs aren't dropped
                 all_answered_chunks.append(batch[i])
             else:
