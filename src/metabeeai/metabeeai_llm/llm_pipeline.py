@@ -1,5 +1,6 @@
 import argparse
 import asyncio
+import copy
 import json
 import os
 import sys
@@ -46,7 +47,10 @@ def _get_questions():
         questions_path = os.path.join(script_dir, "questions.yml")
 
         with open(questions_path, "r") as file:
-            _QUESTIONS = yaml.safe_load(file)
+            # Extract the questions ('QUESTIONS') dictionary to prevent double-wrapping if it exists
+            # Otherwise use the whole config as the questions dictionary
+            config = yaml.safe_load(file)
+            _QUESTIONS = config.get("QUESTIONS", config)
 
     return _QUESTIONS
 
@@ -74,6 +78,10 @@ async def get_answer(question_text, json_path, relevance_model=None, answer_mode
             "answer": result.get("answer", ""),
             "reason": result.get("reason", ""),
             "chunk_ids": result.get("chunk_ids", []),
+            # Pass total question cost to the pipeline for logging (will be popped before saving to answers.json)
+            "cost": result.get("cost", 0.0),
+            # Pass aggregated token metrics to the pipeline for logging (will be popped before saving to answers.json)
+            "metrics": result.get("metrics", {}),
         }
     else:
         # Fallback if result is not a dict
@@ -81,6 +89,12 @@ async def get_answer(question_text, json_path, relevance_model=None, answer_mode
             "answer": str(result) if result else "",
             "reason": "Answer generated from available information",
             "chunk_ids": [],
+            # Safety fallback - pass zero cost so the logging loop doesn't crash
+            # (still popped before saving to answers.json)
+            "cost": 0.0,
+            # Safety fallback - pass empty metrics dictionary so the logging loop doesn't crash
+            # (still popped before saving to answers.json)
+            "metrics": {},
         }
 
 
@@ -127,6 +141,34 @@ async def process_question_tree(tree, json_path, context=None, relevance_model=N
                     list_result = await format_to_list_async(question_of_the_list, answer["answer"])
                     list_items = list_result["answer"]
                     result[key] = {}
+
+                    # Preserve the parent list costs so extract_metrics can see them
+                    # Sum the costs of both finding the list and formatting it into an array
+                    total_list_cost = answer.get("cost", 0.0) + list_result.get("cost", 0.0)
+
+                    # Copy the original list token metrics into the combined run metrics tracker
+                    combined_metrics = copy.deepcopy(answer.get("metrics", {}))
+                    if list_result and "usage_details" in list_result:
+                        usage = list_result["usage_details"]
+                        m_name = usage.get("model", "unknown")
+                        metric_key = f"Answering|{m_name}"
+
+                        # Initialise counters for the model if it's the first time seeing it in this block
+                        if metric_key not in combined_metrics:
+                            combined_metrics[metric_key] = {"input": 0, "cached": 0, "output": 0, "cost": 0.0}
+                        # Add the list formatting token costs to the combined run tracking data
+                        combined_metrics[metric_key]["input"] += usage.get("input_tokens", 0)
+                        combined_metrics[metric_key]["cached"] += usage.get("cached_tokens", 0)
+                        combined_metrics[metric_key]["output"] += usage.get("output_tokens", 0)
+                        combined_metrics[metric_key]["cost"] += usage.get("cost", 0.0)
+
+                    # Store the totals in a dictionary key so they can be processed by the logging function
+                    result[key]["_list_metadata"] = {
+                        "answer": "List discovery metadata",
+                        "cost": total_list_cost,
+                        "metrics": combined_metrics,
+                    }
+
                     for item in list_items:
                         new_context = context.copy()
                         new_context[endpoint_name] = item
@@ -207,6 +249,64 @@ def merge_json_in_the_folder(folder_path, overwrite=False):
         json.dump(json_obj, f, indent=2)
 
 
+def extract_metrics(answers_dict, prefix=""):
+    """
+    Iterates through the answers dictionary to extract costs and model metrics, removing them from the dictionary.
+    Deletes any temporary tracking keys so they are not in the final JSON.
+    """
+    costs = {}
+    metrics = {}
+    total = 0.0
+
+    # Handle lists if the top-level question yml is an array
+    if isinstance(answers_dict, list):
+        for i, item in enumerate(answers_dict):
+            if isinstance(item, dict):
+                sub_costs, sub_metrics, sub_total = extract_metrics(item, prefix=f"{prefix}[{i}].")
+                costs.update(sub_costs)
+                metrics.update(sub_metrics)
+                total += sub_total
+        return costs, metrics, total
+
+    # Use list() to modify the dictionary while looping
+    for key in list(answers_dict.keys()):
+        value = answers_dict[key]
+
+        if isinstance(value, dict):
+            if "metrics" in value and "answer" in value:
+                # Use pop() to extract the data and delete the keys from the dictionary
+                costs[prefix + key] = value.pop("cost", 0.0)
+                metrics[prefix + key] = value.pop("metrics", {})
+                total += costs[prefix + key]
+            else:
+                # If it's a nested category dictionary, go one layer deeper
+                sub_costs, sub_metrics, sub_total = extract_metrics(value, prefix=f"{prefix}{key}.")
+
+                # Merge the numbers found in the sub-category into the main tracking dictionaries
+                costs.update(sub_costs)
+                metrics.update(sub_metrics)
+                total += sub_total
+
+            # If it's a hidden overhead key (starts with _), remove the shell from the dictionary
+            if key.startswith("_"):
+                answers_dict.pop(key)
+
+        elif isinstance(value, list):
+            # If the value is a list of sub-questions, loop through the list
+            for i, item in enumerate(value):
+                if isinstance(item, dict):
+                    # Go one layer deeper into the list items
+                    # Adds [i] to the prefix to track which list item the cost belongs to
+                    sub_costs, sub_metrics, sub_total = extract_metrics(item, prefix=f"{prefix}{key}[{i}].")
+
+                    # Merge the numbers found in the sub-category into the main tracking dictionaries
+                    costs.update(sub_costs)
+                    metrics.update(sub_metrics)
+                    total += sub_total
+
+    return costs, metrics, total
+
+
 async def process_papers(
     base_dir=None,
     paper_folders=None,
@@ -273,6 +373,9 @@ async def process_papers(
     print(f"📁 Papers directory: {base_dir}")
     print(f"📝 Progress log: {log_file}")
     print("=" * 60)
+
+    # Initialise the global metrics dictionary to hold the total token and cost counts across all files in the run
+    global_metrics = {}
 
     for paper_folder in paper_folders:
         paper_path = os.path.join(base_dir, paper_folder)
@@ -355,6 +458,10 @@ async def process_papers(
                         literature_answers[key] = existing_answers[key]
                 print(f"  🔄 Merged answers: {len(literature_answers)} total question(s)")
 
+            # Extract the metrics, removing the tracking data from the dictionary
+            # Happens before saving so the data doesn't get written into answers.json
+            costs, question_metrics, total_cost = extract_metrics(literature_answers)
+
             # Save the merged results in QUESTIONS format
             output_data = {"QUESTIONS": literature_answers}
 
@@ -364,9 +471,29 @@ async def process_papers(
             completed_papers += 1
             print(f"  ✅ Paper {paper_folder} completed successfully")
 
+            # Print and log the metrics
+            log_lines = []
+            for q_key, q_cost in costs.items():
+                # Format individual cost metrics for clear reading in the log file
+                log_lines.append(f"- {q_key}: ${q_cost:.4f}")
+
+                # Collect token usage totals into global_metrics for the final summary
+                q_m = question_metrics.get(q_key, {})
+                for model_name, tokens in q_m.items():
+                    if model_name not in global_metrics:
+                        global_metrics[model_name] = {"input": 0, "cached": 0, "output": 0, "cost": 0.0}
+                    global_metrics[model_name]["input"] += tokens["input"]
+                    global_metrics[model_name]["cached"] += tokens["cached"]
+                    global_metrics[model_name]["output"] += tokens["output"]
+                    global_metrics[model_name]["cost"] += tokens["cost"]
+
+            # Time stamp with the total single-paper cost, saved to tracking log
+            timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+            log_lines.append(f"{paper_folder}: COMPLETED at {timestamp} | Total Cost: ${total_cost:.4f}\n")
+
             # Log completion
             with open(log_file, "a") as f:
-                f.write(f"{paper_folder}: COMPLETED at {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+                f.write("\n".join(log_lines))
 
         except Exception as e:
             print(f"  ❌ Error processing paper {paper_folder}: {str(e)}")
@@ -384,6 +511,42 @@ async def process_papers(
     if failed_papers:
         print(f"❌ Failed papers: {', '.join(failed_papers)}")
     print(f"📝 Detailed log: {log_file}")
+
+    # Full run information for the end of the processing log file
+    # Executes once the whole stack of folders has finished processing
+    if global_metrics:
+        # Calculate the overall total costs and total tokens used across all files processed
+        overall_total_cost = sum(m["cost"] for m in global_metrics.values())
+        overall_total_tokens = sum(m["input"] + m["cached"] + m["output"] for m in global_metrics.values())
+
+        # Title for readability
+        summary_lines = ["\nFull Run Totals:"]
+        # Iterate through global_metrics to generate the final text lines for the log file
+        for model_key, m in global_metrics.items():
+            # Separate the combined key to identify the phase and model name strings
+            if "|" in model_key:
+                phase, model_name = model_key.split("|", 1)
+                model_display = f"{phase} Model: {model_name}"
+            else:
+                # Use the full key as the display name if the data format doesn't have the '|' splitting it
+                model_display = f"Model: {model_key}"
+
+            # Format the metrics into an easy to read text block with all the usage information
+            summary_lines.append(
+                f"{model_display}\n"
+                f"New Input Tokens: {m['input']}\n"
+                f"Cached Input Tokens: {m['cached']}\n"
+                f"Output Tokens: {m['output']}\n"
+                f"Overall Cost: ${m['cost']:.4f}\n"
+            )
+
+        # Add the combined run totals to the end of the summary
+        summary_lines.append(f"Total Tokens Combined: {overall_total_tokens}")
+        summary_lines.append(f"Total Cost Combined: ${overall_total_cost:.4f}\n")
+
+        # Write the summary into the log file at the end of the run
+        with open(log_file, "a") as f:
+            f.write("\n".join(summary_lines))
 
 
 def main(argv=None):
@@ -410,7 +573,7 @@ def main(argv=None):
         type=str,
         nargs="+",
         default=None,
-        help=("Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). " "If not specified, all folders will be processed."),
+        help=("Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). If not specified, all folders will be processed."),
     )
     parser.add_argument(
         "--start",
