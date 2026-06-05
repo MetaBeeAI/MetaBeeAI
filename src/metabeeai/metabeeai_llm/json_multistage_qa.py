@@ -372,6 +372,7 @@ def assess_answer_quality(question: str, chunks: List[Dict[str, Any]], final_ans
 
     return quality_metrics
 
+
 def value_extract(obj, key, default=0):
     """
     Safely extracts a value whether the object is a dictionary or an object.
@@ -382,6 +383,7 @@ def value_extract(obj, key, default=0):
         return obj.get(key, default)
     return getattr(obj, key, default)
 
+
 def get_api_usage(response, model: str) -> dict:
     """
     Extracts token counts from the response and calculates costs.
@@ -390,13 +392,7 @@ def get_api_usage(response, model: str) -> dict:
     If the model isn't present in either, it returns zero cost and the token counts.
     """
     # Initialise a usage dictionary to hold the token counts and cost (zero as default)
-    usage_info = {
-        "cost": 0.0,
-        "input_tokens": 0,
-        "cached_tokens": 0,
-        "output_tokens": 0,
-        "model": model
-    }
+    usage_info = {"cost": 0.0, "input_tokens": 0, "cached_tokens": 0, "output_tokens": 0, "model": model}
 
     # Safety check - extract usage object safely whether it's a dict or an object
     usage_obj = value_extract(response, "usage", None)
@@ -406,7 +402,7 @@ def get_api_usage(response, model: str) -> dict:
     # Cleanly extract token counts using the value_extract helper function
     total_prompt_tokens = value_extract(usage_obj, "prompt_tokens")
     completion_tokens = value_extract(usage_obj, "completion_tokens")
-    
+
     # Normalise the model name (removes "openai/" prefix and converts to lowercase) for better matching
     model_name = model.lower().replace("openai/", "").strip()
 
@@ -426,11 +422,12 @@ def get_api_usage(response, model: str) -> dict:
     # Attempt to pull the per-token costs from LiteLLM's pricing catalogue for the specific model used in this API call
     try:
         import litellm
-        
+
         # Determine which key to look up in the catalogue
         catalogue_key = model
-        
-        # First check if the full model name exists in LiteLLM's pricing catalogue, if it doesn't check the normalised/stripped model name (without "openai/" prefix)
+
+        # First check if the full model name exists in LiteLLM's pricing catalogue
+        # If it doesn't, check the normalised/stripped model name (without "openai/" prefix)
         if catalogue_key not in litellm.model_cost and model_name in litellm.model_cost:
             catalogue_key = model_name
 
@@ -442,23 +439,23 @@ def get_api_usage(response, model: str) -> dict:
             out_rate = catalogue.get("output_cost_per_token", 0.0)
             # If there's no separate cache rate, assume they are the same as normal input tokens
             cache_rate = catalogue.get("cache_read_input_token_cost", in_rate)
-            
+
             # Calculate the breakdown using LiteLLM's pulled rates - multiply the token counts by the retrieved rates
             litellm_in_cost = (uncached_input_tokens * in_rate) + (cached_tokens * cache_rate)
             litellm_out_cost = completion_tokens * out_rate
             litellm_total = litellm_in_cost + litellm_out_cost
 
-            #Save the cost and return the usage info (skipping the manual fallback below)
+            # Save the cost and return the usage info (skipping the manual fallback below)
             usage_info["cost"] = litellm_total
             return usage_info
-                
+
     except ImportError:
         # If LiteLLM isn't installed, log the info and pass to the manual fallback
         # Note: This log is suppressed during runs with llm_pipeline.py. The pass will be silent
         logger.info("LiteLLM not installed, falling back to manual pricing for cost calculation.")
-    
+
     except Exception as e:
-        # Catch unexpected errors from LiteLLM (eg. catalogue structure 
+        # Catch unexpected errors from LiteLLM (eg. catalogue structure
         # changes, model not found in catalogue etc.), log the info
         # Pass to the manual fallback
         # Note: This log is suppressed during runs with llm_pipeline.py. The pass will be silent
@@ -472,28 +469,28 @@ def get_api_usage(response, model: str) -> dict:
     if model_name == "gpt-4o-mini":
         input_cost = (uncached_input_tokens * 0.15 / 1000000) + (cached_tokens * 0.075 / 1000000)
         output_cost = completion_tokens * 0.60 / 1000000
-           
+
     elif model_name == "gpt-4o":
         input_cost = (uncached_input_tokens * 2.50 / 1000000) + (cached_tokens * 1.25 / 1000000)
         output_cost = completion_tokens * 10.00 / 1000000
-        
+
     # GPT-5 models
     elif model_name == "gpt-5-nano":
         input_cost = (uncached_input_tokens * 0.05 / 1000000) + (cached_tokens * 0.005 / 1000000)
         output_cost = completion_tokens * 0.40 / 1000000
-        
+
     elif model_name == "gpt-5-mini":
         input_cost = (uncached_input_tokens * 0.25 / 1000000) + (cached_tokens * 0.025 / 1000000)
         output_cost = completion_tokens * 2.00 / 1000000
-     
+
     elif model_name == "gpt-5":
         input_cost = (uncached_input_tokens * 1.25 / 1000000) + (cached_tokens * 0.125 / 1000000)
         output_cost = completion_tokens * 10.00 / 1000000
-        
+
     elif model_name == "gpt-5.1":
         input_cost = (uncached_input_tokens * 1.25 / 1000000) + (cached_tokens * 0.125 / 1000000)
         output_cost = completion_tokens * 10.00 / 1000000
-        
+
     else:
         # Safety net for unknown models - returns zero cost
         input_cost = 0.0
@@ -502,7 +499,7 @@ def get_api_usage(response, model: str) -> dict:
     # Combine input and output costs and return the final dictionary
     usage_info["cost"] = input_cost + output_cost
     return usage_info
-    
+
 
 # --------------------------------------------------------------------------
 # Asynchronous Processing Functions
@@ -541,7 +538,7 @@ Return the entities in a list format.
     messages = [{"content": prompt, "role": "user"}]
 
     result = None
-    
+
     # Set up a cumulative usage dictionary to track total costs and token counts across retries
     cumulative_usage = {"cost": 0.0, "input_tokens": 0, "cached_tokens": 0, "output_tokens": 0, "model": model}
 
@@ -549,7 +546,7 @@ Return the entities in a list format.
         try:
             # Call the API asynchronously expecting a response conforming to the Answer model.
             response = await acompletion(model=model, messages=messages, response_format=AnswerList, temperature=0)
-            
+
             # Get the API usage for this response and accumulate the usage across retries
             current_usage = get_api_usage(response, model)
             cumulative_usage["cost"] += current_usage["cost"]
@@ -565,16 +562,16 @@ Return the entities in a list format.
             logger.error("Error obtaining answer restructuring", e)
             time.sleep(1)
             continue
-            
+
     # Safety fallback in case the API completely failed to return valid JSON across all retries
     # Trying to attach the cost data to 'none' in the next step will give TypeError and crash the pipeline otherwise
     if result is None:
         result = {"answer": []}
-        
+
     # Attach the cumulative cost and usage details to the result object
     result["cost"] = cumulative_usage["cost"]
     result["usage_details"] = cumulative_usage
-    
+
     return result
 
 
@@ -646,14 +643,14 @@ async def get_answer(question: str, chunk: Dict[str, Any], model: str = ANSWER_M
         try:
             # Call the API asynchronously expecting a response conforming to the Answer model.
             response = await acompletion(model=model, messages=messages, response_format=Answer, temperature=0)
-            
+
             # Get the API usage for this response and accumulate the usage across retries
             current_usage = get_api_usage(response, model)
             cumulative_usage["cost"] += current_usage["cost"]
             cumulative_usage["input_tokens"] += current_usage["input_tokens"]
             cumulative_usage["cached_tokens"] += current_usage["cached_tokens"]
             cumulative_usage["output_tokens"] += current_usage["output_tokens"]
-            
+
             # Parse the JSON string from the API response.
             chunk["answer"] = json.loads(response.choices[0].message.content)
             logger.info("Answer obtained for chunk %s: %s", chunk.get("chunk_id"), chunk["answer"])
@@ -743,9 +740,9 @@ async def get_top_relevant_chunks(
         for i, chunk in enumerate(filtered_chunks):
             chunk_text = chunk.get("text", "")[:500]  # Limit text length
             chunk_id = chunk.get("chunk_id", f"chunk_{i}")
-            prompt_parts.append(f"Chunk {i+1} (ID: {chunk_id}): {chunk_text}...")
+            prompt_parts.append(f"Chunk {i + 1} (ID: {chunk_id}): {chunk_text}...")
             # Debug: Log chunk content to see what we're actually working with
-            logger.info(f"DEBUG: Chunk {i+1} content preview: {chunk_text[:100]}...")
+            logger.info(f"DEBUG: Chunk {i + 1} content preview: {chunk_text[:100]}...")
 
         # Build dynamic instructions based on question metadata
         instructions_list = [
@@ -760,7 +757,7 @@ async def get_top_relevant_chunks(
             instructions_list.insert(1, f"2. Follow these specific guidelines: {'; '.join(question_metadata['instructions'])}")
             # Renumber the remaining instructions
             for i in range(2, len(instructions_list)):
-                instructions_list[i] = f"{i+2}. {instructions_list[i].split('. ', 1)[1]}"
+                instructions_list[i] = f"{i + 2}. {instructions_list[i].split('. ', 1)[1]}"
 
         prompt_parts.extend(
             [
@@ -806,7 +803,7 @@ async def get_top_relevant_chunks(
                     if 0 <= idx < len(filtered_chunks):
                         selected_chunks.append(filtered_chunks[idx])
                         logger.info(
-                            f"DEBUG: Selected chunk {idx+1}: {filtered_chunks[idx].get('chunk_id')} - "
+                            f"DEBUG: Selected chunk {idx + 1}: {filtered_chunks[idx].get('chunk_id')} - "
                             f"Content: {filtered_chunks[idx].get('text', '')[:100]}..."
                         )
 
@@ -910,12 +907,12 @@ async def query_all_chunks(
                 batch[i]["answer"] = {"answer": "Error occurred during answer generation", "reason": f"Error: {str(result)}"}
                 # Attach an empty receipt so the token aggregation doesn't have issues with a missing key
                 batch[i]["usage_details"] = {
-                    "cost": 0.0, 
-                    "input_tokens": 0, 
-                    "cached_tokens": 0, 
-                    "output_tokens": 0, 
-                    "model": selected_model
-                    }
+                    "cost": 0.0,
+                    "input_tokens": 0,
+                    "cached_tokens": 0,
+                    "output_tokens": 0,
+                    "model": selected_model,
+                }
                 # Add the failed chunk to the array so costs aren't dropped
                 all_answered_chunks.append(batch[i])
             else:
@@ -947,12 +944,12 @@ async def reflect_answers(question: str, chunks: List[Dict[str, Any]], model: st
 
     formatted_chunks: str = "\n".join(
         f"""
-<Reference text chunk_id:{chunk.get('chunk_id', 'N/A')}>
-{chunk.get('text', '')}
-</Reference text chunk_id:{chunk.get('chunk_id', 'N/A')}>
-<Answer chunk_id:{chunk.get('chunk_id', 'N/A')}>
-{chunk.get('answer', '')}
-</Answer chunk_id:{chunk.get('chunk_id', 'N/A')}>
+<Reference text chunk_id:{chunk.get("chunk_id", "N/A")}>
+{chunk.get("text", "")}
+</Reference text chunk_id:{chunk.get("chunk_id", "N/A")}>
+<Answer chunk_id:{chunk.get("chunk_id", "N/A")}>
+{chunk.get("answer", "")}
+</Answer chunk_id:{chunk.get("chunk_id", "N/A")}>
         """.strip()
         for chunk in chunks
     )
@@ -1000,41 +997,40 @@ async def reflect_answers(question: str, chunks: List[Dict[str, Any]], model: st
 
     messages = [{"content": prompt, "role": "user"}]
 
-
     # Set up a cumulative usage dictionary to track total costs and token counts across retries
     cumulative_usage = {"cost": 0.0, "input_tokens": 0, "cached_tokens": 0, "output_tokens": 0, "model": model}
 
     for i in range(RETRY):
         try:
             response = await acompletion(model=model, messages=messages, response_format=AnswerWithChunkId, temperature=0)
-            
+
             # Get the API usage for this response and accumulate the usage across retries
             current_usage = get_api_usage(response, model)
             cumulative_usage["cost"] += current_usage["cost"]
             cumulative_usage["input_tokens"] += current_usage["input_tokens"]
             cumulative_usage["cached_tokens"] += current_usage["cached_tokens"]
             cumulative_usage["output_tokens"] += current_usage["output_tokens"]
-            
+
             result = json.loads(response.choices[0].message.content)
-            
+
             # Attach the cumulative usage here since the function returns on success
             result["cost"] = cumulative_usage["cost"]
             result["usage_details"] = cumulative_usage
-            
+
             logger.info("Reflected answer: %s", result)
             return result
         except Exception as e:
             logger.error("Error reflecting answers: %s", e)
             time.sleep(1)
-            
+
     # Fallback response if the model completely fails to generate valid JSON after all retries
-    # Added to still attach the cumulative usage here, so the costs of the failed attempts aren't dropped 
+    # Added to still attach the cumulative usage here, so the costs of the failed attempts aren't dropped
     fallback_result = {
-        "answer": "INSUFFICIENT_INFO", 
+        "answer": "INSUFFICIENT_INFO",
         "reason": "Failed to generate reflection after multiple attempts.",
         "chunk_ids": [],
         "cost": cumulative_usage["cost"],
-        "usage_details": cumulative_usage
+        "usage_details": cumulative_usage,
     }
     return fallback_result
 
@@ -1164,7 +1160,7 @@ async def ask_json(
     # Step 2: Filter out irrelevant chunks with question-specific settings.
     # Use parallel processing with optimized batch sizes
     relevance_batch_size = min(DEFAULT_RELEVANCE_BATCH_SIZE, len(chunks), MAX_CONCURRENT_REQUESTS)
-    
+
     # Call the function to retrieve relevant chunks. It returns the token usage and the chunks
     relevant_chunks, filter_usage = await filter_all_chunks(
         question, chunks, question_config["max_chunks"], batch_size=relevance_batch_size, model=selected_relevance_model
@@ -1172,7 +1168,7 @@ async def ask_json(
 
     # Initialise an empty dictionary to keep track of the total metrics across the whole pipeline run
     metrics = {}
-    
+
     def add_usage(usage, phase):
         """
         Helper function to add usage data to the main 'metrics' dictionary.
@@ -1220,7 +1216,7 @@ async def ask_json(
     logger.info(f"Found {len(relevant_chunks)} relevant chunks:")
     for i, chunk in enumerate(relevant_chunks):
         chunk_id = chunk.get("chunk_id", "N/A")
-        logger.info(f"  Chunk {i+1}: ID {chunk_id}")
+        logger.info(f"  Chunk {i + 1}: ID {chunk_id}")
 
     # Step 2: Query each relevant chunk for its answer.
     # Use parallel processing with optimized batch sizes for answer generation
