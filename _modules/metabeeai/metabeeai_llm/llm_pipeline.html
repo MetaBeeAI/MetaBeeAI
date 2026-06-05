@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -35,35 +35,42 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/bee.css?v=84a0a986" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
 
     <script src="../../../_static/documentation_options.js?v=01f34227"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/metabeeai/metabeeai_llm/llm_pipeline';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="0.1.0" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -89,7 +96,7 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
   <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
@@ -188,11 +195,18 @@
       
         <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
       
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -205,8 +219,7 @@
           
           
           
-          <a href="https://github.com/MetaBeeAI/MetaBeeAI" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span></a>
+          <a href="https://github.com/MetaBeeAI/MetaBeeAI" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
 </ul></div>
       
@@ -300,11 +313,18 @@
         
           <div class="navbar-item">
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
         
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -317,8 +337,7 @@
           
           
           
-          <a href="https://github.com/MetaBeeAI/MetaBeeAI" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">GitHub</span></a>
+          <a href="https://github.com/MetaBeeAI/MetaBeeAI" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
         </li>
 </ul></div>
         
@@ -384,6 +403,7 @@
   <h1>Source code for metabeeai.metabeeai_llm.llm_pipeline</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
@@ -430,7 +450,10 @@
         <span class="n">questions_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">script_dir</span><span class="p">,</span> <span class="s2">&quot;questions.yml&quot;</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">questions_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-            <span class="n">_QUESTIONS</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="c1"># Extract the questions (&#39;QUESTIONS&#39;) dictionary to prevent double-wrapping if it exists</span>
+            <span class="c1"># Otherwise use the whole config as the questions dictionary</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="n">_QUESTIONS</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;QUESTIONS&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">_QUESTIONS</span>
 
@@ -458,6 +481,10 @@
             <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;answer&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
             <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
             <span class="s2">&quot;chunk_ids&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;chunk_ids&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+            <span class="c1"># Pass total question cost to the pipeline for logging (will be popped before saving to answers.json)</span>
+            <span class="s2">&quot;cost&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cost&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="c1"># Pass aggregated token metrics to the pipeline for logging (will be popped before saving to answers.json)</span>
+            <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;metrics&quot;</span><span class="p">,</span> <span class="p">{}),</span>
         <span class="p">}</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Fallback if result is not a dict</span>
@@ -465,6 +492,12 @@
             <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Answer generated from available information&quot;</span><span class="p">,</span>
             <span class="s2">&quot;chunk_ids&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="c1"># Safety fallback - pass zero cost so the logging loop doesn&#39;t crash</span>
+            <span class="c1"># (still popped before saving to answers.json)</span>
+            <span class="s2">&quot;cost&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="c1"># Safety fallback - pass empty metrics dictionary so the logging loop doesn&#39;t crash</span>
+            <span class="c1"># (still popped before saving to answers.json)</span>
+            <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{},</span>
         <span class="p">}</span>
 
 
@@ -511,6 +544,34 @@
                     <span class="n">list_result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">format_to_list_async</span><span class="p">(</span><span class="n">question_of_the_list</span><span class="p">,</span> <span class="n">answer</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">])</span>
                     <span class="n">list_items</span> <span class="o">=</span> <span class="n">list_result</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">]</span>
                     <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+                    <span class="c1"># Preserve the parent list costs so extract_metrics can see them</span>
+                    <span class="c1"># Sum the costs of both finding the list and formatting it into an array</span>
+                    <span class="n">total_list_cost</span> <span class="o">=</span> <span class="n">answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cost&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">+</span> <span class="n">list_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cost&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+                    <span class="c1"># Copy the original list token metrics into the combined run metrics tracker</span>
+                    <span class="n">combined_metrics</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">answer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;metrics&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+                    <span class="k">if</span> <span class="n">list_result</span> <span class="ow">and</span> <span class="s2">&quot;usage_details&quot;</span> <span class="ow">in</span> <span class="n">list_result</span><span class="p">:</span>
+                        <span class="n">usage</span> <span class="o">=</span> <span class="n">list_result</span><span class="p">[</span><span class="s2">&quot;usage_details&quot;</span><span class="p">]</span>
+                        <span class="n">m_name</span> <span class="o">=</span> <span class="n">usage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">)</span>
+                        <span class="n">metric_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Answering|</span><span class="si">{</span><span class="n">m_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+                        <span class="c1"># Initialise counters for the model if it&#39;s the first time seeing it in this block</span>
+                        <span class="k">if</span> <span class="n">metric_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">combined_metrics</span><span class="p">:</span>
+                            <span class="n">combined_metrics</span><span class="p">[</span><span class="n">metric_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;cached&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;cost&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+                        <span class="c1"># Add the list formatting token costs to the combined run tracking data</span>
+                        <span class="n">combined_metrics</span><span class="p">[</span><span class="n">metric_key</span><span class="p">][</span><span class="s2">&quot;input&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">usage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;input_tokens&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">combined_metrics</span><span class="p">[</span><span class="n">metric_key</span><span class="p">][</span><span class="s2">&quot;cached&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">usage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cached_tokens&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">combined_metrics</span><span class="p">[</span><span class="n">metric_key</span><span class="p">][</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">usage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output_tokens&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">combined_metrics</span><span class="p">[</span><span class="n">metric_key</span><span class="p">][</span><span class="s2">&quot;cost&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">usage</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cost&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+                    <span class="c1"># Store the totals in a dictionary key so they can be processed by the logging function</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;_list_metadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="s2">&quot;List discovery metadata&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;cost&quot;</span><span class="p">:</span> <span class="n">total_list_cost</span><span class="p">,</span>
+                        <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="n">combined_metrics</span><span class="p">,</span>
+                    <span class="p">}</span>
+
                     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_items</span><span class="p">:</span>
                         <span class="n">new_context</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
                         <span class="n">new_context</span><span class="p">[</span><span class="n">endpoint_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
@@ -597,6 +658,64 @@
 
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_metrics</span><span class="p">(</span><span class="n">answers_dict</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Iterates through the answers dictionary to extract costs and model metrics, removing them from the dictionary.</span>
+<span class="sd">    Deletes any temporary tracking keys so they are not in the final JSON.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">costs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># Handle lists if the top-level question yml is an array</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">answers_dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">answers_dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">sub_costs</span><span class="p">,</span> <span class="n">sub_metrics</span><span class="p">,</span> <span class="n">sub_total</span> <span class="o">=</span> <span class="n">extract_metrics</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">].&quot;</span><span class="p">)</span>
+                <span class="n">costs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sub_costs</span><span class="p">)</span>
+                <span class="n">metrics</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sub_metrics</span><span class="p">)</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">sub_total</span>
+        <span class="k">return</span> <span class="n">costs</span><span class="p">,</span> <span class="n">metrics</span><span class="p">,</span> <span class="n">total</span>
+
+    <span class="c1"># Use list() to modify the dictionary while looping</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">answers_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">answers_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s2">&quot;metrics&quot;</span> <span class="ow">in</span> <span class="n">value</span> <span class="ow">and</span> <span class="s2">&quot;answer&quot;</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                <span class="c1"># Use pop() to extract the data and delete the keys from the dictionary</span>
+                <span class="n">costs</span><span class="p">[</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;cost&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+                <span class="n">metrics</span><span class="p">[</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;metrics&quot;</span><span class="p">,</span> <span class="p">{})</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">costs</span><span class="p">[</span><span class="n">prefix</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># If it&#39;s a nested category dictionary, go one layer deeper</span>
+                <span class="n">sub_costs</span><span class="p">,</span> <span class="n">sub_metrics</span><span class="p">,</span> <span class="n">sub_total</span> <span class="o">=</span> <span class="n">extract_metrics</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">key</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Merge the numbers found in the sub-category into the main tracking dictionaries</span>
+                <span class="n">costs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sub_costs</span><span class="p">)</span>
+                <span class="n">metrics</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sub_metrics</span><span class="p">)</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">sub_total</span>
+
+            <span class="c1"># If it&#39;s a hidden overhead key (starts with _), remove the shell from the dictionary</span>
+            <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+                <span class="n">answers_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="c1"># If the value is a list of sub-questions, loop through the list</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="c1"># Go one layer deeper into the list items</span>
+                    <span class="c1"># Adds [i] to the prefix to track which list item the cost belongs to</span>
+                    <span class="n">sub_costs</span><span class="p">,</span> <span class="n">sub_metrics</span><span class="p">,</span> <span class="n">sub_total</span> <span class="o">=</span> <span class="n">extract_metrics</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">key</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">].&quot;</span><span class="p">)</span>
+
+                    <span class="c1"># Merge the numbers found in the sub-category into the main tracking dictionaries</span>
+                    <span class="n">costs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sub_costs</span><span class="p">)</span>
+                    <span class="n">metrics</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">sub_metrics</span><span class="p">)</span>
+                    <span class="n">total</span> <span class="o">+=</span> <span class="n">sub_total</span>
+
+    <span class="k">return</span> <span class="n">costs</span><span class="p">,</span> <span class="n">metrics</span><span class="p">,</span> <span class="n">total</span>
+
+
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">process_papers</span><span class="p">(</span>
     <span class="n">base_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">paper_folders</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -663,6 +782,9 @@
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📁 Papers directory: </span><span class="si">{</span><span class="n">base_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📝 Progress log: </span><span class="si">{</span><span class="n">log_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+    <span class="c1"># Initialise the global metrics dictionary to hold the total token and cost counts across all files in the run</span>
+    <span class="n">global_metrics</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">for</span> <span class="n">paper_folder</span> <span class="ow">in</span> <span class="n">paper_folders</span><span class="p">:</span>
         <span class="n">paper_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="n">paper_folder</span><span class="p">)</span>
@@ -745,6 +867,10 @@
                         <span class="n">literature_answers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">existing_answers</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  🔄 Merged answers: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">literature_answers</span><span class="p">)</span><span class="si">}</span><span class="s2"> total question(s)&quot;</span><span class="p">)</span>
 
+            <span class="c1"># Extract the metrics, removing the tracking data from the dictionary</span>
+            <span class="c1"># Happens before saving so the data doesn&#39;t get written into answers.json</span>
+            <span class="n">costs</span><span class="p">,</span> <span class="n">question_metrics</span><span class="p">,</span> <span class="n">total_cost</span> <span class="o">=</span> <span class="n">extract_metrics</span><span class="p">(</span><span class="n">literature_answers</span><span class="p">)</span>
+
             <span class="c1"># Save the merged results in QUESTIONS format</span>
             <span class="n">output_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;QUESTIONS&quot;</span><span class="p">:</span> <span class="n">literature_answers</span><span class="p">}</span>
 
@@ -754,9 +880,29 @@
             <span class="n">completed_papers</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ Paper </span><span class="si">{</span><span class="n">paper_folder</span><span class="si">}</span><span class="s2"> completed successfully&quot;</span><span class="p">)</span>
 
+            <span class="c1"># Print and log the metrics</span>
+            <span class="n">log_lines</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">q_key</span><span class="p">,</span> <span class="n">q_cost</span> <span class="ow">in</span> <span class="n">costs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="c1"># Format individual cost metrics for clear reading in the log file</span>
+                <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">q_key</span><span class="si">}</span><span class="s2">: $</span><span class="si">{</span><span class="n">q_cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Collect token usage totals into global_metrics for the final summary</span>
+                <span class="n">q_m</span> <span class="o">=</span> <span class="n">question_metrics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">q_key</span><span class="p">,</span> <span class="p">{})</span>
+                <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">tokens</span> <span class="ow">in</span> <span class="n">q_m</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">model_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">global_metrics</span><span class="p">:</span>
+                        <span class="n">global_metrics</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;cached&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;cost&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+                    <span class="n">global_metrics</span><span class="p">[</span><span class="n">model_name</span><span class="p">][</span><span class="s2">&quot;input&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">tokens</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">]</span>
+                    <span class="n">global_metrics</span><span class="p">[</span><span class="n">model_name</span><span class="p">][</span><span class="s2">&quot;cached&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">tokens</span><span class="p">[</span><span class="s2">&quot;cached&quot;</span><span class="p">]</span>
+                    <span class="n">global_metrics</span><span class="p">[</span><span class="n">model_name</span><span class="p">][</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">tokens</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span>
+                    <span class="n">global_metrics</span><span class="p">[</span><span class="n">model_name</span><span class="p">][</span><span class="s2">&quot;cost&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">tokens</span><span class="p">[</span><span class="s2">&quot;cost&quot;</span><span class="p">]</span>
+
+            <span class="c1"># Time stamp with the total single-paper cost, saved to tracking log</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+            <span class="n">log_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">paper_folder</span><span class="si">}</span><span class="s2">: COMPLETED at </span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> | Total Cost: $</span><span class="si">{</span><span class="n">total_cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
             <span class="c1"># Log completion</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">log_file</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">paper_folder</span><span class="si">}</span><span class="s2">: COMPLETED at </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">log_lines</span><span class="p">))</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ❌ Error processing paper </span><span class="si">{</span><span class="n">paper_folder</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -774,6 +920,42 @@
     <span class="k">if</span> <span class="n">failed_papers</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Failed papers: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">failed_papers</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📝 Detailed log: </span><span class="si">{</span><span class="n">log_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Full run information for the end of the processing log file</span>
+    <span class="c1"># Executes once the whole stack of folders has finished processing</span>
+    <span class="k">if</span> <span class="n">global_metrics</span><span class="p">:</span>
+        <span class="c1"># Calculate the overall total costs and total tokens used across all files processed</span>
+        <span class="n">overall_total_cost</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">&quot;cost&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">global_metrics</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">overall_total_tokens</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;cached&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">global_metrics</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="c1"># Title for readability</span>
+        <span class="n">summary_lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Full Run Totals:&quot;</span><span class="p">]</span>
+        <span class="c1"># Iterate through global_metrics to generate the final text lines for the log file</span>
+        <span class="k">for</span> <span class="n">model_key</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">global_metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Separate the combined key to identify the phase and model name strings</span>
+            <span class="k">if</span> <span class="s2">&quot;|&quot;</span> <span class="ow">in</span> <span class="n">model_key</span><span class="p">:</span>
+                <span class="n">phase</span><span class="p">,</span> <span class="n">model_name</span> <span class="o">=</span> <span class="n">model_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">model_display</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2"> Model: </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Use the full key as the display name if the data format doesn&#39;t have the &#39;|&#39; splitting it</span>
+                <span class="n">model_display</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Model: </span><span class="si">{</span><span class="n">model_key</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="c1"># Format the metrics into an easy to read text block with all the usage information</span>
+            <span class="n">summary_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_display</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;New Input Tokens: </span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Cached Input Tokens: </span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;cached&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Output Tokens: </span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Overall Cost: $</span><span class="si">{</span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;cost&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Add the combined run totals to the end of the summary</span>
+        <span class="n">summary_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Tokens Combined: </span><span class="si">{</span><span class="n">overall_total_tokens</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">summary_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Cost Combined: $</span><span class="si">{</span><span class="n">overall_total_cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Write the summary into the log file at the end of the run</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">log_file</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">summary_lines</span><span class="p">))</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -800,7 +982,7 @@
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
         <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). &quot;</span> <span class="s2">&quot;If not specified, all folders will be processed.&quot;</span><span class="p">),</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Specific paper IDs to process (e.g., 283C6B42 3ZHNVADM). If not specified, all folders will be processed.&quot;</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--start&quot;</span><span class="p">,</span>
@@ -910,8 +1092,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -945,7 +1127,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
 </p></div>
       
     </div>
