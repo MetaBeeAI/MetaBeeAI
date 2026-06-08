@@ -400,15 +400,15 @@ def get_api_usage(response, model: str) -> dict:
         return usage_info
 
     # Cleanly extract token counts using the value_extract helper function
-    total_prompt_tokens = value_extract(usage_obj, "prompt_tokens")
-    completion_tokens = value_extract(usage_obj, "completion_tokens")
+    total_prompt_tokens = value_extract(usage_obj, "prompt_tokens") or 0
+    completion_tokens = value_extract(usage_obj, "completion_tokens") or 0
 
-    # Normalise the model name (removes "openai/" prefix and converts to lowercase) for better matching
-    model_name = model.lower().replace("openai/", "").strip()
+    # Normalise the model name (removes model prefix and converts to lowercase) for better matching
+    model_name = str(model or "").lower().strip().split("/")[-1]
 
     # Safely extract cached tokens
     details = value_extract(usage_obj, "prompt_tokens_details", None)
-    cached_tokens = value_extract(details, "cached_tokens") if details else 0
+    cached_tokens = (value_extract(details, "cached_tokens") if details else 0) or 0
 
     # Calculate normal input tokens by subtracting cached tokens from total prompt tokens
     uncached_input_tokens = max(0, total_prompt_tokens - cached_tokens)
