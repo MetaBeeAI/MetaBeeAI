@@ -11,6 +11,7 @@ MetaBeeAI
    guide/index
    reference/index
    developer/index
+   citations
 
 .. card::
    :class-card: landing-hero
@@ -26,6 +27,15 @@ MetaBeeAI
    If you already have the package running, jump straight to
    :doc:`Configuration <guide/configuration>`, :doc:`Workflow <guide/workflow>`, or
    :doc:`Reference <reference/index>`.
+
+If you use MetaBeeAI in your research, please cite:
+
+   Parkinson, R. H., Cerbone, H., Mieskolainen, M., Cao, S., Wilson, A. D., Albacete, S., et al. (2026).
+   MetaBeeAI: An AI pipeline for structured evidence extraction from biological literature.
+   *Ecological Informatics*, *96*, Article 103813.
+   https://doi.org/10.1016/j.ecoinf.2026.103813
+
+See :doc:`Citations <citations>` for the full author list and BibTeX.
 
 Explore The Docs
 ----------------
@@ -67,6 +77,13 @@ Explore The Docs
       :class-card: landing-card
 
       Find contribution, configuration-development, and documentation-maintenance guides for working on MetaBeeAI itself.
+
+   .. grid-item-card:: Citations
+      :link: citations
+      :link-type: doc
+      :class-card: landing-card landing-card--warm
+
+      Find the preferred citation, full author list, and BibTeX entry for MetaBeeAI.
 
 Pipeline Guides
 ---------------
